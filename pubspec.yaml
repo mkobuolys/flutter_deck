@@ -1,0 +1,23 @@
+name: flutter_deck
+description: A lightweight, customizable, and easy-to-use framework to create presentations in Flutter.
+version: 0.1.0+1
+repository: https://github.com/mkobuolys/flutter_deck
+issue_tracker: https://github.com/mkobuolys/flutter_deck/issues
+topics:
+  - slides
+  - presentation
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependencies:
+  auto_size_text: ^3.0.0
+  flutter:
+    sdk: flutter
+  go_router: ^10.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^5.0.0
