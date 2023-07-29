@@ -4,11 +4,49 @@
 
   - **Migration**: update the `background` method signature in your code from:
 
-    `Widget? background(BuildContext context)`
+    ```
+    Widget? background(BuildContext context)
+    ```
 
     to:
 
-    `FlutterDeckBackground background(BuildContext context)`
+    ```
+    FlutterDeckBackground background(BuildContext context)
+    ```
+
+  - Instead of:
+
+    ```
+    Widget? background(BuildContext context) {
+      return null;
+    }
+    ```
+
+    do:
+
+    ```
+    FlutterDeckBackground background(BuildContext context) {
+      return FlutterDeckBackground.transparent();
+    }
+    ```
+
+  - Instead of:
+
+    ```
+    Widget? background(BuildContext context) {
+      return YourCustomBackgroundWidget();
+    }
+    ```
+
+    do:
+
+    ```
+    FlutterDeckBackground background(BuildContext context) {
+      return FlutterDeckBackground.custom(
+        child: YourCustomBackgroundWidget(),
+      );
+    }
+    ```
 
 - feat: add FlutterDeckCodeHighlight widget
 - feat: make the background configurable for the whole slide deck
