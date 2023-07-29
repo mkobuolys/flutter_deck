@@ -1,5 +1,15 @@
 # NEXT
 
+- **BREAKING**: feat: updated `backround` method signature for the `FlutterDeckSlideBase`
+
+  - **Migration**: update the `background` method signature in your code from:
+
+    `Widget? background(BuildContext context)`
+
+    to:
+
+    `FlutterDeckBackground background(BuildContext context)`
+
 - feat: add FlutterDeckCodeHighlight widget
 - feat: make the background configurable for the whole slide deck
 - fix: drawer toggle
