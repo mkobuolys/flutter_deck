@@ -1,6 +1,6 @@
 # NEXT
 
-- **BREAKING**: feat: updated `backround` method signature for the `FlutterDeckSlideBase`
+- **BREAKING**: feat: updated `background` method signature for the `FlutterDeckSlideBase`
 
   - **Migration**: update the `background` method signature in your code from:
 
