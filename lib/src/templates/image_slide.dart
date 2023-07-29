@@ -71,7 +71,4 @@ abstract class FlutterDeckImageSlide extends FlutterDeckSlideBase {
           )
         : null;
   }
-
-  @override
-  Widget? background(BuildContext context) => null;
 }

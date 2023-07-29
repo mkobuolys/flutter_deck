@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
+import 'package:flutter_deck/src/widgets/widgets.dart';
 
 /// The base class for a slide with a standard layout.
 ///
@@ -41,9 +43,16 @@ abstract class FlutterDeckSlideBase extends FlutterDeckSlide {
   /// Creates the background of the slide.
   ///
   /// This method is called by the [slide] method. It is responsible for
-  /// placing the background of the slide. If no background is provided, the
-  /// slide will have a background of [Scaffold.backgroundColor].
-  Widget? background(BuildContext context);
+  /// placing the background of the slide. By default, it uses the appropriate
+  /// [FlutterDeckBackground] from the global configuration of the slide deck
+  /// based on the current theme.
+  FlutterDeckBackground background(BuildContext context) {
+    final background = context.flutterDeck.globalConfiguration.background;
+
+    return Theme.of(context).brightness == Brightness.dark
+        ? background.dark
+        : background.light;
+  }
 
   @override
   Widget slide(BuildContext context) {
@@ -51,29 +60,21 @@ abstract class FlutterDeckSlideBase extends FlutterDeckSlide {
     final headerWidget = header(context);
     final footerWidget = footer(context);
 
-    Widget widget = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
       children: [
-        if (headerWidget != null) headerWidget,
-        Expanded(child: contentWidget ?? const SizedBox.shrink()),
-        if (footerWidget != null) footerWidget,
+        ConstrainedBox(
+          constraints: const BoxConstraints.expand(),
+          child: background(context),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (headerWidget != null) headerWidget,
+            Expanded(child: contentWidget ?? const SizedBox.shrink()),
+            if (footerWidget != null) footerWidget,
+          ],
+        ),
       ],
     );
-
-    final backgroundWidget = background(context);
-
-    if (backgroundWidget != null) {
-      widget = Stack(
-        children: [
-          ConstrainedBox(
-            constraints: const BoxConstraints.expand(),
-            child: backgroundWidget,
-          ),
-          widget,
-        ],
-      );
-    }
-
-    return widget;
   }
 }

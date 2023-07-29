@@ -7,7 +7,7 @@
 ## Features 🪄
 
 - 💙 Slide deck is built as any other Flutter app.
-- 🧭 Navigator 2.0 support - each slide is rendered as an individual page with a deeplink to it.
+- 🧭 Navigator 2.0 support - each slide is rendered as an individual page with a deep link to it.
 - 🐾 Steps - each slide can have multiple steps that can be navigated through.
 - ⚙️ Define a global configuration once and override it per slide if needed.
 - 🚀 Predictable API to access the slide deck state and its methods from anywhere in the app.
@@ -61,6 +61,10 @@ Also, you can define a global configuration for your slide deck:
 ```dart
 FlutterDeckApp(
   configuration: const FlutterDeckConfiguration(
+    background: FlutterDeckBackgroundConfiguration(
+      light: FlutterDeckBackground.solid(Color(0xFFB5FFFC)),
+      dark: FlutterDeckBackground.solid(Color(0xFF16222A)),
+    ),
     controls: FlutterDeckControlsConfiguration(
       nextKey: LogicalKeyboardKey.arrowRight,
       previousKey: LogicalKeyboardKey.arrowLeft,
@@ -76,7 +80,7 @@ FlutterDeckApp(
 );
 ```
 
-Use any colours you like:
+Use any colors you like:
 
 ```dart
 FlutterDeckApp(
@@ -321,48 +325,48 @@ class FlutterDeckBulletListDemoSlide extends FlutterDeckSplitSlide {
 Provides a widget that gives you customizable syntax highlighting for many languages.
 
 ```dart
-import 'package:flutter/widgets.dart';
+class CodeHighlightSlide extends FlutterDeckBlankSlide {
+  const CodeHighlightSlide({super.key})
+      : super(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/code-highlight',
+            header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
+          ),
+        );
+
+  @override
+  Widget body(BuildContext context) {
+    return Center(
+      child: FlutterDeckCodeHighlight(
+        code: '''
 import 'package:flutter_deck/flutter_deck.dart';
 
 class CodeHighlightSlide extends FlutterDeckBlankSlide {
-  const CodeHighlightSlide({
-    super.key,
-  }) : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/code-highlight',
-            header: FlutterDeckHeaderConfiguration(
-              title: 'Code Highlighting',
-            ),
-          ),
-        );
-
-  @override
-  Widget body(BuildContext context) => const Center(
-        child: FlutterDeckCodeHighlight(
-          code: '''
-import 'package:flutter_deck/flutter_deck.dart';
-
-class TitleSlide extends FlutterDeckTitleSlide {
-  const TitleSlide({super.key})
+  const CodeHighlightSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
-            route: '/intro',
-            footer: FlutterDeckFooterConfiguration(showFooter: false),
+            route: '/code-highlight',
+            header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
           ),
         );
 
   @override
-  String get title => 'Welcome to flutter_deck example! 🚀';
-
-  @override
-  String? get subtitle => 'Use left and right arrow keys to navigate.';
+  Widget body(BuildContext context) {
+    return const Center(
+      child: Text('Use FlutterDeckCodeHighlight widget to highlight code!'),
+    );
+  }
 }''',
-          fileName: 'title_slide.dart',
-          language: 'dart',
-        ),
-      );
+        fileName: 'code_highlight_slide.dart',
+        language: 'dart',
+        textStyle: Theme.of(context).textTheme.titleLarge,
+      ),
+    );
+  }
 }
 ```
+
+![FlutterDeckCodeHighlight](https://github.com/mkobuolys/flutter_deck/blob/main/images/code_highlighting.png?raw=true)
 
 ## Accessing slide deck state from the code
 

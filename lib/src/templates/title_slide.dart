@@ -87,9 +87,6 @@ abstract class FlutterDeckTitleSlide extends FlutterDeckSlideBase {
           )
         : null;
   }
-
-  @override
-  Widget? background(BuildContext context) => null;
 }
 
 class _SpeakerInfo extends StatelessWidget {
