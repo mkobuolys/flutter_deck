@@ -120,7 +120,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
 
   void _buildRouter() {
     final slides = [
-      for (final slide in widget.slides)
+      for (final slide in widget.slides.where((s) => !s.configuration.hidden))
         FlutterDeckRouterSlide(
           configuration: slide.configuration.mergeWithGlobal(
             widget.configuration,

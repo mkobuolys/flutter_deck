@@ -50,6 +50,7 @@
 
 - feat: add FlutterDeckCodeHighlight widget
 - feat: make the background configurable for the whole slide deck
+- feat: allow to hide slides in the slide deck
 - fix: drawer toggle
 - docs: update the example app and README.md
 

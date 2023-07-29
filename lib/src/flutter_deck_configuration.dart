@@ -66,6 +66,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   /// global configuration.
   const FlutterDeckSlideConfiguration({
     required this.route,
+    this.hidden = false,
     this.steps = 1,
     FlutterDeckFooterConfiguration? footer,
     FlutterDeckHeaderConfiguration? header,
@@ -78,6 +79,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   /// to create a configuration when the global configuration is overridden.
   const FlutterDeckSlideConfiguration._({
     required this.route,
+    this.hidden = false,
     this.steps = 1,
     super.footer,
     super.header,
@@ -88,6 +90,14 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
 
   /// The route for the slide.
   final String route;
+
+  /// Whether the slide is hidden or not.
+  ///
+  /// Hidden slides are not included in the slide deck and cannot be navigated
+  /// to.
+  ///
+  /// The default is false.
+  final bool hidden;
 
   /// The number of steps in the slide.
   final int steps;
@@ -103,6 +113,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   ) {
     return FlutterDeckSlideConfiguration._(
       route: route,
+      hidden: hidden,
       steps: steps,
       footer: _footerConfigurationOverride ?? configuration.footer,
       header: _headerConfigurationOverride ?? configuration.header,
