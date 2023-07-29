@@ -12,34 +12,22 @@ class FlutterDeckCodeHighlight extends StatelessWidget {
   /// For a list of all available [language] values, see:
   /// https://github.com/git-touch/highlight.dart/tree/master/highlight/lib/languages
   ///
-  /// For a list of all available [darkTextStyles] and [lightTextStyles]
-  /// values, see:
-  /// https://github.com/git-touch/highlight.dart/tree/master/flutter_highlight/lib/themes
-  ///
-  /// [textStyle] will be merged with all theme text styles.
-  ///
-  /// Use [darkTextStyles] and [lightTextStyles] to provide or override the
-  /// whole theme.
+  /// Use [textStyle] to set custom font size and other text style properties
+  /// for the root theme.
   const FlutterDeckCodeHighlight({
     required String code,
     super.key,
-    Map<String, TextStyle>? darkTextStyles,
     String? fileName,
     String language = 'dart',
-    Map<String, TextStyle>? lightTextStyles,
     TextStyle? textStyle,
   })  : _code = code,
-        _darkTextStyles = darkTextStyles,
         _fileName = fileName,
         _language = language,
-        _lightTextStyles = lightTextStyles,
         _textStyle = textStyle;
 
   final String _code;
-  final Map<String, TextStyle>? _darkTextStyles;
   final String? _fileName;
   final String _language;
-  final Map<String, TextStyle>? _lightTextStyles;
   final TextStyle? _textStyle;
 
   @override
@@ -56,22 +44,20 @@ class FlutterDeckCodeHighlight extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (_fileName != null) ...[
-              Text(_fileName!),
+              Text(
+                _fileName!,
+                style: _textStyle,
+              ),
               const SizedBox(height: 4),
             ],
             HighlightView(
               _code,
               language: _language,
               padding: const EdgeInsets.all(16),
-              theme: (Theme.of(context).brightness == Brightness.dark
-                      ? _darkTextStyles ?? vs2015Theme
-                      : _lightTextStyles ?? defaultTheme)
-                  .map(
-                (key, value) => MapEntry(
-                  key,
-                  value.merge(_textStyle),
-                ),
-              ),
+              textStyle: _textStyle,
+              theme: Theme.of(context).brightness == Brightness.dark
+                  ? vs2015Theme
+                  : defaultTheme,
             ),
           ],
         ),
