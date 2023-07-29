@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/transitions/transitions.dart';
+import 'package:flutter_deck/src/widgets/widgets.dart';
 
 /// The global configuration for the slide deck.
 ///
@@ -8,17 +11,30 @@ import 'package:flutter_deck/src/transitions/transitions.dart';
 class FlutterDeckConfiguration {
   /// Creates a global configuration for the slide deck.
   const FlutterDeckConfiguration({
+    this.background = const FlutterDeckBackgroundConfiguration(),
     this.controls = const FlutterDeckControlsConfiguration(),
     this.footer = const FlutterDeckFooterConfiguration(showFooter: false),
     this.header = const FlutterDeckHeaderConfiguration(showHeader: false),
     this.transition = const FlutterDeckTransition.none(),
   });
 
+  /// The background configuration for the slide deck. By default, the
+  /// background is transparent and the [Scaffold.backgroundColor] is used.
+  ///
+  /// This configuration is used by all the templates that extend the
+  /// [FlutterDeckSlideBase] class and do not override the background method
+  /// explicitly. This also means that the configuration cannot be overridden
+  /// via the slide configuration, but rather by overriding the
+  /// [FlutterDeckSlideBase.background] method.
+  final FlutterDeckBackgroundConfiguration background;
+
   /// Configures the controls for the slide deck. By default, controls are
   /// enabled. The default keyboard controls are:
   /// - Next slide: ArrowRight
   /// - Previous slide: ArrowLeft
   /// - Open drawer: Period
+  ///
+  /// This configuration cannot be overridden by the slide configuration.
   final FlutterDeckControlsConfiguration controls;
 
   /// Footer component configuration for the slide deck. By default, the footer
@@ -93,6 +109,25 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
       transition: _transitionOverride ?? configuration.transition,
     );
   }
+}
+
+/// The configuration for the slide deck background.
+class FlutterDeckBackgroundConfiguration {
+  /// Creates a configuration for the slide deck background. By default, the
+  /// background is transparent and the [Scaffold.backgroundColor] is used.
+  ///
+  /// The [light] and [dark] configurations are used when the current theme is
+  /// light or dark, respectively.
+  const FlutterDeckBackgroundConfiguration({
+    this.light = const FlutterDeckBackground.transparent(),
+    this.dark = const FlutterDeckBackground.transparent(),
+  });
+
+  /// The background to use when the current theme is light.
+  final FlutterDeckBackground light;
+
+  /// The background to use when the current theme is dark.
+  final FlutterDeckBackground dark;
 }
 
 /// The configuration for the slide deck controls.

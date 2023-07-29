@@ -1,41 +1,42 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 class CodeHighlightSlide extends FlutterDeckBlankSlide {
-  const CodeHighlightSlide({
-    super.key,
-  }) : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/code-highlight',
-            header: FlutterDeckHeaderConfiguration(
-              title: 'Code Highlighting',
-            ),
-          ),
-        );
-
-  @override
-  Widget body(BuildContext context) => const Center(
-        child: FlutterDeckCodeHighlight(
-          code: '''
-import 'package:flutter_deck/flutter_deck.dart';
-
-class TitleSlide extends FlutterDeckTitleSlide {
-  const TitleSlide({super.key})
+  const CodeHighlightSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
-            route: '/intro',
-            footer: FlutterDeckFooterConfiguration(showFooter: false),
+            route: '/code-highlight',
+            header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
           ),
         );
 
   @override
-  String get title => 'Welcome to flutter_deck example! 🚀';
+  Widget body(BuildContext context) {
+    return Center(
+      child: FlutterDeckCodeHighlight(
+        code: '''
+import 'package:flutter_deck/flutter_deck.dart';
+
+class CodeHighlightSlide extends FlutterDeckBlankSlide {
+  const CodeHighlightSlide({super.key})
+      : super(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/code-highlight',
+            header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
+          ),
+        );
 
   @override
-  String? get subtitle => 'Use left and right arrow keys to navigate.';
+  Widget body(BuildContext context) {
+    return const Center(
+      child: Text('Use FlutterDeckCodeHighlight widget to highlight code!'),
+    );
+  }
 }''',
-          fileName: 'title_slide.dart',
-          language: 'dart',
-        ),
-      );
+        fileName: 'code_highlight_slide.dart',
+        language: 'dart',
+        textStyle: Theme.of(context).textTheme.titleLarge,
+      ),
+    );
+  }
 }

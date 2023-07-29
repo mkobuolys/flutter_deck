@@ -10,9 +10,6 @@ class LayoutStructureSlide extends FlutterDeckSlideBase {
         );
 
   @override
-  Widget? background(BuildContext context) => null;
-
-  @override
   Widget? content(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -22,8 +19,9 @@ class LayoutStructureSlide extends FlutterDeckSlideBase {
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: Text(
-            'This is how the default layout structure looks like.\nIn the next '
-            'few slides, you will find pre-built slide templates.',
+            'Content goes here...\n\nThis is how the default layout structure '
+            'looks like.\nIn the next few slides, you will find some pre-built '
+            'slide templates.',
             style: Theme.of(context)
                 .textTheme
                 .titleLarge

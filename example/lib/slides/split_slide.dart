@@ -19,7 +19,6 @@ class SplitSlide extends FlutterDeckSplitSlide {
         'Split Slide template renders two columns, one on the left and one on '
         'right.',
         style: Theme.of(context).textTheme.titleLarge,
-        textAlign: TextAlign.center,
       ),
     );
   }

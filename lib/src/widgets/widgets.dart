@@ -1,3 +1,4 @@
+export 'flutter_deck_background.dart';
 export 'flutter_deck_bullet_list.dart';
 export 'flutter_deck_code_highlight.dart';
 export 'flutter_deck_footer.dart';

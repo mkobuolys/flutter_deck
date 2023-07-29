@@ -107,20 +107,22 @@ abstract class FlutterDeckSplitSlide extends FlutterDeckSlideBase {
   }
 
   @override
-  Widget? background(BuildContext context) {
+  FlutterDeckBackground background(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Row(
-      children: [
-        _BackgroundSection(
-          flex: splitRatio.left,
-          color: leftBackgroundColor ?? colorScheme.background,
-        ),
-        _BackgroundSection(
-          flex: splitRatio.right,
-          color: rightBackgroundColor ?? colorScheme.primary,
-        ),
-      ],
+    return FlutterDeckBackground.custom(
+      child: Row(
+        children: [
+          _BackgroundSection(
+            flex: splitRatio.left,
+            color: leftBackgroundColor ?? colorScheme.background,
+          ),
+          _BackgroundSection(
+            flex: splitRatio.right,
+            color: rightBackgroundColor ?? colorScheme.primary,
+          ),
+        ],
+      ),
     );
   }
 }

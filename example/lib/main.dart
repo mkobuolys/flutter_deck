@@ -15,25 +15,59 @@ class FlutterDeckExample extends StatelessWidget {
     return FlutterDeckApp(
       // You could use the default configuration or create your own.
       configuration: const FlutterDeckConfiguration(
+        // Define a global background for the light and dark themes separately.
+        background: FlutterDeckBackgroundConfiguration(
+          light: FlutterDeckBackground.gradient(
+            LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFFFFDEE9), Color(0xFFB5FFFC)],
+            ),
+          ),
+          dark: FlutterDeckBackground.gradient(
+            LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF16222A), Color(0xFF3A6073)],
+            ),
+          ),
+        ),
+        // Set defaults for the footer.
         footer: FlutterDeckFooterConfiguration(
           showSlideNumbers: true,
           showSocialHandle: true,
         ),
+        // Use a custom transition between slides.
         transition: FlutterDeckTransition.fade(),
       ),
+      // You can also define your own light...
+      lightTheme: ThemeData.from(
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFB5FFFC)),
+        useMaterial3: true,
+      ),
+      // ...and dark themes.
+      darkTheme: ThemeData.from(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF16222A),
+          brightness: Brightness.dark,
+        ),
+        useMaterial3: true,
+      ),
+      // Presentation is build automatically from the list of slides.
       slides: const [
         TitleSlide(),
         LayoutStructureSlide(),
         BlankSlide(),
         SplitSlide(),
         ImageSlide(),
-        TransitionsSlide(),
         DrawerSlide(),
+        BackgroundSlide(),
+        TransitionsSlide(),
         StepsSlide(),
         CodeHighlightSlide(),
         EndSlide(),
       ],
-      // Introduce yourself!
+      // Do not forget to introduce yourself!
       speakerInfo: const FlutterDeckSpeakerInfo(
         name: 'Flutter Deck',
         description: 'The power of Flutter, in your presentations.',
