@@ -30,6 +30,7 @@ class FlutterDeckExample extends StatelessWidget {
         TransitionsSlide(),
         DrawerSlide(),
         StepsSlide(),
+        CodeHighlightSlide(),
         EndSlide(),
       ],
       // Introduce yourself!

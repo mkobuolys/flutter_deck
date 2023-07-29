@@ -1,5 +1,6 @@
 # NEXT
 
+- feat: add FlutterDeckCodeHighlight widget
 - fix: drawer toggle
 
 # 0.1.0+3
