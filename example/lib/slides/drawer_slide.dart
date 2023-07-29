@@ -5,7 +5,7 @@ class DrawerSlide extends FlutterDeckBlankSlide {
   const DrawerSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
-            route: '/drawer-slide',
+            route: '/drawer',
             header: FlutterDeckHeaderConfiguration(title: 'Navigation drawer'),
           ),
         );

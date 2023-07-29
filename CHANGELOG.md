@@ -1,6 +1,6 @@
 # NEXT
 
-- **BREAKING**: feat: updated `backround` method signature for the `FlutterDeckSlideBase`
+- **BREAKING**: feat: updated `background` method signature for the `FlutterDeckSlideBase`
 
   - **Migration**: update the `background` method signature in your code from:
 
@@ -50,6 +50,7 @@
 
 - feat: add FlutterDeckCodeHighlight widget
 - feat: make the background configurable for the whole slide deck
+- feat: allow to hide slides in the slide deck
 - fix: drawer toggle
 - docs: update the example app and README.md
 

@@ -282,6 +282,32 @@ class CustomSlide extends FlutterDeckSlide {
 }
 ```
 
+## Slide visibility
+
+By default, all slides are visible and available in the slide deck. However, you can hide a slide by setting the `hidden` property to `true` for the slide configuration:
+
+```dart
+class HiddenSlide extends FlutterDeckBlankSlide {
+  const HiddenSlide({super.key})
+      : super(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/hidden',
+            hidden: true, // Sets the slide to be hidden
+          ),
+        );
+
+  @override
+  Widget body(BuildContext context) {
+    return Center(
+      child: Text(
+        "This slide is hidden. Oh, but you can't see it...",
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+    );
+  }
+}
+```
+
 ## Widgets
 
 ### FlutterDeckBulletList
