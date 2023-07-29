@@ -1,3 +1,7 @@
+# NEXT
+
+- fix: drawer toggle
+
 # 0.1.0+3
 
 - docs: extend README.md with more information, code snippets and presentation examples
