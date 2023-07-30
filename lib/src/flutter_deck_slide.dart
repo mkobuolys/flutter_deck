@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_configuration.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
@@ -65,7 +66,12 @@ class _SlideBody extends StatelessWidget {
             ? scaffoldState.closeDrawer()
             : scaffoldState.openDrawer();
       },
-      child: child,
+      child: context.flutterDeck.configuration.showProgress
+          ? Stack(
+              alignment: Alignment.bottomCenter,
+              children: [child, const FlutterDeckProgressIndicator()],
+            )
+          : child,
     );
   }
 }

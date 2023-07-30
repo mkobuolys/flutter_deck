@@ -74,6 +74,7 @@ FlutterDeckApp(
       showSlideNumbers: true,
       showSocialHandle: true,
     ),
+    showProgress: false,
     transition: FlutterDeckTransition.fade(),
   ),
   <...>
