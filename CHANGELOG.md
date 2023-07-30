@@ -1,3 +1,8 @@
+# NEXT
+
+- feat: handle cursor visibility
+- refactor: create `FlutterDeckControls` and `FlutterDeckControlsNotifier` to centralize the flutter deck control logic
+
 # 0.2.0
 
 - **BREAKING**: feat: updated `background` method signature for the `FlutterDeckSlideBase`
