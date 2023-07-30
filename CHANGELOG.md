@@ -1,4 +1,4 @@
-# NEXT
+# 0.2.0
 
 - **BREAKING**: feat: updated `background` method signature for the `FlutterDeckSlideBase`
 
