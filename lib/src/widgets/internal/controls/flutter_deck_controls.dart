@@ -17,8 +17,7 @@ import 'package:flutter_deck/src/widgets/internal/controls/flutter_deck_controls
 /// This widget is automatically added to the widget tree and should not be used
 /// directly by the user.
 class FlutterDeckControls extends StatefulWidget {
-  /// Creates a widget that provides keyboard shortcuts for navigating the slide
-  /// deck.
+  /// Creates a widget that provides controls for the slide deck.
   ///
   /// [child] is the widget that will be wrapped by this widget. It should be
   /// the root of the slide deck.
