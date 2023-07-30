@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
-import 'package:flutter_deck/src/flutter_deck_shortcuts.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
 import 'package:flutter_deck/src/inherited_flutter_deck.dart';
@@ -151,7 +150,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
             drawerNotifier: _drawerNotifier,
             themeNotifier: _themeNotifier,
           ),
-          child: FlutterDeckShortcuts(child: child!),
+          child: FlutterDeckControls(child: child!),
         ),
         debugShowCheckedModeBanner: false,
       ),

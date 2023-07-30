@@ -11,7 +11,7 @@
 - 🐾 Steps - each slide can have multiple steps that can be navigated through.
 - ⚙️ Define a global configuration once and override it per slide if needed.
 - 🚀 Predictable API to access the slide deck state and its methods from anywhere in the app.
-- 📦 Out of the box slide templates, widgets, transitions and shortcuts.
+- 📦 Out of the box slide templates, widgets, transitions and controls.
 - 🎨 Light and dark theme support.
 
 ## Installation 💻
