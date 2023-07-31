@@ -228,10 +228,9 @@ class LayoutStructureSlide extends FlutterDeckSlideBase {
         );
 
   @override
-  Widget? background(BuildContext context) {
-    return ColoredBox(
-      color: Theme.of(context).colorScheme.background,
-      child: const Text('Background goes here...'),
+  FlutterDeckBackground background(BuildContext context) {
+    return FlutterDeckBackground.solid(
+      Theme.of(context).colorScheme.background,
     );
   }
 
