@@ -1,4 +1,4 @@
-# NEXT
+# 0.3.0
 
 - feat: handle cursor visibility
 - refactor: create `FlutterDeckControls` and `FlutterDeckControlsNotifier` to centralize the flutter deck control logic
