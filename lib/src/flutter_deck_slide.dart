@@ -49,15 +49,18 @@ import 'package:flutter_deck/src/widgets/internal/internal.dart';
 /// }
 /// ```
 abstract class FlutterDeckSlideWidget {
+  /// Creates a new slide for the slide deck.
   ///
+  /// This constructor must be called by the subclasses to create a new slide.
+  /// The [configuration] argument must not be null.
   const FlutterDeckSlideWidget({
     required this.configuration,
   });
 
-  ///
+  /// The configuration of the slide.
   final FlutterDeckSlideConfiguration configuration;
 
-  ///
+  /// Creates the slide.
   FlutterDeckSlide build(BuildContext context);
 }
 
