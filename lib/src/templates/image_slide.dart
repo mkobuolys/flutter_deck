@@ -4,7 +4,7 @@ import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/templates/slide_base.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
 
-///
+/// A signature for a function that builds an image for a slide.
 typedef ImageBuilder = Image Function(BuildContext context);
 
 /// A slide widget that represents a slide with an image.
