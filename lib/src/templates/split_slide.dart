@@ -24,21 +24,27 @@ class SplitSlideRatio {
   final int right;
 }
 
-/// The base class for a slide that contains two columns.
+/// A slide widget that represents a slide with two columns.
 ///
-/// This class is used to create a slide that contains two columns. It is
-/// responsible for rendering the default header and footer of the slide deck,
-/// and placing the [left] and [right] content in the correct places.
+/// This class is used to create a slide that contains two columns side by side.
+/// It is responsible for rendering the default header and footer of the slide
+/// deck, and use the [leftBuilder] and [rightBuilder] to create the content of
+/// the left and right columns.
 ///
-/// To use a custom background, you can override the [background] method.
+/// To use a custom background, you can pass the [backgroundBuilder].
 class FlutterDeckSplitSlide extends StatelessWidget {
   /// Creates a new split slide.
   ///
-  /// The [configuration] argument must not be null. This configuration
-  /// overrides the global configuration of the slide deck.
+  /// The [leftBuilder] and [rightBuilder] arguments must not be null. The
+  /// [backgroundBuilder], [leftBackgroundColor], [rightBackgroundColor], and
+  /// [splitRatio] arguments are optional.
+  ///
+  /// If [splitRatio] is not specified, the left and right columns will have the
+  /// same width.
   const FlutterDeckSplitSlide({
     required this.leftBuilder,
     required this.rightBuilder,
+    this.backgroundBuilder,
     this.leftBackgroundColor,
     this.rightBackgroundColor,
     SplitSlideRatio? splitRatio,
@@ -46,12 +52,13 @@ class FlutterDeckSplitSlide extends StatelessWidget {
   }) : splitRatio = splitRatio ?? const SplitSlideRatio();
 
   /// Creates the content of the left column.
-  // Widget left(BuildContext context);
   final WidgetBuilder leftBuilder;
 
   /// Creates the content of the right column.
-  // Widget right(BuildContext context);
   final WidgetBuilder rightBuilder;
+
+  /// A builder for the background of the slide.
+  final WidgetBuilder? backgroundBuilder;
 
   /// The background color of the left column.
   ///

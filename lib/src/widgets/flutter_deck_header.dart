@@ -2,13 +2,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck_configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
+import 'package:flutter_deck/src/templates/templates.dart';
 
 /// A widget that renders a header for a slide. The header can contain the slide
 /// title. The title is rendered as an [AutoSizeText] widget and is
 /// automatically resized to fit the available space.
 ///
-/// For the split slide layout, the header is rendered in constrained to fit
-/// the left side of the slide. For the full-width slide layout, the header is
+/// For the [FlutterDeckSplitSlide] layout, the header is constrained to fit the
+/// left side of the slide. For the full-width slide layout, the header is
 /// constrained to the width of the slide.
 class FlutterDeckHeader extends StatelessWidget {
   /// Creates a widget that renders a header for a slide. The header contains

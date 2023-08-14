@@ -7,18 +7,18 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 ///
 typedef ImageBuilder = Image Function(BuildContext context);
 
-/// The base class for a slide that only contains an image.
+/// A slide widget that represents a slide with an image.
 ///
 /// This class is used to create a slide that only contains an image. It is
 /// responsible for rendering the default header and footer of the slide deck,
-/// and placing the [image] in the correct place.
+/// and rendering the image using the provided [imageBuilder].
 ///
-/// To use a custom background, you can override the [background] method.
+/// To use a custom background, you can pass the [backgroundBuilder].
 class FlutterDeckImageSlide extends StatelessWidget {
   /// Creates a new image slide.
   ///
-  /// The [configuration] argument must not be null. This configuration
-  /// overrides the global configuration of the slide deck.
+  /// The [imageBuilder] argument must not be null. The [label] and
+  /// [backgroundBuilder] arguments are optional.
   const FlutterDeckImageSlide({
     required this.imageBuilder,
     this.label,
@@ -26,7 +26,7 @@ class FlutterDeckImageSlide extends StatelessWidget {
     super.key,
   });
 
-  /// The image to display in the slide.
+  /// Creates the image of the slide.
   final ImageBuilder imageBuilder;
 
   /// The label to display below the image.
@@ -34,7 +34,7 @@ class FlutterDeckImageSlide extends StatelessWidget {
   /// If this is null, no label will be displayed.
   final String? label;
 
-  ///
+  /// A builder for the background of the slide.
   final WidgetBuilder? backgroundBuilder;
 
   @override

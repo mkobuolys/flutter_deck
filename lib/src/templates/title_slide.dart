@@ -6,7 +6,7 @@ import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
 import 'package:flutter_deck/src/templates/slide_base.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
 
-/// The base class for a slide that contains a title.
+/// A slide widget that represents a title slide.
 ///
 /// This class is used to create the title slide in a slide deck. It is
 /// responsible for rendering the default header and footer of the slide deck,
@@ -14,12 +14,12 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 /// [FlutterDeckSpeakerInfo] is set, it will render the speaker info below the
 /// title and subtitle.
 ///
-/// To use a custom background, you can override the [background] method.
+/// To use a custom background, you can pass the [backgroundBuilder].
 class FlutterDeckTitleSlide extends StatelessWidget {
   /// Creates a new title slide.
   ///
-  /// The [configuration] argument must not be null. This configuration
-  /// overrides the global configuration of the slide deck.
+  /// The [title] argument must not be null. The [subtitle] and
+  /// [backgroundBuilder] arguments are optional.
   const FlutterDeckTitleSlide({
     required this.title,
     this.subtitle,
@@ -35,7 +35,7 @@ class FlutterDeckTitleSlide extends StatelessWidget {
   /// If this is null, no subtitle will be displayed.
   final String? subtitle;
 
-  ///
+  /// A builder for the background of the slide.
   final WidgetBuilder? backgroundBuilder;
 
   @override

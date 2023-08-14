@@ -14,12 +14,13 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 /// steps in the slide configuration.
 ///
 /// Example:
+///
 /// ```dart
 /// import 'package:flutter/material.dart';
 /// import 'package:flutter_deck/flutter_deck.dart';
 ///
-/// class BulletListSlide extends FlutterDeckSlide {
-///   const BulletListSlide({super.key})
+/// class BulletListSlide extends FlutterDeckSlideWidget {
+///   const BulletListSlide()
 ///       : super(
 ///           configuration: const FlutterDeckSlideConfiguration(
 ///             route: '/bullet-list',
@@ -28,14 +29,16 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 ///         );
 ///
 ///   @override
-///   Widget slide(BuildContext context) {
-///     return FlutterDeckBulletList(
-///       useSteps: true,
-///       items: const [
-///         'Bullet point 1',
-///         'Bullet point 2',
-///         'Bullet point 3',
-///       ],
+///   FlutterDeckSlide build(BuildContext context) {
+///     return FlutterDeckSlide.custom(
+///       builder: (context) => FlutterDeckBulletList(
+///         useSteps: true,
+///         items: const [
+///           'Bullet point 1',
+///           'Bullet point 2',
+///           'Bullet point 3',
+///         ],
+///       ),
 ///     );
 ///   }
 /// }
