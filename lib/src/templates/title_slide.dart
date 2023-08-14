@@ -23,6 +23,7 @@ class FlutterDeckTitleSlide extends StatelessWidget {
   const FlutterDeckTitleSlide({
     required this.title,
     this.subtitle,
+    this.backgroundBuilder,
     super.key,
   });
 
@@ -34,6 +35,9 @@ class FlutterDeckTitleSlide extends StatelessWidget {
   /// If this is null, no subtitle will be displayed.
   final String? subtitle;
 
+  ///
+  final WidgetBuilder? backgroundBuilder;
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -43,6 +47,7 @@ class FlutterDeckTitleSlide extends StatelessWidget {
     final speakerInfo = context.flutterDeck.speakerInfo;
 
     return FlutterDeckSlideBase(
+      backgroundBuilder: backgroundBuilder,
       contentBuilder: (context) => Padding(
         padding: FlutterDeckLayout.slidePadding * 4,
         child: Column(

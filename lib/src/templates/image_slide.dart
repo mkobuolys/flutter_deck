@@ -19,6 +19,7 @@ class FlutterDeckImageSlide extends StatelessWidget {
   const FlutterDeckImageSlide({
     required this.image,
     this.label,
+    this.backgroundBuilder,
     super.key,
   });
 
@@ -30,6 +31,9 @@ class FlutterDeckImageSlide extends StatelessWidget {
   /// If this is null, no label will be displayed.
   final String? label;
 
+  ///
+  final WidgetBuilder? backgroundBuilder;
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -38,6 +42,7 @@ class FlutterDeckImageSlide extends StatelessWidget {
     final headerConfiguration = configuration.header;
 
     return FlutterDeckSlideBase(
+      backgroundBuilder: backgroundBuilder,
       contentBuilder: (context) => Padding(
         padding: FlutterDeckLayout.slidePadding,
         child: Column(

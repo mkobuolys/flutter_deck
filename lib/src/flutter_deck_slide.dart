@@ -49,9 +49,13 @@ class FlutterDeckSlide extends StatelessWidget {
   ///
   FlutterDeckSlide.blank({
     required WidgetBuilder builder,
+    WidgetBuilder? backgroundBuilder,
     Key? key,
   }) : this._(
-          builder: (context) => FlutterDeckBlankSlide(builder: builder),
+          builder: (context) => FlutterDeckBlankSlide(
+            builder: builder,
+            backgroundBuilder: backgroundBuilder,
+          ),
           key: key,
         );
 
@@ -68,11 +72,13 @@ class FlutterDeckSlide extends StatelessWidget {
   FlutterDeckSlide.image({
     required Image image,
     String? label,
+    WidgetBuilder? backgroundBuilder,
     Key? key,
   }) : this._(
           builder: (context) => FlutterDeckImageSlide(
             image: image,
             label: label,
+            backgroundBuilder: backgroundBuilder,
           ),
           key: key,
         );
@@ -117,11 +123,13 @@ class FlutterDeckSlide extends StatelessWidget {
   FlutterDeckSlide.title({
     required String title,
     String? subtitle,
+    WidgetBuilder? backgroundBuilder,
     Key? key,
   }) : this._(
           builder: (context) => FlutterDeckTitleSlide(
             title: title,
             subtitle: subtitle,
+            backgroundBuilder: backgroundBuilder,
           ),
           key: key,
         );

@@ -18,11 +18,15 @@ class FlutterDeckBlankSlide extends StatelessWidget {
   /// overrides the global configuration of the slide deck.
   const FlutterDeckBlankSlide({
     required this.builder,
+    this.backgroundBuilder,
     super.key,
   });
 
   ///
   final WidgetBuilder builder;
+
+  ///
+  final WidgetBuilder? backgroundBuilder;
 
   /// Creates the body of the slide.
   ///
@@ -38,6 +42,7 @@ class FlutterDeckBlankSlide extends StatelessWidget {
     final headerConfiguration = configuration.header;
 
     return FlutterDeckSlideBase(
+      backgroundBuilder: backgroundBuilder,
       contentBuilder: (context) => Padding(
         padding: FlutterDeckLayout.slidePadding,
         child: builder(context),
