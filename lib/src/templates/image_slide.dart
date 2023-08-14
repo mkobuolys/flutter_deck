@@ -4,6 +4,9 @@ import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/templates/slide_base.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
 
+///
+typedef ImageBuilder = Image Function(BuildContext context);
+
 /// The base class for a slide that only contains an image.
 ///
 /// This class is used to create a slide that only contains an image. It is
@@ -17,14 +20,14 @@ class FlutterDeckImageSlide extends StatelessWidget {
   /// The [configuration] argument must not be null. This configuration
   /// overrides the global configuration of the slide deck.
   const FlutterDeckImageSlide({
-    required this.image,
+    required this.imageBuilder,
     this.label,
     this.backgroundBuilder,
     super.key,
   });
 
   /// The image to display in the slide.
-  final Image image;
+  final ImageBuilder imageBuilder;
 
   /// The label to display below the image.
   ///
@@ -48,7 +51,7 @@ class FlutterDeckImageSlide extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: Center(child: image),
+              child: Center(child: imageBuilder(context)),
             ),
             if (label != null) ...[
               const SizedBox(height: 4),

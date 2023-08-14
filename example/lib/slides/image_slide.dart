@@ -15,7 +15,7 @@ class ImageSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.image(
-      image: Image.asset('assets/header.png'),
+      imageBuilder: (context) => Image.asset('assets/header.png'),
       label: 'You can also add a small label here (if you want) 👀',
     );
   }

@@ -70,13 +70,13 @@ class FlutterDeckSlide extends StatelessWidget {
 
   ///
   FlutterDeckSlide.image({
-    required Image image,
+    required ImageBuilder imageBuilder,
     String? label,
     WidgetBuilder? backgroundBuilder,
     Key? key,
   }) : this._(
           builder: (context) => FlutterDeckImageSlide(
-            image: image,
+            imageBuilder: imageBuilder,
             label: label,
             backgroundBuilder: backgroundBuilder,
           ),
