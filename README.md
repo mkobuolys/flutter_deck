@@ -191,8 +191,9 @@ class ImageSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/image-slide',
-            header:
-                FlutterDeckHeaderConfiguration(title: 'Image slide template'),
+            header: FlutterDeckHeaderConfiguration(
+              title: 'Image slide template',
+            ),
           ),
         );
 

@@ -1,3 +1,329 @@
+# NEXT
+
+- **BREAKING**: refactor: rework the way how a new slide is created
+
+  - **Migration**: every slide must extend the `FlutterDeckSlideWidget` and override the `build` method:
+
+    ```
+    class ExampleSlide extends FlutterDeckSlideWidget {
+      const ExampleSlide()
+          : super(
+              configuration: const FlutterDeckSlideConfiguration(
+                route: '/example',
+              ),
+            );
+
+      @override
+      FlutterDeckSlide build(BuildContext context) {
+        <...>
+      }
+    }
+    ```
+
+  - Instead of extending `FlutterDeckTitleSlide`:
+
+    ```
+    class TitleSlide extends FlutterDeckTitleSlide {
+      const TitleSlide({super.key})
+          : super(
+              configuration: const FlutterDeckSlideConfiguration(
+                route: '/title-slide',
+                footer: FlutterDeckFooterConfiguration(showFooter: false),
+              ),
+            );
+
+      @override
+      String get title => 'Here goes the title of the slide';
+
+      @override
+      String? get subtitle => 'Here goes the subtitle of the slide (optional)';
+    }
+    ```
+
+    use `FlutterDeckSlide.title`:
+
+    ```
+    class TitleSlide extends FlutterDeckSlideWidget {
+      const TitleSlide()
+          : super(
+              configuration: const FlutterDeckSlideConfiguration(
+                route: '/title-slide',
+                footer: FlutterDeckFooterConfiguration(showFooter: false),
+              ),
+            );
+
+      @override
+      FlutterDeckSlide build(BuildContext context) {
+        return FlutterDeckSlide.title(
+          title: 'Here goes the title of the slide',
+          subtitle: 'Here goes the subtitle of the slide (optional)',
+        );
+      }
+    }
+    ```
+
+  - Instead of extending `FlutterDeckBlankSlide`:
+
+    ```
+    class BlankSlide extends FlutterDeckBlankSlide {
+      const BlankSlide({super.key})
+          : super(
+              configuration: const FlutterDeckSlideConfiguration(
+                route: '/blank-slide',
+                header: FlutterDeckHeaderConfiguration(
+                  title: 'Blank slide template',
+                ),
+              ),
+            );
+
+      @override
+      Widget body(BuildContext context) {
+        return Text('Here goes the content of the slide');
+      }
+    }
+    ```
+
+    use `FlutterDeckSlide.blank`:
+
+    ```
+    class BlankSlide extends FlutterDeckSlideWidget {
+      const BlankSlide()
+          : super(
+              configuration: const FlutterDeckSlideConfiguration(
+                route: '/blank-slide',
+                header: FlutterDeckHeaderConfiguration(
+                  title: 'Blank slide template',
+                ),
+              ),
+            );
+
+      @override
+      FlutterDeckSlide build(BuildContext context) {
+        return FlutterDeckSlide.blank(
+          builder: (context) => const Text('Here goes the content of the slide'),
+        );
+      }
+    }
+    ```
+
+  - Instead of extending `FlutterDeckImageSlide`:
+
+    ```
+    class ImageSlide extends FlutterDeckImageSlide {
+      const ImageSlide({super.key})
+          : super(
+              configuration: const FlutterDeckSlideConfiguration(
+                route: '/image-slide',
+                header: FlutterDeckHeaderConfiguration(
+                  title: 'Image slide template',
+                ),
+              ),
+            );
+
+      @override
+      Image get image => Image.asset('assets/image.png');
+
+      @override
+      String? get label => 'Here goes the label of the image (optional)';
+    }
+    ```
+
+    use `FlutterDeckSlide.image`:
+
+    ```
+    class ImageSlide extends FlutterDeckSlideWidget {
+      const ImageSlide()
+          : super(
+              configuration: const FlutterDeckSlideConfiguration(
+                route: '/image-slide',
+                header: FlutterDeckHeaderConfiguration(
+                  title: 'Image slide template',
+                ),
+              ),
+            );
+
+      @override
+      FlutterDeckSlide build(BuildContext context) {
+        return FlutterDeckSlide.image(
+          imageBuilder: (context) => Image.asset('assets/image.png'),
+          label: 'Here goes the label of the image (optional)',
+        );
+      }
+    }
+    ```
+
+  - Instead of extending `FlutterDeckSplitSlide`:
+
+    ```
+    class SplitSlide extends FlutterDeckSplitSlide {
+      const SplitSlide({super.key})
+          : super(
+              configuration: const FlutterDeckSlideConfiguration(
+                route: '/split-slide',
+                header: FlutterDeckHeaderConfiguration(
+                  title: 'Split slide template',
+                ),
+              ),
+            );
+
+      @override
+      Widget left(BuildContext context) {
+        return Text('Here goes the LEFT section content of the slide');
+      }
+
+      @override
+      Widget right(BuildContext context) {
+        return Text('Here goes the RIGHT section content of the slide');
+      }
+    }
+    ```
+
+    use `FlutterDeckSlide.split`:
+
+    ```
+    class SplitSlide extends FlutterDeckSlideWidget {
+      const SplitSlide()
+          : super(
+              configuration: const FlutterDeckSlideConfiguration(
+                route: '/split-slide',
+                header: FlutterDeckHeaderConfiguration(
+                  title: 'Split slide template',
+                ),
+              ),
+            );
+
+      @override
+      FlutterDeckSlide build(BuildContext context) {
+        return FlutterDeckSlide.split(
+          leftBuilder: (context) {
+            return const Text('Here goes the LEFT section content of the slide');
+          },
+          rightBuilder: (context) {
+            return const Text('Here goes the RIGHT section content of the slide');
+          },
+        );
+      }
+    }
+    ```
+
+  - Instead of extending `FlutterDeckSlideBase`:
+
+    ```
+    class TemplateSlide extends FlutterDeckSlideBase {
+      const TemplateSlide({super.key})
+          : super(
+              configuration: const FlutterDeckSlideConfiguration(
+                route: '/template-slide',
+              ),
+            );
+
+      @override
+      FlutterDeckBackground background(BuildContext context) {
+        return FlutterDeckBackground.solid(
+          Theme.of(context).colorScheme.background,
+        );
+      }
+
+      @override
+      Widget? content(BuildContext context) {
+        return const ColoredBox(
+          color: Colors.red,
+          child: Text('Content goes here...'),
+        );
+      }
+
+      @override
+      Widget? footer(BuildContext context) {
+        return ColoredBox(
+          color: Theme.of(context).colorScheme.secondary,
+          child: const Text('Footer goes here...'),
+        );
+      }
+
+      @override
+      Widget? header(BuildContext context) {
+        return ColoredBox(
+          color: Theme.of(context).colorScheme.primary,
+          child: const Text('Header goes here...'),
+        );
+      }
+    }
+    ```
+
+    use `FlutterDeckSlide.template`:
+
+    ```
+    class TemplateSlide extends FlutterDeckSlideWidget {
+      const TemplateSlide()
+          : super(
+              configuration: const FlutterDeckSlideConfiguration(
+                route: '/template-slide',
+              ),
+            );
+
+      @override
+      FlutterDeckSlide build(BuildContext context) {
+        return FlutterDeckSlide.template(
+          backgroundBuilder: (context) => FlutterDeckBackground.solid(
+            Theme.of(context).colorScheme.background,
+          ),
+          contentBuilder: (context) => const ColoredBox(
+            color: Colors.red,
+            child: Text('Content goes here...'),
+          ),
+          footerBuilder: (context) => ColoredBox(
+            color: Theme.of(context).colorScheme.secondary,
+            child: const Text('Footer goes here...'),
+          ),
+          headerBuilder: (context) => ColoredBox(
+            color: Theme.of(context).colorScheme.primary,
+            child: const Text('Header goes here...'),
+          ),
+        );
+      }
+    }
+    ```
+
+  - Instead of extending `FlutterDeckSlide`:
+
+    ```
+    class CustomSlide extends FlutterDeckSlide {
+      const CustomSlide({super.key})
+          : super(
+              configuration: const FlutterDeckSlideConfiguration(
+                route: '/custom-slide',
+              ),
+            );
+
+      @override
+      Widget slide(BuildContext context) {
+        return const Text('Here goes your custom slide content...');
+      }
+    }
+    ```
+
+    use `FlutterDeckSlide.custom`:
+
+    ```
+    class CustomSlide extends FlutterDeckSlideWidget {
+      const CustomSlide()
+          : super(
+              configuration: const FlutterDeckSlideConfiguration(
+                route: '/custom-slide',
+              ),
+            );
+
+      @override
+      FlutterDeckSlide build(BuildContext context) {
+        return FlutterDeckSlide.custom(
+          builder: (context) {
+            return const Text('Here goes your custom slide content...');
+          },
+        );
+      }
+    }
+    ```
+
 # 0.3.0
 
 - feat: handle cursor visibility
