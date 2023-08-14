@@ -31,98 +31,92 @@ class SplitSlideRatio {
 /// and placing the [left] and [right] content in the correct places.
 ///
 /// To use a custom background, you can override the [background] method.
-abstract class FlutterDeckSplitSlide extends FlutterDeckSlideBase {
+class FlutterDeckSplitSlide extends StatelessWidget {
   /// Creates a new split slide.
   ///
   /// The [configuration] argument must not be null. This configuration
   /// overrides the global configuration of the slide deck.
   const FlutterDeckSplitSlide({
-    required super.configuration,
+    required this.left,
+    required this.right,
+    this.leftBackgroundColor,
+    this.rightBackgroundColor,
+    SplitSlideRatio? splitRatio,
     super.key,
-  });
+  }) : splitRatio = splitRatio ?? const SplitSlideRatio();
 
   /// Creates the content of the left column.
-  Widget left(BuildContext context);
+  // Widget left(BuildContext context);
+  final Widget left;
 
   /// Creates the content of the right column.
-  Widget right(BuildContext context);
-
-  /// The ratio of the left and right columns.
-  ///
-  /// By default, the left and right columns will have the same width.
-  SplitSlideRatio get splitRatio => const SplitSlideRatio();
+  // Widget right(BuildContext context);
+  final Widget right;
 
   /// The background color of the left column.
   ///
   /// If this is null, the [ColorScheme.background] color of the slide is used.
-  Color? get leftBackgroundColor => null;
+  final Color? leftBackgroundColor;
 
   /// The background color of the right column.
   ///
   /// If this is null, the [ColorScheme.primary] color of the slide is used.
-  Color? get rightBackgroundColor => null;
+  final Color? rightBackgroundColor;
+
+  /// The ratio of the left and right columns.
+  ///
+  /// By default, the left and right columns will have the same width.
+  final SplitSlideRatio splitRatio;
 
   @override
-  Widget? content(BuildContext context) {
-    return Row(
-      children: [
-        _ContentSection(flex: splitRatio.left, child: left(context)),
-        _ContentSection(flex: splitRatio.right, child: right(context)),
-      ],
-    );
-  }
-
-  @override
-  Widget? header(BuildContext context) {
-    final headerConfiguration = context.flutterDeck.configuration.header;
-
-    return headerConfiguration.showHeader
-        ? LayoutBuilder(
-            builder: (context, constraints) {
-              final maxWidth = constraints.maxWidth *
-                  splitRatio.left /
-                  (splitRatio.left + splitRatio.right);
-
-              return FlutterDeckHeader.fromConfiguration(
-                configuration: headerConfiguration,
-                maxWidth: maxWidth,
-              );
-            },
-          )
-        : null;
-  }
-
-  @override
-  Widget? footer(BuildContext context) {
+  Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final footerConfiguration = context.flutterDeck.configuration.footer;
+    final configuration = context.flutterDeck.configuration;
+    final footerConfiguration = configuration.footer;
+    final headerConfiguration = configuration.header;
 
-    return footerConfiguration.showFooter
-        ? FlutterDeckFooter.fromConfiguration(
-            configuration: footerConfiguration,
-            slideNumberColor: colorScheme.onPrimary,
-            socialHandleColor: colorScheme.onBackground,
-          )
-        : null;
-  }
-
-  @override
-  FlutterDeckBackground background(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return FlutterDeckBackground.custom(
-      child: Row(
+    return FlutterDeckSlideBase(
+      background: FlutterDeckBackground.custom(
+        child: Row(
+          children: [
+            _BackgroundSection(
+              flex: splitRatio.left,
+              color: leftBackgroundColor ?? colorScheme.background,
+            ),
+            _BackgroundSection(
+              flex: splitRatio.right,
+              color: rightBackgroundColor ?? colorScheme.primary,
+            ),
+          ],
+        ),
+      ),
+      content: Row(
         children: [
-          _BackgroundSection(
-            flex: splitRatio.left,
-            color: leftBackgroundColor ?? colorScheme.background,
-          ),
-          _BackgroundSection(
-            flex: splitRatio.right,
-            color: rightBackgroundColor ?? colorScheme.primary,
-          ),
+          _ContentSection(flex: splitRatio.left, child: left),
+          _ContentSection(flex: splitRatio.right, child: right),
         ],
       ),
+      footer: footerConfiguration.showFooter
+          ? FlutterDeckFooter.fromConfiguration(
+              configuration: footerConfiguration,
+              slideNumberColor: colorScheme.onPrimary,
+              socialHandleColor: colorScheme.onBackground,
+            )
+          : null,
+      header: headerConfiguration.showHeader
+          ? LayoutBuilder(
+              builder: (context, constraints) {
+                final maxWidth = constraints.maxWidth *
+                    splitRatio.left /
+                    (splitRatio.left + splitRatio.right);
+
+                return FlutterDeckHeader.fromConfiguration(
+                  configuration: headerConfiguration,
+                  maxWidth: maxWidth,
+                );
+              },
+            )
+          : null,
     );
   }
 }

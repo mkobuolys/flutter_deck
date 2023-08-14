@@ -15,77 +15,71 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 /// title and subtitle.
 ///
 /// To use a custom background, you can override the [background] method.
-abstract class FlutterDeckTitleSlide extends FlutterDeckSlideBase {
+class FlutterDeckTitleSlide extends StatelessWidget {
   /// Creates a new title slide.
   ///
   /// The [configuration] argument must not be null. This configuration
   /// overrides the global configuration of the slide deck.
   const FlutterDeckTitleSlide({
-    required super.configuration,
+    required this.title,
+    this.subtitle,
     super.key,
   });
 
   /// The title of the slide.
-  String get title;
+  final String title;
 
   /// The subtitle of the slide.
   ///
   /// If this is null, no subtitle will be displayed.
-  String? get subtitle => null;
+  final String? subtitle;
 
   @override
-  Widget? content(BuildContext context) {
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final configuration = context.flutterDeck.configuration;
+    final footerConfiguration = configuration.footer;
+    final headerConfiguration = configuration.header;
     final speakerInfo = context.flutterDeck.speakerInfo;
 
-    return Padding(
-      padding: FlutterDeckLayout.slidePadding * 4,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AutoSizeText(
-            title,
-            style: Theme.of(context).textTheme.displayLarge,
-          ),
-          if (subtitle != null) ...[
-            const SizedBox(height: 8),
+    return FlutterDeckSlideBase(
+      content: Padding(
+        padding: FlutterDeckLayout.slidePadding * 4,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             AutoSizeText(
-              subtitle!,
-              style: Theme.of(context).textTheme.displayMedium,
+              title,
+              style: Theme.of(context).textTheme.displayLarge,
             ),
+            if (subtitle != null) ...[
+              const SizedBox(height: 8),
+              AutoSizeText(
+                subtitle!,
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
+            ],
+            if (speakerInfo != null) ...[
+              const SizedBox(height: 64),
+              _SpeakerInfo(speakerInfo: speakerInfo),
+            ],
           ],
-          if (speakerInfo != null) ...[
-            const SizedBox(height: 64),
-            _SpeakerInfo(speakerInfo: speakerInfo),
-          ],
-        ],
+        ),
       ),
+      footer: footerConfiguration.showFooter
+          ? FlutterDeckFooter.fromConfiguration(
+              configuration: footerConfiguration,
+              slideNumberColor: colorScheme.onBackground,
+              socialHandleColor: colorScheme.onBackground,
+            )
+          : null,
+      header: headerConfiguration.showHeader
+          ? FlutterDeckHeader.fromConfiguration(
+              configuration: headerConfiguration,
+            )
+          : null,
     );
-  }
-
-  @override
-  Widget? header(BuildContext context) {
-    final headerConfiguration = context.flutterDeck.configuration.header;
-
-    return headerConfiguration.showHeader
-        ? FlutterDeckHeader.fromConfiguration(
-            configuration: headerConfiguration,
-          )
-        : null;
-  }
-
-  @override
-  Widget? footer(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final footerConfiguration = context.flutterDeck.configuration.footer;
-
-    return footerConfiguration.showFooter
-        ? FlutterDeckFooter.fromConfiguration(
-            configuration: footerConfiguration,
-            slideNumberColor: colorScheme.onBackground,
-            socialHandleColor: colorScheme.onBackground,
-          )
-        : null;
   }
 }
 

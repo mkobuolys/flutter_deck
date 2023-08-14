@@ -11,52 +11,49 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 /// and placing the content of the [body] of the slide in the correct place.
 ///
 /// To use a custom background, you can override the [background] method.
-abstract class FlutterDeckBlankSlide extends FlutterDeckSlideBase {
+class FlutterDeckBlankSlide extends StatelessWidget {
   /// Creates a new blank slide.
   ///
   /// The [configuration] argument must not be null. This configuration
   /// overrides the global configuration of the slide deck.
   const FlutterDeckBlankSlide({
-    required super.configuration,
+    required this.child,
     super.key,
   });
+
+  ///
+  final Widget child;
 
   /// Creates the body of the slide.
   ///
   /// This method is called by the [slide] method. It is responsible for
   /// rendering the body of the slide between the header and footer.
-  Widget body(BuildContext context);
+  // Widget body(BuildContext context);
 
   @override
-  Widget? content(BuildContext context) {
-    return Padding(
-      padding: FlutterDeckLayout.slidePadding,
-      child: body(context),
-    );
-  }
-
-  @override
-  Widget? header(BuildContext context) {
-    final headerConfiguration = context.flutterDeck.configuration.header;
-
-    return headerConfiguration.showHeader
-        ? FlutterDeckHeader.fromConfiguration(
-            configuration: headerConfiguration,
-          )
-        : null;
-  }
-
-  @override
-  Widget? footer(BuildContext context) {
+  Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final footerConfiguration = context.flutterDeck.configuration.footer;
+    final configuration = context.flutterDeck.configuration;
+    final footerConfiguration = configuration.footer;
+    final headerConfiguration = configuration.header;
 
-    return footerConfiguration.showFooter
-        ? FlutterDeckFooter.fromConfiguration(
-            configuration: footerConfiguration,
-            slideNumberColor: colorScheme.onBackground,
-            socialHandleColor: colorScheme.onBackground,
-          )
-        : null;
+    return FlutterDeckSlideBase(
+      content: Padding(
+        padding: FlutterDeckLayout.slidePadding,
+        child: child,
+      ),
+      footer: footerConfiguration.showFooter
+          ? FlutterDeckFooter.fromConfiguration(
+              configuration: footerConfiguration,
+              slideNumberColor: colorScheme.onBackground,
+              socialHandleColor: colorScheme.onBackground,
+            )
+          : null,
+      header: headerConfiguration.showHeader
+          ? FlutterDeckHeader.fromConfiguration(
+              configuration: headerConfiguration,
+            )
+          : null,
+    );
   }
 }

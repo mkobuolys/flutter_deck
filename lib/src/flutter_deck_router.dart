@@ -8,11 +8,11 @@ const _queryParameterStep = 'step';
 class FlutterDeckRouterSlide {
   /// Creates a slide route for the slide deck.
   ///
-  /// [configuration], [route], and [slide] must not be null.
+  /// [configuration], [route], and [widget] must not be null.
   const FlutterDeckRouterSlide({
     required this.configuration,
     required this.route,
-    required this.slide,
+    required this.widget,
   });
 
   /// The configuration for the slide.
@@ -21,8 +21,8 @@ class FlutterDeckRouterSlide {
   /// The route for the slide.
   final String route;
 
-  /// The slide to display.
-  final FlutterDeckSlide slide;
+  /// The slide widget to display.
+  final FlutterDeckSlideWidget widget;
 }
 
 /// A router for the slide deck.
@@ -63,7 +63,7 @@ class FlutterDeckRouter {
               key: state.pageKey,
               restorationId: state.pageKey.value,
               transitionsBuilder: slide.configuration.transition.build,
-              child: slide.slide,
+              child: slide.widget.build(context),
             ),
           ),
       ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
-class CodeHighlightSlide extends FlutterDeckBlankSlide {
-  const CodeHighlightSlide({super.key})
+class CodeHighlightSlide extends FlutterDeckSlideWidget {
+  const CodeHighlightSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/code-highlight',
@@ -11,10 +11,11 @@ class CodeHighlightSlide extends FlutterDeckBlankSlide {
         );
 
   @override
-  Widget body(BuildContext context) {
-    return Center(
-      child: FlutterDeckCodeHighlight(
-        code: '''
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.blank(
+      child: Center(
+        child: FlutterDeckCodeHighlight(
+          code: '''
 import 'package:flutter_deck/flutter_deck.dart';
 
 class CodeHighlightSlide extends FlutterDeckBlankSlide {
@@ -33,9 +34,10 @@ class CodeHighlightSlide extends FlutterDeckBlankSlide {
     );
   }
 }''',
-        fileName: 'code_highlight_slide.dart',
-        language: 'dart',
-        textStyle: Theme.of(context).textTheme.titleLarge,
+          fileName: 'code_highlight_slide.dart',
+          language: 'dart',
+          textStyle: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
     );
   }
