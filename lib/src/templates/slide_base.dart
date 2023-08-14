@@ -17,24 +17,24 @@ class FlutterDeckSlideBase extends StatelessWidget {
   /// The [configuration] argument must not be null. This configuration
   /// overrides the global configuration of the slide deck.
   const FlutterDeckSlideBase({
-    this.background,
-    this.content,
-    this.footer,
-    this.header,
+    this.backgroundBuilder,
+    this.contentBuilder,
+    this.footerBuilder,
+    this.headerBuilder,
     super.key,
   });
 
   ///
-  final Widget? background;
+  final WidgetBuilder? backgroundBuilder;
 
   ///
-  final Widget? content;
+  final WidgetBuilder? contentBuilder;
 
   ///
-  final Widget? footer;
+  final WidgetBuilder? footerBuilder;
 
   ///
-  final Widget? header;
+  final WidgetBuilder? headerBuilder;
 
   /// Creates the content of the slide.
   ///
@@ -80,14 +80,16 @@ class FlutterDeckSlideBase extends StatelessWidget {
       children: [
         ConstrainedBox(
           constraints: const BoxConstraints.expand(),
-          child: this.background ?? background,
+          child: backgroundBuilder?.call(context) ?? background,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (header != null) header!,
-            Expanded(child: content ?? const SizedBox.shrink()),
-            if (footer != null) footer!,
+            if (headerBuilder != null) headerBuilder!(context),
+            Expanded(
+              child: contentBuilder?.call(context) ?? const SizedBox.shrink(),
+            ),
+            if (footerBuilder != null) footerBuilder!(context),
           ],
         ),
       ],

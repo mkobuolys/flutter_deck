@@ -43,7 +43,7 @@ class FlutterDeckTitleSlide extends StatelessWidget {
     final speakerInfo = context.flutterDeck.speakerInfo;
 
     return FlutterDeckSlideBase(
-      content: Padding(
+      contentBuilder: (context) => Padding(
         padding: FlutterDeckLayout.slidePadding * 4,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -67,17 +67,17 @@ class FlutterDeckTitleSlide extends StatelessWidget {
           ],
         ),
       ),
-      footer: footerConfiguration.showFooter
-          ? FlutterDeckFooter.fromConfiguration(
-              configuration: footerConfiguration,
-              slideNumberColor: colorScheme.onBackground,
-              socialHandleColor: colorScheme.onBackground,
-            )
+      footerBuilder: footerConfiguration.showFooter
+          ? (context) => FlutterDeckFooter.fromConfiguration(
+                configuration: footerConfiguration,
+                slideNumberColor: colorScheme.onBackground,
+                socialHandleColor: colorScheme.onBackground,
+              )
           : null,
-      header: headerConfiguration.showHeader
-          ? FlutterDeckHeader.fromConfiguration(
-              configuration: headerConfiguration,
-            )
+      headerBuilder: headerConfiguration.showHeader
+          ? (context) => FlutterDeckHeader.fromConfiguration(
+                configuration: headerConfiguration,
+              )
           : null,
     );
   }

@@ -13,7 +13,7 @@ class DrawerSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
-      child: Center(
+      builder: (context) => Center(
         child: Text(
           'Did you know that flutter_deck supports navigation drawer? Just '
           'press "." on your keyboard to open it!\n\nThere, you can toggle the '

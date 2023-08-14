@@ -37,8 +37,8 @@ class FlutterDeckSplitSlide extends StatelessWidget {
   /// The [configuration] argument must not be null. This configuration
   /// overrides the global configuration of the slide deck.
   const FlutterDeckSplitSlide({
-    required this.left,
-    required this.right,
+    required this.leftBuilder,
+    required this.rightBuilder,
     this.leftBackgroundColor,
     this.rightBackgroundColor,
     SplitSlideRatio? splitRatio,
@@ -47,11 +47,11 @@ class FlutterDeckSplitSlide extends StatelessWidget {
 
   /// Creates the content of the left column.
   // Widget left(BuildContext context);
-  final Widget left;
+  final WidgetBuilder leftBuilder;
 
   /// Creates the content of the right column.
   // Widget right(BuildContext context);
-  final Widget right;
+  final WidgetBuilder rightBuilder;
 
   /// The background color of the left column.
   ///
@@ -76,7 +76,7 @@ class FlutterDeckSplitSlide extends StatelessWidget {
     final headerConfiguration = configuration.header;
 
     return FlutterDeckSlideBase(
-      background: FlutterDeckBackground.custom(
+      backgroundBuilder: (context) => FlutterDeckBackground.custom(
         child: Row(
           children: [
             _BackgroundSection(
@@ -90,32 +90,32 @@ class FlutterDeckSplitSlide extends StatelessWidget {
           ],
         ),
       ),
-      content: Row(
+      contentBuilder: (context) => Row(
         children: [
-          _ContentSection(flex: splitRatio.left, child: left),
-          _ContentSection(flex: splitRatio.right, child: right),
+          _ContentSection(flex: splitRatio.left, child: leftBuilder(context)),
+          _ContentSection(flex: splitRatio.right, child: rightBuilder(context)),
         ],
       ),
-      footer: footerConfiguration.showFooter
-          ? FlutterDeckFooter.fromConfiguration(
-              configuration: footerConfiguration,
-              slideNumberColor: colorScheme.onPrimary,
-              socialHandleColor: colorScheme.onBackground,
-            )
+      footerBuilder: footerConfiguration.showFooter
+          ? (context) => FlutterDeckFooter.fromConfiguration(
+                configuration: footerConfiguration,
+                slideNumberColor: colorScheme.onPrimary,
+                socialHandleColor: colorScheme.onBackground,
+              )
           : null,
-      header: headerConfiguration.showHeader
-          ? LayoutBuilder(
-              builder: (context, constraints) {
-                final maxWidth = constraints.maxWidth *
-                    splitRatio.left /
-                    (splitRatio.left + splitRatio.right);
+      headerBuilder: headerConfiguration.showHeader
+          ? (context) => LayoutBuilder(
+                builder: (context, constraints) {
+                  final maxWidth = constraints.maxWidth *
+                      splitRatio.left /
+                      (splitRatio.left + splitRatio.right);
 
-                return FlutterDeckHeader.fromConfiguration(
-                  configuration: headerConfiguration,
-                  maxWidth: maxWidth,
-                );
-              },
-            )
+                  return FlutterDeckHeader.fromConfiguration(
+                    configuration: headerConfiguration,
+                    maxWidth: maxWidth,
+                  );
+                },
+              )
           : null,
     );
   }

@@ -42,25 +42,25 @@ class FlutterDeckSlide extends StatelessWidget {
   /// The [configuration] argument must not be null. This configuration
   /// overrides the global configuration of the slide deck.
   const FlutterDeckSlide._({
-    required Widget child,
+    required WidgetBuilder builder,
     super.key,
-  }) : _child = child;
+  }) : _builder = builder;
 
   ///
   FlutterDeckSlide.blank({
-    required Widget child,
+    required WidgetBuilder builder,
     Key? key,
   }) : this._(
-          child: FlutterDeckBlankSlide(child: child),
+          builder: (context) => FlutterDeckBlankSlide(builder: builder),
           key: key,
         );
 
   ///
   const FlutterDeckSlide.custom({
-    required Widget child,
+    required WidgetBuilder builder,
     Key? key,
   }) : this._(
-          child: child,
+          builder: builder,
           key: key,
         );
 
@@ -70,22 +70,25 @@ class FlutterDeckSlide extends StatelessWidget {
     String? label,
     Key? key,
   }) : this._(
-          child: FlutterDeckImageSlide(image: image, label: label),
+          builder: (context) => FlutterDeckImageSlide(
+            image: image,
+            label: label,
+          ),
           key: key,
         );
 
   ///
   FlutterDeckSlide.split({
-    required Widget left,
-    required Widget right,
+    required WidgetBuilder leftBuilder,
+    required WidgetBuilder rightBuilder,
     Color? leftBackgroundColor,
     Color? rightBackgroundColor,
     SplitSlideRatio? splitRatio,
     Key? key,
   }) : this._(
-          child: FlutterDeckSplitSlide(
-            left: left,
-            right: right,
+          builder: (context) => FlutterDeckSplitSlide(
+            leftBuilder: leftBuilder,
+            rightBuilder: rightBuilder,
             leftBackgroundColor: leftBackgroundColor,
             rightBackgroundColor: rightBackgroundColor,
             splitRatio: splitRatio,
@@ -95,17 +98,17 @@ class FlutterDeckSlide extends StatelessWidget {
 
   ///
   FlutterDeckSlide.template({
-    Widget? background,
-    Widget? content,
-    Widget? footer,
-    Widget? header,
+    WidgetBuilder? backgroundBuilder,
+    WidgetBuilder? contentBuilder,
+    WidgetBuilder? footerBuilder,
+    WidgetBuilder? headerBuilder,
     Key? key,
   }) : this._(
-          child: FlutterDeckSlideBase(
-            background: background,
-            content: content,
-            footer: footer,
-            header: header,
+          builder: (context) => FlutterDeckSlideBase(
+            backgroundBuilder: backgroundBuilder,
+            contentBuilder: contentBuilder,
+            footerBuilder: footerBuilder,
+            headerBuilder: headerBuilder,
           ),
           key: key,
         );
@@ -116,11 +119,14 @@ class FlutterDeckSlide extends StatelessWidget {
     String? subtitle,
     Key? key,
   }) : this._(
-          child: FlutterDeckTitleSlide(title: title, subtitle: subtitle),
+          builder: (context) => FlutterDeckTitleSlide(
+            title: title,
+            subtitle: subtitle,
+          ),
           key: key,
         );
 
-  final Widget _child;
+  final WidgetBuilder _builder;
 
   /// An abstract method that must be implemented by subclasses.
   ///
@@ -131,7 +137,7 @@ class FlutterDeckSlide extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const FlutterDeckDrawer(),
-      body: _SlideBody(child: _child),
+      body: _SlideBody(child: _builder(context)),
     );
   }
 }

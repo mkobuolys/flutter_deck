@@ -15,14 +15,14 @@ class SplitSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.split(
-      left: Center(
+      leftBuilder: (context) => Center(
         child: Text(
           'Split Slide template renders two columns, one on the left and one '
           'on right.',
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
-      right: Center(
+      rightBuilder: (context) => Center(
         child: Text(
           'If 50/50 split is not your thing, you can change the ratio based on '
           'your needs.\nAs well as background colors of each section.\nAs well '

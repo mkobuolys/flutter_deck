@@ -13,7 +13,7 @@ class BackgroundSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
-      child: Center(
+      builder: (context) => Center(
         child: Text(
           'It is possible to define a global background for the light and dark '
           'themes separately. The background could be a solid color, gradient, '

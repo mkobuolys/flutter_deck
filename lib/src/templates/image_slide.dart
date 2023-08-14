@@ -38,7 +38,7 @@ class FlutterDeckImageSlide extends StatelessWidget {
     final headerConfiguration = configuration.header;
 
     return FlutterDeckSlideBase(
-      content: Padding(
+      contentBuilder: (context) => Padding(
         padding: FlutterDeckLayout.slidePadding,
         child: Column(
           children: [
@@ -52,17 +52,17 @@ class FlutterDeckImageSlide extends StatelessWidget {
           ],
         ),
       ),
-      footer: footerConfiguration.showFooter
-          ? FlutterDeckFooter.fromConfiguration(
-              configuration: footerConfiguration,
-              slideNumberColor: colorScheme.onBackground,
-              socialHandleColor: colorScheme.onBackground,
-            )
+      footerBuilder: footerConfiguration.showFooter
+          ? (context) => FlutterDeckFooter.fromConfiguration(
+                configuration: footerConfiguration,
+                slideNumberColor: colorScheme.onBackground,
+                socialHandleColor: colorScheme.onBackground,
+              )
           : null,
-      header: headerConfiguration.showHeader
-          ? FlutterDeckHeader.fromConfiguration(
-              configuration: headerConfiguration,
-            )
+      headerBuilder: headerConfiguration.showHeader
+          ? (context) => FlutterDeckHeader.fromConfiguration(
+                configuration: headerConfiguration,
+              )
           : null,
     );
   }

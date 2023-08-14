@@ -13,7 +13,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
-      child: Center(
+      builder: (context) => Center(
         child: FlutterDeckCodeHighlight(
           code: '''
 import 'package:flutter_deck/flutter_deck.dart';

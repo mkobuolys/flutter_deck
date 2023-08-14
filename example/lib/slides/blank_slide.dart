@@ -15,7 +15,7 @@ class BlankSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
-      child: Center(
+      builder: (context) => Center(
         child: Text(
           'Based on the configuration, this template renders a header and a '
           'footer.\nThe remaining space is free for your imagination.',

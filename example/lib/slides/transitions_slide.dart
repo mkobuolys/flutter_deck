@@ -14,7 +14,7 @@ class TransitionsSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.split(
-      left: FlutterDeckBulletList(
+      leftBuilder: (context) => FlutterDeckBulletList(
         items: const [
           'None (default)',
           'Fade',
@@ -24,7 +24,7 @@ class TransitionsSlide extends FlutterDeckSlideWidget {
           'Custom',
         ],
       ),
-      right: Center(
+      rightBuilder: (context) => Center(
         child: Text(
           'flutter_deck comes with a few built-in transitions. You can also '
           'create your own.\n\nYou can set the transition for the whole deck '

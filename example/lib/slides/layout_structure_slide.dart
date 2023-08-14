@@ -11,14 +11,12 @@ class LayoutStructureSlide extends FlutterDeckSlideWidget {
 
   @override
   FlutterDeckSlide build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return FlutterDeckSlide.template(
-      background: FlutterDeckBackground.solid(
+      backgroundBuilder: (context) => FlutterDeckBackground.solid(
         Theme.of(context).colorScheme.background,
       ),
-      content: ColoredBox(
-        color: colorScheme.background,
+      contentBuilder: (context) => ColoredBox(
+        color: Theme.of(context).colorScheme.background,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Center(
@@ -29,14 +27,14 @@ class LayoutStructureSlide extends FlutterDeckSlideWidget {
               style: Theme.of(context)
                   .textTheme
                   .titleLarge
-                  ?.copyWith(color: colorScheme.onBackground),
+                  ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
               textAlign: TextAlign.center,
             ),
           ),
         ),
       ),
-      footer: ColoredBox(
-        color: colorScheme.secondary,
+      footerBuilder: (context) => ColoredBox(
+        color: Theme.of(context).colorScheme.secondary,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Center(
@@ -45,13 +43,13 @@ class LayoutStructureSlide extends FlutterDeckSlideWidget {
               style: Theme.of(context)
                   .textTheme
                   .titleLarge
-                  ?.copyWith(color: colorScheme.onSecondary),
+                  ?.copyWith(color: Theme.of(context).colorScheme.onSecondary),
             ),
           ),
         ),
       ),
-      header: ColoredBox(
-        color: colorScheme.primary,
+      headerBuilder: (context) => ColoredBox(
+        color: Theme.of(context).colorScheme.primary,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Center(
@@ -60,7 +58,7 @@ class LayoutStructureSlide extends FlutterDeckSlideWidget {
               style: Theme.of(context)
                   .textTheme
                   .titleLarge
-                  ?.copyWith(color: colorScheme.onPrimary),
+                  ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
             ),
           ),
         ),

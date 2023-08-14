@@ -14,7 +14,7 @@ class StepsSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.split(
-      left: FlutterDeckBulletList(
+      leftBuilder: (context) => FlutterDeckBulletList(
         useSteps: true,
         items: const [
           'This is a step',
@@ -22,7 +22,7 @@ class StepsSlide extends FlutterDeckSlideWidget {
           'This is a third step',
         ],
       ),
-      right: Center(
+      rightBuilder: (context) => Center(
         child: Text(
           '"Steps" is a feature that allows you to navigate through a slide, '
           'well, step by step.\n\nYou can access the current step from any '
