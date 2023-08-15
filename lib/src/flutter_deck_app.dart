@@ -4,7 +4,6 @@ import 'package:flutter_deck/src/flutter_deck_configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
-import 'package:flutter_deck/src/inherited_flutter_deck.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
@@ -142,14 +141,12 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
         theme: widget.lightTheme ?? const FlutterDeckTheme.light().themeData,
         darkTheme: widget.darkTheme ?? const FlutterDeckTheme.dark().themeData,
         themeMode: themeMode,
-        builder: (context, child) => InheritedFlutterDeck(
-          flutterDeck: FlutterDeck(
-            configuration: widget.configuration,
-            router: _flutterDeckRouter,
-            speakerInfo: widget.speakerInfo,
-            drawerNotifier: _drawerNotifier,
-            themeNotifier: _themeNotifier,
-          ),
+        builder: (context, child) => FlutterDeck(
+          configuration: widget.configuration,
+          router: _flutterDeckRouter,
+          speakerInfo: widget.speakerInfo,
+          drawerNotifier: _drawerNotifier,
+          themeNotifier: _themeNotifier,
           child: FlutterDeckControls(child: child!),
         ),
         debugShowCheckedModeBanner: false,
