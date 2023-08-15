@@ -6,7 +6,7 @@ import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
 import 'package:flutter_deck/src/templates/slide_base.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
 
-/// The base class for a slide that contains a title.
+/// A slide widget that represents a title slide.
 ///
 /// This class is used to create the title slide in a slide deck. It is
 /// responsible for rendering the default header and footer of the slide deck,
@@ -14,78 +14,77 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 /// [FlutterDeckSpeakerInfo] is set, it will render the speaker info below the
 /// title and subtitle.
 ///
-/// To use a custom background, you can override the [background] method.
-abstract class FlutterDeckTitleSlide extends FlutterDeckSlideBase {
+/// To use a custom background, you can pass the [backgroundBuilder].
+class FlutterDeckTitleSlide extends StatelessWidget {
   /// Creates a new title slide.
   ///
-  /// The [configuration] argument must not be null. This configuration
-  /// overrides the global configuration of the slide deck.
+  /// The [title] argument must not be null. The [subtitle] and
+  /// [backgroundBuilder] arguments are optional.
   const FlutterDeckTitleSlide({
-    required super.configuration,
+    required this.title,
+    this.subtitle,
+    this.backgroundBuilder,
     super.key,
   });
 
   /// The title of the slide.
-  String get title;
+  final String title;
 
   /// The subtitle of the slide.
   ///
   /// If this is null, no subtitle will be displayed.
-  String? get subtitle => null;
+  final String? subtitle;
+
+  /// A builder for the background of the slide.
+  final WidgetBuilder? backgroundBuilder;
 
   @override
-  Widget? content(BuildContext context) {
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final configuration = context.flutterDeck.configuration;
+    final footerConfiguration = configuration.footer;
+    final headerConfiguration = configuration.header;
     final speakerInfo = context.flutterDeck.speakerInfo;
 
-    return Padding(
-      padding: FlutterDeckLayout.slidePadding * 4,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AutoSizeText(
-            title,
-            style: Theme.of(context).textTheme.displayLarge,
-          ),
-          if (subtitle != null) ...[
-            const SizedBox(height: 8),
+    return FlutterDeckSlideBase(
+      backgroundBuilder: backgroundBuilder,
+      contentBuilder: (context) => Padding(
+        padding: FlutterDeckLayout.slidePadding * 4,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             AutoSizeText(
-              subtitle!,
-              style: Theme.of(context).textTheme.displayMedium,
+              title,
+              style: Theme.of(context).textTheme.displayLarge,
             ),
+            if (subtitle != null) ...[
+              const SizedBox(height: 8),
+              AutoSizeText(
+                subtitle!,
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
+            ],
+            if (speakerInfo != null) ...[
+              const SizedBox(height: 64),
+              _SpeakerInfo(speakerInfo: speakerInfo),
+            ],
           ],
-          if (speakerInfo != null) ...[
-            const SizedBox(height: 64),
-            _SpeakerInfo(speakerInfo: speakerInfo),
-          ],
-        ],
+        ),
       ),
+      footerBuilder: footerConfiguration.showFooter
+          ? (context) => FlutterDeckFooter.fromConfiguration(
+                configuration: footerConfiguration,
+                slideNumberColor: colorScheme.onBackground,
+                socialHandleColor: colorScheme.onBackground,
+              )
+          : null,
+      headerBuilder: headerConfiguration.showHeader
+          ? (context) => FlutterDeckHeader.fromConfiguration(
+                configuration: headerConfiguration,
+              )
+          : null,
     );
-  }
-
-  @override
-  Widget? header(BuildContext context) {
-    final headerConfiguration = context.flutterDeck.configuration.header;
-
-    return headerConfiguration.showHeader
-        ? FlutterDeckHeader.fromConfiguration(
-            configuration: headerConfiguration,
-          )
-        : null;
-  }
-
-  @override
-  Widget? footer(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final footerConfiguration = context.flutterDeck.configuration.footer;
-
-    return footerConfiguration.showFooter
-        ? FlutterDeckFooter.fromConfiguration(
-            configuration: footerConfiguration,
-            slideNumberColor: colorScheme.onBackground,
-            socialHandleColor: colorScheme.onBackground,
-          )
-        : null;
   }
 }
 

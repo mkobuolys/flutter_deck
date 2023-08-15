@@ -75,7 +75,7 @@ class FlutterDeckApp extends StatefulWidget {
   ///
   /// The order of the slides determines the order in which they will be
   /// displayed. The first slide will be displayed when the app is first opened.
-  final List<FlutterDeckSlide> slides;
+  final List<FlutterDeckSlideWidget> slides;
 
   /// Information about the speaker.
   final FlutterDeckSpeakerInfo? speakerInfo;
@@ -125,7 +125,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
             widget.configuration,
           ),
           route: slide.configuration.route,
-          slide: slide,
+          widget: slide,
         )
     ];
 

@@ -1,7 +1,8 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
-class EndSlide extends FlutterDeckTitleSlide {
-  const EndSlide({super.key})
+class EndSlide extends FlutterDeckSlideWidget {
+  const EndSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/end',
@@ -10,8 +11,10 @@ class EndSlide extends FlutterDeckTitleSlide {
         );
 
   @override
-  String get title => 'Thank you! 👋';
-
-  @override
-  String? get subtitle => 'Now it\'s your turn to use flutter_deck!';
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.title(
+      title: 'Thank you! 👋',
+      subtitle: "Now it's your turn to use flutter_deck!",
+    );
+  }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
-class ImageSlide extends FlutterDeckImageSlide {
-  const ImageSlide({super.key})
+class ImageSlide extends FlutterDeckSlideWidget {
+  const ImageSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/image-slide',
@@ -13,8 +13,10 @@ class ImageSlide extends FlutterDeckImageSlide {
         );
 
   @override
-  Image get image => Image.asset('assets/header.png');
-
-  @override
-  String? get label => 'You can also add a small label here (if you want) 👀';
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.image(
+      imageBuilder: (context) => Image.asset('assets/header.png'),
+      label: 'You can also add a small label here (if you want) 👀',
+    );
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/transitions/transitions.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
@@ -22,11 +23,11 @@ class FlutterDeckConfiguration {
   /// The background configuration for the slide deck. By default, the
   /// background is transparent and the [Scaffold.backgroundColor] is used.
   ///
-  /// This configuration is used by all the templates that extend the
-  /// [FlutterDeckSlideBase] class and do not override the background method
+  /// This configuration is used by all the templates that use the
+  /// [FlutterDeckSlideBase] class and do not pass the background builder
   /// explicitly. This also means that the configuration cannot be overridden
-  /// via the slide configuration, but rather by overriding the
-  /// [FlutterDeckSlideBase.background] method.
+  /// via the slide configuration, but rather by passing a background builder
+  /// for the [FlutterDeckSlide].
   final FlutterDeckBackgroundConfiguration background;
 
   /// Configures the controls for the slide deck. By default, controls are

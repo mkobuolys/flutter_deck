@@ -4,59 +4,55 @@ import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/templates/slide_base.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
 
-/// The base class for a blank slide in a slide deck.
+/// A slide widget that represents a blank slide.
 ///
 /// This class is used to create a blank slide in a slide deck. It is
 /// responsible for rendering the default header and footer of the slide deck,
-/// and placing the content of the [body] of the slide in the correct place.
+/// and rendering the content of the slide using the provided [builder].
 ///
-/// To use a custom background, you can override the [background] method.
-abstract class FlutterDeckBlankSlide extends FlutterDeckSlideBase {
+/// To use a custom background, you can pass the [backgroundBuilder].
+class FlutterDeckBlankSlide extends StatelessWidget {
   /// Creates a new blank slide.
   ///
-  /// The [configuration] argument must not be null. This configuration
-  /// overrides the global configuration of the slide deck.
+  /// The [builder] argument must not be null. The [backgroundBuilder] argument
+  /// is optional.
   const FlutterDeckBlankSlide({
-    required super.configuration,
+    required this.builder,
+    this.backgroundBuilder,
     super.key,
   });
 
-  /// Creates the body of the slide.
-  ///
-  /// This method is called by the [slide] method. It is responsible for
-  /// rendering the body of the slide between the header and footer.
-  Widget body(BuildContext context);
+  /// Creates the content of the slide.
+  final WidgetBuilder builder;
+
+  /// A builder for the background of the slide.
+  final WidgetBuilder? backgroundBuilder;
 
   @override
-  Widget? content(BuildContext context) {
-    return Padding(
-      padding: FlutterDeckLayout.slidePadding,
-      child: body(context),
-    );
-  }
-
-  @override
-  Widget? header(BuildContext context) {
-    final headerConfiguration = context.flutterDeck.configuration.header;
-
-    return headerConfiguration.showHeader
-        ? FlutterDeckHeader.fromConfiguration(
-            configuration: headerConfiguration,
-          )
-        : null;
-  }
-
-  @override
-  Widget? footer(BuildContext context) {
+  Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final footerConfiguration = context.flutterDeck.configuration.footer;
+    final configuration = context.flutterDeck.configuration;
+    final footerConfiguration = configuration.footer;
+    final headerConfiguration = configuration.header;
 
-    return footerConfiguration.showFooter
-        ? FlutterDeckFooter.fromConfiguration(
-            configuration: footerConfiguration,
-            slideNumberColor: colorScheme.onBackground,
-            socialHandleColor: colorScheme.onBackground,
-          )
-        : null;
+    return FlutterDeckSlideBase(
+      backgroundBuilder: backgroundBuilder,
+      contentBuilder: (context) => Padding(
+        padding: FlutterDeckLayout.slidePadding,
+        child: builder(context),
+      ),
+      footerBuilder: footerConfiguration.showFooter
+          ? (context) => FlutterDeckFooter.fromConfiguration(
+                configuration: footerConfiguration,
+                slideNumberColor: colorScheme.onBackground,
+                socialHandleColor: colorScheme.onBackground,
+              )
+          : null,
+      headerBuilder: headerConfiguration.showHeader
+          ? (context) => FlutterDeckHeader.fromConfiguration(
+                configuration: headerConfiguration,
+              )
+          : null,
+    );
   }
 }

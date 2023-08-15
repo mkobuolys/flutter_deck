@@ -1,50 +1,226 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_configuration.dart';
+import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 
-/// The base class for a slide in a slide deck.
+/// An abstract class that must be extended when creating a new slide for the
+/// slide deck.
 ///
-/// This class is used to create a slide in a slide deck. It is responsible for
-/// wrapping the slide in a [Scaffold] and displaying the navigation drawer.
-///
-/// It is recommended to extend this class directly only if you want to create
-/// a custom slide with its own layout. If the slide has a standard layout, a
-/// better option is to extend the [FlutterDeckSlideBase] class.
+/// This class is used to create a new slide for the slide deck. It ensures that
+/// each slide has a defined [FlutterDeckSlideConfiguration] and a [build]
+/// method to create the slide. Diffently from the [StatelessWidget] class, the
+/// [build] method returns a [FlutterDeckSlide] instead of a [Widget].
 ///
 /// See also:
 ///
-/// * [FlutterDeckSlideBase], which represents a slide with a standard layout.
-/// * [FlutterDeckBlankSlide], which represents a blank slide.
-/// * [FlutterDeckImageSlide], which represents a slide with an image.
-/// * [FlutterDeckSplitSlide], which represents a slide with two columns.
-/// * [FlutterDeckTitleSlide], which represents a title slide.
-/// * [FlutterDeckSlideConfiguration], which represents a configuration for a
-/// single slide.
-abstract class FlutterDeckSlide extends StatelessWidget {
-  /// Creates a new slide.
+/// * [FlutterDeckSlide], which represents a slide in a slide deck.
+/// * [FlutterDeckSlide.blank], which creates a blank slide.
+/// * [FlutterDeckSlide.custom], which creates a custom slide.
+/// * [FlutterDeckSlide.image], which creates a slide with an image.
+/// * [FlutterDeckSlide.split], which creates a slide with two columns.
+/// * [FlutterDeckSlide.template], which creates a slide with a standard layout.
+/// * [FlutterDeckSlide.title], which creates a title slide.
+///
+/// Example:
+///
+/// ```dart
+/// import 'package:flutter/widgets.dart';
+/// import 'package:flutter_deck/flutter_deck.dart';
+///
+/// class ExampleSlide extends FlutterDeckSlideWidget {
+///   const ExampleSlide()
+///       : super(
+///           configuration: const FlutterDeckSlideConfiguration(
+///             route: '/example',
+///             header: FlutterDeckHeaderConfiguration(title: 'Example'),
+///           ),
+///         );
+///
+///   @override
+///   FlutterDeckSlide build(BuildContext context) {
+///     return FlutterDeckSlide.blank(
+///       builder: (context) => const Center(
+///         child: Text('This is an example slide'),
+///       ),
+///     );
+///   }
+/// }
+/// ```
+abstract class FlutterDeckSlideWidget {
+  /// Creates a new slide for the slide deck.
   ///
-  /// The [configuration] argument must not be null. This configuration
-  /// overrides the global configuration of the slide deck.
-  const FlutterDeckSlide({
+  /// This constructor must be called by the subclasses to create a new slide.
+  /// The [configuration] argument must not be null.
+  const FlutterDeckSlideWidget({
     required this.configuration,
-    super.key,
   });
 
   /// The configuration of the slide.
   final FlutterDeckSlideConfiguration configuration;
 
-  /// An abstract method that must be implemented by subclasses.
+  /// Creates the slide.
+  FlutterDeckSlide build(BuildContext context);
+}
+
+/// The main widget for a slide in a slide deck.
+///
+/// This class is used to create a slide in a slide deck. It is responsible for
+/// wrapping the slide in a [Scaffold] and displaying the navigation drawer.
+///
+/// To create a new slide, use one of the named constructors.
+class FlutterDeckSlide extends StatelessWidget {
+  /// Creates a new slide.
   ///
-  /// Usually, this method is implemented in the template.
-  Widget slide(BuildContext context);
+  /// This constructor is private and should not be used directly. Instead, use
+  /// one of the named constructors to create a new slide.
+  const FlutterDeckSlide._({
+    required WidgetBuilder builder,
+    super.key,
+  }) : _builder = builder;
+
+  /// Creates a new blank slide.
+  ///
+  /// This constructor creates a blank slide in a slide deck with the default
+  /// header and footer, and the content in-between.
+  ///
+  /// The [builder] argument must not be null. The [backgroundBuilder] argument
+  /// is optional.
+  FlutterDeckSlide.blank({
+    required WidgetBuilder builder,
+    WidgetBuilder? backgroundBuilder,
+    Key? key,
+  }) : this._(
+          builder: (context) => FlutterDeckBlankSlide(
+            builder: builder,
+            backgroundBuilder: backgroundBuilder,
+          ),
+          key: key,
+        );
+
+  /// Creates a new custom slide.
+  ///
+  /// This constructor creates a custom slide in a slide deck. This constructor
+  /// does not provide any default layout for the slide. It is up to the user to
+  /// define it.
+  ///
+  /// The [builder] argument must not be null.
+  const FlutterDeckSlide.custom({
+    required WidgetBuilder builder,
+    Key? key,
+  }) : this._(
+          builder: builder,
+          key: key,
+        );
+
+  /// Creates a new image slide.
+  ///
+  /// This constructor creates a slide in a slide deck with the default header
+  /// and footer, and the image in-between.The image can be a local asset or a
+  /// network image.
+  ///
+  /// The [imageBuilder] argument must not be null. The [label] and
+  /// [backgroundBuilder] arguments are optional.
+  FlutterDeckSlide.image({
+    required ImageBuilder imageBuilder,
+    String? label,
+    WidgetBuilder? backgroundBuilder,
+    Key? key,
+  }) : this._(
+          builder: (context) => FlutterDeckImageSlide(
+            imageBuilder: imageBuilder,
+            label: label,
+            backgroundBuilder: backgroundBuilder,
+          ),
+          key: key,
+        );
+
+  /// Creates a new slide with two columns.
+  ///
+  /// This constructor creates a slide with two columns in a slide deck. It is
+  /// responsible for rendering the default header and footer of the slide deck,
+  /// and use the [leftBuilder] and [rightBuilder] to create the content of the
+  /// left and right columns.
+  ///
+  /// The [leftBuilder] and [rightBuilder] arguments must not be null. The
+  /// [backgroundBuilder], [leftBackgroundColor], [rightBackgroundColor], and
+  /// [splitRatio] arguments are optional.
+  ///
+  /// If [splitRatio] is not specified, the left and right columns will have the
+  /// same width.
+  FlutterDeckSlide.split({
+    required WidgetBuilder leftBuilder,
+    required WidgetBuilder rightBuilder,
+    WidgetBuilder? backgroundBuilder,
+    Color? leftBackgroundColor,
+    Color? rightBackgroundColor,
+    SplitSlideRatio? splitRatio,
+    Key? key,
+  }) : this._(
+          builder: (context) => FlutterDeckSplitSlide(
+            leftBuilder: leftBuilder,
+            rightBuilder: rightBuilder,
+            backgroundBuilder: backgroundBuilder,
+            leftBackgroundColor: leftBackgroundColor,
+            rightBackgroundColor: rightBackgroundColor,
+            splitRatio: splitRatio,
+          ),
+          key: key,
+        );
+
+  /// Creates a new slide with a standard layout.
+  ///
+  /// This constructor creates a slide with a standard layout in a slide deck.
+  ///
+  /// The [backgroundBuilder], [contentBuilder], [footerBuilder], and
+  /// [headerBuilder] arguments are optional.
+  FlutterDeckSlide.template({
+    WidgetBuilder? backgroundBuilder,
+    WidgetBuilder? contentBuilder,
+    WidgetBuilder? footerBuilder,
+    WidgetBuilder? headerBuilder,
+    Key? key,
+  }) : this._(
+          builder: (context) => FlutterDeckSlideBase(
+            backgroundBuilder: backgroundBuilder,
+            contentBuilder: contentBuilder,
+            footerBuilder: footerBuilder,
+            headerBuilder: headerBuilder,
+          ),
+          key: key,
+        );
+
+  /// Creates a new title slide.
+  ///
+  /// This constructor creates a title slide in a slide deck with the default
+  /// header and footer, and the content in-between. The content is composed of
+  /// the [title] and [subtitle]. Also, if the [FlutterDeckSpeakerInfo] is set,
+  /// it will render the speaker info below the title and subtitle.
+  ///
+  /// The [title] argument must not be null. The [subtitle] and
+  /// [backgroundBuilder] arguments are optional.
+  FlutterDeckSlide.title({
+    required String title,
+    String? subtitle,
+    WidgetBuilder? backgroundBuilder,
+    Key? key,
+  }) : this._(
+          builder: (context) => FlutterDeckTitleSlide(
+            title: title,
+            subtitle: subtitle,
+            backgroundBuilder: backgroundBuilder,
+          ),
+          key: key,
+        );
+
+  final WidgetBuilder _builder;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const FlutterDeckDrawer(),
-      body: _SlideBody(child: slide(context)),
+      body: _SlideBody(child: _builder(context)),
     );
   }
 }

@@ -108,19 +108,33 @@ FlutterDeckApp(
 
 ## Slides
 
-The are multiple ways to create a slide:
-
-- Using one of the predefined slide templates.
-- Implementing a custom slide template.
-- Implementing a custom slide.
-
-### FlutterDeckTitleSlide
-
-This class is used to create the title slide in a slide deck. It is responsible for rendering the default header and footer of the slide deck, and placing the title and subtitle of the slide in the correct places. Also, if the `FlutterDeckSpeakerInfo` is set for the slide deck, it will render the speaker info below the title and subtitle.
+To create a slide, extend the `FlutterDeckSlideWidget` class and override the `build` method that returns a `FlutterDeckSlide` widget. `FlutterDeckSlide` supports a few predefined slide templates that help you to create a slide faster.
 
 ```dart
-class TitleSlide extends FlutterDeckTitleSlide {
-  const TitleSlide({super.key})
+// Extend the FlutterDeckSlideWidget class...
+class NewSlide extends FlutterDeckSlideWidget {
+  const NewSlide()
+      : super(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/new-slide',
+          ),
+        );
+
+  // ...override the build method...
+  @override
+  FlutterDeckSlide build(BuildContext context) {
+    // ...and create a new FlutterDeckSlide instance.
+  }
+}
+```
+
+### Title slide
+
+To create a title slide, use the `FlutterDeckSlide.title` constructor. It is responsible for rendering the default header and footer of the slide deck, and placing the title and subtitle in the correct places. Also, if the `FlutterDeckSpeakerInfo` is set, it will render the speaker info below the title and subtitle.
+
+```dart
+class TitleSlide extends FlutterDeckSlideWidget {
+  const TitleSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/title-slide',
@@ -129,132 +143,135 @@ class TitleSlide extends FlutterDeckTitleSlide {
         );
 
   @override
-  String get title => 'Here goes the title of the slide';
-
-  @override
-  String? get subtitle => 'Here goes the subtitle of the slide (optional)';
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.title(
+      title: 'Here goes the title of the slide',
+      subtitle: 'Here goes the subtitle of the slide (optional)',
+    );
+  }
 }
 ```
 
-![FlutterDeckTitleSlide](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/title.png?raw=true)
+![Title slide example](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/title.png?raw=true)
 
-### FlutterDeckBlankSlide
+### Blank slide
 
-This class is used to create a blank slide in a slide deck. It is responsible for rendering the default header and footer of the slide deck, and placing the content of the slide in the correct place.
+To create a title slide, use the `FlutterDeckSlide.blank` constructor. It is responsible for rendering the default header and footer of the slide deck, and rendering the content of the slide using the provided `builder`.
 
 ```dart
-class BlankSlide extends FlutterDeckBlankSlide {
-  const BlankSlide({super.key})
+class BlankSlide extends FlutterDeckSlideWidget {
+  const BlankSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/blank-slide',
-            header: FlutterDeckHeaderConfiguration(title: 'Blank slide template'),
+            header: FlutterDeckHeaderConfiguration(
+              title: 'Blank slide template',
+            ),
           ),
         );
 
   @override
-  Widget body(BuildContext context) {
-    return Text('Here goes the content of the slide');
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.blank(
+      builder: (context) => const Text('Here goes the content of the slide'),
+    );
   }
 }
 ```
 
-![FlutterDeckBlankSlide](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/blank.png?raw=true)
+![Blank slide example](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/blank.png?raw=true)
 
-### FlutterDeckImageSlide
+### Image slide
 
-This class is used to create a slide that only contains an image. It is responsible for rendering the default header and footer of the slide deck, and placing the image in the correct place.
+To create an image slide, use the `FlutterDeckSlide.image` constructor. It is responsible for rendering the default header and footer of the slide deck, and rendering the image using the provided `imageBuilder`.
 
 ```dart
-class ImageSlide extends FlutterDeckImageSlide {
-  const ImageSlide({super.key})
+class ImageSlide extends FlutterDeckSlideWidget {
+  const ImageSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/image-slide',
-            header: FlutterDeckHeaderConfiguration(title: 'Image slide template'),
+            header: FlutterDeckHeaderConfiguration(
+              title: 'Image slide template',
+            ),
           ),
         );
 
   @override
-  Image get image => Image.asset('assets/image.png');
-
-  @override
-  String? get label => 'Here goes the label of the image (optional)';
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.image(
+      imageBuilder: (context) => Image.asset('assets/image.png'),
+      label: 'Here goes the label of the image (optional)',
+    );
+  }
 }
-
 ```
 
-![FlutterDeckImageSlide](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/image.png?raw=true)
+![Image slide example](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/image.png?raw=true)
 
-### FlutterDeckSplitSlide
+### Split slide
 
-This class is used to create a slide that contains two columns. It is responsible for rendering the default header and footer of the slide deck, and placing the `left` and `right` section content in the correct places.
+To create a split slide, use the `FlutterDeckSlide.split` constructor. It is responsible for rendering the default header and footer of the slide deck, and use the `leftBuilder` and `rightBuilder` to create the content of the left and right columns.
 
 ```dart
-class SplitSlide extends FlutterDeckSplitSlide {
-  const SplitSlide({super.key})
+class SplitSlide extends FlutterDeckSlideWidget {
+  const SplitSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/split-slide',
-            header: FlutterDeckHeaderConfiguration(title: 'Split slide template'),
+            header: FlutterDeckHeaderConfiguration(
+              title: 'Split slide template',
+            ),
           ),
         );
 
   @override
-  Widget left(BuildContext context) {
-    return Text('Here goes the LEFT section content of the slide');
-  }
-
-  @override
-  Widget right(BuildContext context) {
-    return Text('Here goes the RIGHT section content of the slide');
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.split(
+      leftBuilder: (context) {
+        return const Text('Here goes the LEFT section content of the slide');
+      },
+      rightBuilder: (context) {
+        return const Text('Here goes the RIGHT section content of the slide');
+      },
+    );
   }
 }
 ```
 
-![FlutterDeckSplitSlide](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/split.png?raw=true)
+![Split slide example](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/split.png?raw=true)
 
-### Creating a custom template
+### Template slide
 
-To create a custom slide template, you need to extend the `FlutterDeckSlideBase` class and override its methods. This class is used to create a slide with a standard layout. It is responsible for placing the header, footer, and content of the slide in the correct places. Also, it is responsible for displaying the background of the slide.
+To create a custom template slide, use the `FlutterDeckSlide.template` constructor. It is responsible for placing the header, footer, and content of the slide in the correct places. Also, it is responsible for displaying the background of the slide.
 
 ```dart
-class LayoutStructureSlide extends FlutterDeckSlideBase {
-  const LayoutStructureSlide({super.key})
+class TemplateSlide extends FlutterDeckSlideWidget {
+  const TemplateSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
-            route: '/layout-structure',
+            route: '/template-slide',
           ),
         );
 
   @override
-  FlutterDeckBackground background(BuildContext context) {
-    return FlutterDeckBackground.solid(
-      Theme.of(context).colorScheme.background,
-    );
-  }
-
-  @override
-  Widget? content(BuildContext context) {
-    return const ColoredBox(
-      color: Colors.red,
-      child: Text('Content goes here...'),
-    );
-  }
-
-  @override
-  Widget? footer(BuildContext context) {
-    return ColoredBox(
-      color: Theme.of(context).colorScheme.secondary,
-      child: const Text('Footer goes here...'),
-    );
-  }
-
-  @override
-  Widget? header(BuildContext context) {
-    return ColoredBox(
-      color: Theme.of(context).colorScheme.primary,
-      child: const Text('Header goes here...'),
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.template(
+      backgroundBuilder: (context) => FlutterDeckBackground.solid(
+        Theme.of(context).colorScheme.background,
+      ),
+      contentBuilder: (context) => const ColoredBox(
+        color: Colors.red,
+        child: Text('Content goes here...'),
+      ),
+      footerBuilder: (context) => ColoredBox(
+        color: Theme.of(context).colorScheme.secondary,
+        child: const Text('Footer goes here...'),
+      ),
+      headerBuilder: (context) => ColoredBox(
+        color: Theme.of(context).colorScheme.primary,
+        child: const Text('Header goes here...'),
+      ),
     );
   }
 }
@@ -262,13 +279,13 @@ class LayoutStructureSlide extends FlutterDeckSlideBase {
 
 ![FlutterDeckSlideBase](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/custom.png?raw=true)
 
-### Creating a custom slide
+### Custom slide
 
-Finally, you can always create a custom slide by extending the `FlutterDeckSlide` class and overriding the `slide` method. This class is responsible for wrapping the slide in a [Scaffold] and displaying the navigation drawer for the slide deck.
+To create a custom slide (without any predefined template), use the `FlutterDeckSlide.custom` constructor and pass a custom `builder` to it.
 
 ```dart
-class CustomSlide extends FlutterDeckSlide {
-  const CustomSlide({super.key})
+class CustomSlide extends FlutterDeckSlideWidget {
+  const CustomSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/custom-slide',
@@ -276,8 +293,12 @@ class CustomSlide extends FlutterDeckSlide {
         );
 
   @override
-  Widget slide(BuildContext context) {
-    return const Text('Here goes your custom slide content...');
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.custom(
+      builder: (context) {
+        return const Text('Here goes your custom slide content...');
+      },
+    );
   }
 }
 ```
@@ -287,8 +308,8 @@ class CustomSlide extends FlutterDeckSlide {
 By default, all slides are visible and available in the slide deck. However, you can hide a slide by setting the `hidden` property to `true` for the slide configuration:
 
 ```dart
-class HiddenSlide extends FlutterDeckBlankSlide {
-  const HiddenSlide({super.key})
+class HiddenSlide extends FlutterDeckSlideWidget {
+  const HiddenSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/hidden',
@@ -297,11 +318,13 @@ class HiddenSlide extends FlutterDeckBlankSlide {
         );
 
   @override
-  Widget body(BuildContext context) {
-    return Center(
-      child: Text(
-        "This slide is hidden. Oh, but you can't see it...",
-        style: Theme.of(context).textTheme.titleLarge,
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.blank(
+      builder: (context) => Center(
+        child: Text(
+          "This slide is hidden. Oh, but you can't see it...",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
     );
   }
@@ -310,6 +333,8 @@ class HiddenSlide extends FlutterDeckBlankSlide {
 
 ## Widgets
 
+This package comes with a few predefined widgets that could be used in your slide deck.
+
 ### FlutterDeckBulletList
 
 A widget that renders a list of bullet points. Bullet point items are rendered as a row with a bullet point and the text. The bullet point is rendered as a dot by default, but can be customized by providing a `bulletPointWidget`. The text is rendered as an `AutoSizeText` widget and is automatically resized to fit the available space.
@@ -317,31 +342,28 @@ A widget that renders a list of bullet points. Bullet point items are rendered a
 If `useSteps` is true for the slide configuration, the bullet points will be rendered one by one as the user steps through the slide.
 
 ```dart
-class FlutterDeckBulletListDemoSlide extends FlutterDeckSplitSlide {
-  const FlutterDeckBulletListDemoSlide({super.key})
+class FlutterDeckBulletListDemoSlide extends FlutterDeckSlideWidget {
+  const FlutterDeckBulletListDemoSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/bullet-list-demo',
             steps: 3, // Define the number of steps for the slide
-            header: FlutterDeckHeaderConfiguration(title: 'FlutterDeckBulletList demo'),
           ),
         );
 
   @override
-  Widget left(BuildContext context) {
-    return FlutterDeckBulletList(
-      useSteps: true, // Enable steps for the bullet list
-      items: const [
-        'This is a step',
-        'This is another step',
-        'This is a third step',
-      ],
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.split(
+      leftBuilder: (context) => FlutterDeckBulletList(
+        useSteps: true, // Enable steps for the bullet list
+        items: const [
+          'This is a step',
+          'This is another step',
+          'This is a third step',
+        ],
+      ),
+      rightBuilder: (context) => const Text('FlutterDeckBulletList demo'),
     );
-  }
-
-  @override
-  Widget right(BuildContext context) {
-    return Text('FlutterDeckBulletList is awesome!');
   }
 }
 ```
@@ -351,8 +373,8 @@ class FlutterDeckBulletListDemoSlide extends FlutterDeckSplitSlide {
 Provides a widget that gives you customizable syntax highlighting for many languages.
 
 ```dart
-class CodeHighlightSlide extends FlutterDeckBlankSlide {
-  const CodeHighlightSlide({super.key})
+class CodeHighlightSlide extends FlutterDeckSlideWidget {
+  const CodeHighlightSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/code-highlight',
@@ -361,14 +383,16 @@ class CodeHighlightSlide extends FlutterDeckBlankSlide {
         );
 
   @override
-  Widget body(BuildContext context) {
-    return Center(
-      child: FlutterDeckCodeHighlight(
-        code: '''
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.blank(
+      builder: (context) => Center(
+        child: FlutterDeckCodeHighlight(
+          code: '''
+import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
-class CodeHighlightSlide extends FlutterDeckBlankSlide {
-  const CodeHighlightSlide({super.key})
+class CodeHighlightSlide extends FlutterDeckSlideWidget {
+  const CodeHighlightSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/code-highlight',
@@ -377,15 +401,18 @@ class CodeHighlightSlide extends FlutterDeckBlankSlide {
         );
 
   @override
-  Widget body(BuildContext context) {
-    return const Center(
-      child: Text('Use FlutterDeckCodeHighlight widget to highlight code!'),
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.blank(
+      builder: (context) => const Center(
+        child: Text('Use FlutterDeckCodeHighlight widget to highlight code!'),
+      ),
     );
   }
 }''',
-        fileName: 'code_highlight_slide.dart',
-        language: 'dart',
-        textStyle: Theme.of(context).textTheme.titleLarge,
+          fileName: 'code_highlight_slide.dart',
+          language: 'dart',
+          textStyle: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
     );
   }
@@ -457,8 +484,8 @@ FlutterDeckApp(
 Or you can specify a transition for a specific slide:
 
 ```dart
-class TransitionsSlide extends FlutterDeckSplitSlide {
-  const TransitionsSlide({super.key})
+class TransitionsSlide extends FlutterDeckSlideWidget {
+  const TransitionsSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/transitions',
@@ -495,8 +522,8 @@ class VerticalTransitionBuilder extends FlutterDeckTransitionBuilder {
   }
 }
 
-class CustomTransitionSlide extends FlutterDeckBlankSlide {
-  const CustomTransitionSlide({super.key})
+class CustomTransitionSlide extends FlutterDeckSlideWidget {
+  const CustomTransitionSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/custom-transition',
@@ -517,8 +544,8 @@ Steps is a feature that allows you to navigate through a slide, well, step by st
 To enable steps for a slide, you need to set the `steps` property for the slide configuration:
 
 ```dart
-class StepsDemoSlide extends FlutterDeckBlankSlide {
-  const StepsDemoSlide({super.key})
+class StepsDemoSlide extends FlutterDeckSlideWidget {
+  const StepsDemoSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/steps-demo',
@@ -534,7 +561,7 @@ To trigger a rebuild of the widget when the step changes, you can use the `Flutt
 
 ```dart
 @override
-Widget body(BuildContext context) {
+Widget build(BuildContext context) {
   return FlutterDeckSlideStepsBuilder(
     builder: (context, stepNumber) => stepNumber == 1
         ? const Text('This is the first step.')
@@ -547,7 +574,7 @@ Or you can use the `FlutterDeckSlideStepsListener` to trigger side effects when 
 
 ```dart
 @override
-Widget body(BuildContext context) {
+Widget build(BuildContext context) {
   return FlutterDeckSlideStepsListener(
     listener: (context, stepNumber) {
       print('Current step: $stepNumber');
