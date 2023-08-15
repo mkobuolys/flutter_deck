@@ -429,7 +429,8 @@ By using the `FlutterDeck` extensions, you can access the slide deck state and i
 @override
 Widget build(BuildContext context) {
   // Retrieve the FlutterDeck instance from the context.
-  final flutterDeck = context.flutterDeck;
+  // Or by using the extension method: context.flutterDeck
+  final flutterDeck = FlutterDeck.of(context);
 
   // Retrieve the FlutterDeckRouter instance for this slide deck.
   final router = flutterDeck.router;

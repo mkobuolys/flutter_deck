@@ -324,6 +324,9 @@
     }
     ```
 
+- refactor: remove the redundant `InheritedFlutterDeck` widget
+- docs: update README.md and widgets' documentation
+
 # 0.3.0
 
 - feat: handle cursor visibility

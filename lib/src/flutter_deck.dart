@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck_configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
-import 'package:flutter_deck/src/inherited_flutter_deck.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 
@@ -17,9 +16,9 @@ import 'package:flutter_deck/src/widgets/internal/internal.dart';
 /// * Control the slide deck's drawer;
 /// * Control the slide deck's theme.
 ///
-/// The [FlutterDeck] is available in the widget tree via the
-/// [InheritedFlutterDeck] widget. The [FlutterDeck] can be accessed using the
-/// [FlutterDeck.of] method or the `flutterDeck` extension on [BuildContext].
+/// The [FlutterDeck] is available in the widget tree and can be accessed using
+/// the [FlutterDeck.of] method or the `flutterDeck` extension on
+/// [BuildContext].
 ///
 /// See also:
 /// * [FlutterDeckConfiguration], which is used to configure the slide deck.
@@ -29,7 +28,7 @@ import 'package:flutter_deck/src/widgets/internal/internal.dart';
 ///  drawer.
 /// * [FlutterDeckThemeNotifier], which is used to control the slide deck's
 /// theme.
-class FlutterDeck {
+class FlutterDeck extends InheritedWidget {
   /// Default constructor for [FlutterDeck].
   ///
   /// The [configuration] is required and is used to configure the slide deck.
@@ -49,6 +48,8 @@ class FlutterDeck {
     required FlutterDeckSpeakerInfo? speakerInfo,
     required FlutterDeckDrawerNotifier drawerNotifier,
     required FlutterDeckThemeNotifier themeNotifier,
+    required super.child,
+    super.key,
   })  : _configuration = configuration,
         _router = router,
         _speakerInfo = speakerInfo,
@@ -112,13 +113,21 @@ class FlutterDeck {
   ///
   /// See [BuildContext.dependOnInheritedWidgetOfExactType].
   static FlutterDeck of(BuildContext context) {
-    final inheritedFlutterDeck =
-        context.dependOnInheritedWidgetOfExactType<InheritedFlutterDeck>();
+    final flutterDeck =
+        context.dependOnInheritedWidgetOfExactType<FlutterDeck>();
 
-    assert(inheritedFlutterDeck != null, 'No FlutterDeck found in context');
+    assert(flutterDeck != null, 'No FlutterDeck found in context');
 
-    return inheritedFlutterDeck!.flutterDeck;
+    return flutterDeck!;
   }
+
+  @override
+  bool updateShouldNotify(FlutterDeck oldWidget) =>
+      _configuration != oldWidget._configuration ||
+      _router != oldWidget._router ||
+      _speakerInfo != oldWidget._speakerInfo ||
+      _drawerNotifier != oldWidget._drawerNotifier ||
+      _themeNotifier != oldWidget._themeNotifier;
 }
 
 /// An extension on [BuildContext] that simplifies accessing the [FlutterDeck]

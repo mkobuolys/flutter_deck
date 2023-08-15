@@ -39,7 +39,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
 }''',
           fileName: 'code_highlight_slide.dart',
           language: 'dart',
-          textStyle: Theme.of(context).textTheme.titleLarge,
+          textStyle: Theme.of(context).textTheme.titleMedium,
         ),
       ),
     );
