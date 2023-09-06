@@ -20,7 +20,7 @@ class DrawerSlide extends FlutterDeckSlideWidget {
           'dark mode or navigate to any other slide straight away.\n\nOh, and '
           'if you want to update the keyboard shortcut, you can do it in the '
           'FlutterDeckConfiguration, under controls.',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
       ),

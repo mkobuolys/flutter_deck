@@ -3,6 +3,7 @@ import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
+import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 
 /// An abstract class that must be extended when creating a new slide for the
@@ -77,8 +78,10 @@ class FlutterDeckSlide extends StatelessWidget {
   /// one of the named constructors to create a new slide.
   const FlutterDeckSlide._({
     required WidgetBuilder builder,
+    required FlutterDeckThemeData? theme,
     super.key,
-  }) : _builder = builder;
+  })  : _builder = builder,
+        _theme = theme;
 
   /// Creates a new blank slide.
   ///
@@ -90,12 +93,14 @@ class FlutterDeckSlide extends StatelessWidget {
   FlutterDeckSlide.blank({
     required WidgetBuilder builder,
     WidgetBuilder? backgroundBuilder,
+    FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
           builder: (context) => FlutterDeckBlankSlide(
             builder: builder,
             backgroundBuilder: backgroundBuilder,
           ),
+          theme: theme,
           key: key,
         );
 
@@ -108,9 +113,11 @@ class FlutterDeckSlide extends StatelessWidget {
   /// The [builder] argument must not be null.
   const FlutterDeckSlide.custom({
     required WidgetBuilder builder,
+    FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
           builder: builder,
+          theme: theme,
           key: key,
         );
 
@@ -126,6 +133,7 @@ class FlutterDeckSlide extends StatelessWidget {
     required ImageBuilder imageBuilder,
     String? label,
     WidgetBuilder? backgroundBuilder,
+    FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
           builder: (context) => FlutterDeckImageSlide(
@@ -133,6 +141,7 @@ class FlutterDeckSlide extends StatelessWidget {
             label: label,
             backgroundBuilder: backgroundBuilder,
           ),
+          theme: theme,
           key: key,
         );
 
@@ -144,8 +153,7 @@ class FlutterDeckSlide extends StatelessWidget {
   /// left and right columns.
   ///
   /// The [leftBuilder] and [rightBuilder] arguments must not be null. The
-  /// [backgroundBuilder], [leftBackgroundColor], [rightBackgroundColor], and
-  /// [splitRatio] arguments are optional.
+  /// [backgroundBuilder] and [splitRatio] arguments are optional.
   ///
   /// If [splitRatio] is not specified, the left and right columns will have the
   /// same width.
@@ -153,19 +161,17 @@ class FlutterDeckSlide extends StatelessWidget {
     required WidgetBuilder leftBuilder,
     required WidgetBuilder rightBuilder,
     WidgetBuilder? backgroundBuilder,
-    Color? leftBackgroundColor,
-    Color? rightBackgroundColor,
     SplitSlideRatio? splitRatio,
+    FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
           builder: (context) => FlutterDeckSplitSlide(
             leftBuilder: leftBuilder,
             rightBuilder: rightBuilder,
             backgroundBuilder: backgroundBuilder,
-            leftBackgroundColor: leftBackgroundColor,
-            rightBackgroundColor: rightBackgroundColor,
             splitRatio: splitRatio,
           ),
+          theme: theme,
           key: key,
         );
 
@@ -180,6 +186,7 @@ class FlutterDeckSlide extends StatelessWidget {
     WidgetBuilder? contentBuilder,
     WidgetBuilder? footerBuilder,
     WidgetBuilder? headerBuilder,
+    FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
           builder: (context) => FlutterDeckSlideBase(
@@ -188,6 +195,7 @@ class FlutterDeckSlide extends StatelessWidget {
             footerBuilder: footerBuilder,
             headerBuilder: headerBuilder,
           ),
+          theme: theme,
           key: key,
         );
 
@@ -204,6 +212,7 @@ class FlutterDeckSlide extends StatelessWidget {
     required String title,
     String? subtitle,
     WidgetBuilder? backgroundBuilder,
+    FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
           builder: (context) => FlutterDeckTitleSlide(
@@ -211,16 +220,29 @@ class FlutterDeckSlide extends StatelessWidget {
             subtitle: subtitle,
             backgroundBuilder: backgroundBuilder,
           ),
+          theme: theme,
           key: key,
         );
 
   final WidgetBuilder _builder;
 
+  final FlutterDeckThemeData? _theme;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const FlutterDeckDrawer(),
-      body: _SlideBody(child: _builder(context)),
+    final theme = FlutterDeckTheme.of(context).merge(_theme);
+    final slideTheme = theme.slideTheme;
+    final textTheme = theme.textTheme;
+
+    return FlutterDeckTheme(
+      data: theme.copyWith(textTheme: textTheme.apply(color: slideTheme.color)),
+      child: Builder(
+        builder: (context) => Scaffold(
+          backgroundColor: slideTheme.backgroundColor,
+          drawer: const FlutterDeckDrawer(),
+          body: _SlideBody(child: _builder(context)),
+        ),
+      ),
     );
   }
 }

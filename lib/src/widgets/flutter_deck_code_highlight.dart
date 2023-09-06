@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_deck/src/theme/widgets/flutter_deck_code_highlight_theme.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/default.dart';
 import 'package:flutter_highlight/themes/vs2015.dart';
@@ -11,30 +12,26 @@ class FlutterDeckCodeHighlight extends StatelessWidget {
   ///
   /// For a list of all available [language] values, see:
   /// https://github.com/git-touch/highlight.dart/tree/master/highlight/lib/languages
-  ///
-  /// Use [textStyle] to set custom font size and other text style properties
-  /// for the root theme.
   const FlutterDeckCodeHighlight({
     required String code,
     super.key,
     String? fileName,
     String language = 'dart',
-    TextStyle? textStyle,
   })  : _code = code,
         _fileName = fileName,
-        _language = language,
-        _textStyle = textStyle;
+        _language = language;
 
   final String _code;
   final String? _fileName;
   final String _language;
-  final TextStyle? _textStyle;
 
   @override
   Widget build(BuildContext context) {
+    final theme = FlutterDeckCodeHighlightTheme.of(context);
+
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: theme.backgroundColor,
         borderRadius: const BorderRadius.all(Radius.circular(16)),
       ),
       child: Padding(
@@ -46,7 +43,7 @@ class FlutterDeckCodeHighlight extends StatelessWidget {
             if (_fileName != null) ...[
               Text(
                 _fileName!,
-                style: _textStyle,
+                style: theme.textStyle,
               ),
               const SizedBox(height: 4),
             ],
@@ -54,7 +51,7 @@ class FlutterDeckCodeHighlight extends StatelessWidget {
               _code,
               language: _language,
               padding: const EdgeInsets.all(16),
-              textStyle: _textStyle,
+              textStyle: theme.textStyle,
               theme: Theme.of(context).brightness == Brightness.dark
                   ? vs2015Theme
                   : defaultTheme,

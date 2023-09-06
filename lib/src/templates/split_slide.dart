@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/templates/slide_base.dart';
+import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
+import 'package:flutter_deck/src/theme/templates/flutter_deck_split_slide_theme.dart';
+import 'package:flutter_deck/src/theme/widgets/flutter_deck_footer_theme.dart';
+import 'package:flutter_deck/src/theme/widgets/flutter_deck_header_theme.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
 
 /// A split ratio for a [FlutterDeckSplitSlide].
@@ -36,8 +40,7 @@ class FlutterDeckSplitSlide extends StatelessWidget {
   /// Creates a new split slide.
   ///
   /// The [leftBuilder] and [rightBuilder] arguments must not be null. The
-  /// [backgroundBuilder], [leftBackgroundColor], [rightBackgroundColor], and
-  /// [splitRatio] arguments are optional.
+  /// [backgroundBuilder] and [splitRatio] arguments are optional.
   ///
   /// If [splitRatio] is not specified, the left and right columns will have the
   /// same width.
@@ -45,8 +48,6 @@ class FlutterDeckSplitSlide extends StatelessWidget {
     required this.leftBuilder,
     required this.rightBuilder,
     this.backgroundBuilder,
-    this.leftBackgroundColor,
-    this.rightBackgroundColor,
     SplitSlideRatio? splitRatio,
     super.key,
   }) : splitRatio = splitRatio ?? const SplitSlideRatio();
@@ -60,16 +61,6 @@ class FlutterDeckSplitSlide extends StatelessWidget {
   /// A builder for the background of the slide.
   final WidgetBuilder? backgroundBuilder;
 
-  /// The background color of the left column.
-  ///
-  /// If this is null, the [ColorScheme.background] color of the slide is used.
-  final Color? leftBackgroundColor;
-
-  /// The background color of the right column.
-  ///
-  /// If this is null, the [ColorScheme.primary] color of the slide is used.
-  final Color? rightBackgroundColor;
-
   /// The ratio of the left and right columns.
   ///
   /// By default, the left and right columns will have the same width.
@@ -77,7 +68,7 @@ class FlutterDeckSplitSlide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = FlutterDeckSplitSlideTheme.of(context);
     final configuration = context.flutterDeck.configuration;
     final footerConfiguration = configuration.footer;
     final headerConfiguration = configuration.header;
@@ -88,26 +79,38 @@ class FlutterDeckSplitSlide extends StatelessWidget {
           children: [
             _BackgroundSection(
               flex: splitRatio.left,
-              color: leftBackgroundColor ?? colorScheme.background,
+              color: theme.leftBackgroundColor,
             ),
             _BackgroundSection(
               flex: splitRatio.right,
-              color: rightBackgroundColor ?? colorScheme.primary,
+              color: theme.rightBackgroundColor,
             ),
           ],
         ),
       ),
       contentBuilder: (context) => Row(
         children: [
-          _ContentSection(flex: splitRatio.left, child: leftBuilder(context)),
-          _ContentSection(flex: splitRatio.right, child: rightBuilder(context)),
+          _ContentSection(
+            flex: splitRatio.left,
+            color: theme.leftColor,
+            builder: leftBuilder,
+          ),
+          _ContentSection(
+            flex: splitRatio.right,
+            color: theme.rightColor,
+            builder: rightBuilder,
+          ),
         ],
       ),
       footerBuilder: footerConfiguration.showFooter
-          ? (context) => FlutterDeckFooter.fromConfiguration(
-                configuration: footerConfiguration,
-                slideNumberColor: colorScheme.onPrimary,
-                socialHandleColor: colorScheme.onBackground,
+          ? (context) => FlutterDeckFooterTheme(
+                data: FlutterDeckFooterTheme.of(context).copyWith(
+                  slideNumberColor: theme.rightColor,
+                  socialHandleColor: theme.leftColor,
+                ),
+                child: FlutterDeckFooter.fromConfiguration(
+                  configuration: footerConfiguration,
+                ),
               )
           : null,
       headerBuilder: headerConfiguration.showHeader
@@ -117,9 +120,14 @@ class FlutterDeckSplitSlide extends StatelessWidget {
                       splitRatio.left /
                       (splitRatio.left + splitRatio.right);
 
-                  return FlutterDeckHeader.fromConfiguration(
-                    configuration: headerConfiguration,
-                    maxWidth: maxWidth,
+                  return FlutterDeckHeaderTheme(
+                    data: FlutterDeckHeaderTheme.of(context).copyWith(
+                      color: theme.leftColor,
+                    ),
+                    child: FlutterDeckHeader.fromConfiguration(
+                      configuration: headerConfiguration,
+                      maxWidth: maxWidth,
+                    ),
                   );
                 },
               )
@@ -135,7 +143,7 @@ class _BackgroundSection extends StatelessWidget {
   });
 
   final int flex;
-  final Color color;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +151,7 @@ class _BackgroundSection extends StatelessWidget {
       flex: flex,
       child: ConstrainedBox(
         constraints: const BoxConstraints.expand(),
-        child: ColoredBox(color: color),
+        child: ColoredBox(color: color ?? Colors.transparent),
       ),
     );
   }
@@ -152,19 +160,28 @@ class _BackgroundSection extends StatelessWidget {
 class _ContentSection extends StatelessWidget {
   const _ContentSection({
     required this.flex,
-    required this.child,
+    required this.color,
+    required this.builder,
   });
 
   final int flex;
-  final Widget child;
+  final Color? color;
+  final WidgetBuilder builder;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: flex,
-      child: Padding(
-        padding: FlutterDeckLayout.slidePadding,
-        child: child,
+    final theme = FlutterDeckTheme.of(context);
+
+    return FlutterDeckTheme(
+      data: theme.copyWith(textTheme: theme.textTheme.apply(color: color)),
+      child: Builder(
+        builder: (context) => Expanded(
+          flex: flex,
+          child: Padding(
+            padding: FlutterDeckLayout.slidePadding,
+            child: builder(context),
+          ),
+        ),
       ),
     );
   }

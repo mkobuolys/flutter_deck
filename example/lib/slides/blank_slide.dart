@@ -19,7 +19,7 @@ class BlankSlide extends FlutterDeckSlideWidget {
         child: Text(
           'Based on the configuration, this template renders a header and a '
           'footer.\nThe remaining space is free for your imagination.',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
       ),

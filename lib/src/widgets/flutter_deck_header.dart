@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck_configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
+import 'package:flutter_deck/src/theme/widgets/flutter_deck_header_theme.dart';
 
 /// A widget that renders a header for a slide. The header can contain the slide
 /// title. The title is rendered as an [AutoSizeText] widget and is
@@ -17,12 +18,9 @@ class FlutterDeckHeader extends StatelessWidget {
   ///
   /// If [maxWidth] is provided, the header will be constrained to that width.
   /// Otherwise, it will be constrained to the width of the slide.
-  ///
-  /// If [color] is provided, it will be used for the text color of the title.
   const FlutterDeckHeader({
     required this.title,
     this.maxWidth,
-    this.color,
     super.key,
   });
 
@@ -31,21 +29,14 @@ class FlutterDeckHeader extends StatelessWidget {
   ///
   /// If [maxWidth] is provided, the header will be constrained to that width.
   /// Otherwise, it will be constrained to the width of the slide.
-  ///
-  /// If [color] is provided, it will be used for the text color of the title.
   FlutterDeckHeader.fromConfiguration({
     required FlutterDeckHeaderConfiguration configuration,
     this.maxWidth,
-    this.color,
     super.key,
   }) : title = configuration.title;
 
   /// The title of the slide.
   final String title;
-
-  /// The color to use for the title. If not provided, the color scheme's
-  /// `onBackground` color will be used.
-  final Color? color;
 
   /// The maximum width of the header. If not provided, the header will be
   /// constrained to the width of the slide.
@@ -53,8 +44,7 @@ class FlutterDeckHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textStyle = Theme.of(context).textTheme.displayLarge;
+    final theme = FlutterDeckHeaderTheme.of(context);
 
     return Container(
       alignment: Alignment.centerLeft,
@@ -65,8 +55,8 @@ class FlutterDeckHeader extends StatelessWidget {
         padding: FlutterDeckLayout.slidePadding,
         child: AutoSizeText(
           title,
-          style: textStyle?.copyWith(color: color ?? colorScheme.onBackground),
-          maxFontSize: textStyle?.fontSize ?? double.infinity,
+          style: theme.textStyle?.copyWith(color: theme.color),
+          maxFontSize: theme.textStyle?.fontSize ?? double.infinity,
         ),
       ),
     );

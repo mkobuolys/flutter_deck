@@ -81,13 +81,13 @@ class FlutterDeckApp extends StatefulWidget {
 
   /// The theme to use when the app is in light mode.
   ///
-  /// If not provided, the default [FlutterDeckTheme.light] is used.
-  final ThemeData? lightTheme;
+  /// If not provided, the default [FlutterDeckThemeData.light] is used.
+  final FlutterDeckThemeData? lightTheme;
 
   /// The theme to use when the app is in dark mode.
   ///
-  /// If not provided, the default [FlutterDeckTheme.dark] is used.
-  final ThemeData? darkTheme;
+  /// If not provided, the default [FlutterDeckThemeData.dark] is used.
+  final FlutterDeckThemeData? darkTheme;
 
   /// The theme mode to use.
   ///
@@ -125,7 +125,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
           ),
           route: slide.configuration.route,
           widget: slide,
-        )
+        ),
     ];
 
     _flutterDeckRouter = FlutterDeckRouter(slides: slides);
@@ -136,21 +136,30 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: _themeNotifier,
-      builder: (context, themeMode, _) => MaterialApp.router(
-        routerConfig: _router,
-        theme: widget.lightTheme ?? const FlutterDeckTheme.light().themeData,
-        darkTheme: widget.darkTheme ?? const FlutterDeckTheme.dark().themeData,
-        themeMode: themeMode,
-        builder: (context, child) => FlutterDeck(
-          configuration: widget.configuration,
-          router: _flutterDeckRouter,
-          speakerInfo: widget.speakerInfo,
-          drawerNotifier: _drawerNotifier,
-          themeNotifier: _themeNotifier,
-          child: FlutterDeckControls(child: child!),
-        ),
-        debugShowCheckedModeBanner: false,
-      ),
+      builder: (context, themeMode, _) {
+        final theme = context.darkModeEnabled(themeMode)
+            ? widget.darkTheme ?? FlutterDeckThemeData.dark()
+            : widget.lightTheme ?? FlutterDeckThemeData.light();
+
+        return MaterialApp.router(
+          routerConfig: _router,
+          theme: theme.materialTheme,
+          builder: (context, child) => FlutterDeck(
+            configuration: widget.configuration,
+            router: _flutterDeckRouter,
+            speakerInfo: widget.speakerInfo,
+            drawerNotifier: _drawerNotifier,
+            themeNotifier: _themeNotifier,
+            child: FlutterDeckControls(
+              child: FlutterDeckTheme(
+                data: theme,
+                child: child!,
+              ),
+            ),
+          ),
+          debugShowCheckedModeBanner: false,
+        );
+      },
     );
   }
 }
