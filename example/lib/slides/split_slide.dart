@@ -25,7 +25,7 @@ class SplitSlide extends FlutterDeckSlideWidget {
       rightBuilder: (context) => Center(
         child: Text(
           'If 50/50 split is not your thing, you can change the ratio based on '
-          'your needs.\nAs well as background colors of each section.\nAs well '
+          'your needs.\nAs well as background and theme.\nAs well '
           'as header.\nAs well as footer...',
           style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
         ),

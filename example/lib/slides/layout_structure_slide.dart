@@ -17,9 +17,9 @@ class LayoutStructureSlide extends FlutterDeckSlideWidget {
       ),
       contentBuilder: (context) => Center(
         child: Text(
-          'Content goes here...\n\nThis is how the default layout '
-          'structure looks like.\nIn the next few slides, you will find '
-          'some pre-built slide templates.',
+          'Content goes here...\n\nThis is how the default slide layout '
+          'structure looks like.\nIn the next few slides, you will find some '
+          'pre-built slide templates.',
           style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
