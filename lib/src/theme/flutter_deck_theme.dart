@@ -5,9 +5,20 @@ import 'package:flutter_deck/src/theme/widgets/widgets.dart';
 
 const _flutterBlue = Color(0xff0553B1);
 
+/// Defines the visual properties of a slide deck.
 ///
+/// Used by [FlutterDeckTheme] to control the visual properties of a slide deck.
+///
+/// To obtain the current [FlutterDeckThemeData], use [FlutterDeckTheme.of] to
+/// access the closest ancestor [FlutterDeckTheme] of the current
+/// [BuildContext].
+///
+/// See also:
+///
+/// * [FlutterDeckTheme], an [InheritedWidget] that propagates the theme down
+/// its subtree.
 class FlutterDeckThemeData {
-  ///
+  /// Creates a theme to style a slide deck.
   factory FlutterDeckThemeData({
     Brightness? brightness,
     ThemeData? theme,
@@ -27,15 +38,15 @@ class FlutterDeckThemeData {
     return FlutterDeckThemeData.fromThemeAndText(theme, textTheme);
   }
 
-  ///
+  /// Creates a default light theme to style a slide deck.
   factory FlutterDeckThemeData.light() =>
       FlutterDeckThemeData(brightness: Brightness.light);
 
-  ///
+  /// Creates a default dark theme to style a slide deck.
   factory FlutterDeckThemeData.dark() =>
       FlutterDeckThemeData(brightness: Brightness.dark);
 
-  ///
+  /// Creates a theme to style a slide deck from a [ThemeData].
   factory FlutterDeckThemeData.fromTheme(ThemeData theme) {
     final defaultTheme = FlutterDeckThemeData(brightness: theme.brightness);
     final customTheme = FlutterDeckThemeData.fromThemeAndText(
@@ -46,7 +57,8 @@ class FlutterDeckThemeData {
     return defaultTheme.merge(customTheme);
   }
 
-  ///
+  /// Creates a theme to style a slide deck from a [ThemeData] and a
+  /// [FlutterDeckTextTheme].
   factory FlutterDeckThemeData.fromThemeAndText(
     ThemeData theme,
     FlutterDeckTextTheme textTheme,
@@ -96,7 +108,10 @@ class FlutterDeckThemeData {
     );
   }
 
+  /// Creates a theme to style a slide deck.
   ///
+  /// This constructor is private because it should not be used directly.
+  /// Instead, use one of the public constructors.
   const FlutterDeckThemeData._({
     required this.bulletListTheme,
     required this.codeHighlightTheme,
@@ -110,37 +125,38 @@ class FlutterDeckThemeData {
     required this.textTheme,
   });
 
-  ///
+  /// The visual properties of a bullet list widget.
   final FlutterDeckBulletListThemeData bulletListTheme;
 
-  ///
+  /// The visual properties of a code highlight widget.
   final FlutterDeckCodeHighlightThemeData codeHighlightTheme;
 
-  ///
+  /// The visual properties of a footer.
   final FlutterDeckFooterThemeData footerTheme;
 
-  ///
+  /// The visual properties of a header.
   final FlutterDeckHeaderThemeData headerTheme;
 
-  ///
+  /// The base visual properties of a slide.
   final FlutterDeckSlideThemeData slideTheme;
 
-  ///
+  /// The visual properties of a speaker info widget.
   final FlutterDeckSpeakerInfoWidgetThemeData speakerInfoWidgetTheme;
 
-  ///
+  /// The visual properties of a split slide.
   final FlutterDeckSplitSlideThemeData splitSlideTheme;
 
-  ///
+  /// The visual properties of a title slide.
   final FlutterDeckTitleSlideThemeData titleSlideTheme;
 
-  ///
+  /// The base Material theme used by the slide deck.
   final ThemeData materialTheme;
 
-  ///
+  /// The visual properties of text.
   final FlutterDeckTextTheme textTheme;
 
-  ///
+  /// Creates a copy of this theme but with the given fields replaced with the
+  /// new values.
   FlutterDeckThemeData copyWith({
     FlutterDeckBulletListThemeData? bulletListTheme,
     FlutterDeckCodeHighlightThemeData? codeHighlightTheme,
@@ -167,7 +183,7 @@ class FlutterDeckThemeData {
     );
   }
 
-  ///
+  /// Merge the given [FlutterDeckThemeData] with this one.
   FlutterDeckThemeData merge(FlutterDeckThemeData? other) {
     if (other == null) return this;
 
@@ -186,19 +202,25 @@ class FlutterDeckThemeData {
   }
 }
 
+/// An inherited widget that defines the visual properties of
+/// [FlutterDeckTheme].
 ///
+/// Used by [FlutterDeckTheme] to control the visual properties of a slide deck.
 class FlutterDeckTheme extends InheritedWidget {
+  /// Creates a theme to style a slide deck.
   ///
+  /// The [data] argument must not be null.
   const FlutterDeckTheme({
     required this.data,
     required super.child,
     super.key,
   });
 
-  ///
+  /// The visual properties of a slide deck.
   final FlutterDeckThemeData data;
 
-  ///
+  /// Returns the [data] from the closest [FlutterDeckTheme] ancestor. If there
+  /// is no ancestor, assertion error is thrown.
   static FlutterDeckThemeData of(BuildContext context) {
     final theme =
         context.dependOnInheritedWidgetOfExactType<FlutterDeckTheme>();
@@ -212,12 +234,16 @@ class FlutterDeckTheme extends InheritedWidget {
   bool updateShouldNotify(FlutterDeckTheme oldWidget) => data != oldWidget.data;
 }
 
-///
+/// An extension on [BuildContext] that simplifies accessing the
+/// [FlutterDeckTheme] from the widget tree.
 extension FlutterDeckThemeX on BuildContext {
+  /// Returns the [FlutterDeckTheme] from the widget tree.
   ///
+  /// See [FlutterDeckTheme.of].
   FlutterDeckThemeData get flutterDeckTheme => FlutterDeckTheme.of(this);
 
-  ///
+  /// Returns whether the dark mode is enabled based on the given [themeMode]
+  /// and the current platform brightness.
   bool darkModeEnabled(ThemeMode themeMode) {
     final brightness = MediaQuery.of(this).platformBrightness;
 

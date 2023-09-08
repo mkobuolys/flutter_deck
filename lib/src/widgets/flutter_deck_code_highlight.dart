@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck/src/theme/widgets/flutter_deck_code_highlight_theme.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/default.dart';
 import 'package:flutter_highlight/themes/vs2015.dart';
 
 /// This widget provides syntax highlighting for many languages.
+///
+/// To customize the style of the widget, use [FlutterDeckCodeHighlightTheme].
+///
+/// Example:
+///
+/// ```dart
+/// FlutterDeckCodeHighlightTheme(
+///   data: FlutterDeckCodeHighlightThemeData(
+///     backgroundColor: Colors.black87,
+///     textStyle: FlutterDeckTheme.of(context).textTheme.bodyMedium,
+///   ),
+///   child: const FlutterDeckCodeHighlight(
+///     code: '<...>',
+///     fileName: 'example.dart',
+///     language: 'dart',
+///   ),
+/// );
+/// ```
 class FlutterDeckCodeHighlight extends StatelessWidget {
   /// Creates a syntax highlighting widget for displaying code.
   ///

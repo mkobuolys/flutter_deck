@@ -12,6 +12,22 @@ import 'package:flutter_deck/src/theme/widgets/flutter_deck_header_theme.dart';
 /// For the [FlutterDeckSplitSlide] layout, the header is constrained to fit the
 /// left side of the slide. For the full-width slide layout, the header is
 /// constrained to the width of the slide.
+///
+/// To customize the header style, use [FlutterDeckHeaderTheme].
+///
+/// Example:
+///
+/// ```dart
+/// FlutterDeckHeaderTheme(
+///   data: FlutterDeckHeaderThemeData(
+///     color: Colors.white,
+///     textStyle: FlutterDeckTheme.of(context).textTheme.header,
+///   ),
+///   child: FlutterDeckHeader.fromConfiguration(
+///     configuration: const FlutterDeckHeaderConfiguration(),
+///   ),
+/// );
+/// ```
 class FlutterDeckHeader extends StatelessWidget {
   /// Creates a widget that renders a header for a slide. The header contains
   /// the [title] of the slide.

@@ -16,6 +16,8 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 /// title and subtitle.
 ///
 /// To use a custom background, you can pass the [backgroundBuilder].
+///
+/// This template uses the [FlutterDeckTitleSlideTheme] to style the slide.
 class FlutterDeckTitleSlide extends StatelessWidget {
   /// Creates a new title slide.
   ///

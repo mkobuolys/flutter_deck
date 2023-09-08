@@ -4,6 +4,7 @@ import 'package:flutter_deck/src/flutter_deck_configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
+import 'package:flutter_deck/src/theme/templates/flutter_deck_slide_theme.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 
 /// An abstract class that must be extended when creating a new slide for the
@@ -13,6 +14,8 @@ import 'package:flutter_deck/src/widgets/internal/internal.dart';
 /// each slide has a defined [FlutterDeckSlideConfiguration] and a [build]
 /// method to create the slide. Diffently from the [StatelessWidget] class, the
 /// [build] method returns a [FlutterDeckSlide] instead of a [Widget].
+///
+/// Uses [FlutterDeckSlideTheme] as a base to style the slide.
 ///
 /// See also:
 ///
@@ -90,6 +93,8 @@ class FlutterDeckSlide extends StatelessWidget {
   ///
   /// The [builder] argument must not be null. The [backgroundBuilder] argument
   /// is optional.
+  ///
+  /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.blank({
     required WidgetBuilder builder,
     WidgetBuilder? backgroundBuilder,
@@ -111,6 +116,8 @@ class FlutterDeckSlide extends StatelessWidget {
   /// define it.
   ///
   /// The [builder] argument must not be null.
+  ///
+  /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   const FlutterDeckSlide.custom({
     required WidgetBuilder builder,
     FlutterDeckThemeData? theme,
@@ -129,6 +136,8 @@ class FlutterDeckSlide extends StatelessWidget {
   ///
   /// The [imageBuilder] argument must not be null. The [label] and
   /// [backgroundBuilder] arguments are optional.
+  ///
+  /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.image({
     required ImageBuilder imageBuilder,
     String? label,
@@ -157,6 +166,8 @@ class FlutterDeckSlide extends StatelessWidget {
   ///
   /// If [splitRatio] is not specified, the left and right columns will have the
   /// same width.
+  ///
+  /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.split({
     required WidgetBuilder leftBuilder,
     required WidgetBuilder rightBuilder,
@@ -181,6 +192,8 @@ class FlutterDeckSlide extends StatelessWidget {
   ///
   /// The [backgroundBuilder], [contentBuilder], [footerBuilder], and
   /// [headerBuilder] arguments are optional.
+  ///
+  /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.template({
     WidgetBuilder? backgroundBuilder,
     WidgetBuilder? contentBuilder,
@@ -208,6 +221,8 @@ class FlutterDeckSlide extends StatelessWidget {
   ///
   /// The [title] argument must not be null. The [subtitle] and
   /// [backgroundBuilder] arguments are optional.
+  ///
+  /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.title({
     required String title,
     String? subtitle,

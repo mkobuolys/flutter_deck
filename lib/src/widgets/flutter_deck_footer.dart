@@ -8,6 +8,25 @@ import 'package:flutter_deck/src/theme/widgets/flutter_deck_footer_theme.dart';
 
 /// A widget that renders a footer for a slide. The footer can contain the slide
 /// number and the speaker's social handle.
+///
+/// To customize the footer style, use [FlutterDeckFooterTheme].
+///
+/// Example:
+///
+/// ```dart
+/// FlutterDeckFooterTheme(
+///   data: FlutterDeckFooterThemeData(
+///     slideNumberColor: Colors.white,
+///     slideNumberTextStyle: FlutterDeckTheme.of(context).textTheme.bodySmall,
+///     socialHandleColor: Colors.white,
+///     socialHandleTextStyle:
+///         FlutterDeckTheme.of(context).textTheme.bodyMedium,
+///   ),
+///   child: FlutterDeckFooter.fromConfiguration(
+///     configuration: const FlutterDeckFooterConfiguration(),
+///   ),
+/// );
+/// ```
 class FlutterDeckFooter extends StatelessWidget {
   /// Creates a widget that renders a footer for a slide.
   ///

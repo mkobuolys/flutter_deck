@@ -36,6 +36,8 @@ class SplitSlideRatio {
 /// the left and right columns.
 ///
 /// To use a custom background, you can pass the [backgroundBuilder].
+///
+/// This template uses the [FlutterDeckSplitSlideTheme] to style the slide.
 class FlutterDeckSplitSlide extends StatelessWidget {
   /// Creates a new split slide.
   ///
