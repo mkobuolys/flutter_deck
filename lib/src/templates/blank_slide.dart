@@ -30,7 +30,6 @@ class FlutterDeckBlankSlide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     final configuration = context.flutterDeck.configuration;
     final footerConfiguration = configuration.footer;
     final headerConfiguration = configuration.header;
@@ -44,8 +43,6 @@ class FlutterDeckBlankSlide extends StatelessWidget {
       footerBuilder: footerConfiguration.showFooter
           ? (context) => FlutterDeckFooter.fromConfiguration(
                 configuration: footerConfiguration,
-                slideNumberColor: colorScheme.onBackground,
-                socialHandleColor: colorScheme.onBackground,
               )
           : null,
       headerBuilder: headerConfiguration.showHeader

@@ -19,7 +19,7 @@ class BackgroundSlide extends FlutterDeckSlideWidget {
           'themes separately. The background could be a solid color, gradient, '
           'image or any custom widget. Of course, you can override it later '
           'for each slide, too.\n\nToggle dark mode to see this in action',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
       ),

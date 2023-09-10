@@ -1,40 +1,256 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_deck/src/theme/flutter_deck_text_theme.dart';
+import 'package:flutter_deck/src/theme/templates/templates.dart';
+import 'package:flutter_deck/src/theme/widgets/widgets.dart';
 
 const _flutterBlue = Color(0xff0553B1);
 
-/// Default theme for the slide deck.
-class FlutterDeckTheme {
-  /// Creates a light theme for the slide deck.
-  const FlutterDeckTheme.light() : this._(brightness: Brightness.light);
+/// Defines the visual properties of a slide deck.
+///
+/// Used by [FlutterDeckTheme] to control the visual properties of a slide deck.
+///
+/// To obtain the current [FlutterDeckThemeData], use [FlutterDeckTheme.of] to
+/// access the closest ancestor [FlutterDeckTheme] of the current
+/// [BuildContext].
+///
+/// See also:
+///
+/// * [FlutterDeckTheme], an [InheritedWidget] that propagates the theme down
+/// its subtree.
+class FlutterDeckThemeData {
+  /// Creates a theme to style a slide deck.
+  factory FlutterDeckThemeData({
+    Brightness? brightness,
+    ThemeData? theme,
+    FlutterDeckTextTheme? textTheme,
+  }) {
+    theme ??= ThemeData.from(
+      colorScheme: ColorScheme.fromSeed(
+        brightness: brightness ?? Brightness.light,
+        seedColor: _flutterBlue,
+      ),
+      useMaterial3: true,
+    );
+    textTheme ??= const FlutterDeckTextTheme().apply(
+      color: theme.colorScheme.onBackground,
+    );
 
-  /// Creates a dark theme for the slide deck.
-  const FlutterDeckTheme.dark() : this._(brightness: Brightness.dark);
+    return FlutterDeckThemeData.fromThemeAndText(theme, textTheme);
+  }
 
-  const FlutterDeckTheme._({
-    required Brightness brightness,
-  })  : _brightness = brightness,
-        _seedColor = _flutterBlue;
+  /// Creates a default light theme to style a slide deck.
+  factory FlutterDeckThemeData.light() =>
+      FlutterDeckThemeData(brightness: Brightness.light);
 
-  /// The primary color of the slide deck theme.
+  /// Creates a default dark theme to style a slide deck.
+  factory FlutterDeckThemeData.dark() =>
+      FlutterDeckThemeData(brightness: Brightness.dark);
+
+  /// Creates a theme to style a slide deck from a [ThemeData].
+  factory FlutterDeckThemeData.fromTheme(ThemeData theme) {
+    final defaultTheme = FlutterDeckThemeData(brightness: theme.brightness);
+    final customTheme = FlutterDeckThemeData.fromThemeAndText(
+      theme,
+      defaultTheme.textTheme,
+    );
+
+    return defaultTheme.merge(customTheme);
+  }
+
+  /// Creates a theme to style a slide deck from a [ThemeData] and a
+  /// [FlutterDeckTextTheme].
+  factory FlutterDeckThemeData.fromThemeAndText(
+    ThemeData theme,
+    FlutterDeckTextTheme textTheme,
+  ) {
+    final colorScheme = theme.colorScheme;
+
+    return FlutterDeckThemeData._(
+      bulletListTheme: FlutterDeckBulletListThemeData(
+        color: colorScheme.onBackground,
+        textStyle: textTheme.title,
+      ),
+      codeHighlightTheme: FlutterDeckCodeHighlightThemeData(
+        backgroundColor: colorScheme.background,
+        textStyle: textTheme.bodyMedium,
+      ),
+      footerTheme: FlutterDeckFooterThemeData(
+        slideNumberColor: colorScheme.onBackground,
+        slideNumberTextStyle: textTheme.bodySmall,
+        socialHandleColor: colorScheme.onBackground,
+        socialHandleTextStyle: textTheme.bodyMedium,
+      ),
+      headerTheme: FlutterDeckHeaderThemeData(
+        color: colorScheme.onBackground,
+        textStyle: textTheme.header,
+      ),
+      slideTheme: FlutterDeckSlideThemeData(
+        backgroundColor: colorScheme.background,
+        color: colorScheme.onBackground,
+      ),
+      speakerInfoWidgetTheme: FlutterDeckSpeakerInfoWidgetThemeData(
+        descriptionTextStyle: textTheme.bodyMedium,
+        nameTextStyle: textTheme.bodyLarge,
+        socialHandleTextStyle: textTheme.bodyMedium,
+      ),
+      splitSlideTheme: FlutterDeckSplitSlideThemeData(
+        leftBackgroundColor: colorScheme.background,
+        leftColor: colorScheme.onBackground,
+        rightBackgroundColor: colorScheme.primary,
+        rightColor: colorScheme.onPrimary,
+      ),
+      titleSlideTheme: FlutterDeckTitleSlideThemeData(
+        subtitleTextStyle: textTheme.subtitle,
+        titleTextStyle: textTheme.title,
+      ),
+      materialTheme: theme,
+      textTheme: textTheme,
+    );
+  }
+
+  /// Creates a theme to style a slide deck.
   ///
-  /// This color is used as a seed color to generate the theme colors based on
-  /// the Material 3 color system.
-  final Color _seedColor;
+  /// This constructor is private because it should not be used directly.
+  /// Instead, use one of the public constructors.
+  const FlutterDeckThemeData._({
+    required this.bulletListTheme,
+    required this.codeHighlightTheme,
+    required this.footerTheme,
+    required this.headerTheme,
+    required this.slideTheme,
+    required this.speakerInfoWidgetTheme,
+    required this.splitSlideTheme,
+    required this.titleSlideTheme,
+    required this.materialTheme,
+    required this.textTheme,
+  });
 
-  /// The brightness of the slide deck theme.
-  ///
-  /// This brightness is used to generate the theme colors based on the Material
-  /// 3 color system.
-  final Brightness _brightness;
+  /// The visual properties of a bullet list widget.
+  final FlutterDeckBulletListThemeData bulletListTheme;
 
-  /// Returns the [ThemeData] for the slide deck.
+  /// The visual properties of a code highlight widget.
+  final FlutterDeckCodeHighlightThemeData codeHighlightTheme;
+
+  /// The visual properties of a footer.
+  final FlutterDeckFooterThemeData footerTheme;
+
+  /// The visual properties of a header.
+  final FlutterDeckHeaderThemeData headerTheme;
+
+  /// The base visual properties of a slide.
+  final FlutterDeckSlideThemeData slideTheme;
+
+  /// The visual properties of a speaker info widget.
+  final FlutterDeckSpeakerInfoWidgetThemeData speakerInfoWidgetTheme;
+
+  /// The visual properties of a split slide.
+  final FlutterDeckSplitSlideThemeData splitSlideTheme;
+
+  /// The visual properties of a title slide.
+  final FlutterDeckTitleSlideThemeData titleSlideTheme;
+
+  /// The base Material theme used by the slide deck.
+  final ThemeData materialTheme;
+
+  /// The visual properties of text.
+  final FlutterDeckTextTheme textTheme;
+
+  /// Creates a copy of this theme but with the given fields replaced with the
+  /// new values.
+  FlutterDeckThemeData copyWith({
+    FlutterDeckBulletListThemeData? bulletListTheme,
+    FlutterDeckCodeHighlightThemeData? codeHighlightTheme,
+    FlutterDeckFooterThemeData? footerTheme,
+    FlutterDeckHeaderThemeData? headerTheme,
+    FlutterDeckSlideThemeData? slideTheme,
+    FlutterDeckSpeakerInfoWidgetThemeData? speakerInfoWidgetTheme,
+    FlutterDeckSplitSlideThemeData? splitSlideTheme,
+    FlutterDeckTitleSlideThemeData? titleSlideTheme,
+    FlutterDeckTextTheme? textTheme,
+  }) {
+    return FlutterDeckThemeData._(
+      bulletListTheme: this.bulletListTheme.merge(bulletListTheme),
+      codeHighlightTheme: this.codeHighlightTheme.merge(codeHighlightTheme),
+      footerTheme: this.footerTheme.merge(footerTheme),
+      headerTheme: this.headerTheme.merge(headerTheme),
+      slideTheme: this.slideTheme.merge(slideTheme),
+      speakerInfoWidgetTheme:
+          this.speakerInfoWidgetTheme.merge(speakerInfoWidgetTheme),
+      splitSlideTheme: this.splitSlideTheme.merge(splitSlideTheme),
+      titleSlideTheme: this.titleSlideTheme.merge(titleSlideTheme),
+      materialTheme: materialTheme,
+      textTheme: this.textTheme.merge(textTheme),
+    );
+  }
+
+  /// Merge the given [FlutterDeckThemeData] with this one.
+  FlutterDeckThemeData merge(FlutterDeckThemeData? other) {
+    if (other == null) return this;
+
+    return copyWith(
+      bulletListTheme: bulletListTheme.merge(other.bulletListTheme),
+      codeHighlightTheme: codeHighlightTheme.merge(other.codeHighlightTheme),
+      footerTheme: footerTheme.merge(other.footerTheme),
+      headerTheme: headerTheme.merge(other.headerTheme),
+      slideTheme: slideTheme.merge(other.slideTheme),
+      speakerInfoWidgetTheme:
+          speakerInfoWidgetTheme.merge(other.speakerInfoWidgetTheme),
+      splitSlideTheme: splitSlideTheme.merge(other.splitSlideTheme),
+      titleSlideTheme: titleSlideTheme.merge(other.titleSlideTheme),
+      textTheme: textTheme.merge(other.textTheme),
+    );
+  }
+}
+
+/// An inherited widget that defines the visual properties of
+/// [FlutterDeckTheme].
+///
+/// Used by [FlutterDeckTheme] to control the visual properties of a slide deck.
+class FlutterDeckTheme extends InheritedWidget {
+  /// Creates a theme to style a slide deck.
   ///
-  /// The [ThemeData] is generated based on the [_seedColor] and [_brightness].
-  ThemeData get themeData => ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(
-          brightness: _brightness,
-          seedColor: _seedColor,
-        ),
-        useMaterial3: true,
-      );
+  /// The [data] argument must not be null.
+  const FlutterDeckTheme({
+    required this.data,
+    required super.child,
+    super.key,
+  });
+
+  /// The visual properties of a slide deck.
+  final FlutterDeckThemeData data;
+
+  /// Returns the [data] from the closest [FlutterDeckTheme] ancestor. If there
+  /// is no ancestor, assertion error is thrown.
+  static FlutterDeckThemeData of(BuildContext context) {
+    final theme =
+        context.dependOnInheritedWidgetOfExactType<FlutterDeckTheme>();
+
+    assert(theme != null, 'No FlutterDeckTheme found in context');
+
+    return theme!.data;
+  }
+
+  @override
+  bool updateShouldNotify(FlutterDeckTheme oldWidget) => data != oldWidget.data;
+}
+
+/// An extension on [BuildContext] that simplifies accessing the
+/// [FlutterDeckTheme] from the widget tree.
+extension FlutterDeckThemeX on BuildContext {
+  /// Returns the [FlutterDeckTheme] from the widget tree.
+  ///
+  /// See [FlutterDeckTheme.of].
+  FlutterDeckThemeData get flutterDeckTheme => FlutterDeckTheme.of(this);
+
+  /// Returns whether the dark mode is enabled based on the given [themeMode]
+  /// and the current platform brightness.
+  bool darkModeEnabled(ThemeMode themeMode) {
+    final brightness = MediaQuery.of(this).platformBrightness;
+
+    return switch (themeMode) {
+      ThemeMode.system => brightness == Brightness.dark,
+      ThemeMode.light => false,
+      ThemeMode.dark => true,
+    };
+  }
 }

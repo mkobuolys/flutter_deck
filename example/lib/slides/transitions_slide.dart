@@ -30,10 +30,7 @@ class TransitionsSlide extends FlutterDeckSlideWidget {
           'create your own.\n\nYou can set the transition for the whole deck '
           'or for individual slides.\n\nAs you saw, this slide uses a '
           '"Rotation" transition 😵‍💫',
-          style: Theme.of(context)
-              .textTheme
-              .titleLarge
-              ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
+          style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_deck/src/theme/widgets/flutter_deck_bullet_list_theme.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
 
 /// A widget that renders a list of bullet points.
@@ -154,7 +155,7 @@ class _BulletListItem extends StatelessWidget {
         const SizedBox(width: 8),
         Expanded(
           child: _AutoSizeText(text, group: group),
-        )
+        ),
       ],
     );
   }
@@ -171,12 +172,13 @@ class _AutoSizeText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.displayMedium;
+    final theme = FlutterDeckBulletListTheme.of(context);
+    final textStyle = theme.textStyle;
 
     return AutoSizeText(
       text,
       group: group,
-      style: textStyle,
+      style: textStyle?.copyWith(color: theme.color),
       maxFontSize: textStyle?.fontSize ?? double.infinity,
     );
   }

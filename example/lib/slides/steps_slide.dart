@@ -29,10 +29,7 @@ class StepsSlide extends FlutterDeckSlideWidget {
           'widget. This way, you can reveal or hide content, run animations, '
           'etc.\n\nFlutterDeckBulletList widget (the one on the left) supports '
           'steps out of the box.',
-          style: Theme.of(context)
-              .textTheme
-              .titleLarge
-              ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
+          style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
         ),
       ),
     );

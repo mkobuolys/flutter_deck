@@ -14,8 +14,12 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => Center(
-        child: FlutterDeckCodeHighlight(
-          code: '''
+        child: FlutterDeckCodeHighlightTheme(
+          data: FlutterDeckCodeHighlightTheme.of(context).copyWith(
+            textStyle: FlutterDeckTheme.of(context).textTheme.bodySmall,
+          ),
+          child: const FlutterDeckCodeHighlight(
+            code: '''
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
@@ -37,9 +41,9 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
     );
   }
 }''',
-          fileName: 'code_highlight_slide.dart',
-          language: 'dart',
-          textStyle: Theme.of(context).textTheme.titleMedium,
+            fileName: 'code_highlight_slide.dart',
+            language: 'dart',
+          ),
         ),
       ),
     );

@@ -4,6 +4,7 @@ import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
 import 'package:flutter_deck/src/templates/slide_base.dart';
+import 'package:flutter_deck/src/theme/templates/flutter_deck_title_slide_theme.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
 
 /// A slide widget that represents a title slide.
@@ -15,6 +16,8 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 /// title and subtitle.
 ///
 /// To use a custom background, you can pass the [backgroundBuilder].
+///
+/// This template uses the [FlutterDeckTitleSlideTheme] to style the slide.
 class FlutterDeckTitleSlide extends StatelessWidget {
   /// Creates a new title slide.
   ///
@@ -40,7 +43,7 @@ class FlutterDeckTitleSlide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = FlutterDeckTitleSlideTheme.of(context);
     final configuration = context.flutterDeck.configuration;
     final footerConfiguration = configuration.footer;
     final headerConfiguration = configuration.header;
@@ -54,20 +57,14 @@ class FlutterDeckTitleSlide extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AutoSizeText(
-              title,
-              style: Theme.of(context).textTheme.displayLarge,
-            ),
+            AutoSizeText(title, style: theme.titleTextStyle),
             if (subtitle != null) ...[
               const SizedBox(height: 8),
-              AutoSizeText(
-                subtitle!,
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
+              AutoSizeText(subtitle!, style: theme.subtitleTextStyle),
             ],
             if (speakerInfo != null) ...[
               const SizedBox(height: 64),
-              _SpeakerInfo(speakerInfo: speakerInfo),
+              FlutterDeckSpeakerInfoWidget(speakerInfo: speakerInfo),
             ],
           ],
         ),
@@ -75,8 +72,6 @@ class FlutterDeckTitleSlide extends StatelessWidget {
       footerBuilder: footerConfiguration.showFooter
           ? (context) => FlutterDeckFooter.fromConfiguration(
                 configuration: footerConfiguration,
-                slideNumberColor: colorScheme.onBackground,
-                socialHandleColor: colorScheme.onBackground,
               )
           : null,
       headerBuilder: headerConfiguration.showHeader
@@ -84,51 +79,6 @@ class FlutterDeckTitleSlide extends StatelessWidget {
                 configuration: headerConfiguration,
               )
           : null,
-    );
-  }
-}
-
-class _SpeakerInfo extends StatelessWidget {
-  const _SpeakerInfo({
-    required this.speakerInfo,
-  });
-
-  final FlutterDeckSpeakerInfo speakerInfo;
-
-  @override
-  Widget build(BuildContext context) {
-    const imageHeight = 160.0;
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Image.asset(
-          speakerInfo.imagePath,
-          height: imageHeight,
-          width: imageHeight,
-        ),
-        const SizedBox(width: 32),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AutoSizeText(
-              speakerInfo.name,
-              style: Theme.of(context).textTheme.displaySmall,
-              maxLines: 1,
-            ),
-            AutoSizeText(
-              speakerInfo.description,
-              style: Theme.of(context).textTheme.headlineMedium,
-              maxLines: 1,
-            ),
-            AutoSizeText(
-              speakerInfo.socialHandle,
-              style: Theme.of(context).textTheme.headlineMedium,
-              maxLines: 1,
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

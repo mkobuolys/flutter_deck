@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/templates/slide_base.dart';
+import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
 
 /// A signature for a function that builds an image for a slide.
@@ -39,7 +40,6 @@ class FlutterDeckImageSlide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     final configuration = context.flutterDeck.configuration;
     final footerConfiguration = configuration.footer;
     final headerConfiguration = configuration.header;
@@ -55,7 +55,10 @@ class FlutterDeckImageSlide extends StatelessWidget {
             ),
             if (label != null) ...[
               const SizedBox(height: 4),
-              Text(label!, style: Theme.of(context).textTheme.bodySmall),
+              Text(
+                label!,
+                style: FlutterDeckTheme.of(context).textTheme.bodySmall,
+              ),
             ],
           ],
         ),
@@ -63,8 +66,6 @@ class FlutterDeckImageSlide extends StatelessWidget {
       footerBuilder: footerConfiguration.showFooter
           ? (context) => FlutterDeckFooter.fromConfiguration(
                 configuration: footerConfiguration,
-                slideNumberColor: colorScheme.onBackground,
-                socialHandleColor: colorScheme.onBackground,
               )
           : null,
       headerBuilder: headerConfiguration.showHeader

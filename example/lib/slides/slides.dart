@@ -8,5 +8,6 @@ export 'image_slide.dart';
 export 'layout_structure_slide.dart';
 export 'split_slide.dart';
 export 'steps_slide.dart';
+export 'theming_slide.dart';
 export 'title_slide.dart';
 export 'transitions_slide.dart';
