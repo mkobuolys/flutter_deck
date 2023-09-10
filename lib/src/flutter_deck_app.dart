@@ -45,6 +45,7 @@ class FlutterDeckApp extends StatefulWidget {
   /// the slide deck.
   /// * [FlutterDeckSlideConfiguration], which represents a configuration for a
   /// single slide.
+  /// * [FlutterDeckThemeData], which represents a theme for the slide deck.
   /// * [FlutterDeckSpeakerInfo], which represents information about the
   /// speaker.
   const FlutterDeckApp({

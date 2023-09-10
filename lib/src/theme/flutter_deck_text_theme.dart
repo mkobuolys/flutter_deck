@@ -31,21 +31,33 @@ class FlutterDeckTextTheme {
   });
 
   /// Text style of the header.
+  ///
+  /// By default, the text size is 57, and the font weight is 400.
   final TextStyle header;
 
   /// Text style of the title.
+  ///
+  /// By default, the text size is 54, and the font weight is 400.
   final TextStyle title;
 
   /// Text style of the subtitle.
+  ///
+  /// By default, the text size is 42, and the font weight is 400.
   final TextStyle subtitle;
 
   /// Text style of the body (large).
+  ///
+  /// By default, the text size is 28, and the font weight is 400.
   final TextStyle bodyLarge;
 
   /// Text style of the body (medium).
+  ///
+  /// By default, the text size is 22, and the font weight is 400.
   final TextStyle bodyMedium;
 
   /// Text style of the body (small).
+  ///
+  /// By default, the text size is 16, and the font weight is 400.
   final TextStyle bodySmall;
 
   /// Creates a copy of this object with the given fields replaced with the new

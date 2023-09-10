@@ -340,12 +340,12 @@
     );
     ```
 
-- **BREAKING**: removed `leftBackgroundColor` and `rightBackgroundColor` properties from the `FlutterDeckSplitSlide` template. Use `FlutterDeckSplitSlideTheme` instead.
-- **BREAKING**: removed `color` property from the `FlutterDeckHeader` component. Use `FlutterDeckHeaderTheme` instead.
-- **BREAKING**: removed `slideNumberColor` and `socialHandleColor` properties from the `FlutterDeckFooter` component. Use `FlutterDeckFooterTheme` instead.
-- **BREAKING**: removed `textStyle` property from the `FlutterDeckCodeHighlight` component. Use `FlutterDeckCodeHighlightTheme` instead.
+- **BREAKING**: removed `leftBackgroundColor` and `rightBackgroundColor` properties from the `FlutterDeckSplitSlide` template. Use `FlutterDeckSplitSlideTheme` instead
+- **BREAKING**: removed `color` property from the `FlutterDeckHeader` component. Use `FlutterDeckHeaderTheme` instead
+- **BREAKING**: removed `slideNumberColor` and `socialHandleColor` properties from the `FlutterDeckFooter` component. Use `FlutterDeckFooterTheme` instead
+- **BREAKING**: removed `textStyle` property from the `FlutterDeckCodeHighlight` component. Use `FlutterDeckCodeHighlightTheme` instead
 - feat: implement global slide deck theming
-- feat: add `FlutterDeckSpeakerInfoWidget` component to display speaker information.
+- feat: add `FlutterDeckSpeakerInfoWidget` component to display speaker information
 - refactor: remove the redundant `InheritedFlutterDeck` widget
 - docs: update README.md and widgets' documentation
 

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
+import 'package:flutter_deck/src/theme/templates/flutter_deck_slide_theme.dart';
 import 'package:flutter_deck/src/transitions/transitions.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
 
@@ -21,7 +21,8 @@ class FlutterDeckConfiguration {
   });
 
   /// The background configuration for the slide deck. By default, the
-  /// background is transparent and the [Scaffold.backgroundColor] is used.
+  /// background is transparent and [FlutterDeckSlideThemeData.backgroundColor]
+  /// is used.
   ///
   /// This configuration is used by all the templates that use the
   /// [FlutterDeckSlideBase] class and do not pass the background builder
@@ -142,7 +143,8 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
 /// The configuration for the slide deck background.
 class FlutterDeckBackgroundConfiguration {
   /// Creates a configuration for the slide deck background. By default, the
-  /// background is transparent and the [Scaffold.backgroundColor] is used.
+  /// background is transparent and the
+  /// [FlutterDeckSlideThemeData.backgroundColor] is used.
   ///
   /// The [light] and [dark] configurations are used when the current theme is
   /// light or dark, respectively.

@@ -45,6 +45,12 @@ import 'package:flutter_deck/src/widgets/internal/internal.dart';
 ///   @override
 ///   FlutterDeckSlide build(BuildContext context) {
 ///     return FlutterDeckSlide.blank(
+///       theme: FlutterDeckTheme.of(context).copyWith(
+///         slideTheme: const FlutterDeckSlideThemeData(
+///           color: Colors.white,
+///           backgroundColor: Colors.black87,
+///         ),
+///       ),
 ///       builder: (context) => const Center(
 ///         child: Text('This is an example slide'),
 ///       ),
@@ -71,7 +77,8 @@ abstract class FlutterDeckSlideWidget {
 /// The main widget for a slide in a slide deck.
 ///
 /// This class is used to create a slide in a slide deck. It is responsible for
-/// wrapping the slide in a [Scaffold] and displaying the navigation drawer.
+/// wrapping the slide in a [Scaffold], applying slide theme and displaying the
+/// navigation drawer.
 ///
 /// To create a new slide, use one of the named constructors.
 class FlutterDeckSlide extends StatelessWidget {
