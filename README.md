@@ -12,7 +12,7 @@
 - ⚙️ Define a global configuration once and override it per slide if needed.
 - 🚀 Predictable API to access the slide deck state and its methods from anywhere in the app.
 - 📦 Out of the box slide templates, widgets, transitions and controls.
-- 🎨 Light and dark theme support.
+- 🎨 Custom theming and light/dark mode support.
 
 ## Installation 💻
 
@@ -33,7 +33,7 @@ flutter packages get
 
 ## Hello <s>World</s> flutter_deck! 🧑‍💻
 
-Use `FlutterDeckApp` as your slide deck's root widget and pass a list of `FlutterDeckSlide` widgets to it:
+Use `FlutterDeckApp` as your slide deck's root widget and pass a list of `FlutterDeckSlideWidget` widgets to it:
 
 ```dart
 void main() {
@@ -74,6 +74,9 @@ FlutterDeckApp(
       showSlideNumbers: true,
       showSocialHandle: true,
     ),
+    header: FlutterDeckHeaderConfiguration(
+      showHeader: false,
+    ),
     showProgress: false,
     transition: FlutterDeckTransition.fade(),
   ),
@@ -85,8 +88,8 @@ Use any colors you like:
 
 ```dart
 FlutterDeckApp(
-  lightTheme: ThemeData.light(),
-  darkTheme: ThemeData.dark(),
+  lightTheme: FlutterDeckThemeData.light(),
+  darkTheme: FlutterDeckThemeData.dark(),
   themeMode: ThemeMode.system,
   <...>
 );
@@ -303,6 +306,98 @@ class CustomSlide extends FlutterDeckSlideWidget {
 }
 ```
 
+## Theming
+
+You can customize the theme of your slide deck by providing a `FlutterDeckThemeData` to the `FlutterDeckApp` widget:
+
+```dart
+return FlutterDeckApp(
+  // You can define light...
+  lightTheme: FlutterDeckThemeData.fromTheme(
+    ThemeData.from(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color(0xFFB5FFFC),
+      ),
+      useMaterial3: true,
+    ),
+  ),
+  // ...and dark themes.
+  darkTheme: FlutterDeckThemeData.fromTheme(
+    ThemeData.from(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color(0xFF16222A),
+        brightness: Brightness.dark,
+      ),
+      useMaterial3: true,
+    ),
+  ),
+);
+```
+
+It's also possible to override the theme for a specific slide. The provided theme data will be merged with the global theme. Meaning, only the properties you specify there are overridden:
+
+```dart
+class ThemingSlide extends FlutterDeckSlideWidget {
+  const ThemingSlide()
+      : super(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/theming-slide',
+            header: FlutterDeckHeaderConfiguration(title: 'Theming'),
+          ),
+        );
+
+  @override
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.split(
+      theme: FlutterDeckTheme.of(context).copyWith(
+        splitSlideTheme: const FlutterDeckSplitSlideThemeData(
+          leftBackgroundColor: Colors.blue,
+          leftColor: Colors.yellow,
+          rightBackgroundColor: Colors.yellow,
+          rightColor: Colors.blue,
+        ),
+      ),
+      leftBuilder: (context) => <...>
+      rightBuilder: (context) => <...>
+    );
+  }
+}
+```
+
+Also, you can override the theme for a specific flutter deck widget that supports theming (e.g. header, footer, bullet list, code highlight, etc.). Simply, wrap the widget with a corresponding theme widget:
+
+```dart
+FlutterDeckSlide.template(
+  // Wrap header with a theme widget to override the theme.
+  headerBuilder: (context) => FlutterDeckHeaderTheme(
+    data: FlutterDeckHeaderThemeData(
+      color: Colors.red,
+      textStyle: FlutterDeckTheme.of(context).textTheme.header,
+    ),
+    child: const FlutterDeckHeader(title: 'Header'),
+  ),
+  // Wrap footer with a theme widget to override the theme.
+  footerBuilder: (context) => FlutterDeckFooterTheme(
+    data: FlutterDeckFooterThemeData(
+      socialHandleColor: Colors.blue,
+      socialHandleTextStyle:
+          FlutterDeckTheme.of(context).textTheme.bodyMedium,
+    ),
+    child: const FlutterDeckFooter(showSlideNumber: false),
+  ),
+  contentBuilder: (context) => Center(
+    // Wrap code highlight with a theme widget to override the theme.
+    child: FlutterDeckCodeHighlightTheme(
+      data: FlutterDeckCodeHighlightThemeData(
+        backgroundColor: Colors.green,
+        textStyle: FlutterDeckTheme.of(context).textTheme.bodyLarge,
+      ),
+      child: const FlutterDeckCodeHighlight(code: '<...>'),
+    ),
+  ),
+);
+```
+
 ## Slide visibility
 
 By default, all slides are visible and available in the slide deck. However, you can hide a slide by setting the `hidden` property to `true` for the slide configuration:
@@ -320,11 +415,8 @@ class HiddenSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
-      builder: (context) => Center(
-        child: Text(
-          "This slide is hidden. Oh, but you can't see it...",
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+      builder: (context) => const Center(
+        child: Text("This slide is hidden. Oh, but you can't see it..."),
       ),
     );
   }

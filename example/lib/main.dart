@@ -37,6 +37,10 @@ class FlutterDeckExample extends StatelessWidget {
           showSlideNumbers: true,
           showSocialHandle: true,
         ),
+        // Set defaults for the header.
+        header: FlutterDeckHeaderConfiguration(
+          showHeader: false,
+        ),
         // Use a custom transition between slides.
         transition: FlutterDeckTransition.fade(),
       ),
