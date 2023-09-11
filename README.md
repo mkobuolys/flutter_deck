@@ -477,7 +477,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
-      builder: (context) => Center(
+      builder: (context) => const Center(
         child: FlutterDeckCodeHighlight(
           code: '''
 import 'package:flutter/material.dart';
@@ -503,7 +503,6 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
 }''',
           fileName: 'code_highlight_slide.dart',
           language: 'dart',
-          textStyle: Theme.of(context).textTheme.titleLarge,
         ),
       ),
     );
