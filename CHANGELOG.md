@@ -1,3 +1,7 @@
+# 0.4.1
+
+fix: override text colors for Material text styles
+
 # 0.4.0
 
 - **BREAKING**: refactor: rework the way how a new slide is created
