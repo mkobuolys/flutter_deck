@@ -252,17 +252,29 @@ class FlutterDeckSlide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final materialTheme = Theme.of(context);
     final theme = FlutterDeckTheme.of(context).merge(_theme);
-    final slideTheme = theme.slideTheme;
-    final textTheme = theme.textTheme;
 
-    return FlutterDeckTheme(
-      data: theme.copyWith(textTheme: textTheme.apply(color: slideTheme.color)),
-      child: Builder(
-        builder: (context) => Scaffold(
-          backgroundColor: slideTheme.backgroundColor,
-          drawer: const FlutterDeckDrawer(),
-          body: _SlideBody(child: _builder(context)),
+    final slideTheme = theme.slideTheme;
+    final backgroundColor = slideTheme.backgroundColor;
+    final color = slideTheme.color;
+
+    return Theme(
+      data: materialTheme.copyWith(
+        textTheme: materialTheme.textTheme.apply(
+          bodyColor: color,
+          displayColor: color,
+          decorationColor: color,
+        ),
+      ),
+      child: FlutterDeckTheme(
+        data: theme.copyWith(textTheme: theme.textTheme.apply(color: color)),
+        child: Builder(
+          builder: (context) => Scaffold(
+            backgroundColor: backgroundColor,
+            drawer: const FlutterDeckDrawer(),
+            body: _SlideBody(child: _builder(context)),
+          ),
         ),
       ),
     );

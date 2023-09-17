@@ -172,16 +172,26 @@ class _ContentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final materialTheme = Theme.of(context);
     final theme = FlutterDeckTheme.of(context);
 
-    return FlutterDeckTheme(
-      data: theme.copyWith(textTheme: theme.textTheme.apply(color: color)),
-      child: Builder(
-        builder: (context) => Expanded(
-          flex: flex,
-          child: Padding(
-            padding: FlutterDeckLayout.slidePadding,
-            child: builder(context),
+    return Theme(
+      data: materialTheme.copyWith(
+        textTheme: materialTheme.textTheme.apply(
+          bodyColor: color,
+          displayColor: color,
+          decorationColor: color,
+        ),
+      ),
+      child: FlutterDeckTheme(
+        data: theme.copyWith(textTheme: theme.textTheme.apply(color: color)),
+        child: Builder(
+          builder: (context) => Expanded(
+            flex: flex,
+            child: Padding(
+              padding: FlutterDeckLayout.slidePadding,
+              child: builder(context),
+            ),
           ),
         ),
       ),
