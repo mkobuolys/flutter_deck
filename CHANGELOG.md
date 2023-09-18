@@ -1,3 +1,7 @@
+# 0.4.2
+
+docs: update split slide documentation in README.md
+
 # 0.4.1
 
 fix: override text colors for Material text styles

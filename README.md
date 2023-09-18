@@ -214,7 +214,7 @@ class ImageSlide extends FlutterDeckSlideWidget {
 
 ### Split slide
 
-To create a split slide, use the `FlutterDeckSlide.split` constructor. It is responsible for rendering the default header and footer of the slide deck, and use the `leftBuilder` and `rightBuilder` to create the content of the left and right columns.
+To create a split slide, use the `FlutterDeckSlide.split` constructor. It is responsible for rendering the default header and footer of the slide deck, and use the `leftBuilder` and `rightBuilder` to create the content of the left and right columns. Make sure to use text styles from `Theme` or `FlutterDeckTheme` to apply the correct text styling for specific slide sections.
 
 ```dart
 class SplitSlide extends FlutterDeckSlideWidget {
@@ -232,10 +232,16 @@ class SplitSlide extends FlutterDeckSlideWidget {
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.split(
       leftBuilder: (context) {
-        return const Text('Here goes the LEFT section content of the slide');
+        return Text(
+          'Here goes the LEFT section content of the slide',
+          style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
+        );
       },
       rightBuilder: (context) {
-        return const Text('Here goes the RIGHT section content of the slide');
+        return Text(
+          'Here goes the RIGHT section content of the slide',
+          style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
+        );
       },
     );
   }
