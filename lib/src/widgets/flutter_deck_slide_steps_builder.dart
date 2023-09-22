@@ -36,6 +36,7 @@ class _FlutterDeckSlideStepsBuilderState
     extends State<FlutterDeckSlideStepsBuilder> {
   FlutterDeckRouter? _router;
   int? _stepNumber;
+  int? _slideNumber;
 
   @override
   void dispose() {
@@ -50,7 +51,10 @@ class _FlutterDeckSlideStepsBuilderState
 
     if (_router != null) return;
 
-    _router = context.flutterDeck.router..addListener(_onRouteChange);
+    final flutterDeck = context.flutterDeck;
+
+    _slideNumber = flutterDeck.slideNumber;
+    _router = flutterDeck.router..addListener(_onRouteChange);
 
     // Needed for the first render, e.g. when the user navigates to a slide
     // directly via URL or deep link.
@@ -58,7 +62,11 @@ class _FlutterDeckSlideStepsBuilderState
   }
 
   void _onRouteChange() {
-    setState(() => _stepNumber = context.flutterDeck.stepNumber);
+    final flutterDeck = context.flutterDeck;
+
+    if (_slideNumber != flutterDeck.slideNumber) return;
+
+    setState(() => _stepNumber = flutterDeck.stepNumber);
   }
 
   @override

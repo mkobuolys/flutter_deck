@@ -39,6 +39,7 @@ class FlutterDeckSlideStepsListener extends StatefulWidget {
 class _FlutterDeckSlideStepsListenerState
     extends State<FlutterDeckSlideStepsListener> {
   FlutterDeckRouter? _router;
+  int? _slideNumber;
 
   @override
   void dispose() {
@@ -53,11 +54,18 @@ class _FlutterDeckSlideStepsListenerState
 
     if (_router != null) return;
 
-    _router = context.flutterDeck.router..addListener(_onRouteChange);
+    final flutterDeck = context.flutterDeck;
+
+    _slideNumber = flutterDeck.slideNumber;
+    _router = flutterDeck.router..addListener(_onRouteChange);
   }
 
   void _onRouteChange() {
-    widget.listener(context, context.flutterDeck.stepNumber);
+    final flutterDeck = context.flutterDeck;
+
+    if (_slideNumber != flutterDeck.slideNumber) return;
+
+    widget.listener(context, flutterDeck.stepNumber);
   }
 
   @override

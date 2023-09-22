@@ -1,10 +1,15 @@
+# NEXT
+
+- fix: `FlutterDeckSlideStepsBuilder` triggers builder on slide change
+- fix: `FlutterDeckSlideStepsListener` triggers listener on slide change
+
 # 0.4.2
 
-docs: update split slide documentation in README.md
+- docs: update split slide documentation in README.md
 
 # 0.4.1
 
-fix: override text colors for Material text styles
+- fix: override text colors for Material text styles
 
 # 0.4.0
 
