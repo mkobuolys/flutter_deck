@@ -1,12 +1,12 @@
-# NEXT
+# 0.5.0
 
 - feat: add `FlutterDeckImageSlideTheme`
+- chore(deps): upgrade to go_router ^11.0.0
 
 # 0.4.3
 
 - fix: `FlutterDeckSlideStepsBuilder` triggers builder on slide change
 - fix: `FlutterDeckSlideStepsListener` triggers listener on slide change
-- chore(deps): upgrade to go_router ^11.0.0
 
 # 0.4.2
 
