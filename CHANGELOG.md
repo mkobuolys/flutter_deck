@@ -1,4 +1,4 @@
-# NEXT
+# 0.4.3
 
 - fix: `FlutterDeckSlideStepsBuilder` triggers builder on slide change
 - fix: `FlutterDeckSlideStepsListener` triggers listener on slide change
