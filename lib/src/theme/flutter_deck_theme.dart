@@ -84,6 +84,9 @@ class FlutterDeckThemeData {
         color: colorScheme.onBackground,
         textStyle: textTheme.header,
       ),
+      imageSlideTheme: FlutterDeckImageSlideThemeData(
+        labelTextStyle: textTheme.bodySmall,
+      ),
       slideTheme: FlutterDeckSlideThemeData(
         backgroundColor: colorScheme.background,
         color: colorScheme.onBackground,
@@ -117,6 +120,7 @@ class FlutterDeckThemeData {
     required this.codeHighlightTheme,
     required this.footerTheme,
     required this.headerTheme,
+    required this.imageSlideTheme,
     required this.slideTheme,
     required this.speakerInfoWidgetTheme,
     required this.splitSlideTheme,
@@ -136,6 +140,9 @@ class FlutterDeckThemeData {
 
   /// The visual properties of a header.
   final FlutterDeckHeaderThemeData headerTheme;
+
+  /// The visual properties of an image slide.
+  final FlutterDeckImageSlideThemeData imageSlideTheme;
 
   /// The base visual properties of a slide.
   final FlutterDeckSlideThemeData slideTheme;
@@ -162,6 +169,7 @@ class FlutterDeckThemeData {
     FlutterDeckCodeHighlightThemeData? codeHighlightTheme,
     FlutterDeckFooterThemeData? footerTheme,
     FlutterDeckHeaderThemeData? headerTheme,
+    FlutterDeckImageSlideThemeData? imageSlideTheme,
     FlutterDeckSlideThemeData? slideTheme,
     FlutterDeckSpeakerInfoWidgetThemeData? speakerInfoWidgetTheme,
     FlutterDeckSplitSlideThemeData? splitSlideTheme,
@@ -173,6 +181,7 @@ class FlutterDeckThemeData {
       codeHighlightTheme: this.codeHighlightTheme.merge(codeHighlightTheme),
       footerTheme: this.footerTheme.merge(footerTheme),
       headerTheme: this.headerTheme.merge(headerTheme),
+      imageSlideTheme: this.imageSlideTheme.merge(imageSlideTheme),
       slideTheme: this.slideTheme.merge(slideTheme),
       speakerInfoWidgetTheme:
           this.speakerInfoWidgetTheme.merge(speakerInfoWidgetTheme),
@@ -192,6 +201,7 @@ class FlutterDeckThemeData {
       codeHighlightTheme: codeHighlightTheme.merge(other.codeHighlightTheme),
       footerTheme: footerTheme.merge(other.footerTheme),
       headerTheme: headerTheme.merge(other.headerTheme),
+      imageSlideTheme: imageSlideTheme.merge(other.imageSlideTheme),
       slideTheme: slideTheme.merge(other.slideTheme),
       speakerInfoWidgetTheme:
           speakerInfoWidgetTheme.merge(other.speakerInfoWidgetTheme),

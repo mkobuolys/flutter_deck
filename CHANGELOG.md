@@ -1,3 +1,7 @@
+# NEXT
+
+- feat: add `FlutterDeckImageSlideTheme`
+
 # 0.4.3
 
 - fix: `FlutterDeckSlideStepsBuilder` triggers builder on slide change
