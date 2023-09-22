@@ -141,7 +141,7 @@ class FlutterDeckThemeData {
   /// The visual properties of a header.
   final FlutterDeckHeaderThemeData headerTheme;
 
-  /// The visual properties of a title slide.
+  /// The visual properties of an image slide.
   final FlutterDeckImageSlideThemeData imageSlideTheme;
 
   /// The base visual properties of a slide.
