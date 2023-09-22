@@ -11,8 +11,8 @@ Add information about the presentation here.
 
 **Requirements**
 
-- [ ] Provide a link to the presentation (if deployed, just to check it out)
 - [ ] Provide a link to the source code
 - [ ] Provide a title for the presentation
+- [ ] Provide a language of the presentation
 - [ ] Provide your full name
 - [ ] Provide a link to your social media profile
