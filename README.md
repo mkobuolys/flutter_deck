@@ -692,11 +692,12 @@ Every slide deck comes with a navigation drawer that can be used to navigate thr
 
 ## Presentations built with flutter_deck 🚀
 
-| Title                                                                                                                               | Language   | Author                                            |
-| ----------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------- |
-| [Let me introduce you to Flutter](https://github.com/mkobuolys/introduction-to-flutter)                                             | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link] |
-| [Control your Flutter application on the fly with Firebase Remote Config](https://github.com/mkobuolys/firebase-remote-config-talk) | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link] |
-| [Introduction to Flutter Web](https://github.com/afucher/flutter_web_101)                                                           | Portuguese | [Arthur Fücher](https://x.com/Thur)               |
+| Title                                                                                                                               | Language   | Author                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------- |
+| [Let me introduce you to Flutter](https://github.com/mkobuolys/introduction-to-flutter)                                             | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link]                                            |
+| [Control your Flutter application on the fly with Firebase Remote Config](https://github.com/mkobuolys/firebase-remote-config-talk) | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link]                                            |
+| [Introduction to Flutter Web](https://github.com/afucher/flutter_web_101)                                                           | Portuguese | [Arthur Fücher](https://x.com/Thur)                                                          |
+| [Make smarter decisions faster with Firebase Remote Config](https://github.com/mkobuolys/f3-firebase-remote-config-talk)            | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link] & [Darja Orlova](https://x.com/dariadroid) |
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
