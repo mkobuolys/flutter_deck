@@ -81,7 +81,7 @@ class FlutterDeckBigFactSlideTheme extends InheritedTheme {
   /// Returns the [data] from the closest [FlutterDeckBigFactSlideTheme]
   /// ancestor.
   /// If there is no ancestor, it returns
-  /// [FlutterDeckThemeData.titleSlideTheme].
+  /// [FlutterDeckThemeData.bigFactSlideTheme].
   ///
   /// The returned theme data will never be null.
 
