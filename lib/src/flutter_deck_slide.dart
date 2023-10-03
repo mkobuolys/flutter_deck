@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
+import 'package:flutter_deck/src/templates/big_fact_slide.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 import 'package:flutter_deck/src/theme/templates/flutter_deck_slide_theme.dart';
@@ -241,6 +242,33 @@ class FlutterDeckSlide extends StatelessWidget {
             title: title,
             subtitle: subtitle,
             backgroundBuilder: backgroundBuilder,
+          ),
+          theme: theme,
+          key: key,
+        );
+
+  /// Creates a new Big Fact slide.
+  ///
+  /// This constructor creates a big face slide in a slide deck with the default
+  /// header and footer.
+  /// The content is composed of Centered large title and [title] and [subtitle]
+  /// The [title] argument must not be null. The [subtitle] and
+  /// [backgroundBuilder] arguments are optional.
+  /// [titleMaxLines] is the maximum number of lines for the title by default 3.
+  /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
+  FlutterDeckSlide.bigFact({
+    required String title,
+    String? subtitle,
+    WidgetBuilder? backgroundBuilder,
+    int? titleMaxLines,
+    FlutterDeckThemeData? theme,
+    Key? key,
+  }) : this._(
+          builder: (context) => FlutterDeckBigFactSlide(
+            title: title,
+            subtitle: subtitle,
+            backgroundBuilder: backgroundBuilder,
+            titleMaxLines: titleMaxLines,
           ),
           theme: theme,
           key: key,
