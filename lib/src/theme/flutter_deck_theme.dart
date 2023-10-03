@@ -106,6 +106,10 @@ class FlutterDeckThemeData {
         subtitleTextStyle: textTheme.subtitle,
         titleTextStyle: textTheme.title,
       ),
+      bigFactSlideTheme: FlutterDeckBigFactSlideThemeData(
+        titleTextStyle: textTheme.header,
+        subtitleTextStyle: textTheme.subtitle,
+      ),
       materialTheme: theme,
       textTheme: textTheme,
     );
@@ -127,6 +131,7 @@ class FlutterDeckThemeData {
     required this.titleSlideTheme,
     required this.materialTheme,
     required this.textTheme,
+    required this.bigFactSlideTheme,
   });
 
   /// The visual properties of a bullet list widget.
@@ -156,6 +161,9 @@ class FlutterDeckThemeData {
   /// The visual properties of a title slide.
   final FlutterDeckTitleSlideThemeData titleSlideTheme;
 
+  /// The visual properties of a big fact slide.
+  final FlutterDeckBigFactSlideThemeData bigFactSlideTheme;
+
   /// The base Material theme used by the slide deck.
   final ThemeData materialTheme;
 
@@ -174,6 +182,7 @@ class FlutterDeckThemeData {
     FlutterDeckSpeakerInfoWidgetThemeData? speakerInfoWidgetTheme,
     FlutterDeckSplitSlideThemeData? splitSlideTheme,
     FlutterDeckTitleSlideThemeData? titleSlideTheme,
+    FlutterDeckBigFactSlideThemeData? bigFactSlideTheme,
     FlutterDeckTextTheme? textTheme,
   }) {
     return FlutterDeckThemeData._(
@@ -187,6 +196,7 @@ class FlutterDeckThemeData {
           this.speakerInfoWidgetTheme.merge(speakerInfoWidgetTheme),
       splitSlideTheme: this.splitSlideTheme.merge(splitSlideTheme),
       titleSlideTheme: this.titleSlideTheme.merge(titleSlideTheme),
+      bigFactSlideTheme: this.bigFactSlideTheme.merge(bigFactSlideTheme),
       materialTheme: materialTheme,
       textTheme: this.textTheme.merge(textTheme),
     );
@@ -207,6 +217,7 @@ class FlutterDeckThemeData {
           speakerInfoWidgetTheme.merge(other.speakerInfoWidgetTheme),
       splitSlideTheme: splitSlideTheme.merge(other.splitSlideTheme),
       titleSlideTheme: titleSlideTheme.merge(other.titleSlideTheme),
+      bigFactSlideTheme: bigFactSlideTheme.merge(other.bigFactSlideTheme),
       textTheme: textTheme.merge(other.textTheme),
     );
   }
