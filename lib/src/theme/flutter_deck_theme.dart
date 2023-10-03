@@ -107,8 +107,8 @@ class FlutterDeckThemeData {
         titleTextStyle: textTheme.title,
       ),
       bigFactSlideTheme: FlutterDeckBigFactSlideThemeData(
-        titleTextStyle: textTheme.header,
-        subtitleTextStyle: textTheme.subtitle,
+        titleTextStyle: textTheme.headerLarge,
+        subtitleTextStyle: textTheme.bodyMedium,
       ),
       materialTheme: theme,
       textTheme: textTheme,
