@@ -13,11 +13,13 @@ import 'package:flutter_deck/src/templates/templates.dart';
 class FlutterDeckBigFactSlide extends StatelessWidget {
   /// Creates a new title slide.
   /// The [title] and [subtitle] arguments must not be null.
-  ///  The [backgroundBuilder] argument is optional.
+  /// The [backgroundBuilder] argument is optional.
+  /// The [titleMaxLines] is the maximum number of lines for the title by
+  /// default = 3.
   const FlutterDeckBigFactSlide({
     required this.title,
-    required this.subtitle,
-    this.titleMaxLines = 3,
+    this.subtitle,
+    this.titleMaxLines,
     this.backgroundBuilder,
     super.key,
   });
@@ -26,10 +28,10 @@ class FlutterDeckBigFactSlide extends StatelessWidget {
   final String title;
 
   /// The subtitle of the slide.
-  final String subtitle;
+  final String? subtitle;
 
   /// maxLines for the title of the slide.
-  final int titleMaxLines;
+  final int? titleMaxLines;
 
   /// A builder for the background of the slide.
   final WidgetBuilder? backgroundBuilder;
@@ -44,18 +46,26 @@ class FlutterDeckBigFactSlide extends StatelessWidget {
       backgroundBuilder: backgroundBuilder,
       contentBuilder: (context) => Padding(
         padding: FlutterDeckLayout.slidePadding * 4,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AutoSizeText(
-              title,
-              style: theme.titleTextStyle,
-              textAlign: TextAlign.center,
-              maxLines: titleMaxLines,
-            ),
-            const SizedBox(height: 8),
-            AutoSizeText(subtitle, style: theme.subtitleTextStyle),
-          ],
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AutoSizeText(
+                title,
+                style: theme.titleTextStyle,
+                textAlign: TextAlign.center,
+                maxLines: titleMaxLines ?? 3,
+              ),
+              if (subtitle != null) ...[
+                const SizedBox(height: 8),
+                AutoSizeText(
+                  subtitle!,
+                  style: theme.subtitleTextStyle,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ],
+          ),
         ),
       ),
       footerBuilder: footerConfiguration.showFooter
