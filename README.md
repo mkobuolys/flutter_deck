@@ -312,6 +312,37 @@ class CustomSlide extends FlutterDeckSlideWidget {
 }
 ```
 
+### BigFact slide
+
+To create a title slide, use the `FlutterDeckSlide.bigFact` constructor. It is responsible for rendering Big Title in the center with description below it if needed also is uses the default header and footer configuration
+```dart
+class BigFactSlide extends FlutterDeckSlideWidget {
+  const BigFactSlide()
+      : super(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/bigFact-slide-title',
+            footer: FlutterDeckFooterConfiguration(showFooter: false),
+          ),
+        );
+
+  @override
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.bigFact(
+      title: 'The Big Fact (Title)',
+      subtitle:
+          'Description if exists',
+      titleMaxLines: 3, // default is 3
+      theme: FlutterDeckTheme.of(context).copyWith(
+          bigFactSlideTheme: const FlutterDeckBigFactSlideThemeData(
+              titleTextStyle: TextStyle(color: Colors.amber))),
+    );
+  }
+}
+```
+
+![BigFact slide example](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/bigfact.png?raw=true)
+
+
 ## Theming
 
 You can customize the theme of your slide deck by providing a `FlutterDeckThemeData` to the `FlutterDeckApp` widget:
