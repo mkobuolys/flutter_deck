@@ -11,3 +11,4 @@ export 'steps_slide.dart';
 export 'theming_slide.dart';
 export 'title_slide.dart';
 export 'transitions_slide.dart';
+export 'big_fact_slide.dart';
