@@ -1,4 +1,4 @@
-# 0.5.1
+# Next
 
 - feat: add `FlutterDeckBigFactSlide`
 # 0.5.0
