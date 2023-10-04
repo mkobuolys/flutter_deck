@@ -5,7 +5,7 @@ class BigFactSlide extends FlutterDeckSlideWidget {
   const BigFactSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
-            route: '/bigFact',
+            route: '/big-fact',
             footer: FlutterDeckFooterConfiguration(showFooter: false),
           ),
         );
@@ -13,12 +13,14 @@ class BigFactSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.bigFact(
-      title: 'Let\'s Start with the decks!',
+      title: '100%',
       subtitle:
-          'Flutter Deck is a Flutter package that helps you create slide decks in Flutter.',
+          'The test coverage value that flutter_deck will probably never achieve',
       theme: FlutterDeckTheme.of(context).copyWith(
-          bigFactSlideTheme: const FlutterDeckBigFactSlideThemeData(
-              titleTextStyle: TextStyle(color: Colors.amber))),
+        bigFactSlideTheme: const FlutterDeckBigFactSlideThemeData(
+          titleTextStyle: TextStyle(color: Colors.amber),
+        ),
+      ),
     );
   }
 }
