@@ -66,6 +66,10 @@ class FlutterDeckThemeData {
     final colorScheme = theme.colorScheme;
 
     return FlutterDeckThemeData._(
+      bigFactSlideTheme: FlutterDeckBigFactSlideThemeData(
+        titleTextStyle: textTheme.display,
+        subtitleTextStyle: textTheme.subtitle,
+      ),
       bulletListTheme: FlutterDeckBulletListThemeData(
         color: colorScheme.onBackground,
         textStyle: textTheme.title,
@@ -106,10 +110,6 @@ class FlutterDeckThemeData {
         subtitleTextStyle: textTheme.subtitle,
         titleTextStyle: textTheme.title,
       ),
-      bigFactSlideTheme: FlutterDeckBigFactSlideThemeData(
-        titleTextStyle: textTheme.display,
-        subtitleTextStyle: textTheme.subtitle,
-      ),
       materialTheme: theme,
       textTheme: textTheme,
     );
@@ -120,6 +120,7 @@ class FlutterDeckThemeData {
   /// This constructor is private because it should not be used directly.
   /// Instead, use one of the public constructors.
   const FlutterDeckThemeData._({
+    required this.bigFactSlideTheme,
     required this.bulletListTheme,
     required this.codeHighlightTheme,
     required this.footerTheme,
@@ -131,7 +132,6 @@ class FlutterDeckThemeData {
     required this.titleSlideTheme,
     required this.materialTheme,
     required this.textTheme,
-    required this.bigFactSlideTheme,
   });
 
   /// The visual properties of a big fact slide.

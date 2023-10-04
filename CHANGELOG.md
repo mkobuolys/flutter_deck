@@ -1,6 +1,6 @@
 # Next
 
-- feat: add `FlutterDeckBigFactSlide`
+- feat: add big fact template `FlutterDeckSlide.bigFact`
 # 0.5.0
 
 - feat: add `FlutterDeckImageSlideTheme`

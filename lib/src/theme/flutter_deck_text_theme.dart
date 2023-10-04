@@ -5,7 +5,7 @@ class FlutterDeckTextTheme {
   /// Creates a theme to style text in a slide deck.
   const FlutterDeckTextTheme({
     this.display = const TextStyle(
-      fontSize: 91,
+      fontSize: 103,
       fontWeight: FontWeight.bold,
     ),
     this.header = const TextStyle(
@@ -34,9 +34,9 @@ class FlutterDeckTextTheme {
     ),
   });
 
-  /// Text style of the header.
+  /// Text style of the display.
   ///
-  /// By default, the text size is 112, and the font weight is 400.
+  /// By default, the text size is 103, and the font weight is 700.
   final TextStyle display;
 
   /// Text style of the header.

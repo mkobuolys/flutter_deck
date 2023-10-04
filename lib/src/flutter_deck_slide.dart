@@ -250,15 +250,14 @@ class FlutterDeckSlide extends StatelessWidget {
   ///
   /// This constructor creates a big fact slide in a slide deck with the default
   /// header and footer.
-  /// 
+  ///
   /// The [title] argument must not be null. The [subtitle] and
   /// [backgroundBuilder] arguments are optional.
   ///
-  /// [subtitleMaxLines] is the maximum number of lines for the subtitle by default
-  ///  3.
+  /// [subtitleMaxLines] is the maximum number of lines for the subtitle. By
+  /// default it is 3.
   ///
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
-
   FlutterDeckSlide.bigFact({
     required String title,
     String? subtitle,
