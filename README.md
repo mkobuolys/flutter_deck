@@ -314,13 +314,13 @@ class CustomSlide extends FlutterDeckSlideWidget {
 
 ### BigFact slide
 
-To create a title slide, use the `FlutterDeckSlide.bigFact` constructor. It is responsible for rendering Big Title in the center with description below it if needed also is uses the default header and footer configuration
+To create a big fact slide, use the `FlutterDeckSlide.bigFact` constructor. It is responsible for rendering the title (fact) with the description (subtitle) below it.
 ```dart
 class BigFactSlide extends FlutterDeckSlideWidget {
   const BigFactSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
-            route: '/bigFact-slide-title',
+            route: '/big-fact',
             footer: FlutterDeckFooterConfiguration(showFooter: false),
           ),
         );
@@ -328,19 +328,20 @@ class BigFactSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.bigFact(
-      title: 'The Big Fact (Title)',
+      title: '100%',
       subtitle:
-          'Description if exists',
-      titleMaxLines: 3, // default is 3
+          'The test coverage value that flutter_deck will probably never achieve',
       theme: FlutterDeckTheme.of(context).copyWith(
-          bigFactSlideTheme: const FlutterDeckBigFactSlideThemeData(
-              titleTextStyle: TextStyle(color: Colors.amber))),
+        bigFactSlideTheme: const FlutterDeckBigFactSlideThemeData(
+          titleTextStyle: TextStyle(color: Colors.amber),
+        ),
+      ),
     );
   }
 }
 ```
 
-![BigFact slide example](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/bigfact.png?raw=true)
+![BigFact slide example](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/big_fact.png?raw=true)
 
 
 ## Theming

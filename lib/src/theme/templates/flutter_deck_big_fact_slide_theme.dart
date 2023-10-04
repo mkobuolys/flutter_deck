@@ -1,6 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/widgets.dart';
-
 import 'package:flutter_deck/src/templates/big_fact_slide.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 
@@ -64,7 +62,6 @@ class FlutterDeckBigFactSlideThemeData {
 ///
 /// Used by [FlutterDeckBigFactSlide] to control the visual properties of slides
 /// in the slide deck.
-
 class FlutterDeckBigFactSlideTheme extends InheritedTheme {
   /// Creates a theme to style [FlutterDeckBigFactSlide].
   ///

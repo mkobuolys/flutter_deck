@@ -66,11 +66,11 @@ class FlutterDeckExample extends StatelessWidget {
       // Presentation is build automatically from the list of slides.
       slides: const [
         TitleSlide(),
-        BigFactSlide(),
         LayoutStructureSlide(),
         BlankSlide(),
         SplitSlide(),
         ImageSlide(),
+        BigFactSlide(),
         HiddenSlide(),
         DrawerSlide(),
         ThemingSlide(),

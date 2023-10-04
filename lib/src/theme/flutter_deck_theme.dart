@@ -107,8 +107,8 @@ class FlutterDeckThemeData {
         titleTextStyle: textTheme.title,
       ),
       bigFactSlideTheme: FlutterDeckBigFactSlideThemeData(
-        titleTextStyle: textTheme.headerLarge,
-        subtitleTextStyle: textTheme.bodyMedium,
+        titleTextStyle: textTheme.display,
+        subtitleTextStyle: textTheme.subtitle,
       ),
       materialTheme: theme,
       textTheme: textTheme,
@@ -133,6 +133,9 @@ class FlutterDeckThemeData {
     required this.textTheme,
     required this.bigFactSlideTheme,
   });
+
+  /// The visual properties of a big fact slide.
+  final FlutterDeckBigFactSlideThemeData bigFactSlideTheme;
 
   /// The visual properties of a bullet list widget.
   final FlutterDeckBulletListThemeData bulletListTheme;
@@ -161,9 +164,6 @@ class FlutterDeckThemeData {
   /// The visual properties of a title slide.
   final FlutterDeckTitleSlideThemeData titleSlideTheme;
 
-  /// The visual properties of a big fact slide.
-  final FlutterDeckBigFactSlideThemeData bigFactSlideTheme;
-
   /// The base Material theme used by the slide deck.
   final ThemeData materialTheme;
 
@@ -173,6 +173,7 @@ class FlutterDeckThemeData {
   /// Creates a copy of this theme but with the given fields replaced with the
   /// new values.
   FlutterDeckThemeData copyWith({
+    FlutterDeckBigFactSlideThemeData? bigFactSlideTheme,
     FlutterDeckBulletListThemeData? bulletListTheme,
     FlutterDeckCodeHighlightThemeData? codeHighlightTheme,
     FlutterDeckFooterThemeData? footerTheme,
@@ -182,10 +183,10 @@ class FlutterDeckThemeData {
     FlutterDeckSpeakerInfoWidgetThemeData? speakerInfoWidgetTheme,
     FlutterDeckSplitSlideThemeData? splitSlideTheme,
     FlutterDeckTitleSlideThemeData? titleSlideTheme,
-    FlutterDeckBigFactSlideThemeData? bigFactSlideTheme,
     FlutterDeckTextTheme? textTheme,
   }) {
     return FlutterDeckThemeData._(
+      bigFactSlideTheme: this.bigFactSlideTheme.merge(bigFactSlideTheme),
       bulletListTheme: this.bulletListTheme.merge(bulletListTheme),
       codeHighlightTheme: this.codeHighlightTheme.merge(codeHighlightTheme),
       footerTheme: this.footerTheme.merge(footerTheme),
@@ -196,7 +197,6 @@ class FlutterDeckThemeData {
           this.speakerInfoWidgetTheme.merge(speakerInfoWidgetTheme),
       splitSlideTheme: this.splitSlideTheme.merge(splitSlideTheme),
       titleSlideTheme: this.titleSlideTheme.merge(titleSlideTheme),
-      bigFactSlideTheme: this.bigFactSlideTheme.merge(bigFactSlideTheme),
       materialTheme: materialTheme,
       textTheme: this.textTheme.merge(textTheme),
     );
@@ -207,6 +207,7 @@ class FlutterDeckThemeData {
     if (other == null) return this;
 
     return copyWith(
+      bigFactSlideTheme: bigFactSlideTheme.merge(other.bigFactSlideTheme),
       bulletListTheme: bulletListTheme.merge(other.bulletListTheme),
       codeHighlightTheme: codeHighlightTheme.merge(other.codeHighlightTheme),
       footerTheme: footerTheme.merge(other.footerTheme),
@@ -217,7 +218,6 @@ class FlutterDeckThemeData {
           speakerInfoWidgetTheme.merge(other.speakerInfoWidgetTheme),
       splitSlideTheme: splitSlideTheme.merge(other.splitSlideTheme),
       titleSlideTheme: titleSlideTheme.merge(other.titleSlideTheme),
-      bigFactSlideTheme: bigFactSlideTheme.merge(other.bigFactSlideTheme),
       textTheme: textTheme.merge(other.textTheme),
     );
   }
