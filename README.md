@@ -312,7 +312,7 @@ class CustomSlide extends FlutterDeckSlideWidget {
 }
 ```
 
-### BigFact slide
+### Big fact slide
 
 To create a big fact slide, use the `FlutterDeckSlide.bigFact` constructor. It is responsible for rendering the title (fact) with the description (subtitle) below it.
 
