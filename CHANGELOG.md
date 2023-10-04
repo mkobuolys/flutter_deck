@@ -1,3 +1,6 @@
+# 0.5.1
+
+- feat: add `FlutterDeckBigFactSlide`
 # 0.5.0
 
 - feat: add `FlutterDeckImageSlideTheme`
