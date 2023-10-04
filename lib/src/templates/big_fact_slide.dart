@@ -23,10 +23,10 @@ class FlutterDeckBigFactSlide extends StatelessWidget {
   const FlutterDeckBigFactSlide({
     required this.title,
     this.subtitle,
-    this.subtitleMaxLines,
+    int? subtitleMaxLines,
     this.backgroundBuilder,
     super.key,
-  });
+  }) : subtitleMaxLines = subtitleMaxLines ?? 3;
 
   /// The title of the slide.
   final String title;
@@ -35,7 +35,7 @@ class FlutterDeckBigFactSlide extends StatelessWidget {
   final String? subtitle;
 
   /// The maximum number of lines for the subtitle.
-  final int? subtitleMaxLines;
+  final int subtitleMaxLines;
 
   /// A builder for the background of the slide.
   final WidgetBuilder? backgroundBuilder;
@@ -66,7 +66,7 @@ class FlutterDeckBigFactSlide extends StatelessWidget {
                   subtitle!,
                   style: theme.subtitleTextStyle,
                   textAlign: TextAlign.center,
-                  maxLines: subtitleMaxLines ?? 3,
+                  maxLines: subtitleMaxLines,
                 ),
               ],
             ],
