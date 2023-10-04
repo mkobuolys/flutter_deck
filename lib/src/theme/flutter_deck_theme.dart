@@ -66,6 +66,10 @@ class FlutterDeckThemeData {
     final colorScheme = theme.colorScheme;
 
     return FlutterDeckThemeData._(
+      bigFactSlideTheme: FlutterDeckBigFactSlideThemeData(
+        titleTextStyle: textTheme.display,
+        subtitleTextStyle: textTheme.subtitle,
+      ),
       bulletListTheme: FlutterDeckBulletListThemeData(
         color: colorScheme.onBackground,
         textStyle: textTheme.title,
@@ -116,6 +120,7 @@ class FlutterDeckThemeData {
   /// This constructor is private because it should not be used directly.
   /// Instead, use one of the public constructors.
   const FlutterDeckThemeData._({
+    required this.bigFactSlideTheme,
     required this.bulletListTheme,
     required this.codeHighlightTheme,
     required this.footerTheme,
@@ -128,6 +133,9 @@ class FlutterDeckThemeData {
     required this.materialTheme,
     required this.textTheme,
   });
+
+  /// The visual properties of a big fact slide.
+  final FlutterDeckBigFactSlideThemeData bigFactSlideTheme;
 
   /// The visual properties of a bullet list widget.
   final FlutterDeckBulletListThemeData bulletListTheme;
@@ -165,6 +173,7 @@ class FlutterDeckThemeData {
   /// Creates a copy of this theme but with the given fields replaced with the
   /// new values.
   FlutterDeckThemeData copyWith({
+    FlutterDeckBigFactSlideThemeData? bigFactSlideTheme,
     FlutterDeckBulletListThemeData? bulletListTheme,
     FlutterDeckCodeHighlightThemeData? codeHighlightTheme,
     FlutterDeckFooterThemeData? footerTheme,
@@ -177,6 +186,7 @@ class FlutterDeckThemeData {
     FlutterDeckTextTheme? textTheme,
   }) {
     return FlutterDeckThemeData._(
+      bigFactSlideTheme: this.bigFactSlideTheme.merge(bigFactSlideTheme),
       bulletListTheme: this.bulletListTheme.merge(bulletListTheme),
       codeHighlightTheme: this.codeHighlightTheme.merge(codeHighlightTheme),
       footerTheme: this.footerTheme.merge(footerTheme),
@@ -197,6 +207,7 @@ class FlutterDeckThemeData {
     if (other == null) return this;
 
     return copyWith(
+      bigFactSlideTheme: bigFactSlideTheme.merge(other.bigFactSlideTheme),
       bulletListTheme: bulletListTheme.merge(other.bulletListTheme),
       codeHighlightTheme: codeHighlightTheme.merge(other.codeHighlightTheme),
       footerTheme: footerTheme.merge(other.footerTheme),

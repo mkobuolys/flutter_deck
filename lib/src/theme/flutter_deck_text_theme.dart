@@ -4,6 +4,10 @@ import 'package:flutter/widgets.dart';
 class FlutterDeckTextTheme {
   /// Creates a theme to style text in a slide deck.
   const FlutterDeckTextTheme({
+    this.display = const TextStyle(
+      fontSize: 103,
+      fontWeight: FontWeight.bold,
+    ),
     this.header = const TextStyle(
       fontSize: 57,
       fontWeight: FontWeight.w400,
@@ -29,6 +33,11 @@ class FlutterDeckTextTheme {
       fontWeight: FontWeight.w400,
     ),
   });
+
+  /// Text style of the display.
+  ///
+  /// By default, the text size is 103, and the font weight is 700.
+  final TextStyle display;
 
   /// Text style of the header.
   ///
@@ -63,6 +72,7 @@ class FlutterDeckTextTheme {
   /// Creates a copy of this object with the given fields replaced with the new
   /// values.
   FlutterDeckTextTheme copyWith({
+    TextStyle? display,
     TextStyle? header,
     TextStyle? title,
     TextStyle? subtitle,
@@ -72,6 +82,7 @@ class FlutterDeckTextTheme {
     TextStyle? footnote,
   }) =>
       FlutterDeckTextTheme(
+        display: display ?? this.display,
         header: header ?? this.header,
         title: title ?? this.title,
         subtitle: subtitle ?? this.subtitle,
@@ -85,6 +96,7 @@ class FlutterDeckTextTheme {
     if (other == null) return this;
 
     return copyWith(
+      display: display.merge(other.display),
       header: header.merge(other.header),
       title: title.merge(other.title),
       subtitle: subtitle.merge(other.subtitle),
@@ -98,6 +110,7 @@ class FlutterDeckTextTheme {
   /// properties.
   FlutterDeckTextTheme apply({Color? color}) {
     return copyWith(
+      display: display.apply(color: color),
       header: header.apply(color: color),
       title: title.apply(color: color),
       subtitle: subtitle.apply(color: color),
