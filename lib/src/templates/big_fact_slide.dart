@@ -4,17 +4,22 @@ import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
 
-/// A slide widget that represents a big fact Slide
-/// This class is used to create the big fact slide in a slide deck.
-/// It renders two lines of text, a Big title and a subtitle.
-/// It reders the default header and footer of the slide deck, if they are
-/// enabled in the configuration.
+/// A slide widget that represents a big fact slide.
+///
+/// This class is used to create a big fact slide in a slide deck. It renders
+/// two lines of text, a big [title] (fact) and a [subtitle]. It is also
+/// responsible for rendering the default header and footer of the slide deck,
+/// if they are enabled in the configuration.
+///
+/// To use a custom background, you can pass the [backgroundBuilder].
 class FlutterDeckBigFactSlide extends StatelessWidget {
-  /// Creates a new title slide.
-  /// The [title] and [subtitle] arguments must not be null.
-  /// The [backgroundBuilder] argument is optional.
-  /// The [subtitleMaxLines] is the maximum number of lines for the title by
-  /// default = 3.
+  /// Creates a new big fact slide.
+  ///
+  /// The [title] and [subtitle] arguments must not be null. The
+  /// [backgroundBuilder] argument is optional.
+  ///
+  /// [subtitleMaxLines] is the maximum number of lines for the subtitle. By
+  /// default it is 3.
   const FlutterDeckBigFactSlide({
     required this.title,
     this.subtitle,
@@ -29,7 +34,7 @@ class FlutterDeckBigFactSlide extends StatelessWidget {
   /// The subtitle of the slide.
   final String? subtitle;
 
-  /// maxLines for the subtitle of the slide.
+  /// The maximum number of lines for the subtitle.
   final int? subtitleMaxLines;
 
   /// A builder for the background of the slide.
@@ -41,7 +46,7 @@ class FlutterDeckBigFactSlide extends StatelessWidget {
     final configuration = context.flutterDeck.configuration;
     final footerConfiguration = configuration.footer;
     final headerConfiguration = configuration.header;
-    
+
     return FlutterDeckSlideBase(
       backgroundBuilder: backgroundBuilder,
       contentBuilder: (context) => Padding(
