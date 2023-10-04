@@ -15,8 +15,8 @@ import 'package:flutter_deck/src/templates/templates.dart';
 class FlutterDeckBigFactSlide extends StatelessWidget {
   /// Creates a new big fact slide.
   ///
-  /// The [title] and [subtitle] arguments must not be null. The
-  /// [backgroundBuilder] argument is optional.
+  /// The [title] argument must not be null. The [subtitle] and
+  /// [backgroundBuilder] arguments are optional.
   ///
   /// [subtitleMaxLines] is the maximum number of lines for the subtitle. By
   /// default it is 3.
