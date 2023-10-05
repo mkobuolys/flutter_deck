@@ -6,7 +6,9 @@ class BigFactSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/big-fact',
-            footer: FlutterDeckFooterConfiguration(showFooter: false),
+            header: FlutterDeckHeaderConfiguration(
+              title: 'Big fact slide template',
+            ),
           ),
         );
 
