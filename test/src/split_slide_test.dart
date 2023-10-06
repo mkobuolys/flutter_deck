@@ -57,10 +57,10 @@ void main() {
   final headerFinder = find.text('Split slide template');
   final leftFinder = find.text(
     'Here goes the LEFT section content of the slide',
-    );
+  );
   final rightFinder = find.text(
     'Here goes the RIGHT section content of the slide',
-    );
+  );
   
   expect(slideNumbersTextFinder, findsOneWidget);
   expect(socialHandleTextFinder, findsOneWidget);
