@@ -15,6 +15,7 @@ class TitleSlide extends FlutterDeckSlideWidget {
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.title(
       title: 'Here goes the title of the slide',
+      // Notice there was a limit of how many characters subtitle can use
       subtitle: 'Here goes the subtitle of the slide (optional',
     );
   }
