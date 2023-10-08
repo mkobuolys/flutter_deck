@@ -88,7 +88,7 @@ class FlutterDeckSlide extends StatelessWidget {
   /// one of the named constructors to create a new slide.
   const FlutterDeckSlide._({
     required WidgetBuilder builder,
-    FlutterDeckThemeData? theme,
+    required FlutterDeckThemeData? theme,
     super.key,
   })  : _builder = builder,
         _theme = theme;
