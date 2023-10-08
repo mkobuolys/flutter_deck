@@ -250,7 +250,7 @@ class FlutterDeckSlide extends StatelessWidget {
 
   final FlutterDeckThemeData? _theme;
 
-  /// Returns the current theme used by this slide.
+  /// Returns the current theme used by any slide.
   FlutterDeckThemeData? get theme => _theme;
 
 

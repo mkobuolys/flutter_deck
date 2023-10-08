@@ -40,27 +40,25 @@ void main() {
         description: 'CEO of flutter_deck',
         socialHandle: '@john_doe',
         imagePath: '',
-      ),
-      slides: const[
-        BlankSlide(),
+        ),
+        slides: const[
+          BlankSlide(),
         ],
-    ),
-  );
+      ),
+    );
 
-  final slideNumbersTextFinder = find.text('1');
-  final socialHandleTextFinder = find.text('@john_doe');
-  final headerFinder = find.text('Blank slide template');
-  final contentFinder = find.text('Here goes the content of the slide');
+    final slideNumbersTextFinder = find.text('1');
+    final socialHandleTextFinder = find.text('@john_doe');
+    final headerFinder = find.text('Blank slide template');
+    final contentFinder = find.text('Here goes the content of the slide');
+    final slideFinder = find.byKey(const Key('blankslide'));
+    final slide = tester.widget(slideFinder) as FlutterDeckSlide;
+    final backgroundColor = slide.theme?.slideTheme.backgroundColor;
 
-  
-  final slideFinder = find.byKey(const Key('blankslide'));
-  final slide = tester.widget(slideFinder) as FlutterDeckSlide;
-  final backgroundColor = slide.theme?.slideTheme.backgroundColor;
-
-  expect(backgroundColor, equals(Colors.orange));
-  expect(slideNumbersTextFinder, findsOneWidget);
-  expect(socialHandleTextFinder, findsOneWidget);
-  expect(headerFinder, findsOneWidget);
-  expect(contentFinder, findsOneWidget);
+    expect(backgroundColor, equals(Colors.orange));
+    expect(slideNumbersTextFinder, findsOneWidget);
+    expect(socialHandleTextFinder, findsOneWidget);
+    expect(headerFinder, findsOneWidget);
+    expect(contentFinder, findsOneWidget);
   });
 }
