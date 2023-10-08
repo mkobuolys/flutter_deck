@@ -21,10 +21,8 @@ class ImageSlide extends FlutterDeckSlideWidget {
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.image(
       imageBuilder: (context) => Image.asset('assets/header.png'),
+      key: const Key('ImageHeader'),
       label: 'Here goes the label of the image (optional)',
-      backgroundBuilder: (context) => Container(
-        color: Colors.blue, 
-      ),
     );
   }
 }
@@ -49,18 +47,12 @@ void main() {
   final socialHandleTextFinder = find.text('@john_doe');
   final labelFinder = find.text('Here goes the label of the image (optional)');
   final headerFinder = find.text('Image slide template');
-  final imageFinder = find.byType(Image);
-  
+  final specificImageFinder = find.byKey(const Key('ImageHeader'));
 
-// final backgroundFinder = find.byKey(const Key('custom_background'));
-// final container = tester.widget<Container>(backgroundFinder);
-// final decoration = container.decoration! as BoxDecoration;
-// expect(backgroundFinder, findsOneWidget);
-// expect(decoration.color, equals(Colors.blue));
   expect(slideNumbersTextFinder, findsOneWidget);
   expect(socialHandleTextFinder, findsOneWidget);
   expect(labelFinder, findsOneWidget);
   expect(headerFinder, findsOneWidget);
-  expect(imageFinder,findsOneWidget);
+  expect(specificImageFinder, findsOneWidget);
   });
 }

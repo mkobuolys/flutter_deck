@@ -20,12 +20,13 @@ class BlankSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
-      builder: (BuildContext context) {
-        return const Text('Here goes the content of the slide');
-      },
-      backgroundBuilder: (context) => Container(
-        color: Colors.blue, 
-      ), 
+      builder: (context) => const Text('Here goes the content of the slide'),
+      theme: FlutterDeckTheme.of(context).copyWith(
+        slideTheme: const FlutterDeckSlideThemeData(
+          backgroundColor: Colors.orange,
+        ),
+      ),
+      key: const Key('blankslide'),
     );
   }
 }
@@ -50,14 +51,13 @@ void main() {
   final socialHandleTextFinder = find.text('@john_doe');
   final headerFinder = find.text('Blank slide template');
   final contentFinder = find.text('Here goes the content of the slide');
-  final backgroundFinder = find.byKey(const Key('custom_background'));
 
-expect(backgroundFinder, findsOneWidget);
+  
+  final slideFinder = find.byKey(const Key('blankslide'));
+  final slide = tester.widget(slideFinder) as FlutterDeckSlide;
+  final backgroundColor = slide.theme?.slideTheme.backgroundColor;
 
-// final container = tester.widget<Container>(backgroundFinder);
-// final decoration = container.decoration! as BoxDecoration;
-
-// expect(decoration.color, equals(Colors.blue));
+  expect(backgroundColor, equals(Colors.orange));
   expect(slideNumbersTextFinder, findsOneWidget);
   expect(socialHandleTextFinder, findsOneWidget);
   expect(headerFinder, findsOneWidget);

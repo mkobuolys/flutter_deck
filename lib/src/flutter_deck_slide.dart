@@ -88,7 +88,7 @@ class FlutterDeckSlide extends StatelessWidget {
   /// one of the named constructors to create a new slide.
   const FlutterDeckSlide._({
     required WidgetBuilder builder,
-    required FlutterDeckThemeData? theme,
+    FlutterDeckThemeData? theme,
     super.key,
   })  : _builder = builder,
         _theme = theme;
@@ -249,6 +249,10 @@ class FlutterDeckSlide extends StatelessWidget {
   final WidgetBuilder _builder;
 
   final FlutterDeckThemeData? _theme;
+
+  /// Returns the current theme used by this slide.
+  FlutterDeckThemeData? get theme => _theme;
+
 
   @override
   Widget build(BuildContext context) {

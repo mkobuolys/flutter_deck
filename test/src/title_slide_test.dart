@@ -14,9 +14,9 @@ class TitleSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.title(
-      title: 'Here goes the title of the slide',
+      title: 'Here goes the title',
       // Notice there was a limit of how many characters subtitle can use
-      subtitle: 'Here goes the subtitle of the slide (optional',
+      subtitle: 'Here goes the subtitle',
     );
   }
 }
@@ -32,9 +32,9 @@ void main() {
   );
 
   final footerFinder = find.byType(FlutterDeckFooter);
-  final titleFinder = find.text('Here goes the title of the slide',);
+  final titleFinder = find.text('Here goes the title',);
   final subtitleFinder = find.text(
-    'Here goes the subtitle of the slide (optional',
+    'Here goes the subtitle',
   );
 
   expect(titleFinder, findsOneWidget);
