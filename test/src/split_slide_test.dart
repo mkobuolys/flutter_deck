@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
-import 'package:flutter_deck/src/templates/split_slide.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class SplitSlide extends FlutterDeckSlideWidget {
