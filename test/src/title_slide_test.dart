@@ -16,6 +16,13 @@ class TitleSlide extends FlutterDeckSlideWidget {
     return FlutterDeckSlide.title(
       title: 'Here goes the title',
       subtitle: 'Here goes the subtitle',
+      backgroundBuilder: (context) => FlutterDeckBackground.custom(
+        child: Container(
+          color: Colors.orange,
+          key: const Key('Deck Background'),
+        ),
+      ),
+      key: const Key('title slide'),
     );
   }
 }
@@ -33,7 +40,11 @@ void main() {
     final footerFinder = find.byType(FlutterDeckFooter);
     final titleFinder = find.text('Here goes the title');
     final subtitleFinder = find.text('Here goes the subtitle');
-
+    final containerFinder = find.byKey(const Key('Deck Background'));
+    final container = tester.widget(containerFinder) as Container;
+    final deckBackgroundColor = container.color;
+    
+    expect(deckBackgroundColor, equals(Colors.orange));
     expect(titleFinder, findsOneWidget);
     expect(subtitleFinder, findsOneWidget);
     expect(footerFinder,findsNothing);
