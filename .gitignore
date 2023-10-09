@@ -27,7 +27,7 @@
 .packages
 .pub-cache/
 .pub/
-/build/
+build/
 pubspec.lock
 
 # Web related
@@ -41,3 +41,7 @@ app.*.map.json
 
 # Test related
 coverage
+
+# Mason
+mason-lock.json
+.mason

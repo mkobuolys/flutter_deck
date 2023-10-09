@@ -1,0 +1,4 @@
+FlutterDeckSlide.split(
+      leftBuilder: (context) => const Placeholder(),
+      rightBuilder: (context) => const Placeholder(),
+    );

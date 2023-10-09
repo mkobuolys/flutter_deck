@@ -1,0 +1,4 @@
+FlutterDeckSlide.title(
+      title: '',
+      subtitle: '',
+    );
