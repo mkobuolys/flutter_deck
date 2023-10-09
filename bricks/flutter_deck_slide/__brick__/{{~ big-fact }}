@@ -1,0 +1,4 @@
+FlutterDeckSlide.bigFact(
+      title: '',
+      subtitle: '',
+    );
