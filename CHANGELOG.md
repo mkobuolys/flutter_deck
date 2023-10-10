@@ -1,6 +1,7 @@
 # Next
 
 - feat: add big fact template `FlutterDeckSlide.bigFact`
+- docs: add slides generation using mason section to README.md
 
 # 0.5.0
 
