@@ -1,0 +1,3 @@
+FlutterDeckSlide.custom(
+      builder: (context) => const Placeholder(),
+    );

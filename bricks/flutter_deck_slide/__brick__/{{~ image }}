@@ -1,0 +1,4 @@
+FlutterDeckSlide.image(
+      imageBuilder: (context) => Image.asset('assets/'),
+      label: '',
+    );

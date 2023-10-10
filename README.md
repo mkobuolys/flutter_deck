@@ -724,6 +724,32 @@ Every slide deck comes with a navigation drawer that can be used to navigate thr
 
 ![Navigation demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/navigation.gif?raw=true)
 
+## Generating slides
+
+This package comes with a [mason][mason_link] template that can be used to generate a new slide for the slide deck.
+
+Ensure you have the [mason_cli][mason_cli_link] installed:
+
+```sh
+dart pub global activate mason_cli
+```
+
+Install the [flutter_deck_slide][flutter_deck_slide_brick] template:
+
+```sh
+# Install locally
+mason add flutter_deck_slide
+
+# Install globally
+mason add -g flutter_deck_slide
+```
+
+Generate a new slide:
+
+```sh
+mason make flutter_deck_slide
+```
+
 ## Presentations built with flutter_deck 🚀
 
 | Title                                                                                                                               | Language   | Author                                                                                       |
@@ -738,4 +764,7 @@ Every slide deck comes with a navigation drawer that can be used to navigate thr
 [license_link]: https://opensource.org/licenses/MIT
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
+[mason_link]: https://pub.dev/packages/mason
+[mason_cli_link]: https://pub.dev/packages/mason_cli
+[flutter_deck_slide_brick]: https://brickhub.dev/bricks/flutter_deck_slide
 [mangirdas_kazlauskas_link]: https://x.com/mkobuolys

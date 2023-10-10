@@ -1,0 +1,6 @@
+FlutterDeckSlide.template(
+      backgroundBuilder: (context) => const Placeholder(),
+      contentBuilder: (context) => const Placeholder(),
+      footerBuilder: (context) => const Placeholder(),
+      headerBuilder: (context) => const Placeholder(),
+    );
