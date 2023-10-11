@@ -24,6 +24,8 @@ class FlutterDeckFooterThemeData {
     this.slideNumberTextStyle,
     this.socialHandleColor,
     this.socialHandleTextStyle,
+    this.textColor,
+    this.textTextStyle,
   });
 
   /// Color of the slide number.
@@ -38,6 +40,12 @@ class FlutterDeckFooterThemeData {
   /// Text style of the social handle.
   final TextStyle? socialHandleTextStyle;
 
+  /// Color of the footer text.
+  final Color? textColor;
+
+  /// Text style of the footer text.
+  final TextStyle? textTextStyle;
+
   /// Creates a copy of this object with the given fields replaced with the new
   /// values.
   FlutterDeckFooterThemeData copyWith({
@@ -45,6 +53,8 @@ class FlutterDeckFooterThemeData {
     TextStyle? slideNumberTextStyle,
     Color? socialHandleColor,
     TextStyle? socialHandleTextStyle,
+    Color? textColor,
+    TextStyle? textTextStyle,
   }) {
     return FlutterDeckFooterThemeData(
       slideNumberColor: slideNumberColor ?? this.slideNumberColor,
@@ -52,6 +62,8 @@ class FlutterDeckFooterThemeData {
       socialHandleColor: socialHandleColor ?? this.socialHandleColor,
       socialHandleTextStyle:
           socialHandleTextStyle ?? this.socialHandleTextStyle,
+      textColor: textColor ?? this.textColor,
+      textTextStyle: textTextStyle ?? this.textTextStyle,
     );
   }
 
@@ -68,6 +80,9 @@ class FlutterDeckFooterThemeData {
       socialHandleTextStyle:
           socialHandleTextStyle?.merge(other.socialHandleTextStyle) ??
               other.socialHandleTextStyle,
+      textColor: other.textColor,
+      textTextStyle:
+          textTextStyle?.merge(other.textTextStyle) ?? other.textTextStyle,
     );
   }
 }

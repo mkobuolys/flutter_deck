@@ -198,6 +198,7 @@ class FlutterDeckFooterConfiguration {
     this.showFooter = true,
     this.showSlideNumbers = false,
     this.showSocialHandle = false,
+    this.text,
   });
 
   /// Whether to show the footer or not.
@@ -208,6 +209,9 @@ class FlutterDeckFooterConfiguration {
 
   /// Whether to show the social handle or not.
   final bool showSocialHandle;
+
+  /// A text to show in the footer.
+  final String? text;
 }
 
 /// The configuration for the slide deck header.

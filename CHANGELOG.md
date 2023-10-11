@@ -1,3 +1,7 @@
+# NEXT
+
+- Add optional custom text to footer
+
 # 0.6.0
 
 - feat: add big fact template `FlutterDeckSlide.bigFact`

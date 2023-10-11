@@ -68,6 +68,7 @@ class FlutterDeckExample extends StatelessWidget {
         TitleSlide(),
         LayoutStructureSlide(),
         BlankSlide(),
+        FooterSlide(),
         SplitSlide(),
         ImageSlide(),
         BigFactSlide(),

@@ -7,7 +7,7 @@ import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/theme/widgets/flutter_deck_footer_theme.dart';
 
 /// A widget that renders a footer for a slide. The footer can contain the slide
-/// number and the speaker's social handle.
+/// number, the speaker's social handle and a custom text.
 ///
 /// To customize the footer style, use [FlutterDeckFooterTheme].
 ///
@@ -21,6 +21,8 @@ import 'package:flutter_deck/src/theme/widgets/flutter_deck_footer_theme.dart';
 ///     socialHandleColor: Colors.white,
 ///     socialHandleTextStyle:
 ///         FlutterDeckTheme.of(context).textTheme.bodyMedium,
+///     textColor: Colors.white,
+///     textTextStyle: FlutterDeckTheme.of(context).textTheme.bodySmall,
 ///   ),
 ///   child: FlutterDeckFooter.fromConfiguration(
 ///     configuration: const FlutterDeckFooterConfiguration(),
@@ -35,26 +37,33 @@ class FlutterDeckFooter extends StatelessWidget {
   ///
   /// If [showSocialHandle] is true, the speaker's social handle will be
   /// rendered. By default, it is false.
+  /// 
+  /// if [text] is not null, it will be rendered. By default, it is null.
   const FlutterDeckFooter({
     this.showSlideNumber = false,
     this.showSocialHandle = false,
+    this.text,
     super.key,
   });
 
   /// Creates a widget that renders a footer for a slide from a configuration.
-  /// The configuration is used to determine whether to show the slide number
-  /// and the social handle.
+  /// The configuration is used to determine whether to show the slide number,
+  /// the social handle and the text.
   FlutterDeckFooter.fromConfiguration({
     required FlutterDeckFooterConfiguration configuration,
     super.key,
   })  : showSlideNumber = configuration.showSlideNumbers,
-        showSocialHandle = configuration.showSocialHandle;
+        showSocialHandle = configuration.showSocialHandle,
+        text = configuration.text;
 
   /// Whether to show the slide number in the footer.
   final bool showSlideNumber;
 
   /// Whether to show the speaker's social handle in the footer.
   final bool showSocialHandle;
+
+  /// A text to show in the footer.
+  final String? text;
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +82,14 @@ class FlutterDeckFooter extends StatelessWidget {
                 color: theme.socialHandleColor,
                 fontWeight: FontWeight.bold,
               ),
-            )
-          else
-            const SizedBox.shrink(),
+            ),
+          if (text != null)
+            Text(
+              text!,
+              style: theme.textTextStyle?.copyWith(
+                color: theme.textColor,
+              ),
+            ),
           if (showSlideNumber)
             Text(
               '${context.flutterDeck.slideNumber}',

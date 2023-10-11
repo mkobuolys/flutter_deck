@@ -83,6 +83,8 @@ class FlutterDeckThemeData {
         slideNumberTextStyle: textTheme.bodySmall,
         socialHandleColor: colorScheme.onBackground,
         socialHandleTextStyle: textTheme.bodyMedium,
+        textColor: colorScheme.onBackground,
+        textTextStyle: textTheme.bodySmall,
       ),
       headerTheme: FlutterDeckHeaderThemeData(
         color: colorScheme.onBackground,
