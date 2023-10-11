@@ -37,7 +37,7 @@ class FlutterDeckFooter extends StatelessWidget {
   ///
   /// If [showSocialHandle] is true, the speaker's social handle will be
   /// rendered. By default, it is false.
-  /// 
+  ///
   /// if [text] is not null, it will be rendered. By default, it is null.
   const FlutterDeckFooter({
     this.showSlideNumber = false,
