@@ -1,6 +1,6 @@
 # NEXT
 
-- Add optional custom text to footer
+- Add optional custom widget to footer
 
 # 0.6.0
 

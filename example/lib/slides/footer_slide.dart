@@ -7,8 +7,13 @@ class FooterSlide extends FlutterDeckSlideWidget {
           configuration: const FlutterDeckSlideConfiguration(
             footer: FlutterDeckFooterConfiguration(
               showSlideNumbers: true,
-              showSocialHandle: true,
-              text: 'This is a custom footer text',
+              widget: Row(
+                children: [
+                  Icon(Icons.home),
+                  SizedBox(width: 8),
+                  Text('This is a custom footer with icon and text'),
+                ],
+              ),
             ),
             route: '/footer-slide',
             header: FlutterDeckHeaderConfiguration(
