@@ -17,6 +17,9 @@ class FlutterDeckConfiguration {
     this.footer = const FlutterDeckFooterConfiguration(showFooter: false),
     this.header = const FlutterDeckHeaderConfiguration(showHeader: false),
     this.transition = const FlutterDeckTransition.none(),
+    this.progressIndicator = const FlutterDeckProgressIndicator.solid(
+      Color(0xFF6200EE),
+    ),
     this.showProgress = true,
   });
 
@@ -52,6 +55,11 @@ class FlutterDeckConfiguration {
   ///
   /// The default transition is [FlutterDeckTransition.none].
   final FlutterDeckTransition transition;
+
+  /// Type of progress indicator to show in the slide deck.
+  /// The progress indicator can be of type solid or gradient.
+  /// The default progress indicator is a solid with primary color from theme.
+  final FlutterDeckProgressIndicator progressIndicator;
 
   /// Whether to show the presentation progress or not.
   ///

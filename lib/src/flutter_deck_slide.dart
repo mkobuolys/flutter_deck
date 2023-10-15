@@ -321,6 +321,8 @@ class _SlideBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scaffoldState = Scaffold.of(context);
+    print(context.flutterDeck.configuration.progressIndicator.color);
+    print(context.flutterDeck.configuration.progressIndicator.gradient);
 
     return FlutterDeckDrawerListener(
       onDrawerToggle: () {
@@ -331,7 +333,10 @@ class _SlideBody extends StatelessWidget {
       child: context.flutterDeck.configuration.showProgress
           ? Stack(
               alignment: Alignment.bottomCenter,
-              children: [child, const FlutterDeckProgressIndicator()],
+              children: [
+                child,
+                context.flutterDeck.configuration.progressIndicator,
+              ],
             )
           : child,
     );

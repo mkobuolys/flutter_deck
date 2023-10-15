@@ -1,3 +1,4 @@
+export './flutter_deck_progress_indicator.dart';
 export 'flutter_deck_background.dart';
 export 'flutter_deck_bullet_list.dart';
 export 'flutter_deck_code_highlight.dart';
