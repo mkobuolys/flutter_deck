@@ -75,18 +75,18 @@ class FlutterDeckFooter extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          if (showSocialHandle && widget == null)
+          if (widget != null)
+            DefaultTextStyle(
+              style: FlutterDeckTheme.of(context).textTheme.bodySmall,
+              child: widget!,
+            )
+          else if (showSocialHandle)
             Text(
               context.flutterDeck.speakerInfo?.socialHandle ?? '',
               style: theme.socialHandleTextStyle?.copyWith(
                 color: theme.socialHandleColor,
                 fontWeight: FontWeight.bold,
               ),
-            ),
-          if (widget != null)
-            DefaultTextStyle(
-              style: FlutterDeckTheme.of(context).textTheme.bodySmall,
-              child: widget!,
             ),
           if (showSlideNumber)
             Text(
