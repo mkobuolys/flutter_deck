@@ -8,7 +8,7 @@ import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 import 'package:flutter_deck/src/theme/widgets/flutter_deck_footer_theme.dart';
 
 /// A widget that renders a footer for a slide. The footer can contain the slide
-/// number, the speaker's social handle and a custom text.
+/// number, the speaker's social handle or a custom widget.
 ///
 /// To customize the footer style, use [FlutterDeckFooterTheme].
 ///
@@ -48,7 +48,7 @@ class FlutterDeckFooter extends StatelessWidget {
 
   /// Creates a widget that renders a footer for a slide from a configuration.
   /// The configuration is used to determine whether to show the slide number,
-  /// the social handle and the text.
+  /// the social handle or a custom widget.
   FlutterDeckFooter.fromConfiguration({
     required FlutterDeckFooterConfiguration configuration,
     super.key,
@@ -62,7 +62,7 @@ class FlutterDeckFooter extends StatelessWidget {
   /// Whether to show the speaker's social handle in the footer.
   final bool showSocialHandle;
 
-  /// A text to show in the footer.
+  /// A custom widget to show in the footer (overrides the social handle).
   final Widget? widget;
 
   @override
