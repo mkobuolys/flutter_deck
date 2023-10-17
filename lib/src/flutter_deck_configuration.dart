@@ -17,9 +17,7 @@ class FlutterDeckConfiguration {
     this.footer = const FlutterDeckFooterConfiguration(showFooter: false),
     this.header = const FlutterDeckHeaderConfiguration(showHeader: false),
     this.transition = const FlutterDeckTransition.none(),
-    this.progressIndicator = const FlutterDeckProgressIndicator.solid(
-      Color(0xFF6200EE),
-    ),
+    this.progressIndicator = const FlutterDeckProgressIndicator.solid(),
     this.showProgress = true,
   });
 

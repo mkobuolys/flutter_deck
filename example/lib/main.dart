@@ -45,7 +45,7 @@ class FlutterDeckExample extends StatelessWidget {
         transition: FlutterDeckTransition.fade(),
         // Show progress indicator with a gradient.
         progressIndicator: FlutterDeckProgressIndicator.solid(
-          Colors.red,
+          color: Colors.red,
         ),
       ),
       // You can also define your own light...

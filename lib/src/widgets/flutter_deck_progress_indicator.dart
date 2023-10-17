@@ -9,7 +9,8 @@ import 'package:flutter_deck/src/flutter_deck_router.dart';
 /// and the current step.
 class FlutterDeckProgressIndicator extends StatefulWidget {
   /// Creates a progress indicator with a solid color.
-  const FlutterDeckProgressIndicator.solid(Color color) : this._(color: color);
+  const FlutterDeckProgressIndicator.solid({Color? color})
+      : this._(color: color);
 
   /// Creates a progress indicator with a gradient.
   const FlutterDeckProgressIndicator.gradient(Gradient gradient)
@@ -105,7 +106,7 @@ class _FlutterDeckProgressIndicatorState
     } else {
       return LinearProgressIndicator(
         backgroundColor: Colors.grey,
-        color: widget.color,
+        color: widget.color ?? Theme.of(context).primaryColor,
         value: _progress,
       );
     }
