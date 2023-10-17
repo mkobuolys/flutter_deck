@@ -1,6 +1,6 @@
 # NEXT
 
-- Add optional custom widget to footer
+- feat: add an optional custom widget to the footer
 
 # 0.6.0
 
