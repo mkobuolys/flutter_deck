@@ -7,13 +7,7 @@ class FooterSlide extends FlutterDeckSlideWidget {
           configuration: const FlutterDeckSlideConfiguration(
             footer: FlutterDeckFooterConfiguration(
               showSlideNumbers: true,
-              widget: Row(
-                children: [
-                  Icon(Icons.home),
-                  SizedBox(width: 8),
-                  Text('This is a custom footer with icon and text'),
-                ],
-              ),
+              widget: _CustomFooter(),
             ),
             route: '/footer-slide',
             header: FlutterDeckHeaderConfiguration(
@@ -33,6 +27,21 @@ class FooterSlide extends FlutterDeckSlideWidget {
           textAlign: TextAlign.center,
         ),
       ),
+    );
+  }
+}
+
+class _CustomFooter extends StatelessWidget {
+  const _CustomFooter();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        Icon(Icons.home),
+        SizedBox(width: 8),
+        Text('This is a custom footer with icon and text'),
+      ],
     );
   }
 }
