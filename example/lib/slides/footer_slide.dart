@@ -7,6 +7,7 @@ class FooterSlide extends FlutterDeckSlideWidget {
           configuration: const FlutterDeckSlideConfiguration(
             footer: FlutterDeckFooterConfiguration(
               showSlideNumbers: true,
+              showSocialHandle: true,
               widget: _CustomFooter(),
             ),
             route: '/footer-slide',
@@ -21,8 +22,10 @@ class FooterSlide extends FlutterDeckSlideWidget {
     return FlutterDeckSlide.blank(
       builder: (context) => Center(
         child: Text(
-          'Based on the configuration, this template renders a header and a '
-          'footer.\nThe remaining space is free for your imagination.',
+          'This showcases the usage of a custom footer widget using a row '
+          'of multiple widgets for the footer (this also overrides the social '
+          'handle. showSocialHandle is true but since widget is not '
+          'null, widget is displayed.).',
           style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
