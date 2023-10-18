@@ -93,6 +93,7 @@ class _FlutterDeckProgressIndicatorState
   @override
   Widget build(BuildContext context) {
     final isGradient = widget.gradient != null;
+    
     return LayoutBuilder(
       builder: (context, constraints) {
         final maxWidth = constraints.maxWidth;
