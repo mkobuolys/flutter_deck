@@ -1,4 +1,4 @@
-# NEXT
+# 0.7.0
 
 - feat: add an optional custom widget to the footer
 - feat: support for gradient progress indicator
