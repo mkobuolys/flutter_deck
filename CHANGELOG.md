@@ -1,3 +1,7 @@
+# NEXT
+
+- feat: add an optional custom widget to the footer
+
 # 0.6.1
 
 - fix: export `SplitSlideRatio` class from the framework
