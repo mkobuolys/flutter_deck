@@ -75,10 +75,10 @@ class FlutterDeckFooter extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          if (widget != null)
+          if (widget case final Widget widget)
             DefaultTextStyle(
               style: FlutterDeckTheme.of(context).textTheme.bodySmall,
-              child: widget!,
+              child: widget,
             )
           else if (showSocialHandle)
             Text(
