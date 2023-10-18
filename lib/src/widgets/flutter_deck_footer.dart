@@ -87,7 +87,9 @@ class FlutterDeckFooter extends StatelessWidget {
                 color: theme.socialHandleColor,
                 fontWeight: FontWeight.bold,
               ),
-            ),
+            )
+          else
+            const SizedBox.shrink(),
           if (showSlideNumber)
             Text(
               '${context.flutterDeck.slideNumber}',
