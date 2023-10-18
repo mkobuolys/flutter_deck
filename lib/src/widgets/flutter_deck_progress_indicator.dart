@@ -92,25 +92,24 @@ class _FlutterDeckProgressIndicatorState
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final isGradient = widget.gradient != null;
-    
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final maxWidth = constraints.maxWidth;
         final indicatorWidth = maxWidth * _progress;
 
         return Container(
-          height: 8,
+          height: 4,
           width: maxWidth,
-          color: widget.backgroundColor ?? Colors.grey,
+          color: widget.backgroundColor ?? colorScheme.background,
           child: Align(
             alignment: Alignment.centerLeft,
             child: Container(
               width: indicatorWidth,
               decoration: BoxDecoration(
-                color: isGradient
-                    ? null
-                    : widget.color ?? Theme.of(context).primaryColor,
+                color: !isGradient ? widget.color ?? colorScheme.primary : null,
                 gradient: widget.gradient,
               ),
             ),

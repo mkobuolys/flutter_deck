@@ -17,9 +17,9 @@ class FlutterDeckConfiguration {
     this.controls = const FlutterDeckControlsConfiguration(),
     this.footer = const FlutterDeckFooterConfiguration(showFooter: false),
     this.header = const FlutterDeckHeaderConfiguration(showHeader: false),
-    this.transition = const FlutterDeckTransition.none(),
     this.progressIndicator = const FlutterDeckProgressIndicator.solid(),
     this.showProgress = true,
+    this.transition = const FlutterDeckTransition.none(),
   });
 
   /// The background configuration for the slide deck. By default, the
@@ -50,20 +50,21 @@ class FlutterDeckConfiguration {
   /// is not shown.
   final FlutterDeckHeaderConfiguration header;
 
-  /// The transition to use when navigating between slides.
-  ///
-  /// The default transition is [FlutterDeckTransition.none].
-  final FlutterDeckTransition transition;
-
   /// The progress indicator to show in the slide deck.
-  /// By default, the progress indicator is [FlutterDeckProgressIndicator.solid]
-  /// with a primary color from the theme.
+  ///
+  /// The default is [FlutterDeckProgressIndicator.solid] with a primary color
+  /// from the theme.
   final FlutterDeckProgressIndicator progressIndicator;
 
   /// Whether to show the presentation progress or not.
   ///
   /// The default is true.
   final bool showProgress;
+
+  /// The transition to use when navigating between slides.
+  ///
+  /// The default transition is [FlutterDeckTransition.none].
+  final FlutterDeckTransition transition;
 }
 
 /// The configuration for a slide.
