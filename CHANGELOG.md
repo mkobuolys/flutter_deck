@@ -2,6 +2,10 @@
 
 - feat: add an optional custom widget to the footer
 
+# 0.6.1
+
+- fix: export `SplitSlideRatio` class from the framework
+
 # 0.6.0
 
 - feat: add big fact template `FlutterDeckSlide.bigFact`
