@@ -1,3 +1,7 @@
+# 0.6.1
+
+- fix: export `SplitSlideRatio` class from the framework
+
 # 0.6.0
 
 - feat: add big fact template `FlutterDeckSlide.bigFact`
