@@ -8,13 +8,17 @@ import 'package:flutter_deck/src/flutter_deck_router.dart';
 /// The progress is calculated by the number of total steps in the presentation
 /// and the current step.
 class FlutterDeckProgressIndicator extends StatefulWidget {
-  /// Creates a progress indicator with a solid color.
-  const FlutterDeckProgressIndicator.solid({Color? color})
-      : this._(color: color);
+  /// Creates a progress indicator with a solid color and a background color.
+  const FlutterDeckProgressIndicator.solid({
+    Color? color,
+    Color? backgroundColor,
+  }) : this._(color: color, backgroundColor: backgroundColor);
 
-  /// Creates a progress indicator with a gradient.
-  const FlutterDeckProgressIndicator.gradient(Gradient gradient)
-      : this._(gradient: gradient);
+  /// Creates a progress indicator with a gradient and a background color.
+  const FlutterDeckProgressIndicator.gradient({
+    required Gradient gradient,
+    Color? backgroundColor,
+  }) : this._(gradient: gradient, backgroundColor: backgroundColor);
 
   /// A private constructor for the [FlutterDeckProgressIndicator] widget.
   ///
@@ -23,18 +27,22 @@ class FlutterDeckProgressIndicator extends StatefulWidget {
   const FlutterDeckProgressIndicator._({
     this.color,
     this.gradient,
+    this.backgroundColor,
   });
 
   /// The progress indicator color.
   ///
-  /// This value is only provided via the [FlutterDeckProgressIndicator.solid]
-  /// constructor.
+  /// This value is only provided via the
+  /// [FlutterDeckProgressIndicator.solid] constructor.
   final Color? color;
+
+  /// The progress indicator background color.
+  final Color? backgroundColor;
 
   /// The progress indicator gradient.
   ///
-  /// This value is only provided
-  /// via the [FlutterDeckProgressIndicator.gradient] constructor.
+  /// This value is only provided via the
+  /// [FlutterDeckProgressIndicator.gradient] constructor.
   final Gradient? gradient;
 
   @override
@@ -84,31 +92,30 @@ class _FlutterDeckProgressIndicatorState
 
   @override
   Widget build(BuildContext context) {
-    if (widget.gradient != null) {
-      return LayoutBuilder(
-        builder: (context, constraints) {
-          final maxWidth = constraints.maxWidth;
-          final indicatorWidth = maxWidth * _progress;
-          return Container(
-            height: 8,
-            width: maxWidth,
-            color: Colors.grey,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                width: indicatorWidth,
-                decoration: BoxDecoration(gradient: widget.gradient),
+    final isGradient = widget.gradient != null;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final maxWidth = constraints.maxWidth;
+        final indicatorWidth = maxWidth * _progress;
+
+        return Container(
+          height: 8,
+          width: maxWidth,
+          color: widget.backgroundColor ?? Colors.grey,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              width: indicatorWidth,
+              decoration: BoxDecoration(
+                color: isGradient
+                    ? null
+                    : widget.color ?? Theme.of(context).primaryColor,
+                gradient: widget.gradient,
               ),
             ),
-          );
-        },
-      );
-    } else {
-      return LinearProgressIndicator(
-        backgroundColor: Colors.grey,
-        color: widget.color ?? Theme.of(context).primaryColor,
-        value: _progress,
-      );
-    }
+          ),
+        );
+      },
+    );
   }
 }

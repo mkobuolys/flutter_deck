@@ -54,9 +54,9 @@ class FlutterDeckConfiguration {
   /// The default transition is [FlutterDeckTransition.none].
   final FlutterDeckTransition transition;
 
-  /// Type of progress indicator to show in the slide deck.
-  /// The progress indicator can be of type solid or gradient.
-  /// The default progress indicator is a solid with primary color from theme.
+  /// The progress indicator to show in the slide deck.
+  /// By default, the progress indicatoris [FlutterDeckProgressIndicator.solid]
+  /// with a primary color from the theme.
   final FlutterDeckProgressIndicator progressIndicator;
 
   /// Whether to show the presentation progress or not.
