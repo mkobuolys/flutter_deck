@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/theme/templates/flutter_deck_slide_theme.dart';
@@ -203,14 +204,16 @@ class FlutterDeckControlsConfiguration {
 /// The configuration for the slide deck footer.
 ///
 /// The footer is the component at the bottom of the slide deck that shows the
-/// slide number and social handle.
+/// slide number and social handle and an optional custom widget.
 class FlutterDeckFooterConfiguration {
   /// Creates a configuration for the slide deck footer. By default, the footer
-  /// is shown. By default, the slide number and social handle are not shown.
+  /// is shown. By default, the slide number, social handle and custom widget
+  /// are not shown.
   const FlutterDeckFooterConfiguration({
     this.showFooter = true,
     this.showSlideNumbers = false,
     this.showSocialHandle = false,
+    this.widget,
   });
 
   /// Whether to show the footer or not.
@@ -219,8 +222,12 @@ class FlutterDeckFooterConfiguration {
   /// Whether to show the slide number or not.
   final bool showSlideNumbers;
 
-  /// Whether to show the social handle or not.
+  /// Whether to show the social handle or not. If [widget] is provided, this is
+  /// never shown.
   final bool showSocialHandle;
+
+  /// A custom widget to show in the footer (instead of the social handle).
+  final Widget? widget;
 }
 
 /// The configuration for the slide deck header.

@@ -73,6 +73,7 @@ FlutterDeckApp(
     footer: FlutterDeckFooterConfiguration(
       showSlideNumbers: true,
       showSocialHandle: true,
+      widget: _MyCustomFooter(),
     ),
     header: FlutterDeckHeaderConfiguration(
       showHeader: false,
