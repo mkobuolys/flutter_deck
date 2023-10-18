@@ -79,6 +79,14 @@ FlutterDeckApp(
     ),
     showProgress: false,
     transition: FlutterDeckTransition.fade(),
+    progressIndicator: FlutterDeckProgressIndicator.gradient(
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [Colors.pink, Colors.purple],
+      ),
+      backgroundColor: Colors.black,
+    ),
   ),
   <...>
 );

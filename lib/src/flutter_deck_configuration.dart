@@ -90,24 +90,28 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
     FlutterDeckHeaderConfiguration? header,
     bool? showProgress,
     FlutterDeckTransition? transition,
+    FlutterDeckProgressIndicator? progressIndicator,
   })  : _footerConfigurationOverride = footer,
         _headerConfigurationOverride = header,
         _showProgressOverride = showProgress,
+        _progressIndicatorOverride = progressIndicator,
         _transitionOverride = transition;
 
   /// Creates a configuration for a slide. This constructor is used internally
   /// to create a configuration when the global configuration is overridden.
-  const FlutterDeckSlideConfiguration._({
-    required this.route,
-    this.hidden = false,
-    this.steps = 1,
-    super.footer,
-    super.header,
-    super.showProgress,
-    super.transition,
-  })  : _footerConfigurationOverride = null,
+  const FlutterDeckSlideConfiguration._(
+      {required this.route,
+      this.hidden = false,
+      this.steps = 1,
+      super.footer,
+      super.header,
+      super.showProgress,
+      super.transition,
+      super.progressIndicator})
+      : _footerConfigurationOverride = null,
         _headerConfigurationOverride = null,
         _showProgressOverride = null,
+        _progressIndicatorOverride = null,
         _transitionOverride = null;
 
   /// The route for the slide.
@@ -128,6 +132,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   final FlutterDeckHeaderConfiguration? _headerConfigurationOverride;
   final bool? _showProgressOverride;
   final FlutterDeckTransition? _transitionOverride;
+  final FlutterDeckProgressIndicator? _progressIndicatorOverride;
 
   /// Merges the slide configuration with the global configuration. The slide
   /// configuration values take precedence.
@@ -142,6 +147,8 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
       header: _headerConfigurationOverride ?? configuration.header,
       showProgress: _showProgressOverride ?? configuration.showProgress,
       transition: _transitionOverride ?? configuration.transition,
+      progressIndicator:
+          _progressIndicatorOverride ?? configuration.progressIndicator,
     );
   }
 }

@@ -333,7 +333,7 @@ class _SlideBody extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               children: [
                 child,
-                context.flutterDeck.globalConfiguration.progressIndicator,
+                context.flutterDeck.configuration.progressIndicator,
               ],
             )
           : child,
