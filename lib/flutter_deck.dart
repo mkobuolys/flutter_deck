@@ -6,6 +6,7 @@ export 'src/flutter_deck_app.dart';
 export 'src/flutter_deck_configuration.dart';
 export 'src/flutter_deck_slide.dart';
 export 'src/flutter_deck_speaker_info.dart';
+export 'src/templates/split_slide.dart' show SplitSlideRatio;
 export 'src/theme/flutter_deck_text_theme.dart';
 export 'src/theme/flutter_deck_theme.dart';
 export 'src/theme/templates/templates.dart';
