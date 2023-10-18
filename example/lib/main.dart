@@ -43,6 +43,15 @@ class FlutterDeckExample extends StatelessWidget {
         ),
         // Use a custom transition between slides.
         transition: FlutterDeckTransition.fade(),
+        // Show progress indicator with specifc gradient and background color.
+        progressIndicator: FlutterDeckProgressIndicator.gradient(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.pink, Colors.purple],
+          ),
+          backgroundColor: Colors.black,
+        ),
       ),
       // You can also define your own light...
       lightTheme: FlutterDeckThemeData.fromTheme(

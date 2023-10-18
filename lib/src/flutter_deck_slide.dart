@@ -331,7 +331,10 @@ class _SlideBody extends StatelessWidget {
       child: context.flutterDeck.configuration.showProgress
           ? Stack(
               alignment: Alignment.bottomCenter,
-              children: [child, const FlutterDeckProgressIndicator()],
+              children: [
+                child,
+                context.flutterDeck.configuration.progressIndicator,
+              ],
             )
           : child,
     );
