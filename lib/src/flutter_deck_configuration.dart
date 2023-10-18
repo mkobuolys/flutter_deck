@@ -56,7 +56,7 @@ class FlutterDeckConfiguration {
   final FlutterDeckTransition transition;
 
   /// The progress indicator to show in the slide deck.
-  /// By default, the progress indicatoris [FlutterDeckProgressIndicator.solid]
+  /// By default, the progress indicator is [FlutterDeckProgressIndicator.solid]
   /// with a primary color from the theme.
   final FlutterDeckProgressIndicator progressIndicator;
 
@@ -81,38 +81,38 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   ///
   /// [steps] is the number of steps in the slide. The default is 1.
   ///
-  /// [footer], [header], [showProgress], and [transition] are optional
-  /// overrides for the global configuration.
+  /// [footer], [header], [progressIndicator], [showProgress], and [transition]
+  /// are optional overrides for the global configuration.
   const FlutterDeckSlideConfiguration({
     required this.route,
     this.hidden = false,
     this.steps = 1,
     FlutterDeckFooterConfiguration? footer,
     FlutterDeckHeaderConfiguration? header,
+    FlutterDeckProgressIndicator? progressIndicator,
     bool? showProgress,
     FlutterDeckTransition? transition,
-    FlutterDeckProgressIndicator? progressIndicator,
   })  : _footerConfigurationOverride = footer,
         _headerConfigurationOverride = header,
-        _showProgressOverride = showProgress,
         _progressIndicatorOverride = progressIndicator,
+        _showProgressOverride = showProgress,
         _transitionOverride = transition;
 
   /// Creates a configuration for a slide. This constructor is used internally
   /// to create a configuration when the global configuration is overridden.
-  const FlutterDeckSlideConfiguration._(
-      {required this.route,
-      this.hidden = false,
-      this.steps = 1,
-      super.footer,
-      super.header,
-      super.showProgress,
-      super.transition,
-      super.progressIndicator})
-      : _footerConfigurationOverride = null,
+  const FlutterDeckSlideConfiguration._({
+    required this.route,
+    this.hidden = false,
+    this.steps = 1,
+    super.footer,
+    super.header,
+    super.progressIndicator,
+    super.showProgress,
+    super.transition,
+  })  : _footerConfigurationOverride = null,
         _headerConfigurationOverride = null,
-        _showProgressOverride = null,
         _progressIndicatorOverride = null,
+        _showProgressOverride = null,
         _transitionOverride = null;
 
   /// The route for the slide.
@@ -131,9 +131,9 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
 
   final FlutterDeckFooterConfiguration? _footerConfigurationOverride;
   final FlutterDeckHeaderConfiguration? _headerConfigurationOverride;
+  final FlutterDeckProgressIndicator? _progressIndicatorOverride;
   final bool? _showProgressOverride;
   final FlutterDeckTransition? _transitionOverride;
-  final FlutterDeckProgressIndicator? _progressIndicatorOverride;
 
   /// Merges the slide configuration with the global configuration. The slide
   /// configuration values take precedence.
@@ -146,10 +146,10 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
       steps: steps,
       footer: _footerConfigurationOverride ?? configuration.footer,
       header: _headerConfigurationOverride ?? configuration.header,
-      showProgress: _showProgressOverride ?? configuration.showProgress,
-      transition: _transitionOverride ?? configuration.transition,
       progressIndicator:
           _progressIndicatorOverride ?? configuration.progressIndicator,
+      showProgress: _showProgressOverride ?? configuration.showProgress,
+      transition: _transitionOverride ?? configuration.transition,
     );
   }
 }
