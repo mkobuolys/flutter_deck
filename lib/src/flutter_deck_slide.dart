@@ -281,9 +281,10 @@ class FlutterDeckSlide extends StatelessWidget {
   final FlutterDeckThemeData? _theme;
 
   /// Returns the current theme used by any slide.
+  /// Being used for testing purposes
+  @visibleForTesting
   FlutterDeckThemeData? get theme => _theme;
-
-
+  
   @override
   Widget build(BuildContext context) {
     final materialTheme = Theme.of(context);

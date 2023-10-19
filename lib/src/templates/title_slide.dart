@@ -57,10 +57,14 @@ class FlutterDeckTitleSlide extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AutoSizeText(title, style: theme.titleTextStyle),
+            Expanded(
+              child: AutoSizeText(title, style: theme.titleTextStyle),
+            ),
             if (subtitle != null) ...[
               const SizedBox(height: 8),
-              AutoSizeText(subtitle!, style: theme.subtitleTextStyle),
+              Expanded(
+                child: AutoSizeText(subtitle!, style: theme.subtitleTextStyle),
+              ),
             ],
             if (speakerInfo != null) ...[
               const SizedBox(height: 64),
