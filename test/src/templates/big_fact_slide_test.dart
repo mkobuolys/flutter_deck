@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'test_utils.dart';
+import '../../test_utils.dart';
 
 void main() {
   group('BigFactSlide', () {
     testWidgets('should render all layout elements',
-        (WidgetTester tester) async {
+        (tester) async {
       final slideTester = SlideTester(
         tester: tester,
         showHeader: true,
         showFooter: true,
         slide: const BigFactSlide(),
       );
+
       await slideTester.pumpSlide();
 
       final socialHandleFinder = find.text('@flutter_deck');
@@ -28,14 +29,16 @@ void main() {
       expect(descriptionFinder, findsOneWidget);
     });
 
-    testWidgets('should apply theming', (WidgetTester tester) async {
+    testWidgets('should apply theming', (tester) async {
       final slideTester = SlideTester(
         tester: tester,
         showHeader: false,
         showFooter: false,
         slide: const BigFactSlide(),
       );
+
       await slideTester.pumpSlide();
+
       final sliderFinder = find.byKey(const Key('BigFactslide'));
       final slider = tester.widget(sliderFinder) as FlutterDeckSlide;
       final textStyleFinder = slider.theme!.bigFactSlideTheme.titleTextStyle!;
@@ -45,13 +48,14 @@ void main() {
     });
 
     group('when footer and header are disabled', () {
-      testWidgets('should render content only', (WidgetTester tester) async {
+      testWidgets('should render content only', (tester) async {
         final slideTester = SlideTester(
           tester: tester,
           showHeader: false,
           showFooter: false,
           slide: const BigFactSlide(),
         );
+        
         await slideTester.pumpSlide();
 
         final socialHandleFinder = find.text('@flutter_deck');

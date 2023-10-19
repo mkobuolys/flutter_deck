@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'test_utils.dart';
+import '../../test_utils.dart';
 
 void main() {
   group('ImageSlide', () {
     testWidgets('should render all layout elements',
-        (WidgetTester tester) async {
+        (tester) async {
       final slideTester = SlideTester(
         tester: tester,
         showHeader: true,
         showFooter: true,
         slide: const ImageSlide(),
       );
+
       await slideTester.pumpSlide();
+
       final titleFinder = find.text('Slide');
       final labelFinder = find.text('Here goes the label of the image');
       final slideNumberFinder = find.text('1');
@@ -27,14 +29,16 @@ void main() {
       expect(socialHandleFinder, findsOneWidget);
     });
 
-    testWidgets('should apply theming', (WidgetTester tester) async {
+    testWidgets('should apply theming', (tester) async {
       final slideTester = SlideTester(
         tester: tester,
         showHeader: false,
         showFooter: false,
         slide: const ImageSlide(),
       );
+
       await slideTester.pumpSlide();
+
       final containerFinder = find.byKey(const Key('Container Key'));
       final container = tester.widget(containerFinder) as Container;
       final backgroundColor = container.color;
@@ -43,14 +47,16 @@ void main() {
     });
 
     group('when footer and header are disabled', () {
-      testWidgets('should render content only', (WidgetTester tester) async {
+      testWidgets('should render content only', (tester) async {
         final slideTester = SlideTester(
           tester: tester,
           showHeader: false,
           showFooter: false,
           slide: const ImageSlide(),
         );
+
         await slideTester.pumpSlide();
+
         final titleFinder = find.text('Slide');
         final slideNumberFinder = find.text('1');
         final socialHandleFinder = find.text('@flutter_deck');

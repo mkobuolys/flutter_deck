@@ -2,13 +2,13 @@ import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class SlideTester {
-
-  SlideTester({
+  const SlideTester({
     required this.tester,
     required this.showHeader,
     required this.showFooter,
     required this.slide,
   });
+
   final WidgetTester tester;
   final bool showHeader;
   final bool showFooter;
