@@ -5,8 +5,7 @@ import '../../test_utils.dart';
 
 void main() {
   group('BigFactSlide', () {
-    testWidgets('should render all layout elements',
-        (tester) async {
+    testWidgets('should render all layout elements', (tester) async {
       final slideTester = SlideTester(
         tester: tester,
         showHeader: true,
@@ -55,7 +54,7 @@ void main() {
           showFooter: false,
           slide: const BigFactSlide(),
         );
-        
+
         await slideTester.pumpSlide();
 
         final socialHandleFinder = find.text('@flutter_deck');

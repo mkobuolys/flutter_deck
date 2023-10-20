@@ -5,8 +5,7 @@ import '../../test_utils.dart';
 
 void main() {
   group('BlankSlide', () {
-    testWidgets('should render all layout elements',
-        (tester) async {
+    testWidgets('should render all layout elements', (tester) async {
       final slideTester = SlideTester(
         tester: tester,
         showHeader: true,

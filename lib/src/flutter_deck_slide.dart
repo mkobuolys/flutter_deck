@@ -284,7 +284,7 @@ class FlutterDeckSlide extends StatelessWidget {
   /// Being used for testing purposes
   @visibleForTesting
   FlutterDeckThemeData? get theme => _theme;
-  
+
   @override
   Widget build(BuildContext context) {
     final materialTheme = Theme.of(context);

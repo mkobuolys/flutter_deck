@@ -5,8 +5,7 @@ import '../../test_utils.dart';
 
 void main() {
   group('TitleSlide', () {
-    testWidgets('should render all layout elements',
-        (tester) async {
+    testWidgets('should render all layout elements', (tester) async {
       final slideTester = SlideTester(
         tester: tester,
         showHeader: true,
@@ -57,7 +56,7 @@ void main() {
         );
 
         await slideTester.pumpSlide();
-        
+
         final headerFinder = find.text('Slide');
         final slideNumberFinder = find.text('1');
         final titleFinder = find.text('Title');
