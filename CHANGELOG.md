@@ -1,3 +1,7 @@
+# NEXT
+
+- chore: upgrade go_router to v12.0.0
+
 # 0.7.0
 
 - feat: add an optional custom widget to the footer
