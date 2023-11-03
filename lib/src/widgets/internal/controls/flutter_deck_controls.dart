@@ -66,7 +66,8 @@ class _FlutterDeckControlsState extends State<FlutterDeckControls> {
         shortcuts: <LogicalKeySet, Intent>{
           LogicalKeySet(controls.nextKey): const _GoNextIntent(),
           LogicalKeySet(controls.previousKey): const _GoPreviousIntent(),
-          LogicalKeySet(controls.openDrawerKey): const _OpenDrawerIntent(),
+          LogicalKeySet(controls.openDrawerKey): const _ToggleDrawerIntent(),
+          LogicalKeySet(controls.toggleMarkerKey): const _ToggleMarkerIntent(),
         },
         child: Actions(
           actions: <Type, Action<Intent>>{
@@ -76,8 +77,11 @@ class _FlutterDeckControlsState extends State<FlutterDeckControls> {
             _GoPreviousIntent: CallbackAction(
               onInvoke: (_) => _notifier?.previous(),
             ),
-            _OpenDrawerIntent: CallbackAction(
+            _ToggleDrawerIntent: CallbackAction(
               onInvoke: (_) => _notifier?.toggleDrawer(),
+            ),
+            _ToggleMarkerIntent: CallbackAction(
+              onInvoke: (_) => _notifier?.toggleMarker(),
             ),
           },
           child: child,
@@ -111,6 +115,10 @@ class _GoPreviousIntent extends Intent {
   const _GoPreviousIntent();
 }
 
-class _OpenDrawerIntent extends Intent {
-  const _OpenDrawerIntent();
+class _ToggleDrawerIntent extends Intent {
+  const _ToggleDrawerIntent();
+}
+
+class _ToggleMarkerIntent extends Intent {
+  const _ToggleMarkerIntent();
 }

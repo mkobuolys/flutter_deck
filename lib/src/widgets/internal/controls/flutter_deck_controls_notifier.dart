@@ -28,6 +28,9 @@ class FlutterDeckControlsNotifier with ChangeNotifier {
   /// Toggle the navigation drawer.
   void toggleDrawer() => _flutterDeck.drawerNotifier.toggle();
 
+  ///
+  void toggleMarker() => _flutterDeck.markerNotifier.toggle();
+
   /// Show the cursor.
   ///
   /// The cursor will be hidden after 3 seconds.

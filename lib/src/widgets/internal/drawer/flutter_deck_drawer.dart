@@ -31,6 +31,8 @@ class FlutterDeckDrawer extends StatelessWidget {
               itemCount: slides.length,
             ),
           ),
+          const Divider(),
+          const _Actions(),
         ],
       ),
     );
@@ -61,6 +63,30 @@ class _SlideCard extends StatelessWidget {
 
         Navigator.of(context).pop();
       },
+    );
+  }
+}
+
+class _Actions extends StatelessWidget {
+  const _Actions();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.edit_rounded),
+            onPressed: () {
+              context.flutterDeck.markerNotifier.toggle();
+              Navigator.of(context).pop();
+            },
+            tooltip: 'Use marker',
+          ),
+        ],
+      ),
     );
   }
 }

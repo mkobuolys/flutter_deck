@@ -17,6 +17,7 @@ class FlutterDeckConfiguration {
     this.controls = const FlutterDeckControlsConfiguration(),
     this.footer = const FlutterDeckFooterConfiguration(showFooter: false),
     this.header = const FlutterDeckHeaderConfiguration(showHeader: false),
+    this.marker = const FlutterDeckMarkerConfiguration(),
     this.progressIndicator = const FlutterDeckProgressIndicator.solid(),
     this.showProgress = true,
     this.transition = const FlutterDeckTransition.none(),
@@ -49,6 +50,9 @@ class FlutterDeckConfiguration {
   /// Header component configuration for the slide deck. By default, the header
   /// is not shown.
   final FlutterDeckHeaderConfiguration header;
+
+  ///
+  final FlutterDeckMarkerConfiguration marker;
 
   /// The progress indicator to show in the slide deck.
   ///
@@ -187,6 +191,7 @@ class FlutterDeckControlsConfiguration {
     this.nextKey = LogicalKeyboardKey.arrowRight,
     this.previousKey = LogicalKeyboardKey.arrowLeft,
     this.openDrawerKey = LogicalKeyboardKey.period,
+    this.toggleMarkerKey = LogicalKeyboardKey.keyM,
   });
 
   /// Whether controls are enabled or not.
@@ -200,6 +205,9 @@ class FlutterDeckControlsConfiguration {
 
   /// The key to use for opening the navigation drawer.
   final LogicalKeyboardKey openDrawerKey;
+
+  ///
+  final LogicalKeyboardKey toggleMarkerKey;
 }
 
 /// The configuration for the slide deck footer.
@@ -251,4 +259,19 @@ class FlutterDeckHeaderConfiguration {
 
   /// The title to show in the header.
   final String title;
+}
+
+///
+class FlutterDeckMarkerConfiguration {
+  ///
+  const FlutterDeckMarkerConfiguration({
+    this.color = const Color(0xFFFF5252),
+    this.strokeWidth = 5.0,
+  });
+
+  ///
+  final Color color;
+
+  ///
+  final double strokeWidth;
 }
