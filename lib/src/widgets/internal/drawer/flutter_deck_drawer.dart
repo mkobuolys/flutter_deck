@@ -80,7 +80,7 @@ class _Actions extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.edit_rounded),
             onPressed: () {
-              context.flutterDeck.markerNotifier.toggle();
+              context.flutterDeck.controlsNotifier.toggleMarker();
               Navigator.of(context).pop();
             },
             tooltip: 'Use marker',

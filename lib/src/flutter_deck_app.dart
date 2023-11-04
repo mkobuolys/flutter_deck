@@ -103,6 +103,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
   late FlutterDeckRouter _flutterDeckRouter;
   late GoRouter _router;
 
+  late FlutterDeckControlsNotifier _controlsNotifier;
   late FlutterDeckDrawerNotifier _drawerNotifier;
   late FlutterDeckMarkerNotifier _markerNotifier;
   late FlutterDeckThemeNotifier _themeNotifier;
@@ -111,11 +112,14 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
   void initState() {
     super.initState();
 
-    _drawerNotifier = FlutterDeckDrawerNotifier();
-    _markerNotifier = FlutterDeckMarkerNotifier();
-    _themeNotifier = FlutterDeckThemeNotifier(widget.themeMode);
-
     _buildRouter();
+
+    _controlsNotifier = FlutterDeckControlsNotifier(
+      drawerNotifier: _drawerNotifier = FlutterDeckDrawerNotifier(),
+      markerNotifier: _markerNotifier = FlutterDeckMarkerNotifier(),
+      router: _flutterDeckRouter,
+    );
+    _themeNotifier = FlutterDeckThemeNotifier(widget.themeMode);
   }
 
   void _buildRouter() {
@@ -150,10 +154,11 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
             configuration: widget.configuration,
             router: _flutterDeckRouter,
             speakerInfo: widget.speakerInfo,
+            controlsNotifier: _controlsNotifier,
             drawerNotifier: _drawerNotifier,
-            markerNotifier: _markerNotifier,
             themeNotifier: _themeNotifier,
             child: FlutterDeckControls(
+              notifier: _controlsNotifier,
               child: FlutterDeckMarker(
                 notifier: _markerNotifier,
                 child: FlutterDeckTheme(

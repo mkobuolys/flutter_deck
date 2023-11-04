@@ -46,23 +46,23 @@ class FlutterDeck extends InheritedWidget {
     required FlutterDeckConfiguration configuration,
     required FlutterDeckRouter router,
     required FlutterDeckSpeakerInfo? speakerInfo,
+    required FlutterDeckControlsNotifier controlsNotifier,
     required FlutterDeckDrawerNotifier drawerNotifier,
-    required FlutterDeckMarkerNotifier markerNotifier,
     required FlutterDeckThemeNotifier themeNotifier,
     required super.child,
     super.key,
   })  : _configuration = configuration,
         _router = router,
         _speakerInfo = speakerInfo,
+        _controlsNotifier = controlsNotifier,
         _drawerNotifier = drawerNotifier,
-        _markerNotifier = markerNotifier,
         _themeNotifier = themeNotifier;
 
   final FlutterDeckConfiguration _configuration;
   final FlutterDeckRouter _router;
   final FlutterDeckSpeakerInfo? _speakerInfo;
+  final FlutterDeckControlsNotifier _controlsNotifier;
   final FlutterDeckDrawerNotifier _drawerNotifier;
-  final FlutterDeckMarkerNotifier _markerNotifier;
   final FlutterDeckThemeNotifier _themeNotifier;
 
   /// Returns the [FlutterDeckRouter] for the slide deck.
@@ -109,8 +109,8 @@ class FlutterDeck extends InheritedWidget {
   /// Returns the [FlutterDeckDrawerNotifier] for the slide deck.
   FlutterDeckDrawerNotifier get drawerNotifier => _drawerNotifier;
 
-  ///
-  FlutterDeckMarkerNotifier get markerNotifier => _markerNotifier;
+  /// Returns the [FlutterDeckControlsNotifier] for the slide deck.
+  FlutterDeckControlsNotifier get controlsNotifier => _controlsNotifier;
 
   /// Returns the [FlutterDeckThemeNotifier] for the slide deck.
   FlutterDeckThemeNotifier get themeNotifier => _themeNotifier;
@@ -132,8 +132,8 @@ class FlutterDeck extends InheritedWidget {
       _configuration != oldWidget._configuration ||
       _router != oldWidget._router ||
       _speakerInfo != oldWidget._speakerInfo ||
+      _controlsNotifier != oldWidget._controlsNotifier ||
       _drawerNotifier != oldWidget._drawerNotifier ||
-      _markerNotifier != oldWidget._markerNotifier ||
       _themeNotifier != oldWidget._themeNotifier;
 }
 
