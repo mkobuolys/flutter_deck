@@ -4,19 +4,24 @@ import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/widgets/internal/marker/flutter_deck_marker_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/marker/flutter_deck_marker_painter.dart';
 
+/// A widget that allows the user to draw on the slide.
 ///
+/// This widget is automatically added to the widget tree and should not be used
+/// directly by the user.
 class FlutterDeckMarker extends StatelessWidget {
+  /// Creates a [FlutterDeckMarker].
   ///
+  /// The [notifier] and [child] arguments must not be null.
   const FlutterDeckMarker({
     required this.notifier,
     required this.child,
     super.key,
   });
 
-  ///
+  /// The notifier used to control the slide deck's marker.
   final FlutterDeckMarkerNotifier notifier;
 
-  ///
+  /// The widget below this widget in the tree.
   final Widget child;
 
   void _updatePath(BuildContext context, Offset globalPosition, int index) {

@@ -51,7 +51,7 @@ class FlutterDeckConfiguration {
   /// is not shown.
   final FlutterDeckHeaderConfiguration header;
 
-  ///
+  /// The marker configuration for the slide deck.
   final FlutterDeckMarkerConfiguration marker;
 
   /// The progress indicator to show in the slide deck.
@@ -186,6 +186,7 @@ class FlutterDeckControlsConfiguration {
   /// - Next slide: ArrowRight
   /// - Previous slide: ArrowLeft
   /// - Open drawer: Period
+  /// - Toggle marker: KeyM
   const FlutterDeckControlsConfiguration({
     this.enabled = true,
     this.nextKey = LogicalKeyboardKey.arrowRight,
@@ -206,7 +207,7 @@ class FlutterDeckControlsConfiguration {
   /// The key to use for opening the navigation drawer.
   final LogicalKeyboardKey openDrawerKey;
 
-  ///
+  /// The key to use for toggling the marker.
   final LogicalKeyboardKey toggleMarkerKey;
 }
 
@@ -261,17 +262,18 @@ class FlutterDeckHeaderConfiguration {
   final String title;
 }
 
-///
+/// The configuration for the slide deck marker.
 class FlutterDeckMarkerConfiguration {
-  ///
+  /// Creates a configuration for the slide deck marker. By default, the marker
+  /// is red with a stroke width of 5px.
   const FlutterDeckMarkerConfiguration({
     this.color = const Color(0xFFFF5252),
     this.strokeWidth = 5.0,
   });
 
-  ///
+  /// The color of the marker.
   final Color color;
 
-  ///
+  /// The stroke width of the marker.
   final double strokeWidth;
 }

@@ -11,6 +11,7 @@ import 'package:flutter_deck/src/widgets/internal/controls/flutter_deck_controls
 /// * `nextKey` - Go to the next slide.
 /// * `previousKey` - Go to the previous slide.
 /// * `openDrawerKey` - Open the navigation drawer.
+/// * `toggleMarkerKey` - Toggle the slide deck's marker.
 ///
 /// Cursor visibility is also handled by this widget. The cursor will be hidden
 /// after 3 seconds of inactivity.
@@ -22,6 +23,9 @@ class FlutterDeckControls extends StatelessWidget {
   ///
   /// [child] is the widget that will be wrapped by this widget. It should be
   /// the root of the slide deck.
+  ///
+  /// [notifier] is the [FlutterDeckControlsNotifier] that will be used to
+  /// control the slide deck.
   const FlutterDeckControls({
     required this.child,
     required this.notifier,
@@ -31,7 +35,7 @@ class FlutterDeckControls extends StatelessWidget {
   /// The widget below this widget in the tree.
   final Widget child;
 
-  ///
+  /// The notifier used to control the slide deck.
   final FlutterDeckControlsNotifier notifier;
 
   @override

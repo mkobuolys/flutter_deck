@@ -3,11 +3,13 @@ import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 
-/// A widget that used as a navigation drawer for the [FlutterDeck].
+/// A widget that is used as a navigation drawer for the [FlutterDeck].
 ///
 /// This widget renders a [FlutterDeckThemeSwitcher] to switch between light and
-/// dark themes and a list of all the slides in the deck. The user can tap on
-/// any slide to navigate to it.
+/// dark themes, a list of all the slides in the deck, and additional slide
+/// deck controls.
+///
+/// The user can tap on any slide to navigate to it.
 class FlutterDeckDrawer extends StatelessWidget {
   /// Creates a [FlutterDeckDrawer].
   const FlutterDeckDrawer({super.key});

@@ -2,18 +2,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck_configuration.dart';
 
-///
+/// A [CustomPainter] that draws all the paths of the marker.
 class FlutterDeckMarkerPainter extends CustomPainter {
+  /// Creates a [FlutterDeckMarkerPainter].
   ///
+  /// The [configuration] and [paths] arguments must not be null.
   const FlutterDeckMarkerPainter({
     required this.configuration,
     required this.paths,
   });
 
-  ///
+  /// The configuration of the marker.
   final FlutterDeckMarkerConfiguration configuration;
 
-  ///
+  /// The paths drawn on the slide.
   final List<List<Offset>> paths;
 
   @override

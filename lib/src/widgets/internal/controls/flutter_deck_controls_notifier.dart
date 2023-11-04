@@ -8,8 +8,6 @@ import 'package:flutter_deck/src/widgets/internal/marker/marker.dart';
 
 /// The [ChangeNotifier] used to control the slide deck and handle cursor
 /// visibility.
-///
-/// This is used internally only.
 class FlutterDeckControlsNotifier with ChangeNotifier {
   /// Creates a [FlutterDeckControlsNotifier].
   FlutterDeckControlsNotifier({
@@ -41,7 +39,12 @@ class FlutterDeckControlsNotifier with ChangeNotifier {
   /// Toggle the navigation drawer.
   void toggleDrawer() => _drawerNotifier.toggle();
 
+  /// Toggle the slide deck's marker.
   ///
+  /// When the marker is enabled, the following intents are disabled:
+  /// * [GoNextIntent]
+  /// * [GoPreviousIntent]
+  /// * [ToggleDrawerIntent]
   void toggleMarker() {
     _markerNotifier.toggle();
 
@@ -75,6 +78,6 @@ class FlutterDeckControlsNotifier with ChangeNotifier {
     notifyListeners();
   }
 
-  ///
+  /// Whether the given [intent] is disabled.
   bool intentDisabled(Intent intent) => _disabledIntents.contains(intent);
 }
