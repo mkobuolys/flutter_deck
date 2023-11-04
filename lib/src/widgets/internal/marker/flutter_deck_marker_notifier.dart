@@ -32,7 +32,12 @@ class FlutterDeckMarkerNotifier with ChangeNotifier {
   void toggle() {
     _enabled = !_enabled;
 
-    if (!_enabled) _paths = [];
+    clear();
+  }
+
+  ///
+  void clear() {
+    _paths = [];
 
     notifyListeners();
   }

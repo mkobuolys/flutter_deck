@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
+import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/widgets/internal/marker/flutter_deck_marker_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/marker/flutter_deck_marker_painter.dart';
 
@@ -63,7 +64,35 @@ class FlutterDeckMarker extends StatelessWidget {
                   ),
                 ),
               ),
-              // TODO(mkobuolys): actions to clear and close
+              Align(
+                alignment: AlignmentDirectional.centerEnd,
+                child: Container(
+                  margin: FlutterDeckLayout.slidePadding,
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    color: Colors.black.withOpacity(0.5),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.cleaning_services_rounded),
+                        onPressed:
+                            notifier.paths.isNotEmpty ? notifier.clear : null,
+                        tooltip: 'Clear',
+                      ),
+                      const SizedBox(height: 4),
+                      IconButton(
+                        icon: const Icon(Icons.clear_rounded),
+                        onPressed:
+                            context.flutterDeck.controlsNotifier.toggleMarker,
+                        tooltip: 'Close',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           );
         }

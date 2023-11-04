@@ -156,15 +156,13 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
             speakerInfo: widget.speakerInfo,
             controlsNotifier: _controlsNotifier,
             drawerNotifier: _drawerNotifier,
+            markerNotifier: _markerNotifier,
             themeNotifier: _themeNotifier,
             child: FlutterDeckControls(
               notifier: _controlsNotifier,
-              child: FlutterDeckMarker(
-                notifier: _markerNotifier,
-                child: FlutterDeckTheme(
-                  data: theme,
-                  child: child!,
-                ),
+              child: FlutterDeckTheme(
+                data: theme,
+                child: child!,
               ),
             ),
           ),
