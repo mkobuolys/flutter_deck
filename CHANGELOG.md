@@ -1,4 +1,4 @@
-# NEXT
+# 0.8.0
 
 - feat: add marker tool
 - feat: add quote template `FlutterDeckSlide.quote`
