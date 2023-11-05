@@ -17,6 +17,7 @@ class FlutterDeckConfiguration {
     this.controls = const FlutterDeckControlsConfiguration(),
     this.footer = const FlutterDeckFooterConfiguration(showFooter: false),
     this.header = const FlutterDeckHeaderConfiguration(showHeader: false),
+    this.marker = const FlutterDeckMarkerConfiguration(),
     this.progressIndicator = const FlutterDeckProgressIndicator.solid(),
     this.showProgress = true,
     this.transition = const FlutterDeckTransition.none(),
@@ -49,6 +50,9 @@ class FlutterDeckConfiguration {
   /// Header component configuration for the slide deck. By default, the header
   /// is not shown.
   final FlutterDeckHeaderConfiguration header;
+
+  /// The marker configuration for the slide deck.
+  final FlutterDeckMarkerConfiguration marker;
 
   /// The progress indicator to show in the slide deck.
   ///
@@ -182,11 +186,13 @@ class FlutterDeckControlsConfiguration {
   /// - Next slide: ArrowRight
   /// - Previous slide: ArrowLeft
   /// - Open drawer: Period
+  /// - Toggle marker: KeyM
   const FlutterDeckControlsConfiguration({
     this.enabled = true,
     this.nextKey = LogicalKeyboardKey.arrowRight,
     this.previousKey = LogicalKeyboardKey.arrowLeft,
     this.openDrawerKey = LogicalKeyboardKey.period,
+    this.toggleMarkerKey = LogicalKeyboardKey.keyM,
   });
 
   /// Whether controls are enabled or not.
@@ -200,6 +206,9 @@ class FlutterDeckControlsConfiguration {
 
   /// The key to use for opening the navigation drawer.
   final LogicalKeyboardKey openDrawerKey;
+
+  /// The key to use for toggling the marker.
+  final LogicalKeyboardKey toggleMarkerKey;
 }
 
 /// The configuration for the slide deck footer.
@@ -251,4 +260,20 @@ class FlutterDeckHeaderConfiguration {
 
   /// The title to show in the header.
   final String title;
+}
+
+/// The configuration for the slide deck marker.
+class FlutterDeckMarkerConfiguration {
+  /// Creates a configuration for the slide deck marker. By default, the marker
+  /// is red with a stroke width of 5px.
+  const FlutterDeckMarkerConfiguration({
+    this.color = const Color(0xFFFF5252),
+    this.strokeWidth = 5.0,
+  });
+
+  /// The color of the marker.
+  final Color color;
+
+  /// The stroke width of the marker.
+  final double strokeWidth;
 }

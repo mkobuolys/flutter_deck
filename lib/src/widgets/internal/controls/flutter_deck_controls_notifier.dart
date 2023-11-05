@@ -1,32 +1,61 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter_deck/src/flutter_deck.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_deck/src/flutter_deck_router.dart';
+import 'package:flutter_deck/src/widgets/internal/controls/actions/actions.dart';
+import 'package:flutter_deck/src/widgets/internal/drawer/drawer.dart';
+import 'package:flutter_deck/src/widgets/internal/marker/marker.dart';
 
 /// The [ChangeNotifier] used to control the slide deck and handle cursor
 /// visibility.
-///
-/// This is used internally only.
 class FlutterDeckControlsNotifier with ChangeNotifier {
   /// Creates a [FlutterDeckControlsNotifier].
-  FlutterDeckControlsNotifier(this._flutterDeck);
+  FlutterDeckControlsNotifier({
+    required FlutterDeckDrawerNotifier drawerNotifier,
+    required FlutterDeckMarkerNotifier markerNotifier,
+    required FlutterDeckRouter router,
+  })  : _drawerNotifier = drawerNotifier,
+        _markerNotifier = markerNotifier,
+        _router = router;
 
-  final FlutterDeck _flutterDeck;
+  final FlutterDeckDrawerNotifier _drawerNotifier;
+  final FlutterDeckMarkerNotifier _markerNotifier;
+  final FlutterDeckRouter _router;
 
+  var _cursorVisible = false;
   Timer? _cursorVisibleTimer;
+
+  Set<Intent> _disabledIntents = {};
 
   /// Whether the cursor should be visible.
   bool get cursorVisible => _cursorVisible;
-  var _cursorVisible = false;
 
   /// Go to the next slide.
-  void next() => _flutterDeck.next();
+  void next() => _router.next();
 
   /// Go to the previous slide.
-  void previous() => _flutterDeck.previous();
+  void previous() => _router.previous();
 
   /// Toggle the navigation drawer.
-  void toggleDrawer() => _flutterDeck.drawerNotifier.toggle();
+  void toggleDrawer() => _drawerNotifier.toggle();
+
+  /// Toggle the slide deck's marker.
+  ///
+  /// When the marker is enabled, the following intents are disabled:
+  /// * [GoNextIntent]
+  /// * [GoPreviousIntent]
+  /// * [ToggleDrawerIntent]
+  void toggleMarker() {
+    _markerNotifier.toggle();
+
+    _disabledIntents = {
+      if (_markerNotifier.enabled) ...{
+        const GoNextIntent(),
+        const GoPreviousIntent(),
+        const ToggleDrawerIntent(),
+      },
+    };
+  }
 
   /// Show the cursor.
   ///
@@ -48,4 +77,7 @@ class FlutterDeckControlsNotifier with ChangeNotifier {
     _cursorVisible = visible;
     notifyListeners();
   }
+
+  /// Whether the given [intent] is disabled.
+  bool intentDisabled(Intent intent) => _disabledIntents.contains(intent);
 }

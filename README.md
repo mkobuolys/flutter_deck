@@ -69,6 +69,7 @@ FlutterDeckApp(
       nextKey: LogicalKeyboardKey.arrowRight,
       previousKey: LogicalKeyboardKey.arrowLeft,
       openDrawerKey: LogicalKeyboardKey.period,
+      toggleMarkerKey: LogicalKeyboardKey.keyM,
     ),
     footer: FlutterDeckFooterConfiguration(
       showSlideNumbers: true,
@@ -76,6 +77,10 @@ FlutterDeckApp(
     ),
     header: FlutterDeckHeaderConfiguration(
       showHeader: false,
+    ),
+    marker: FlutterDeckMarkerConfiguration(
+      color: Colors.cyan,
+      strokeWidth: 8.0,
     ),
     progressIndicator: FlutterDeckProgressIndicator.gradient(
       gradient: LinearGradient(
@@ -730,6 +735,12 @@ Every slide deck comes with a navigation drawer that can be used to navigate thr
 
 ![Navigation demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/navigation.gif?raw=true)
 
+## Marker tool
+
+The marker tool allows you to draw on top of the slide. It can be used to highlight specific parts of the slide, or to draw anything you want. The tool is available in the navigation drawer, or just press "M" on your keyboard (it's also possible to specify a custom key binding for the `toggleMarkerKey` property in `FlutterDeckControlsConfiguration`).
+
+![Marker demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/marker.gif?raw=true)
+
 ## Generating slides
 
 This package comes with a [mason][mason_link] template that can be used to generate a new slide for the slide deck.
@@ -764,7 +775,7 @@ mason make flutter_deck_slide
 | [Control your Flutter application on the fly with Firebase Remote Config](https://github.com/mkobuolys/firebase-remote-config-talk) | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link]                                            |
 | [Introduction to Flutter Web](https://github.com/afucher/flutter_web_101)                                                           | Portuguese | [Arthur Fücher](https://x.com/Thur)                                                          |
 | [Make smarter decisions faster with Firebase Remote Config](https://github.com/mkobuolys/f3-firebase-remote-config-talk)            | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link] & [Darja Orlova](https://x.com/dariadroid) |
-| [Flutter for the win: Sviluppo Cross Platform alla massima potenza](https://github.com/polilluminato/linuxday-2023-presentation)    | Italian    | [Alberto Bonacina](https://x.com/polilluminato)                                              |
+| [Flutter for the win: Cross-platform development at maximum power](https://github.com/polilluminato/linuxday-2023-presentation)     | Italian    | [Alberto Bonacina](https://x.com/polilluminato)                                              |
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg

@@ -305,10 +305,13 @@ class FlutterDeckSlide extends StatelessWidget {
       child: FlutterDeckTheme(
         data: theme.copyWith(textTheme: theme.textTheme.apply(color: color)),
         child: Builder(
-          builder: (context) => Scaffold(
-            backgroundColor: backgroundColor,
-            drawer: const FlutterDeckDrawer(),
-            body: _SlideBody(child: _builder(context)),
+          builder: (context) => FlutterDeckMarker(
+            notifier: context.flutterDeck.markerNotifier,
+            child: Scaffold(
+              backgroundColor: backgroundColor,
+              drawer: const FlutterDeckDrawer(),
+              body: _SlideBody(child: _builder(context)),
+            ),
           ),
         ),
       ),
@@ -325,6 +328,7 @@ class _SlideBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final configuration = context.flutterDeck.configuration;
     final scaffoldState = Scaffold.of(context);
 
     return FlutterDeckDrawerListener(
@@ -333,12 +337,12 @@ class _SlideBody extends StatelessWidget {
             ? scaffoldState.closeDrawer()
             : scaffoldState.openDrawer();
       },
-      child: context.flutterDeck.configuration.showProgress
+      child: configuration.showProgress
           ? Stack(
               alignment: Alignment.bottomCenter,
               children: [
                 child,
-                context.flutterDeck.configuration.progressIndicator,
+                configuration.progressIndicator,
               ],
             )
           : child,

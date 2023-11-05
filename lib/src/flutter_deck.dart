@@ -24,8 +24,11 @@ import 'package:flutter_deck/src/widgets/internal/internal.dart';
 /// * [FlutterDeckConfiguration], which is used to configure the slide deck.
 /// * [FlutterDeckRouter], which is used to navigate between slides and steps.
 /// * [FlutterDeckSpeakerInfo], which is used to access the speaker info.
+/// * [FlutterDeckControlsNotifier], which is used to control the slide deck.
 /// * [FlutterDeckDrawerNotifier], which is used to control the slide deck's
-///  drawer.
+/// drawer.
+/// * [FlutterDeckMarkerNotifier], which is used to control the slide deck's
+/// marker.
 /// * [FlutterDeckThemeNotifier], which is used to control the slide deck's
 /// theme.
 class FlutterDeck extends InheritedWidget {
@@ -37,8 +40,13 @@ class FlutterDeck extends InheritedWidget {
   ///
   /// The [speakerInfo] is optional and is used to access the speaker info.
   ///
+  /// The [controlsNotifier] is required and is used to control the slide deck.
+  ///
   /// The [drawerNotifier] is required and is used to control the slide deck's
   /// drawer.
+  ///
+  /// The [markerNotifier] is required and is used to control the slide deck's
+  /// marker.
   ///
   /// The [themeNotifier] is required and is used to control the slide deck's
   /// theme.
@@ -46,20 +54,26 @@ class FlutterDeck extends InheritedWidget {
     required FlutterDeckConfiguration configuration,
     required FlutterDeckRouter router,
     required FlutterDeckSpeakerInfo? speakerInfo,
+    required FlutterDeckControlsNotifier controlsNotifier,
     required FlutterDeckDrawerNotifier drawerNotifier,
+    required FlutterDeckMarkerNotifier markerNotifier,
     required FlutterDeckThemeNotifier themeNotifier,
     required super.child,
     super.key,
   })  : _configuration = configuration,
         _router = router,
         _speakerInfo = speakerInfo,
+        _controlsNotifier = controlsNotifier,
         _drawerNotifier = drawerNotifier,
+        _markerNotifier = markerNotifier,
         _themeNotifier = themeNotifier;
 
   final FlutterDeckConfiguration _configuration;
   final FlutterDeckRouter _router;
   final FlutterDeckSpeakerInfo? _speakerInfo;
+  final FlutterDeckControlsNotifier _controlsNotifier;
   final FlutterDeckDrawerNotifier _drawerNotifier;
+  final FlutterDeckMarkerNotifier _markerNotifier;
   final FlutterDeckThemeNotifier _themeNotifier;
 
   /// Returns the [FlutterDeckRouter] for the slide deck.
@@ -103,8 +117,14 @@ class FlutterDeck extends InheritedWidget {
   /// Returns the global configuration for the slide deck.
   FlutterDeckConfiguration get globalConfiguration => _configuration;
 
+  /// Returns the [FlutterDeckControlsNotifier] for the slide deck.
+  FlutterDeckControlsNotifier get controlsNotifier => _controlsNotifier;
+
   /// Returns the [FlutterDeckDrawerNotifier] for the slide deck.
   FlutterDeckDrawerNotifier get drawerNotifier => _drawerNotifier;
+
+  /// Returns the [FlutterDeckMarkerNotifier] for the slide deck.
+  FlutterDeckMarkerNotifier get markerNotifier => _markerNotifier;
 
   /// Returns the [FlutterDeckThemeNotifier] for the slide deck.
   FlutterDeckThemeNotifier get themeNotifier => _themeNotifier;
@@ -126,7 +146,9 @@ class FlutterDeck extends InheritedWidget {
       _configuration != oldWidget._configuration ||
       _router != oldWidget._router ||
       _speakerInfo != oldWidget._speakerInfo ||
+      _controlsNotifier != oldWidget._controlsNotifier ||
       _drawerNotifier != oldWidget._drawerNotifier ||
+      _markerNotifier != oldWidget._markerNotifier ||
       _themeNotifier != oldWidget._themeNotifier;
 }
 
