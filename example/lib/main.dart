@@ -41,6 +41,11 @@ class FlutterDeckExample extends StatelessWidget {
         header: FlutterDeckHeaderConfiguration(
           showHeader: false,
         ),
+        // Override the default marker configuration.
+        marker: FlutterDeckMarkerConfiguration(
+          color: Colors.cyan,
+          strokeWidth: 8.0,
+        ),
         // Show progress indicator with specifc gradient and background color.
         progressIndicator: FlutterDeckProgressIndicator.gradient(
           gradient: LinearGradient(
