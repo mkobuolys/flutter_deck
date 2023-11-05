@@ -13,10 +13,10 @@ mason make flutter_deck_slide --name new --template blank
 
 ## Variables ✨
 
-| Variable   | Description                 | Default                                                          | Type     |
-| ---------- | --------------------------- | ---------------------------------------------------------------- | -------- |
-| `name`     | The name of the slide class | `new`                                                            | `string` |
-| `template` | The template of the slide   | `blank (big-fact, blank, custom, image, split, template, title)` | `enum`   |
+| Variable   | Description                 | Default                                                                 | Type     |
+| ---------- | --------------------------- | ----------------------------------------------------------------------- | -------- |
+| `name`     | The name of the slide class | `new`                                                                   | `string` |
+| `template` | The template of the slide   | `blank (big-fact, blank, custom, image, quote, split, template, title)` | `enum`   |
 
 ## Output 📦
 

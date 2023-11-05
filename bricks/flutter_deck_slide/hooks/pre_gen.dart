@@ -9,6 +9,7 @@ void run(HookContext context) {
     'use_blank': template == 'blank',
     'use_custom': template == 'custom',
     'use_image': template == 'image',
+    'use_quote': template == 'quote',
     'use_split': template == 'split',
     'use_template': template == 'template',
     'use_title': template == 'title',

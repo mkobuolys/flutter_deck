@@ -1,7 +1,7 @@
 name: flutter_deck_slide
 description: Generate a new slide for the slide deck. Built for the flutter_deck package.
 repository: https://github.com/mkobuolys/flutter_deck/tree/main/bricks/flutter_deck_slide
-version: 0.1.0
+version: 0.2.0
 
 environment:
   mason: ">=0.1.0-dev.51 <0.1.0"
@@ -17,6 +17,7 @@ vars:
       - blank
       - custom
       - image
+      - quote
       - split
       - template
       - title
