@@ -1,5 +1,6 @@
 # NEXT
 
+- feat: add marker tool
 - chore: upgrade go_router to v12.0.0
 
 # 0.7.0
