@@ -93,6 +93,36 @@ class FlutterDeckSlide extends StatelessWidget {
   })  : _builder = builder,
         _theme = theme;
 
+  /// Creates a new big fact slide.
+  ///
+  /// This constructor creates a big fact slide in a slide deck with the default
+  /// header and footer.
+  ///
+  /// The [title] argument must not be null. The [subtitle] and
+  /// [backgroundBuilder] arguments are optional.
+  ///
+  /// [subtitleMaxLines] is the maximum number of lines for the subtitle. By
+  /// default it is 3.
+  ///
+  /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
+  FlutterDeckSlide.bigFact({
+    required String title,
+    String? subtitle,
+    WidgetBuilder? backgroundBuilder,
+    int? subtitleMaxLines,
+    FlutterDeckThemeData? theme,
+    Key? key,
+  }) : this._(
+          builder: (context) => FlutterDeckBigFactSlide(
+            title: title,
+            subtitle: subtitle,
+            backgroundBuilder: backgroundBuilder,
+            subtitleMaxLines: subtitleMaxLines,
+          ),
+          theme: theme,
+          key: key,
+        );
+
   /// Creates a new blank slide.
   ///
   /// This constructor creates a blank slide in a slide deck with the default
@@ -155,6 +185,36 @@ class FlutterDeckSlide extends StatelessWidget {
           builder: (context) => FlutterDeckImageSlide(
             imageBuilder: imageBuilder,
             label: label,
+            backgroundBuilder: backgroundBuilder,
+          ),
+          theme: theme,
+          key: key,
+        );
+
+  /// Creates a new quote slide.
+  ///
+  /// This constructor creates a quote slide in a slide deck with the default
+  /// header and footer.
+  ///
+  /// The [quote] argument must not be null. The [attribution] and
+  /// [backgroundBuilder] arguments are optional.
+  ///
+  /// [quoteMaxLines] is the maximum number of lines for the quote. By default
+  /// it is 5.
+  ///
+  /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
+  FlutterDeckSlide.quote({
+    required String quote,
+    String? attribution,
+    WidgetBuilder? backgroundBuilder,
+    int? quoteMaxLines,
+    FlutterDeckThemeData? theme,
+    Key? key,
+  }) : this._(
+          builder: (context) => FlutterDeckQuoteSlide(
+            quote: quote,
+            attribution: attribution,
+            quoteMaxLines: quoteMaxLines,
             backgroundBuilder: backgroundBuilder,
           ),
           theme: theme,
@@ -241,36 +301,6 @@ class FlutterDeckSlide extends StatelessWidget {
             title: title,
             subtitle: subtitle,
             backgroundBuilder: backgroundBuilder,
-          ),
-          theme: theme,
-          key: key,
-        );
-
-  /// Creates a new big fact slide.
-  ///
-  /// This constructor creates a big fact slide in a slide deck with the default
-  /// header and footer.
-  ///
-  /// The [title] argument must not be null. The [subtitle] and
-  /// [backgroundBuilder] arguments are optional.
-  ///
-  /// [subtitleMaxLines] is the maximum number of lines for the subtitle. By
-  /// default it is 3.
-  ///
-  /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
-  FlutterDeckSlide.bigFact({
-    required String title,
-    String? subtitle,
-    WidgetBuilder? backgroundBuilder,
-    int? subtitleMaxLines,
-    FlutterDeckThemeData? theme,
-    Key? key,
-  }) : this._(
-          builder: (context) => FlutterDeckBigFactSlide(
-            title: title,
-            subtitle: subtitle,
-            backgroundBuilder: backgroundBuilder,
-            subtitleMaxLines: subtitleMaxLines,
           ),
           theme: theme,
           key: key,
