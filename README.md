@@ -257,6 +257,39 @@ class ImageSlide extends FlutterDeckSlideWidget {
 
 ![Image slide example](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/image.png?raw=true)
 
+### Quote slide
+
+To create a quote slide, use the `FlutterDeckSlide.quote` constructor. It is responsible for rendering the quote and attribution below it.
+
+```dart
+class QuoteSlide extends FlutterDeckSlideWidget {
+  const QuoteSlide()
+      : super(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/quote',
+            header: FlutterDeckHeaderConfiguration(
+              title: 'Quote slide template',
+            ),
+          ),
+        );
+
+  @override
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.quote(
+      quote: '"If you really look closely, most overnight successes took a long time."',
+      attribution: '- Steve Jobs',
+      theme: FlutterDeckTheme.of(context).copyWith(
+        quoteSlideTheme: const FlutterDeckQuoteSlideThemeData(
+          quoteTextStyle: TextStyle(color: Colors.yellowAccent),
+        ),
+      ),
+    );
+  }
+}
+```
+
+![Quote slide example](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/quote.png?raw=true)
+
 ### Split slide
 
 To create a split slide, use the `FlutterDeckSlide.split` constructor. It is responsible for rendering the default header and footer of the slide deck, and use the `leftBuilder` and `rightBuilder` to create the content of the left and right columns. Make sure to use text styles from `Theme` or `FlutterDeckTheme` to apply the correct text styling for specific slide sections.

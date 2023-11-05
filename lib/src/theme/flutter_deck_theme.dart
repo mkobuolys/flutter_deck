@@ -91,6 +91,10 @@ class FlutterDeckThemeData {
       imageSlideTheme: FlutterDeckImageSlideThemeData(
         labelTextStyle: textTheme.bodySmall,
       ),
+      quoteSlideTheme: FlutterDeckQuoteSlideThemeData(
+        attributionTextStyle: textTheme.subtitle,
+        quoteTextStyle: textTheme.title.copyWith(fontStyle: FontStyle.italic),
+      ),
       slideTheme: FlutterDeckSlideThemeData(
         backgroundColor: colorScheme.background,
         color: colorScheme.onBackground,
@@ -126,6 +130,7 @@ class FlutterDeckThemeData {
     required this.footerTheme,
     required this.headerTheme,
     required this.imageSlideTheme,
+    required this.quoteSlideTheme,
     required this.slideTheme,
     required this.speakerInfoWidgetTheme,
     required this.splitSlideTheme,
@@ -151,6 +156,9 @@ class FlutterDeckThemeData {
 
   /// The visual properties of an image slide.
   final FlutterDeckImageSlideThemeData imageSlideTheme;
+
+  /// The visual properties of a quote slide.
+  final FlutterDeckQuoteSlideThemeData quoteSlideTheme;
 
   /// The base visual properties of a slide.
   final FlutterDeckSlideThemeData slideTheme;
@@ -179,6 +187,7 @@ class FlutterDeckThemeData {
     FlutterDeckFooterThemeData? footerTheme,
     FlutterDeckHeaderThemeData? headerTheme,
     FlutterDeckImageSlideThemeData? imageSlideTheme,
+    FlutterDeckQuoteSlideThemeData? quoteSlideTheme,
     FlutterDeckSlideThemeData? slideTheme,
     FlutterDeckSpeakerInfoWidgetThemeData? speakerInfoWidgetTheme,
     FlutterDeckSplitSlideThemeData? splitSlideTheme,
@@ -192,6 +201,7 @@ class FlutterDeckThemeData {
       footerTheme: this.footerTheme.merge(footerTheme),
       headerTheme: this.headerTheme.merge(headerTheme),
       imageSlideTheme: this.imageSlideTheme.merge(imageSlideTheme),
+      quoteSlideTheme: this.quoteSlideTheme.merge(quoteSlideTheme),
       slideTheme: this.slideTheme.merge(slideTheme),
       speakerInfoWidgetTheme:
           this.speakerInfoWidgetTheme.merge(speakerInfoWidgetTheme),
@@ -213,6 +223,7 @@ class FlutterDeckThemeData {
       footerTheme: footerTheme.merge(other.footerTheme),
       headerTheme: headerTheme.merge(other.headerTheme),
       imageSlideTheme: imageSlideTheme.merge(other.imageSlideTheme),
+      quoteSlideTheme: quoteSlideTheme.merge(other.quoteSlideTheme),
       slideTheme: slideTheme.merge(other.slideTheme),
       speakerInfoWidgetTheme:
           speakerInfoWidgetTheme.merge(other.speakerInfoWidgetTheme),
