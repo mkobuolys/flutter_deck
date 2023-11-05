@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import '../../test_utils.dart';
 
 void main() {
@@ -38,9 +39,9 @@ void main() {
 
       await slideTester.pumpSlide();
 
-      final sliderFinder = find.byKey(const Key('BigFactslide'));
-      final slider = tester.widget(sliderFinder) as FlutterDeckSlide;
-      final textStyleFinder = slider.theme!.bigFactSlideTheme.titleTextStyle!;
+      final slideFinder = find.byKey(const Key('BigFactslide'));
+      final slide = tester.widget(slideFinder) as FlutterDeckSlide;
+      final textStyleFinder = slide.theme!.bigFactSlideTheme.titleTextStyle!;
       final textStyleColor = textStyleFinder.color;
 
       expect(textStyleColor, equals(Colors.amber));

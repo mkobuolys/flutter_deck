@@ -4,29 +4,33 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../test_utils.dart';
 
+const _attribution = '- Author';
+const _quote = 'Quote text';
+const _key = Key('QuoteSlide');
+
 void main() {
-  group('ImageSlide', () {
+  group('QuoteSlide', () {
     testWidgets('should render all layout elements', (tester) async {
       final slideTester = SlideTester(
         tester: tester,
         showHeader: true,
         showFooter: true,
-        slide: const ImageSlide(),
+        slide: const QuoteSlide(),
       );
 
       await slideTester.pumpSlide();
 
-      final titleFinder = find.text('Slide');
-      final labelFinder = find.text('Here goes the label of the image');
-      final slideNumberFinder = find.text('1');
       final socialHandleFinder = find.text('@flutter_deck');
-      final imageFinder = find.byKey(const Key('Image Key'));
+      final headerFinder = find.text('Slide');
+      final slideNumberFinder = find.text('1');
+      final quoteFinder = find.text(_quote);
+      final attributionFinder = find.text(_attribution);
 
-      expect(imageFinder, findsOneWidget);
-      expect(titleFinder, findsOneWidget);
-      expect(labelFinder, findsOneWidget);
-      expect(slideNumberFinder, findsOneWidget);
       expect(socialHandleFinder, findsOneWidget);
+      expect(headerFinder, findsOneWidget);
+      expect(slideNumberFinder, findsOneWidget);
+      expect(quoteFinder, findsOneWidget);
+      expect(attributionFinder, findsOneWidget);
     });
 
     testWidgets('should apply theming', (tester) async {
@@ -34,16 +38,17 @@ void main() {
         tester: tester,
         showHeader: false,
         showFooter: false,
-        slide: const ImageSlide(),
+        slide: const QuoteSlide(),
       );
 
       await slideTester.pumpSlide();
 
-      final containerFinder = find.byKey(const Key('Container Key'));
-      final container = tester.widget(containerFinder) as Container;
-      final backgroundColor = container.color;
+      final slideFinder = find.byKey(_key);
+      final slide = tester.widget(slideFinder) as FlutterDeckSlide;
+      final textStyleFinder = slide.theme!.quoteSlideTheme.quoteTextStyle!;
+      final textStyleColor = textStyleFinder.color;
 
-      expect(backgroundColor, equals(Colors.orange));
+      expect(textStyleColor, equals(Colors.yellowAccent));
     });
 
     group('when footer and header are disabled', () {
@@ -52,7 +57,7 @@ void main() {
           tester: tester,
           showHeader: false,
           showFooter: false,
-          slide: const ImageSlide(),
+          slide: const QuoteSlide(),
         );
 
         await slideTester.pumpSlide();
@@ -60,35 +65,38 @@ void main() {
         final titleFinder = find.text('Slide');
         final slideNumberFinder = find.text('1');
         final socialHandleFinder = find.text('@flutter_deck');
-        final imageFinder = find.byKey(const Key('Image Key'));
+        final quoteFinder = find.text(_quote);
+        final attributionFinder = find.text(_attribution);
 
-        expect(imageFinder, findsOneWidget);
         expect(titleFinder, findsNothing);
         expect(slideNumberFinder, findsNothing);
         expect(socialHandleFinder, findsNothing);
+        expect(quoteFinder, findsOneWidget);
+        expect(attributionFinder, findsOneWidget);
       });
     });
   });
 }
 
-class ImageSlide extends FlutterDeckSlideWidget {
-  const ImageSlide()
+class QuoteSlide extends FlutterDeckSlideWidget {
+  const QuoteSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
-            route: '/image-slide',
+            route: '/quote',
           ),
         );
 
   @override
   FlutterDeckSlide build(BuildContext context) {
-    return FlutterDeckSlide.image(
-      imageBuilder: (context) => Image.asset('assets/header.png'),
-      key: const Key('Image Key'),
-      label: 'Here goes the label of the image',
-      backgroundBuilder: (context) => Container(
-        color: Colors.orange,
-        key: const Key('Container Key'),
+    return FlutterDeckSlide.quote(
+      quote: _quote,
+      attribution: _attribution,
+      theme: FlutterDeckTheme.of(context).copyWith(
+        quoteSlideTheme: const FlutterDeckQuoteSlideThemeData(
+          quoteTextStyle: TextStyle(color: Colors.yellowAccent),
+        ),
       ),
+      key: _key,
     );
   }
 }

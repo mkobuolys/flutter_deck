@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import '../../test_utils.dart';
 
 void main() {
@@ -36,9 +37,9 @@ void main() {
 
       await slideTester.pumpSlide();
 
-      final sliderFinder = find.byKey(const Key('blankslide'));
-      final slider = tester.widget(sliderFinder) as FlutterDeckSlide;
-      final backgroundColor = slider.theme?.slideTheme.backgroundColor;
+      final slideFinder = find.byKey(const Key('blankslide'));
+      final slide = tester.widget(slideFinder) as FlutterDeckSlide;
+      final backgroundColor = slide.theme?.slideTheme.backgroundColor;
 
       expect(backgroundColor, equals(Colors.orange));
     });
