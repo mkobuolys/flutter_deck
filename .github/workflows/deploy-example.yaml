@@ -1,4 +1,4 @@
-name: Deploy example to GitHub Pages
+name: Build and deploy the example to GitHub Pages
 
 on:
   push:
@@ -6,11 +6,12 @@ on:
       - main
 
 jobs:
-  deploy-example:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -19,6 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+        working-directory: ./example
 
       - name: Build web
         run: flutter build web --release --web-renderer=canvaskit
