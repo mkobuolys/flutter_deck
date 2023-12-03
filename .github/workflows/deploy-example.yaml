@@ -23,7 +23,7 @@ jobs:
         working-directory: ./example
 
       - name: Build web
-        run: flutter build web --release --web-renderer canvaskit --base-href ./
+        run: flutter build web --release --web-renderer canvaskit --base-href /
         working-directory: ./example
 
       - name: Deploy to GitHub Pages
