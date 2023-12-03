@@ -1,3 +1,7 @@
+# NEXT
+
+- ci: update the example's base url for GitHub Pages deployment
+
 # 0.8.0
 
 - feat: add marker tool
