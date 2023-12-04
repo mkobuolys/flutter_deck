@@ -22,8 +22,12 @@ jobs:
         run: flutter pub get
         working-directory: ./example
 
+      - name: Replace index.html
+        run: mv gh_pages.index.html index.html
+        working-directory: ./example/web
+
       - name: Build web
-        run: flutter build web --release --web-renderer canvaskit --base-href /
+        run: flutter build web --release --web-renderer=canvaskit
         working-directory: ./example
 
       - name: Deploy to GitHub Pages
