@@ -361,21 +361,38 @@ class _SlideBody extends StatelessWidget {
     final configuration = context.flutterDeck.configuration;
     final scaffoldState = Scaffold.of(context);
 
+    var body = configuration.showProgress
+        ? Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              child,
+              configuration.progressIndicator,
+            ],
+          )
+        : child;
+
+    final globalConfiguration = context.flutterDeck.globalConfiguration;
+    final aspectRatio = globalConfiguration.aspectRatio.value;
+
+    if (aspectRatio != null) {
+      body = ColoredBox(
+        color: Colors.black,
+        child: Center(
+          child: AspectRatio(
+            aspectRatio: aspectRatio,
+            child: body,
+          ),
+        ),
+      );
+    }
+
     return FlutterDeckDrawerListener(
       onDrawerToggle: () {
         scaffoldState.isDrawerOpen
             ? scaffoldState.closeDrawer()
             : scaffoldState.openDrawer();
       },
-      child: configuration.showProgress
-          ? Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                child,
-                configuration.progressIndicator,
-              ],
-            )
-          : child,
+      child: body,
     );
   }
 }

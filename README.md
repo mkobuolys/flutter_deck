@@ -63,6 +63,7 @@ Also, you can define a global configuration for your slide deck:
 ```dart
 FlutterDeckApp(
   configuration: const FlutterDeckConfiguration(
+    aspectRatio: FlutterDeckAspectRatio.ratio16x9(),
     background: FlutterDeckBackgroundConfiguration(
       light: FlutterDeckBackground.solid(Color(0xFFB5FFFC)),
       dark: FlutterDeckBackground.solid(Color(0xFF16222A)),
