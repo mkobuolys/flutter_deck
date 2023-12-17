@@ -3,6 +3,7 @@ library flutter_deck;
 
 export 'src/flutter_deck.dart';
 export 'src/flutter_deck_app.dart';
+export 'src/flutter_deck_aspect_ratio.dart';
 export 'src/flutter_deck_configuration.dart';
 export 'src/flutter_deck_slide.dart';
 export 'src/flutter_deck_speaker_info.dart';

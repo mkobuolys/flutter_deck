@@ -1,5 +1,6 @@
 # NEXT
 
+- feat: add `FlutterDeckAspectRatio` to set the aspect ratio for the whole slide deck
 - ci: update the example's base url for GitHub Pages deployment
 
 # 0.8.0

@@ -15,6 +15,8 @@ class FlutterDeckExample extends StatelessWidget {
     return FlutterDeckApp(
       // You could use the default configuration or create your own.
       configuration: const FlutterDeckConfiguration(
+        // Set the aspect ratio of the deck.
+        aspectRatio: FlutterDeckAspectRatio.ratio16x9(),
         // Define a global background for the light and dark themes separately.
         background: FlutterDeckBackgroundConfiguration(
           light: FlutterDeckBackground.gradient(
