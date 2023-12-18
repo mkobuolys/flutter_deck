@@ -58,12 +58,29 @@ class FlutterDeckExample extends StatelessWidget {
 }
 ```
 
+To run the slide deck in scaled mode, use `runScaledFlutterDeckApp` instead of `runApp` inside the `main` function:
+
+```dart
+void main() {
+  runScaledFlutterDeckApp(
+    FlutterDeckApp(
+      configuration: const FlutterDeckConfiguration(
+        aspectRatio: FlutterDeckAspectRatio.ratio16x10(),
+      ),
+      slides: [
+        <...>
+      ],
+    ),
+  );
+}
+```
+
 Also, you can define a global configuration for your slide deck:
 
 ```dart
 FlutterDeckApp(
   configuration: const FlutterDeckConfiguration(
-    aspectRatio: FlutterDeckAspectRatio.ratio16x9(),
+    aspectRatio: FlutterDeckAspectRatio.ratio16x10(),
     background: FlutterDeckBackgroundConfiguration(
       light: FlutterDeckBackground.solid(Color(0xFFB5FFFC)),
       dark: FlutterDeckBackground.solid(Color(0xFF16222A)),
