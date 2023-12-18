@@ -3,20 +3,12 @@ import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck_example/slides/slides.dart';
 
 void main() {
-  runApp(const FlutterDeckExample());
-}
-
-class FlutterDeckExample extends StatelessWidget {
-  const FlutterDeckExample({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // This is an entry point for the Flutter Deck app.
-    return FlutterDeckApp(
+  runScaledFlutterDeckApp(
+    FlutterDeckApp(
       // You could use the default configuration or create your own.
       configuration: const FlutterDeckConfiguration(
         // Set the aspect ratio of the deck.
-        aspectRatio: FlutterDeckAspectRatio.ratio16x9(),
+        aspectRatio: FlutterDeckAspectRatio.ratio16x10(),
         // Define a global background for the light and dark themes separately.
         background: FlutterDeckBackgroundConfiguration(
           light: FlutterDeckBackground.gradient(
@@ -106,6 +98,6 @@ class FlutterDeckExample extends StatelessWidget {
         socialHandle: 'flutter_deck',
         imagePath: 'assets/flutter_logo.png',
       ),
-    );
-  }
+    ),
+  );
 }
