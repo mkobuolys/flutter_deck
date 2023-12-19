@@ -1,7 +1,6 @@
 # NEXT
 
-- feat: add `FlutterDeckAspectRatio` to set the aspect ratio for the whole slide deck
-- feat: add `runScaledFlutterDeckApp` to run the slide deck in a scaled mode
+- feat: add `FlutterDeckSlideSize` to set the slide size for the whole presentation
 - ci: update the example's base url for GitHub Pages deployment
 
 # 0.8.0

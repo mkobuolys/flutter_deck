@@ -3,14 +3,19 @@ import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck_example/slides/slides.dart';
 
 void main() {
-  runScaledFlutterDeckApp(
-    FlutterDeckApp(
+  runApp(const FlutterDeckExample());
+}
+
+class FlutterDeckExample extends StatelessWidget {
+  const FlutterDeckExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FlutterDeckApp(
       // You could use the default configuration or create your own.
-      configuration: const FlutterDeckConfiguration(
-        // Set the aspect ratio of the deck.
-        aspectRatio: FlutterDeckAspectRatio.ratio16x10(),
+      configuration: FlutterDeckConfiguration(
         // Define a global background for the light and dark themes separately.
-        background: FlutterDeckBackgroundConfiguration(
+        background: const FlutterDeckBackgroundConfiguration(
           light: FlutterDeckBackground.gradient(
             LinearGradient(
               begin: Alignment.topLeft,
@@ -27,21 +32,21 @@ void main() {
           ),
         ),
         // Set defaults for the footer.
-        footer: FlutterDeckFooterConfiguration(
+        footer: const FlutterDeckFooterConfiguration(
           showSlideNumbers: true,
           showSocialHandle: true,
         ),
         // Set defaults for the header.
-        header: FlutterDeckHeaderConfiguration(
+        header: const FlutterDeckHeaderConfiguration(
           showHeader: false,
         ),
         // Override the default marker configuration.
-        marker: FlutterDeckMarkerConfiguration(
+        marker: const FlutterDeckMarkerConfiguration(
           color: Colors.cyan,
           strokeWidth: 8.0,
         ),
         // Show progress indicator with specifc gradient and background color.
-        progressIndicator: FlutterDeckProgressIndicator.gradient(
+        progressIndicator: const FlutterDeckProgressIndicator.gradient(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -49,8 +54,13 @@ void main() {
           ),
           backgroundColor: Colors.black,
         ),
+        // Use a custom slide size.
+        slideSize: FlutterDeckSlideSize.fromAspectRatio(
+          aspectRatio: const FlutterDeckAspectRatio.ratio16x10(),
+          resolution: const FlutterDeckResolution.fromWidth(1440),
+        ),
         // Use a custom transition between slides.
-        transition: FlutterDeckTransition.fade(),
+        transition: const FlutterDeckTransition.fade(),
       ),
       // You can also define your own light...
       lightTheme: FlutterDeckThemeData.fromTheme(
@@ -98,6 +108,6 @@ void main() {
         socialHandle: 'flutter_deck',
         imagePath: 'assets/flutter_logo.png',
       ),
-    ),
-  );
+    );
+  }
 }

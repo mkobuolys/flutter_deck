@@ -20,7 +20,6 @@ dependencies:
     sdk: flutter
   flutter_highlight: ^0.7.0
   go_router: ^12.0.0
-  scaled_app: ^2.2.0
 
 dev_dependencies:
   flutter_test:

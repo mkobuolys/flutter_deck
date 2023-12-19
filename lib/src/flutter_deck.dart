@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deck/src/flutter_deck_configuration.dart';
+import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
