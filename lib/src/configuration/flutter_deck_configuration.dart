@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_deck/src/flutter_deck_aspect_ratio.dart';
+import 'package:flutter_deck/src/configuration/flutter_deck_slide_size.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/theme/templates/flutter_deck_slide_theme.dart';
@@ -14,7 +14,6 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 class FlutterDeckConfiguration {
   /// Creates a global configuration for the slide deck.
   const FlutterDeckConfiguration({
-    this.aspectRatio = const FlutterDeckAspectRatio.responsive(),
     this.background = const FlutterDeckBackgroundConfiguration(),
     this.controls = const FlutterDeckControlsConfiguration(),
     this.footer = const FlutterDeckFooterConfiguration(showFooter: false),
@@ -22,17 +21,9 @@ class FlutterDeckConfiguration {
     this.marker = const FlutterDeckMarkerConfiguration(),
     this.progressIndicator = const FlutterDeckProgressIndicator.solid(),
     this.showProgress = true,
+    this.slideSize = const FlutterDeckSlideSize.responsive(),
     this.transition = const FlutterDeckTransition.none(),
   });
-
-  /// The aspect ratio of the slide deck.
-  ///
-  /// By default, the aspect ratio is [FlutterDeckAspectRatio.responsive],
-  /// which means the aspect ratio is not constrained and will be responsive to
-  /// the size of the screen.
-  ///
-  /// This configuration cannot be overridden by the slide configuration.
-  final FlutterDeckAspectRatio aspectRatio;
 
   /// The background configuration for the slide deck. By default, the
   /// background is transparent and [FlutterDeckSlideThemeData.backgroundColor]
@@ -75,6 +66,14 @@ class FlutterDeckConfiguration {
   ///
   /// The default is true.
   final bool showProgress;
+
+  /// The size of the slides in the slide deck.
+  ///
+  /// By default, the size is [FlutterDeckSlideSize.responsive], which means the
+  /// size is not constrained and will be responsive to the size of the screen.
+  ///
+  /// This configuration cannot be overridden by the slide configuration.
+  final FlutterDeckSlideSize slideSize;
 
   /// The transition to use when navigating between slides.
   ///

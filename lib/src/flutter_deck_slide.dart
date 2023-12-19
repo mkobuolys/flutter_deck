@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
-import 'package:flutter_deck/src/flutter_deck_configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
@@ -372,15 +372,18 @@ class _SlideBody extends StatelessWidget {
         : child;
 
     final globalConfiguration = context.flutterDeck.globalConfiguration;
-    final aspectRatio = globalConfiguration.aspectRatio.value;
+    final slideSize = globalConfiguration.slideSize;
 
-    if (aspectRatio != null) {
+    if (!slideSize.isResponsive) {
       body = ColoredBox(
         color: Colors.black,
         child: Center(
-          child: AspectRatio(
-            aspectRatio: aspectRatio,
-            child: body,
+          child: FittedBox(
+            child: SizedBox(
+              height: slideSize.height,
+              width: slideSize.width,
+              child: body,
+            ),
           ),
         ),
       );

@@ -58,51 +58,33 @@ class FlutterDeckExample extends StatelessWidget {
 }
 ```
 
-To run the slide deck in scaled mode, use `runScaledFlutterDeckApp` instead of `runApp` inside the `main` function:
-
-```dart
-void main() {
-  runScaledFlutterDeckApp(
-    FlutterDeckApp(
-      configuration: const FlutterDeckConfiguration(
-        aspectRatio: FlutterDeckAspectRatio.ratio16x10(),
-      ),
-      slides: [
-        <...>
-      ],
-    ),
-  );
-}
-```
-
 Also, you can define a global configuration for your slide deck:
 
 ```dart
 FlutterDeckApp(
-  configuration: const FlutterDeckConfiguration(
-    aspectRatio: FlutterDeckAspectRatio.ratio16x10(),
-    background: FlutterDeckBackgroundConfiguration(
+  configuration: FlutterDeckConfiguration(
+    background: const FlutterDeckBackgroundConfiguration(
       light: FlutterDeckBackground.solid(Color(0xFFB5FFFC)),
       dark: FlutterDeckBackground.solid(Color(0xFF16222A)),
     ),
-    controls: FlutterDeckControlsConfiguration(
+    controls: const FlutterDeckControlsConfiguration(
       nextKey: LogicalKeyboardKey.arrowRight,
       previousKey: LogicalKeyboardKey.arrowLeft,
       openDrawerKey: LogicalKeyboardKey.period,
       toggleMarkerKey: LogicalKeyboardKey.keyM,
     ),
-    footer: FlutterDeckFooterConfiguration(
+    footer: const FlutterDeckFooterConfiguration(
       showSlideNumbers: true,
       widget: FlutterLogo(),
     ),
-    header: FlutterDeckHeaderConfiguration(
+    header: const FlutterDeckHeaderConfiguration(
       showHeader: false,
     ),
-    marker: FlutterDeckMarkerConfiguration(
+    marker: const FlutterDeckMarkerConfiguration(
       color: Colors.cyan,
       strokeWidth: 8.0,
     ),
-    progressIndicator: FlutterDeckProgressIndicator.gradient(
+    progressIndicator: const FlutterDeckProgressIndicator.gradient(
       gradient: LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -110,7 +92,11 @@ FlutterDeckApp(
       ),
       backgroundColor: Colors.black,
     ),
-    transition: FlutterDeckTransition.fade(),
+    slideSize: FlutterDeckSlideSize.fromAspectRatio(
+      aspectRatio: const FlutterDeckAspectRatio.ratio16x10(),
+      resolution: const FlutterDeckResolution.fromWidth(1440),
+    ),
+    transition: const FlutterDeckTransition.fade(),
   ),
   <...>
 );

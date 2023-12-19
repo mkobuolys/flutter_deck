@@ -1,4 +1,4 @@
-import 'package:flutter_deck/src/flutter_deck_configuration.dart';
+import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:go_router/go_router.dart';
 

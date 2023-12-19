@@ -1,9 +1,6 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
+import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
-import 'package:flutter_deck/src/flutter_deck_aspect_ratio.dart';
-import 'package:flutter_deck/src/flutter_deck_configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
@@ -11,52 +8,6 @@ import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 import 'package:go_router/go_router.dart';
-import 'package:scaled_app/scaled_app.dart';
-
-/// Runs a scaled version of a slide deck.
-///
-/// To run a slide deck in a scaled mode, this function should be used instead
-/// of [runApp] inside the `main` function when running a [FlutterDeckApp].
-///
-/// The scaling will be applied only if the
-/// [FlutterDeckConfiguration.aspectRatio] is not
-/// [FlutterDeckAspectRatio.responsive].
-///
-/// Example:
-///
-/// ```dart
-/// void main() {
-///   runScaledFlutterDeckApp(
-///     FlutterDeckApp(
-///       configuration: const FlutterDeckConfiguration(
-///         aspectRatio: FlutterDeckAspectRatio.ratio16x10(),
-///       ),
-///       slides: [
-///         // ...
-///       ],
-///     ),
-///   );
-/// }
-/// ```
-void runScaledFlutterDeckApp(FlutterDeckApp app) {
-  final aspectRatio = app.configuration.aspectRatio.value;
-
-  if (aspectRatio == null) return runApp(app);
-
-  runAppScaled(
-    app,
-    scaleFactor: (size) {
-      final height = size.aspectRatio < aspectRatio
-          ? size.width / aspectRatio
-          : size.height;
-      final width = size.aspectRatio > aspectRatio
-          ? size.height * aspectRatio
-          : size.width;
-
-      return math.min(width / size.width, height / size.height);
-    },
-  );
-}
 
 /// The main widget of a slide deck.
 ///
