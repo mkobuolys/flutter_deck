@@ -1,82 +1,261 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
+import 'package:flutter_deck/src/flutter_deck_layout.dart';
+import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 import 'package:flutter_deck/src/widgets/internal/controls/actions/actions.dart';
-import 'package:flutter_deck/src/widgets/internal/controls/flutter_deck_controls_notifier.dart';
 
-/// A widget that provides controls for the slide deck.
+/// A widget that allows the user to control the slide deck.
 ///
-/// Key bindings are defined in global deck configuration. The following
-/// shortcuts are supported:
+/// The widget renders the following controls:
 ///
-/// * `nextKey` - Go to the next slide.
-/// * `previousKey` - Go to the previous slide.
-/// * `openDrawerKey` - Open the navigation drawer.
-/// * `toggleMarkerKey` - Toggle the slide deck's marker.
+/// * Previous button
+/// * Next button
+/// * Slide number button, which also opens the navigation drawer
+/// * Marker controls
+/// * Theme switcher
 ///
-/// Cursor visibility is also handled by this widget. The cursor will be hidden
-/// after 3 seconds of inactivity.
+/// Controls are only rendered if they are enabled in the global configuration.
+/// Control component visibility is also handled by this widget. The controls
+/// will be hidden after 3 seconds of cursor inactivity.
 ///
 /// This widget is automatically added to the widget tree and should not be used
 /// directly by the user.
 class FlutterDeckControls extends StatelessWidget {
-  /// Creates a widget that provides controls for the slide deck.
+  /// Creates a [FlutterDeckControls].
   ///
-  /// [child] is the widget that will be wrapped by this widget. It should be
-  /// the root of the slide deck.
-  ///
-  /// [notifier] is the [FlutterDeckControlsNotifier] that will be used to
-  /// control the slide deck.
+  /// The [child] argument must not be null.
   const FlutterDeckControls({
     required this.child,
-    required this.notifier,
     super.key,
   });
 
   /// The widget below this widget in the tree.
   final Widget child;
 
-  /// The notifier used to control the slide deck.
-  final FlutterDeckControlsNotifier notifier;
+  @override
+  Widget build(BuildContext context) {
+    final flutterDeck = context.flutterDeck;
+
+    if (!flutterDeck.globalConfiguration.controls.enabled) return child;
+
+    final controlsNotifier = flutterDeck.controlsNotifier;
+
+    return ListenableBuilder(
+      listenable: controlsNotifier,
+      builder: (context, child) => Stack(
+        children: [
+          child!,
+          if (controlsNotifier.controlsVisible)
+            Align(
+              alignment: AlignmentDirectional.bottomCenter,
+              child: Container(
+                margin: FlutterDeckLayout.slidePadding,
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color: Theme.of(context).colorScheme.surface,
+                ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _PreviousButton(),
+                    _SlideNumberButton(),
+                    _NextButton(),
+                    _MarkerControls(),
+                    _OptionsMenuButton(),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
+      child: child,
+    );
+  }
+}
+
+class _PreviousButton extends StatelessWidget {
+  const _PreviousButton();
 
   @override
   Widget build(BuildContext context) {
-    final controls = context.flutterDeck.globalConfiguration.controls;
+    final flutterDeck = context.flutterDeck;
+    final controlsNotifier = flutterDeck.controlsNotifier;
+    final shortcut = flutterDeck.configuration.controls.previousKey.keyLabel;
 
-    Widget widget = Focus(
-      autofocus: true,
-      child: ListenableBuilder(
-        listenable: notifier,
-        builder: (context, child) => MouseRegion(
-          cursor: notifier.cursorVisible
-              ? MouseCursor.defer
-              : SystemMouseCursors.none,
-          onHover: (_) => notifier.showCursor(),
-          child: child,
-        ),
-        child: child,
-      ),
+    return ListenableBuilder(
+      listenable: controlsNotifier,
+      builder: (context, child) {
+        final isFirstSlide = flutterDeck.slideNumber == 1;
+        final isFirstStep = flutterDeck.stepNumber == 1;
+        final enabled = !(isFirstSlide && isFirstStep) &&
+            !controlsNotifier.intentDisabled(const GoPreviousIntent());
+
+        return IconButton(
+          icon: const Icon(Icons.keyboard_arrow_left_rounded),
+          tooltip: 'Previous ($shortcut)',
+          onPressed: enabled ? controlsNotifier.previous : null,
+        );
+      },
     );
+  }
+}
 
-    if (controls.enabled) {
-      widget = Shortcuts(
-        shortcuts: <LogicalKeySet, Intent>{
-          LogicalKeySet(controls.nextKey): const GoNextIntent(),
-          LogicalKeySet(controls.previousKey): const GoPreviousIntent(),
-          LogicalKeySet(controls.openDrawerKey): const ToggleDrawerIntent(),
-          LogicalKeySet(controls.toggleMarkerKey): const ToggleMarkerIntent(),
-        },
-        child: Actions(
-          actions: <Type, Action<Intent>>{
-            GoNextIntent: GoNextAction(notifier),
-            GoPreviousIntent: GoPreviousAction(notifier),
-            ToggleDrawerIntent: ToggleDrawerAction(notifier),
-            ToggleMarkerIntent: ToggleMarkerAction(notifier),
-          },
-          child: widget,
-        ),
-      );
-    }
+class _NextButton extends StatelessWidget {
+  const _NextButton();
 
-    return widget;
+  @override
+  Widget build(BuildContext context) {
+    final flutterDeck = context.flutterDeck;
+    final controlsNotifier = flutterDeck.controlsNotifier;
+    final shortcut = flutterDeck.configuration.controls.nextKey.keyLabel;
+
+    return ListenableBuilder(
+      listenable: controlsNotifier,
+      builder: (context, child) {
+        final isLastSlide =
+            flutterDeck.slideNumber == flutterDeck.router.slides.length;
+        final isLastStep =
+            flutterDeck.stepNumber == flutterDeck.configuration.steps;
+        final enabled = !(isLastSlide && isLastStep) &&
+            !controlsNotifier.intentDisabled(const GoNextIntent());
+
+        return IconButton(
+          icon: const Icon(Icons.keyboard_arrow_right_rounded),
+          tooltip: 'Next ($shortcut)',
+          onPressed: enabled ? controlsNotifier.next : null,
+        );
+      },
+    );
+  }
+}
+
+class _SlideNumberButton extends StatelessWidget {
+  const _SlideNumberButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    final flutterDeck = context.flutterDeck;
+    final controlsNotifier = flutterDeck.controlsNotifier;
+    final shortcut = flutterDeck.configuration.controls.openDrawerKey.keyLabel;
+
+    return ListenableBuilder(
+      listenable: controlsNotifier,
+      builder: (context, child) {
+        final enabled =
+            !controlsNotifier.intentDisabled(const ToggleDrawerIntent());
+
+        return IconButton(
+          icon: Text(
+            '${flutterDeck.slideNumber}',
+            style: TextStyle(
+              color: enabled ? theme.iconTheme.color : theme.disabledColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          tooltip: 'Open navigation drawer ($shortcut)',
+          onPressed: enabled ? controlsNotifier.toggleDrawer : null,
+        );
+      },
+    );
+  }
+}
+
+class _MarkerControls extends StatelessWidget {
+  const _MarkerControls();
+
+  @override
+  Widget build(BuildContext context) {
+    final flutterDeck = context.flutterDeck;
+    final controlsNotifier = flutterDeck.controlsNotifier;
+    final markerNotifier = flutterDeck.markerNotifier;
+    final shortcut =
+        flutterDeck.configuration.controls.toggleMarkerKey.keyLabel;
+
+    return ListenableBuilder(
+      listenable: markerNotifier,
+      builder: (context, child) => markerNotifier.enabled
+          ? Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.edit_off_rounded),
+                  tooltip: 'Turn off marker ($shortcut)',
+                  onPressed: controlsNotifier.toggleMarker,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.delete_forever_rounded),
+                  tooltip: 'Erase all',
+                  onPressed: markerNotifier.paths.isNotEmpty
+                      ? markerNotifier.clear
+                      : null,
+                ),
+              ],
+            )
+          : const SizedBox.shrink(),
+    );
+  }
+}
+
+class _MarkerButton extends StatelessWidget {
+  const _MarkerButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final flutterDeck = context.flutterDeck;
+    final controlsNotifier = flutterDeck.controlsNotifier;
+    final shortcut =
+        flutterDeck.configuration.controls.toggleMarkerKey.keyLabel;
+
+    return MenuItemButton(
+      leadingIcon: const Icon(Icons.edit_rounded),
+      trailingIcon: Text('($shortcut)'),
+      onPressed: controlsNotifier.toggleMarker,
+      child: const Text('Toggle marker'),
+    );
+  }
+}
+
+class _ThemeButton extends StatelessWidget {
+  const _ThemeButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final themeNotifier = context.flutterDeck.themeNotifier;
+
+    return ValueListenableBuilder(
+      valueListenable: themeNotifier,
+      builder: (context, themeMode, _) => context.darkModeEnabled(themeMode)
+          ? MenuItemButton(
+              leadingIcon: const Icon(Icons.light_mode_rounded),
+              onPressed: () => themeNotifier.update(ThemeMode.light),
+              child: const Text('Use light mode'),
+            )
+          : MenuItemButton(
+              leadingIcon: const Icon(Icons.dark_mode_rounded),
+              onPressed: () => themeNotifier.update(ThemeMode.dark),
+              child: const Text('Use dark mode'),
+            ),
+    );
+  }
+}
+
+class _OptionsMenuButton extends StatelessWidget {
+  const _OptionsMenuButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return MenuAnchor(
+      builder: (context, controller, child) => IconButton(
+        icon: const Icon(Icons.more_vert_rounded),
+        tooltip: 'Open menu',
+        onPressed: controller.isOpen ? controller.close : controller.open,
+      ),
+      menuChildren: const [
+        _ThemeButton(),
+        _MarkerButton(),
+      ],
+    );
   }
 }

@@ -14,7 +14,7 @@ class TitleSlide extends FlutterDeckSlideWidget {
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.title(
       title: 'Welcome to flutter_deck example! 🚀',
-      subtitle: 'Use left and right arrow keys to navigate.',
+      subtitle: 'Use slide deck controls to navigate.',
     );
   }
 }

@@ -16,10 +16,11 @@ class DrawerSlide extends FlutterDeckSlideWidget {
       builder: (context) => Center(
         child: Text(
           'Did you know that flutter_deck supports navigation drawer? Just '
-          'press "." on your keyboard to open it!\n\nThere, you can toggle the '
-          'dark mode or navigate to any other slide straight away.\n\nOh, and '
-          'if you want to override default keyboard bindings, you can do it in '
-          'the FlutterDeckConfiguration, under controls.',
+          'press "." on your keyboard or press the slide number button in the '
+          'deck controls to open it!\n\nThere, you can navigate to any other '
+          'slide straight away.\n\nOh, and if you want to override default '
+          'keyboard bindings, you can do it in the FlutterDeckConfiguration, '
+          'under controls.',
           style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),

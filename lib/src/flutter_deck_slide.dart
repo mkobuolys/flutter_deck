@@ -335,12 +335,14 @@ class FlutterDeckSlide extends StatelessWidget {
       child: FlutterDeckTheme(
         data: theme.copyWith(textTheme: theme.textTheme.apply(color: color)),
         child: Builder(
-          builder: (context) => FlutterDeckMarker(
-            notifier: context.flutterDeck.markerNotifier,
-            child: Scaffold(
-              backgroundColor: backgroundColor,
-              drawer: const FlutterDeckDrawer(),
-              body: _SlideBody(child: _builder(context)),
+          builder: (context) => FlutterDeckControls(
+            child: FlutterDeckMarker(
+              notifier: context.flutterDeck.markerNotifier,
+              child: Scaffold(
+                backgroundColor: backgroundColor,
+                drawer: const FlutterDeckDrawer(),
+                body: _SlideBody(child: _builder(context)),
+              ),
             ),
           ),
         ),

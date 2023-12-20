@@ -1,6 +1,7 @@
 # NEXT
 
 - feat: add `FlutterDeckSlideSize` to set the slide size for the whole presentation
+- feat: add flutter deck controls widget
 - ci: update the example's base url for GitHub Pages deployment
 
 # 0.8.0
