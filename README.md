@@ -68,6 +68,8 @@ FlutterDeckApp(
       dark: FlutterDeckBackground.solid(Color(0xFF16222A)),
     ),
     controls: const FlutterDeckControlsConfiguration(
+      enabled: true,
+      shortcutsEnabled: true,
       nextKey: LogicalKeyboardKey.arrowRight,
       previousKey: LogicalKeyboardKey.arrowLeft,
       openDrawerKey: LogicalKeyboardKey.period,

@@ -58,23 +58,27 @@ class FlutterDeckControlsListener extends StatelessWidget {
     );
 
     if (controls.enabled) {
-      widget = Shortcuts(
-        shortcuts: <LogicalKeySet, Intent>{
-          LogicalKeySet(controls.nextKey): const GoNextIntent(),
-          LogicalKeySet(controls.previousKey): const GoPreviousIntent(),
-          LogicalKeySet(controls.openDrawerKey): const ToggleDrawerIntent(),
-          LogicalKeySet(controls.toggleMarkerKey): const ToggleMarkerIntent(),
+      widget = Actions(
+        actions: <Type, Action<Intent>>{
+          GoNextIntent: GoNextAction(notifier),
+          GoPreviousIntent: GoPreviousAction(notifier),
+          ToggleDrawerIntent: ToggleDrawerAction(notifier),
+          ToggleMarkerIntent: ToggleMarkerAction(notifier),
         },
-        child: Actions(
-          actions: <Type, Action<Intent>>{
-            GoNextIntent: GoNextAction(notifier),
-            GoPreviousIntent: GoPreviousAction(notifier),
-            ToggleDrawerIntent: ToggleDrawerAction(notifier),
-            ToggleMarkerIntent: ToggleMarkerAction(notifier),
+        child: widget,
+      );
+
+      if (controls.shortcutsEnabled) {
+        widget = Shortcuts(
+          shortcuts: <LogicalKeySet, Intent>{
+            LogicalKeySet(controls.nextKey): const GoNextIntent(),
+            LogicalKeySet(controls.previousKey): const GoPreviousIntent(),
+            LogicalKeySet(controls.openDrawerKey): const ToggleDrawerIntent(),
+            LogicalKeySet(controls.toggleMarkerKey): const ToggleMarkerIntent(),
           },
           child: widget,
-        ),
-      );
+        );
+      }
     }
 
     return widget;

@@ -81,7 +81,8 @@ class _PreviousButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
-    final shortcut = flutterDeck.configuration.controls.previousKey.keyLabel;
+    final controls = flutterDeck.globalConfiguration.controls;
+    final shortcut = controls.previousKey.keyLabel;
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -93,7 +94,8 @@ class _PreviousButton extends StatelessWidget {
 
         return IconButton(
           icon: const Icon(Icons.keyboard_arrow_left_rounded),
-          tooltip: 'Previous ($shortcut)',
+          tooltip: 'Previous'
+              '${controls.shortcutsEnabled ? ' ($shortcut)' : ''}',
           onPressed: enabled ? controlsNotifier.previous : null,
         );
       },
@@ -108,7 +110,8 @@ class _NextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
-    final shortcut = flutterDeck.configuration.controls.nextKey.keyLabel;
+    final controls = flutterDeck.globalConfiguration.controls;
+    final shortcut = controls.nextKey.keyLabel;
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -122,7 +125,8 @@ class _NextButton extends StatelessWidget {
 
         return IconButton(
           icon: const Icon(Icons.keyboard_arrow_right_rounded),
-          tooltip: 'Next ($shortcut)',
+          tooltip: 'Next'
+              '${controls.shortcutsEnabled ? ' ($shortcut)' : ''}',
           onPressed: enabled ? controlsNotifier.next : null,
         );
       },
@@ -139,7 +143,8 @@ class _SlideNumberButton extends StatelessWidget {
 
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
-    final shortcut = flutterDeck.configuration.controls.openDrawerKey.keyLabel;
+    final controls = flutterDeck.globalConfiguration.controls;
+    final shortcut = controls.openDrawerKey.keyLabel;
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -155,7 +160,8 @@ class _SlideNumberButton extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          tooltip: 'Open navigation drawer ($shortcut)',
+          tooltip: 'Open navigation drawer'
+              '${controls.shortcutsEnabled ? ' ($shortcut)' : ''}',
           onPressed: enabled ? controlsNotifier.toggleDrawer : null,
         );
       },
@@ -171,8 +177,8 @@ class _MarkerControls extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final markerNotifier = flutterDeck.markerNotifier;
-    final shortcut =
-        flutterDeck.configuration.controls.toggleMarkerKey.keyLabel;
+    final controls = flutterDeck.globalConfiguration.controls;
+    final shortcut = controls.toggleMarkerKey.keyLabel;
 
     return ListenableBuilder(
       listenable: markerNotifier,
@@ -181,7 +187,8 @@ class _MarkerControls extends StatelessWidget {
               children: [
                 IconButton(
                   icon: const Icon(Icons.edit_off_rounded),
-                  tooltip: 'Turn off marker ($shortcut)',
+                  tooltip: 'Turn off marker'
+                      '${controls.shortcutsEnabled ? ' ($shortcut)' : ''}',
                   onPressed: controlsNotifier.toggleMarker,
                 ),
                 IconButton(
@@ -205,12 +212,12 @@ class _MarkerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
-    final shortcut =
-        flutterDeck.configuration.controls.toggleMarkerKey.keyLabel;
+    final controls = flutterDeck.globalConfiguration.controls;
+    final shortcut = controls.toggleMarkerKey.keyLabel;
 
     return MenuItemButton(
       leadingIcon: const Icon(Icons.edit_rounded),
-      trailingIcon: Text('($shortcut)'),
+      trailingIcon: controls.shortcutsEnabled ? Text('($shortcut)') : null,
       onPressed: controlsNotifier.toggleMarker,
       child: const Text('Toggle marker'),
     );

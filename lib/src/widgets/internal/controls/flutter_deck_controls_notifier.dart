@@ -65,6 +65,7 @@ class FlutterDeckControlsNotifier with ChangeNotifier {
       },
     };
 
+    showControls();
     notifyListeners();
   }
 
