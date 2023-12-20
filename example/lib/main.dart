@@ -56,8 +56,8 @@ class FlutterDeckExample extends StatelessWidget {
         ),
         // Use a custom slide size.
         slideSize: FlutterDeckSlideSize.fromAspectRatio(
-          aspectRatio: const FlutterDeckAspectRatio.ratio16x10(),
-          resolution: const FlutterDeckResolution.fromWidth(1440),
+          aspectRatio: const FlutterDeckAspectRatio.ratio16x9(),
+          resolution: const FlutterDeckResolution.fhd(),
         ),
         // Use a custom transition between slides.
         transition: const FlutterDeckTransition.fade(),

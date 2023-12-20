@@ -46,30 +46,49 @@ class FlutterDeckControls extends StatelessWidget {
         children: [
           child!,
           if (controlsNotifier.controlsVisible)
-            Align(
+            const Align(
               alignment: AlignmentDirectional.bottomCenter,
-              child: Container(
-                margin: FlutterDeckLayout.slidePadding,
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(32),
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-                child: const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _PreviousButton(),
-                    _SlideNumberButton(),
-                    _NextButton(),
-                    _MarkerControls(),
-                    _OptionsMenuButton(),
-                  ],
-                ),
-              ),
+              child: _Controls(),
             ),
         ],
       ),
       child: child,
+    );
+  }
+}
+
+class _Controls extends StatefulWidget {
+  const _Controls();
+
+  @override
+  State<_Controls> createState() => _ControlsState();
+}
+
+class _ControlsState extends State<_Controls> {
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      data: ThemeData.light(),
+      child: Builder(
+        builder: (context) => Container(
+          margin: FlutterDeckLayout.slidePadding,
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(32),
+            color: Theme.of(context).colorScheme.surface,
+          ),
+          child: const Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _PreviousButton(),
+              _SlideNumberButton(),
+              _NextButton(),
+              _MarkerControls(),
+              _OptionsMenuButton(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -253,16 +272,25 @@ class _OptionsMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MenuAnchor(
-      builder: (context, controller, child) => IconButton(
-        icon: const Icon(Icons.more_vert_rounded),
-        tooltip: 'Open menu',
-        onPressed: controller.isOpen ? controller.close : controller.open,
+    return MenuButtonTheme(
+      data: MenuButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll(
+            Theme.of(context).colorScheme.surface,
+          ),
+        ),
       ),
-      menuChildren: const [
-        _ThemeButton(),
-        _MarkerButton(),
-      ],
+      child: MenuAnchor(
+        builder: (context, controller, child) => IconButton(
+          icon: const Icon(Icons.more_vert_rounded),
+          tooltip: 'Open menu',
+          onPressed: controller.isOpen ? controller.close : controller.open,
+        ),
+        menuChildren: const [
+          _ThemeButton(),
+          _MarkerButton(),
+        ],
+      ),
     );
   }
 }
