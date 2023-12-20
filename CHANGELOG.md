@@ -1,4 +1,4 @@
-# NEXT
+# 0.9.0
 
 - feat: add `FlutterDeckSlideSize` to set the slide size for the whole presentation
 - feat: add flutter deck controls widget
