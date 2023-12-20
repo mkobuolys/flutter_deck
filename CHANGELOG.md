@@ -1,3 +1,7 @@
+# 0.9.1
+
+- fix: adjust control widget styling and the default slide background color
+
 # 0.9.0
 
 - feat: add `FlutterDeckSlideSize` to set the slide size for the whole presentation

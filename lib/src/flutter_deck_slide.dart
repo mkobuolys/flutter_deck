@@ -319,10 +319,7 @@ class FlutterDeckSlide extends StatelessWidget {
   Widget build(BuildContext context) {
     final materialTheme = Theme.of(context);
     final theme = FlutterDeckTheme.of(context).merge(_theme);
-
-    final slideTheme = theme.slideTheme;
-    final backgroundColor = slideTheme.backgroundColor;
-    final color = slideTheme.color;
+    final color = theme.slideTheme.color;
 
     return Theme(
       data: materialTheme.copyWith(
@@ -339,7 +336,6 @@ class FlutterDeckSlide extends StatelessWidget {
             child: FlutterDeckMarker(
               notifier: context.flutterDeck.markerNotifier,
               child: Scaffold(
-                backgroundColor: backgroundColor,
                 drawer: const FlutterDeckDrawer(),
                 body: _SlideBody(child: _builder(context)),
               ),
@@ -381,7 +377,8 @@ class _SlideBody extends StatelessWidget {
         color: Colors.black,
         child: Center(
           child: FittedBox(
-            child: SizedBox(
+            child: Container(
+              color: FlutterDeckTheme.of(context).slideTheme.backgroundColor,
               height: slideSize.height,
               width: slideSize.width,
               child: body,
