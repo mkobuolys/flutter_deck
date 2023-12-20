@@ -13,12 +13,27 @@ class BackgroundSlide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
+      backgroundBuilder: (context) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: isDark
+                  ? [Colors.blue.shade900, Colors.blue.shade600]
+                  : [Colors.yellow.shade100, Colors.blueGrey.shade50],
+            ),
+          ),
+        );
+      },
       builder: (context) => Center(
         child: Text(
           'It is possible to define a global background for the light and dark '
           'themes separately. The background could be a solid color, gradient, '
           'image or any custom widget. Of course, you can override it later '
-          'for each slide, too.\n\nToggle dark mode to see this in action',
+          'for each slide, too.',
           style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),

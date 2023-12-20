@@ -24,8 +24,7 @@ class FooterSlide extends FlutterDeckSlideWidget {
         child: Text(
           'This showcases the usage of a custom footer widget using a row '
           'of multiple widgets for the footer (this also overrides the social '
-          'handle. showSocialHandle is true but since widget is not '
-          'null, widget is displayed.).',
+          'handle).',
           style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),

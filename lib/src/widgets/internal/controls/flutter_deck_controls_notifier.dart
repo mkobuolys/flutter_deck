@@ -6,8 +6,8 @@ import 'package:flutter_deck/src/widgets/internal/controls/actions/actions.dart'
 import 'package:flutter_deck/src/widgets/internal/drawer/drawer.dart';
 import 'package:flutter_deck/src/widgets/internal/marker/marker.dart';
 
-/// The [ChangeNotifier] used to control the slide deck and handle cursor
-/// visibility.
+/// The [ChangeNotifier] used to control the slide deck and handle cursor and
+/// deck controls visibility.
 class FlutterDeckControlsNotifier with ChangeNotifier {
   /// Creates a [FlutterDeckControlsNotifier].
   FlutterDeckControlsNotifier({
@@ -22,22 +22,31 @@ class FlutterDeckControlsNotifier with ChangeNotifier {
   final FlutterDeckMarkerNotifier _markerNotifier;
   final FlutterDeckRouter _router;
 
-  var _cursorVisible = false;
-  Timer? _cursorVisibleTimer;
+  var _controlsVisible = false;
+  Timer? _controlsVisibleTimer;
 
   Set<Intent> _disabledIntents = {};
 
-  /// Whether the cursor should be visible.
-  bool get cursorVisible => _cursorVisible;
+  /// Whether the cursor and deck controls are visible.
+  bool get controlsVisible => _controlsVisible;
 
   /// Go to the next slide.
-  void next() => _router.next();
+  void next() {
+    _router.next();
+    notifyListeners();
+  }
 
   /// Go to the previous slide.
-  void previous() => _router.previous();
+  void previous() {
+    _router.previous();
+    notifyListeners();
+  }
 
   /// Toggle the navigation drawer.
-  void toggleDrawer() => _drawerNotifier.toggle();
+  void toggleDrawer() {
+    _drawerNotifier.toggle();
+    notifyListeners();
+  }
 
   /// Toggle the slide deck's marker.
   ///
@@ -55,26 +64,29 @@ class FlutterDeckControlsNotifier with ChangeNotifier {
         const ToggleDrawerIntent(),
       },
     };
+
+    showControls();
+    notifyListeners();
   }
 
-  /// Show the cursor.
+  /// Show the cursor and controls.
   ///
-  /// The cursor will be hidden after 3 seconds.
-  void showCursor() {
-    _setCursorVisible(true);
+  /// The cursor and deck controls will be hidden after 3 seconds of inactivity.
+  void showControls() {
+    _setControlsVisible(true);
 
-    _cursorVisibleTimer = Timer(
+    _controlsVisibleTimer = Timer(
       const Duration(seconds: 3),
-      () => _setCursorVisible(false),
+      () => _setControlsVisible(false),
     );
   }
 
-  void _setCursorVisible(bool visible) {
-    _cursorVisibleTimer?.cancel();
+  void _setControlsVisible(bool visible) {
+    _controlsVisibleTimer?.cancel();
 
-    if (_cursorVisible == visible) return;
+    if (_controlsVisible == visible) return;
 
-    _cursorVisible = visible;
+    _controlsVisible = visible;
     notifyListeners();
   }
 

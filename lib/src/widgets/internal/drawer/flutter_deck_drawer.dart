@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
-import 'package:flutter_deck/src/widgets/internal/internal.dart';
 
 /// A widget that is used as a navigation drawer for the [FlutterDeck].
 ///
-/// This widget renders a [FlutterDeckThemeSwitcher] to switch between light and
-/// dark themes, a list of all the slides in the deck, and additional slide
-/// deck controls.
-///
-/// The user can tap on any slide to navigate to it.
+/// This widget renders a list of all the slides in the deck. The user can tap
+/// on any slide to navigate to it.
 class FlutterDeckDrawer extends StatelessWidget {
   /// Creates a [FlutterDeckDrawer].
   const FlutterDeckDrawer({super.key});
@@ -20,22 +16,12 @@ class FlutterDeckDrawer extends StatelessWidget {
     final slides = flutterDeck.router.slides;
 
     return Drawer(
-      child: Column(
-        children: [
-          const FlutterDeckThemeSwitcher(),
-          const Divider(),
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) => _SlideCard(
-                slide: slides[index],
-                index: index,
-              ),
-              itemCount: slides.length,
-            ),
-          ),
-          const Divider(),
-          const _Actions(),
-        ],
+      child: ListView.builder(
+        itemBuilder: (context, index) => _SlideCard(
+          slide: slides[index],
+          index: index,
+        ),
+        itemCount: slides.length,
       ),
     );
   }
@@ -65,30 +51,6 @@ class _SlideCard extends StatelessWidget {
 
         Navigator.of(context).pop();
       },
-    );
-  }
-}
-
-class _Actions extends StatelessWidget {
-  const _Actions();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.edit_rounded),
-            onPressed: () {
-              context.flutterDeck.controlsNotifier.toggleMarker();
-              Navigator.of(context).pop();
-            },
-            tooltip: 'Use marker',
-          ),
-        ],
-      ),
     );
   }
 }

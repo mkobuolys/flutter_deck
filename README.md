@@ -68,6 +68,8 @@ FlutterDeckApp(
       dark: FlutterDeckBackground.solid(Color(0xFF16222A)),
     ),
     controls: const FlutterDeckControlsConfiguration(
+      enabled: true,
+      shortcutsEnabled: true,
       nextKey: LogicalKeyboardKey.arrowRight,
       previousKey: LogicalKeyboardKey.arrowLeft,
       openDrawerKey: LogicalKeyboardKey.period,
@@ -770,13 +772,13 @@ Widget build(BuildContext context) {
 
 ## Navigation drawer
 
-Every slide deck comes with a navigation drawer that can be used to navigate through the slide deck. The navigation drawer is automatically generated based on the slide deck configuration. From the drawer, you can change the current theme mode, or go to a specific slide.
+Every slide deck comes with a navigation drawer that can be used to navigate through the slide deck. The navigation drawer is automatically generated based on the slide deck configuration.
 
 ![Navigation demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/navigation.gif?raw=true)
 
 ## Marker tool
 
-The marker tool allows you to draw on top of the slide. It can be used to highlight specific parts of the slide, or to draw anything you want. The tool is available in the navigation drawer, or just press "M" on your keyboard (it's also possible to specify a custom key binding for the `toggleMarkerKey` property in `FlutterDeckControlsConfiguration`).
+The marker tool allows you to draw on top of the slide. It can be used to highlight specific parts of the slide, or to draw anything you want. The tool is available in the deck controls, or just press "M" on your keyboard (it's also possible to specify a custom key binding for the `toggleMarkerKey` property in `FlutterDeckControlsConfiguration`).
 
 ![Marker demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/marker.gif?raw=true)
 
