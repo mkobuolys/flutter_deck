@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
+import 'package:flutter_deck/src/fullscreen/fullscreen.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 import 'package:flutter_deck/src/widgets/internal/controls/actions/actions.dart';
 
@@ -12,6 +13,7 @@ import 'package:flutter_deck/src/widgets/internal/controls/actions/actions.dart'
 /// * Next button
 /// * Slide number button, which also opens the navigation drawer
 /// * Marker controls
+/// * Toggle fullscreen button (when on a supported platform)
 /// * Theme switcher
 ///
 /// Controls are only rendered if they are enabled in the global configuration.
@@ -243,6 +245,19 @@ class _MarkerButton extends StatelessWidget {
   }
 }
 
+class _FullscreenButton extends StatelessWidget {
+  const _FullscreenButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return MenuItemButton(
+      leadingIcon: const Icon(Icons.fullscreen_rounded),
+      onPressed: isInFullscreen() ? leaveFullscreen : enterFullscreen,
+      child: Text(isInFullscreen() ? 'Leave fullscreen' : 'Enter fullscreen'),
+    );
+  }
+}
+
 class _ThemeButton extends StatelessWidget {
   const _ThemeButton();
 
@@ -286,9 +301,10 @@ class _OptionsMenuButton extends StatelessWidget {
           tooltip: 'Open menu',
           onPressed: controller.isOpen ? controller.close : controller.open,
         ),
-        menuChildren: const [
-          _ThemeButton(),
-          _MarkerButton(),
+        menuChildren: [
+          const _ThemeButton(),
+          const _MarkerButton(),
+          if (canFullscreen()) const _FullscreenButton(),
         ],
       ),
     );
