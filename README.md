@@ -68,12 +68,14 @@ FlutterDeckApp(
       dark: FlutterDeckBackground.solid(Color(0xFF16222A)),
     ),
     controls: const FlutterDeckControlsConfiguration(
-      enabled: true,
-      shortcutsEnabled: true,
-      nextKey: LogicalKeyboardKey.arrowRight,
-      previousKey: LogicalKeyboardKey.arrowLeft,
-      openDrawerKey: LogicalKeyboardKey.period,
-      toggleMarkerKey: LogicalKeyboardKey.keyM,
+      presenterToolbarVisible: true,
+      shortcuts: FlutterDeckShortcutsConfiguration(
+        enabled: true,
+        nextSlide: [LogicalKeyboardKey.arrowRight],
+        previousSlide: [LogicalKeyboardKey.arrowLeft],
+        toggleMarker: [LogicalKeyboardKey.keyM],
+        toggleNavigationDrawer: [LogicalKeyboardKey.period],
+      ),
     ),
     footer: const FlutterDeckFooterConfiguration(
       showSlideNumbers: true,
@@ -778,7 +780,7 @@ Every slide deck comes with a navigation drawer that can be used to navigate thr
 
 ## Marker tool
 
-The marker tool allows you to draw on top of the slide. It can be used to highlight specific parts of the slide, or to draw anything you want. The tool is available in the deck controls, or just press "M" on your keyboard (it's also possible to specify a custom key binding for the `toggleMarkerKey` property in `FlutterDeckControlsConfiguration`).
+The marker tool allows you to draw on top of the slide. It can be used to highlight specific parts of the slide, or to draw anything you want. The tool is available in the deck controls, or just press "M" on your keyboard (it's also possible to specify a custom key binding for the `toggleMarker` shortcut in `FlutterDeckShortcutsConfiguration`).
 
 ![Marker demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/marker.gif?raw=true)
 
@@ -810,14 +812,14 @@ mason make flutter_deck_slide
 
 ## Presentations built with flutter_deck 🚀
 
-| Title                                                                                                                               | Language   | Author                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------- |
-| [Let me introduce you to Flutter](https://github.com/mkobuolys/introduction-to-flutter)                                             | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link]                                            |
-| [Control your Flutter application on the fly with Firebase Remote Config](https://github.com/mkobuolys/firebase-remote-config-talk) | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link]                                            |
-| [Introduction to Flutter Web](https://github.com/afucher/flutter_web_101)                                                           | Portuguese | [Arthur Fücher](https://x.com/Thur)                                                          |
-| [Make smarter decisions faster with Firebase Remote Config](https://github.com/mkobuolys/f3-firebase-remote-config-talk)            | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link] & [Darja Orlova](https://x.com/dariadroid) |
-| [Flutter for the win: Cross-platform development at maximum power](https://github.com/polilluminato/linuxday-2023-presentation)     | Italian    | [Alberto Bonacina](https://x.com/polilluminato)                                              |
-| [ReArch: A Reactive Approach to Application Architecture Supporting Side Effects](https://github.com/GregoryConrad/rearch-dart/tree/main/examples/presentation) | English | [Gregory Conrad](https://github.com/GregoryConrad)
+| Title                                                                                                                                                           | Language   | Author                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------- |
+| [Let me introduce you to Flutter](https://github.com/mkobuolys/introduction-to-flutter)                                                                         | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link]                                            |
+| [Control your Flutter application on the fly with Firebase Remote Config](https://github.com/mkobuolys/firebase-remote-config-talk)                             | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link]                                            |
+| [Introduction to Flutter Web](https://github.com/afucher/flutter_web_101)                                                                                       | Portuguese | [Arthur Fücher](https://x.com/Thur)                                                          |
+| [Make smarter decisions faster with Firebase Remote Config](https://github.com/mkobuolys/f3-firebase-remote-config-talk)                                        | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link] & [Darja Orlova](https://x.com/dariadroid) |
+| [Flutter for the win: Cross-platform development at maximum power](https://github.com/polilluminato/linuxday-2023-presentation)                                 | Italian    | [Alberto Bonacina](https://x.com/polilluminato)                                              |
+| [ReArch: A Reactive Approach to Application Architecture Supporting Side Effects](https://github.com/GregoryConrad/rearch-dart/tree/main/examples/presentation) | English    | [Gregory Conrad](https://github.com/GregoryConrad)                                           |
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg

@@ -1,17 +1,17 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_deck/src/controls/actions/actions.dart';
+import 'package:flutter_deck/src/controls/flutter_deck_controls_notifier.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
-import 'package:flutter_deck/src/widgets/internal/controls/actions/actions.dart';
-import 'package:flutter_deck/src/widgets/internal/controls/flutter_deck_controls_notifier.dart';
 
 /// A widget that handles controls (actions and shortcuts) for the slide deck.
 ///
 /// Key bindings are defined in global deck configuration. The following
 /// shortcuts are supported:
 ///
-/// * `nextKey` - Go to the next slide.
-/// * `previousKey` - Go to the previous slide.
-/// * `openDrawerKey` - Open the navigation drawer.
-/// * `toggleMarkerKey` - Toggle the slide deck's marker.
+/// * `nextSlide` - Go to the next slide.
+/// * `previousSlide` - Go to the previous slide.
+/// * `toggleMarker` - Toggle the slide deck's marker.
+/// * `toggleNavigationDrawer` - Toggle the navigation drawer.
 ///
 /// Cursor visibility is also handled by this widget. The cursor will be hidden
 /// after 3 seconds of inactivity.
@@ -57,7 +57,9 @@ class FlutterDeckControlsListener extends StatelessWidget {
       ),
     );
 
-    if (controls.enabled) {
+    final shortcuts = controls.shortcuts;
+
+    if (controls.presenterToolbarVisible || shortcuts.enabled) {
       widget = Actions(
         actions: <Type, Action<Intent>>{
           GoNextIntent: GoNextAction(notifier),
@@ -68,13 +70,16 @@ class FlutterDeckControlsListener extends StatelessWidget {
         child: widget,
       );
 
-      if (controls.shortcutsEnabled) {
+      if (shortcuts.enabled) {
         widget = Shortcuts(
           shortcuts: <LogicalKeySet, Intent>{
-            LogicalKeySet(controls.nextKey): const GoNextIntent(),
-            LogicalKeySet(controls.previousKey): const GoPreviousIntent(),
-            LogicalKeySet(controls.openDrawerKey): const ToggleDrawerIntent(),
-            LogicalKeySet(controls.toggleMarkerKey): const ToggleMarkerIntent(),
+            LogicalKeySet.fromSet(shortcuts.nextSlide): const GoNextIntent(),
+            LogicalKeySet.fromSet(shortcuts.previousSlide):
+                const GoPreviousIntent(),
+            LogicalKeySet.fromSet(shortcuts.toggleMarker):
+                const ToggleMarkerIntent(),
+            LogicalKeySet.fromSet(shortcuts.toggleNavigationDrawer):
+                const ToggleDrawerIntent(),
           },
           child: widget,
         );
