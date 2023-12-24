@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_deck/src/controls/actions/actions.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
@@ -103,7 +104,7 @@ class _PreviousButton extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.previousKey.keyLabel;
+    final shortcut = shortcuts.previousSlide.toShortcutString();
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -132,7 +133,7 @@ class _NextButton extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.nextKey.keyLabel;
+    final shortcut = shortcuts.nextSlide.toShortcutString();
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -165,7 +166,7 @@ class _SlideNumberButton extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.openDrawerKey.keyLabel;
+    final shortcut = shortcuts.toggleNavigationDrawer.toShortcutString();
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -199,7 +200,7 @@ class _MarkerControls extends StatelessWidget {
     final controlsNotifier = flutterDeck.controlsNotifier;
     final markerNotifier = flutterDeck.markerNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.toggleMarkerKey.keyLabel;
+    final shortcut = shortcuts.toggleMarker.toShortcutString();
 
     return ListenableBuilder(
       listenable: markerNotifier,
@@ -234,7 +235,7 @@ class _MarkerButton extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.toggleMarkerKey.keyLabel;
+    final shortcut = shortcuts.toggleMarker.toShortcutString();
 
     return MenuItemButton(
       leadingIcon: const Icon(Icons.edit_rounded),
@@ -295,4 +296,8 @@ class _OptionsMenuButton extends StatelessWidget {
       ),
     );
   }
+}
+
+extension _ShortcutExtensions on Set<LogicalKeyboardKey> {
+  String toShortcutString() => map((key) => key.keyLabel).join('+');
 }

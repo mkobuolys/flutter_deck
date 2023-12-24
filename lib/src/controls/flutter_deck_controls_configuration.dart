@@ -6,11 +6,11 @@ class FlutterDeckControlsConfiguration {
   /// presenter toolbar is visible and the default keyboard controls are
   /// enabled.
   ///
-  /// The default keyboard controls are:
-  /// - Next slide: ArrowRight
-  /// - Previous slide: ArrowLeft
-  /// - Open drawer: Period
-  /// - Toggle marker: KeyM
+  /// The default keyboard shortcuts are:
+  /// - Next slide: \[ArrowRight\]
+  /// - Previous slide: \[ArrowLeft\]
+  /// - Toggle marker: \[KeyM\]
+  /// - Toggle navigation drawer: \[Period\]
   const FlutterDeckControlsConfiguration({
     this.presenterToolbarVisible = true,
     this.shortcuts = const FlutterDeckShortcutsConfiguration(),
@@ -29,30 +29,50 @@ class FlutterDeckShortcutsConfiguration {
   /// shortcuts are enabled.
   ///
   /// The default keyboard shortcuts are:
-  /// - Next slide: ArrowRight
-  /// - Previous slide: ArrowLeft
-  /// - Open drawer: Period
-  /// - Toggle marker: KeyM
+  /// - Next slide: \[ArrowRight\]
+  /// - Previous slide: \[ArrowLeft\]
+  /// - Toggle marker: \[KeyM\]
+  /// - Toggle navigation drawer: \[Period\]
   const FlutterDeckShortcutsConfiguration({
     this.enabled = true,
-    this.nextKey = LogicalKeyboardKey.arrowRight,
-    this.previousKey = LogicalKeyboardKey.arrowLeft,
-    this.openDrawerKey = LogicalKeyboardKey.period,
-    this.toggleMarkerKey = LogicalKeyboardKey.keyM,
-  });
+    List<LogicalKeyboardKey> nextSlide = const [
+      LogicalKeyboardKey.arrowRight,
+    ],
+    List<LogicalKeyboardKey> previousSlide = const [
+      LogicalKeyboardKey.arrowLeft,
+    ],
+    List<LogicalKeyboardKey> toggleMarker = const [
+      LogicalKeyboardKey.keyM,
+    ],
+    List<LogicalKeyboardKey> toggleNavigationDrawer = const [
+      LogicalKeyboardKey.period,
+    ],
+  })  : _nextSlide = nextSlide,
+        _previousSlide = previousSlide,
+        _toggleMarker = toggleMarker,
+        _toggleNavigationDrawer = toggleNavigationDrawer;
 
   /// Whether keyboard shortcuts are enabled or not.
   final bool enabled;
 
-  /// The key to use for going to the next slide.
-  final LogicalKeyboardKey nextKey;
+  final List<LogicalKeyboardKey> _nextSlide;
 
-  /// The key to use for going to the previous slide.
-  final LogicalKeyboardKey previousKey;
+  /// The key combination to use for going to the next slide.
+  Set<LogicalKeyboardKey> get nextSlide => {..._nextSlide};
 
-  /// The key to use for opening the navigation drawer.
-  final LogicalKeyboardKey openDrawerKey;
+  final List<LogicalKeyboardKey> _previousSlide;
 
-  /// The key to use for toggling the marker.
-  final LogicalKeyboardKey toggleMarkerKey;
+  /// The key combination to use for going to the previous slide.
+  Set<LogicalKeyboardKey> get previousSlide => {..._previousSlide};
+
+  final List<LogicalKeyboardKey> _toggleMarker;
+
+  /// The key combination to use for toggling the marker.
+  Set<LogicalKeyboardKey> get toggleMarker => {..._toggleMarker};
+
+  final List<LogicalKeyboardKey> _toggleNavigationDrawer;
+
+  /// The key combination to use for toggling the navigation drawer.
+  Set<LogicalKeyboardKey> get toggleNavigationDrawer =>
+      {..._toggleNavigationDrawer};
 }
