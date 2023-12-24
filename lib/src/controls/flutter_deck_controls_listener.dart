@@ -8,10 +8,10 @@ import 'package:flutter_deck/src/flutter_deck.dart';
 /// Key bindings are defined in global deck configuration. The following
 /// shortcuts are supported:
 ///
-/// * `nextKey` - Go to the next slide.
-/// * `previousKey` - Go to the previous slide.
-/// * `openDrawerKey` - Open the navigation drawer.
-/// * `toggleMarkerKey` - Toggle the slide deck's marker.
+/// * `nextSlide` - Go to the next slide.
+/// * `previousSlide` - Go to the previous slide.
+/// * `toggleMarker` - Toggle the slide deck's marker.
+/// * `toggleNavigationDrawer` - Toggle the navigation drawer.
 ///
 /// Cursor visibility is also handled by this widget. The cursor will be hidden
 /// after 3 seconds of inactivity.
