@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_deck/src/widgets/internal/controls/actions/flutter_deck_action.dart';
+import 'package:flutter_deck/src/controls/actions/flutter_deck_action.dart';
 
 /// An [Intent] that is bound to a [ToggleMarkerAction].
 class ToggleMarkerIntent extends Intent {

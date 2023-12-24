@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_deck/src/controls/actions/actions.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
-import 'package:flutter_deck/src/widgets/internal/controls/actions/actions.dart';
 import 'package:flutter_deck/src/widgets/internal/drawer/drawer.dart';
 import 'package:flutter_deck/src/widgets/internal/marker/marker.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_deck/src/controls/actions/actions.dart';
+import 'package:flutter_deck/src/controls/flutter_deck_controls_notifier.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
-import 'package:flutter_deck/src/widgets/internal/controls/actions/actions.dart';
-import 'package:flutter_deck/src/widgets/internal/controls/flutter_deck_controls_notifier.dart';
 
 /// A widget that handles controls (actions and shortcuts) for the slide deck.
 ///

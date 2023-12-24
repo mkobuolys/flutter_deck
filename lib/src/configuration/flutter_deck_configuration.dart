@@ -1,11 +1,13 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/src/configuration/flutter_deck_slide_size.dart';
+import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/theme/templates/flutter_deck_slide_theme.dart';
 import 'package:flutter_deck/src/transitions/transitions.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
+
+export 'package:flutter_deck/src/controls/flutter_deck_controls_configuration.dart';
 
 /// The global configuration for the slide deck.
 ///
@@ -187,44 +189,6 @@ class FlutterDeckBackgroundConfiguration {
 
   /// The background to use when the current theme is dark.
   final FlutterDeckBackground dark;
-}
-
-/// The configuration for the slide deck controls.
-class FlutterDeckControlsConfiguration {
-  /// Creates a configuration for the slide deck controls. By default, controls
-  /// and shortcuts are enabled.
-  ///
-  /// The default keyboard controls are:
-  /// - Next slide: ArrowRight
-  /// - Previous slide: ArrowLeft
-  /// - Open drawer: Period
-  /// - Toggle marker: KeyM
-  const FlutterDeckControlsConfiguration({
-    this.enabled = true,
-    this.shortcutsEnabled = true,
-    this.nextKey = LogicalKeyboardKey.arrowRight,
-    this.previousKey = LogicalKeyboardKey.arrowLeft,
-    this.openDrawerKey = LogicalKeyboardKey.period,
-    this.toggleMarkerKey = LogicalKeyboardKey.keyM,
-  });
-
-  /// Whether controls are enabled or not.
-  final bool enabled;
-
-  /// Whether keyboard shortcuts are enabled or not.
-  final bool shortcutsEnabled;
-
-  /// The key to use for going to the next slide.
-  final LogicalKeyboardKey nextKey;
-
-  /// The key to use for going to the previous slide.
-  final LogicalKeyboardKey previousKey;
-
-  /// The key to use for opening the navigation drawer.
-  final LogicalKeyboardKey openDrawerKey;
-
-  /// The key to use for toggling the marker.
-  final LogicalKeyboardKey toggleMarkerKey;
 }
 
 /// The configuration for the slide deck footer.
