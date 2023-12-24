@@ -38,11 +38,14 @@ class FlutterDeckConfiguration {
   /// for the [FlutterDeckSlide].
   final FlutterDeckBackgroundConfiguration background;
 
-  /// Configures the controls for the slide deck. By default, controls are
-  /// enabled. The default keyboard controls are:
-  /// - Next slide: ArrowRight
-  /// - Previous slide: ArrowLeft
-  /// - Open drawer: Period
+  /// Configures the controls for the slide deck.  By default, the presenter
+  /// toolbar is visible and the default keyboard controls are enabled.
+  ///
+  /// The default keyboard shortcuts are:
+  /// - Next slide: \[ArrowRight\]
+  /// - Previous slide: \[ArrowLeft\]
+  /// - Toggle marker: \[KeyM\]
+  /// - Toggle navigation drawer: \[Period\]
   ///
   /// This configuration cannot be overridden by the slide configuration.
   final FlutterDeckControlsConfiguration controls;
