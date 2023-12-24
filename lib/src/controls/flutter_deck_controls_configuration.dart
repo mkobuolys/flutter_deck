@@ -16,6 +16,12 @@ class FlutterDeckControlsConfiguration {
     this.shortcuts = const FlutterDeckShortcutsConfiguration(),
   });
 
+  /// Creates a configuration for the slide deck controls where they are
+  /// disabled.
+  const FlutterDeckControlsConfiguration.disabled()
+      : presenterToolbarVisible = false,
+        shortcuts = const FlutterDeckShortcutsConfiguration(enabled: false);
+
   /// Whether the presenter toolbar is visible or not.
   final bool presenterToolbarVisible;
 
@@ -51,6 +57,15 @@ class FlutterDeckShortcutsConfiguration {
         _previousSlide = previousSlide,
         _toggleMarker = toggleMarker,
         _toggleNavigationDrawer = toggleNavigationDrawer;
+
+  /// Creates a configuration for the slide deck keyboard shortcuts where they
+  /// are disabled.
+  const FlutterDeckShortcutsConfiguration.disabled()
+      : enabled = false,
+        _nextSlide = const [],
+        _previousSlide = const [],
+        _toggleMarker = const [],
+        _toggleNavigationDrawer = const [];
 
   /// Whether keyboard shortcuts are enabled or not.
   final bool enabled;
