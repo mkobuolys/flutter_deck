@@ -2,8 +2,9 @@ import 'package:flutter/services.dart';
 
 /// The configuration for the slide deck controls.
 class FlutterDeckControlsConfiguration {
-  /// Creates a configuration for the slide deck controls. By default, controls
-  /// and shortcuts are enabled.
+  /// Creates a configuration for the slide deck controls. By default, the
+  /// presenter toolbar is visible and the default keyboard controls are
+  /// enabled.
   ///
   /// The default keyboard controls are:
   /// - Next slide: ArrowRight
@@ -11,19 +12,37 @@ class FlutterDeckControlsConfiguration {
   /// - Open drawer: Period
   /// - Toggle marker: KeyM
   const FlutterDeckControlsConfiguration({
+    this.presenterToolbarVisible = true,
+    this.shortcuts = const FlutterDeckShortcutsConfiguration(),
+  });
+
+  /// Whether the presenter toolbar is visible or not.
+  final bool presenterToolbarVisible;
+
+  /// The configuration for the slide deck keyboard shortcuts.
+  final FlutterDeckShortcutsConfiguration shortcuts;
+}
+
+/// The configuration for the slide deck keyboard shortcuts.
+class FlutterDeckShortcutsConfiguration {
+  /// Creates a configuration for the slide deck keyboard shortcuts. By default,
+  /// shortcuts are enabled.
+  ///
+  /// The default keyboard shortcuts are:
+  /// - Next slide: ArrowRight
+  /// - Previous slide: ArrowLeft
+  /// - Open drawer: Period
+  /// - Toggle marker: KeyM
+  const FlutterDeckShortcutsConfiguration({
     this.enabled = true,
-    this.shortcutsEnabled = true,
     this.nextKey = LogicalKeyboardKey.arrowRight,
     this.previousKey = LogicalKeyboardKey.arrowLeft,
     this.openDrawerKey = LogicalKeyboardKey.period,
     this.toggleMarkerKey = LogicalKeyboardKey.keyM,
   });
 
-  /// Whether controls are enabled or not.
-  final bool enabled;
-
   /// Whether keyboard shortcuts are enabled or not.
-  final bool shortcutsEnabled;
+  final bool enabled;
 
   /// The key to use for going to the next slide.
   final LogicalKeyboardKey nextKey;

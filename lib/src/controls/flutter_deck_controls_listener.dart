@@ -57,7 +57,9 @@ class FlutterDeckControlsListener extends StatelessWidget {
       ),
     );
 
-    if (controls.enabled) {
+    final shortcuts = controls.shortcuts;
+
+    if (controls.presenterToolbarVisible || shortcuts.enabled) {
       widget = Actions(
         actions: <Type, Action<Intent>>{
           GoNextIntent: GoNextAction(notifier),
@@ -68,13 +70,14 @@ class FlutterDeckControlsListener extends StatelessWidget {
         child: widget,
       );
 
-      if (controls.shortcutsEnabled) {
+      if (shortcuts.enabled) {
         widget = Shortcuts(
           shortcuts: <LogicalKeySet, Intent>{
-            LogicalKeySet(controls.nextKey): const GoNextIntent(),
-            LogicalKeySet(controls.previousKey): const GoPreviousIntent(),
-            LogicalKeySet(controls.openDrawerKey): const ToggleDrawerIntent(),
-            LogicalKeySet(controls.toggleMarkerKey): const ToggleMarkerIntent(),
+            LogicalKeySet(shortcuts.nextKey): const GoNextIntent(),
+            LogicalKeySet(shortcuts.previousKey): const GoPreviousIntent(),
+            LogicalKeySet(shortcuts.openDrawerKey): const ToggleDrawerIntent(),
+            LogicalKeySet(shortcuts.toggleMarkerKey):
+                const ToggleMarkerIntent(),
           },
           child: widget,
         );
