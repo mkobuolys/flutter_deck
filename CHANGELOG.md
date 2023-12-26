@@ -1,3 +1,83 @@
+# NEXT
+
+- refactor: rework flutter deck controls
+
+  - **BREAKING**: the `enabled` and `shortcutsEnabled` properties have been removed
+
+    - **Migration**: to disable all controls, instead of:
+
+      ```
+      FlutterDeckConfiguration(
+        controls: FlutterDeckControlsConfiguration(
+          enabled: false,
+          shortcutsEnabled: false,
+          <...>
+        ),
+        <...>
+      )
+      ```
+
+      use:
+
+      ```
+      FlutterDeckConfiguration(
+        controls: FlutterDeckControlsConfiguration.disabled(),
+        <...>
+      )
+      ```
+
+    - **Migration**: to disable shortcuts, instead of:
+
+      ```
+      FlutterDeckControlsConfiguration(
+        shortcutsEnabled: false,
+        <...>
+      )
+      ```
+
+      use:
+
+      ```
+      FlutterDeckControlsConfiguration(
+        shortcuts: FlutterDeckShortcutsConfiguration.disabled(),
+        <...>,
+      )
+      ```
+
+  - feat: support key combinations for shortcuts
+
+  - **BREAKING**: `nextKey`, `previousKey`, `openDrawerKey` and `toggleMarkerKey` were renamed and moved to the `FlutterDeckShortcutsConfiguration` class
+
+    - `nextKey` -> `nextSlide`
+    - `previousKey` -> `previousSlide`
+    - `openDrawerKey` -> `toggleNavigationDrawer`
+    - `toggleMarkerKey` -> `toggleMarker`
+    - **Migration**: instead of:
+
+      ```
+      FlutterDeckControlsConfiguration(
+        nextKey: LogicalKeyboardKey.arrowRight,
+        previousKey: LogicalKeyboardKey.arrowLeft,
+        openDrawerKey: LogicalKeyboardKey.period,
+        toggleMarkerKey: LogicalKeyboardKey.keyM,
+        <...>,
+      )
+      ```
+
+      use:
+
+      ```
+      FlutterDeckControlsConfiguration(
+        shortcuts: FlutterDeckShortcutsConfiguration(
+          nextSlide: [LogicalKeyboardKey.arrowRight],
+          previousSlide: [LogicalKeyboardKey.arrowLeft],
+          toggleMarker: [LogicalKeyboardKey.keyM],
+          toggleNavigationDrawer: [LogicalKeyboardKey.period],
+        ),
+        <...>,
+      )
+      ```
+
 # 0.9.1
 
 - fix: adjust control widget styling and the default slide background color

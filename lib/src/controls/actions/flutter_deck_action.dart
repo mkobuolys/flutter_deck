@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_deck/src/widgets/internal/controls/flutter_deck_controls_notifier.dart';
+import 'package:flutter_deck/src/controls/flutter_deck_controls_notifier.dart';
 
 /// Base class for an action that can be performed on the slide deck.
 ///

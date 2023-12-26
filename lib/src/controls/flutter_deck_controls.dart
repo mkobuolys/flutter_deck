@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_deck/src/controls/actions/actions.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/fullscreen/fullscreen.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
-import 'package:flutter_deck/src/widgets/internal/controls/actions/actions.dart';
 
 /// A widget that allows the user to control the slide deck.
 ///
@@ -38,7 +39,9 @@ class FlutterDeckControls extends StatelessWidget {
   Widget build(BuildContext context) {
     final flutterDeck = context.flutterDeck;
 
-    if (!flutterDeck.globalConfiguration.controls.enabled) return child;
+    if (!flutterDeck.globalConfiguration.controls.presenterToolbarVisible) {
+      return child;
+    }
 
     final controlsNotifier = flutterDeck.controlsNotifier;
 
@@ -102,8 +105,8 @@ class _PreviousButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
-    final controls = flutterDeck.globalConfiguration.controls;
-    final shortcut = controls.previousKey.keyLabel;
+    final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
+    final shortcut = shortcuts.previousSlide.toShortcutString();
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -116,7 +119,7 @@ class _PreviousButton extends StatelessWidget {
         return IconButton(
           icon: const Icon(Icons.keyboard_arrow_left_rounded),
           tooltip: 'Previous'
-              '${controls.shortcutsEnabled ? ' ($shortcut)' : ''}',
+              '${shortcuts.enabled ? ' ($shortcut)' : ''}',
           onPressed: enabled ? controlsNotifier.previous : null,
         );
       },
@@ -131,8 +134,8 @@ class _NextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
-    final controls = flutterDeck.globalConfiguration.controls;
-    final shortcut = controls.nextKey.keyLabel;
+    final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
+    final shortcut = shortcuts.nextSlide.toShortcutString();
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -147,7 +150,7 @@ class _NextButton extends StatelessWidget {
         return IconButton(
           icon: const Icon(Icons.keyboard_arrow_right_rounded),
           tooltip: 'Next'
-              '${controls.shortcutsEnabled ? ' ($shortcut)' : ''}',
+              '${shortcuts.enabled ? ' ($shortcut)' : ''}',
           onPressed: enabled ? controlsNotifier.next : null,
         );
       },
@@ -164,8 +167,8 @@ class _SlideNumberButton extends StatelessWidget {
 
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
-    final controls = flutterDeck.globalConfiguration.controls;
-    final shortcut = controls.openDrawerKey.keyLabel;
+    final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
+    final shortcut = shortcuts.toggleNavigationDrawer.toShortcutString();
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -182,7 +185,7 @@ class _SlideNumberButton extends StatelessWidget {
             ),
           ),
           tooltip: 'Open navigation drawer'
-              '${controls.shortcutsEnabled ? ' ($shortcut)' : ''}',
+              '${shortcuts.enabled ? ' ($shortcut)' : ''}',
           onPressed: enabled ? controlsNotifier.toggleDrawer : null,
         );
       },
@@ -198,8 +201,8 @@ class _MarkerControls extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final markerNotifier = flutterDeck.markerNotifier;
-    final controls = flutterDeck.globalConfiguration.controls;
-    final shortcut = controls.toggleMarkerKey.keyLabel;
+    final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
+    final shortcut = shortcuts.toggleMarker.toShortcutString();
 
     return ListenableBuilder(
       listenable: markerNotifier,
@@ -209,7 +212,7 @@ class _MarkerControls extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.edit_off_rounded),
                   tooltip: 'Turn off marker'
-                      '${controls.shortcutsEnabled ? ' ($shortcut)' : ''}',
+                      '${shortcuts.enabled ? ' ($shortcut)' : ''}',
                   onPressed: controlsNotifier.toggleMarker,
                 ),
                 IconButton(
@@ -233,12 +236,12 @@ class _MarkerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
-    final controls = flutterDeck.globalConfiguration.controls;
-    final shortcut = controls.toggleMarkerKey.keyLabel;
+    final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
+    final shortcut = shortcuts.toggleMarker.toShortcutString();
 
     return MenuItemButton(
       leadingIcon: const Icon(Icons.edit_rounded),
-      trailingIcon: controls.shortcutsEnabled ? Text('($shortcut)') : null,
+      trailingIcon: shortcuts.enabled ? Text('($shortcut)') : null,
       onPressed: controlsNotifier.toggleMarker,
       child: const Text('Toggle marker'),
     );
@@ -309,4 +312,8 @@ class _OptionsMenuButton extends StatelessWidget {
       ),
     );
   }
+}
+
+extension _ShortcutExtensions on Set<LogicalKeyboardKey> {
+  String toShortcutString() => map((key) => key.keyLabel).join('+');
 }
