@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/src/controls/actions/actions.dart';
+import 'package:flutter_deck/src/controls/autoplay/autoplay.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/widgets/internal/drawer/drawer.dart';
 import 'package:flutter_deck/src/widgets/internal/marker/marker.dart';
@@ -11,13 +12,16 @@ import 'package:flutter_deck/src/widgets/internal/marker/marker.dart';
 class FlutterDeckControlsNotifier with ChangeNotifier {
   /// Creates a [FlutterDeckControlsNotifier].
   FlutterDeckControlsNotifier({
+    required FlutterDeckAutoplayNotifier autoplayNotifier,
     required FlutterDeckDrawerNotifier drawerNotifier,
     required FlutterDeckMarkerNotifier markerNotifier,
     required FlutterDeckRouter router,
-  })  : _drawerNotifier = drawerNotifier,
+  })  : _autoplayNotifier = autoplayNotifier,
+        _drawerNotifier = drawerNotifier,
         _markerNotifier = markerNotifier,
         _router = router;
 
+  final FlutterDeckAutoplayNotifier _autoplayNotifier;
   final FlutterDeckDrawerNotifier _drawerNotifier;
   final FlutterDeckMarkerNotifier _markerNotifier;
   final FlutterDeckRouter _router;
@@ -32,18 +36,21 @@ class FlutterDeckControlsNotifier with ChangeNotifier {
 
   /// Go to the next slide.
   void next() {
+    _autoplayNotifier.pause();
     _router.next();
     notifyListeners();
   }
 
   /// Go to the previous slide.
   void previous() {
+    _autoplayNotifier.pause();
     _router.previous();
     notifyListeners();
   }
 
   /// Toggle the navigation drawer.
   void toggleDrawer() {
+    _autoplayNotifier.pause();
     _drawerNotifier.toggle();
     notifyListeners();
   }
@@ -55,6 +62,7 @@ class FlutterDeckControlsNotifier with ChangeNotifier {
   /// * [GoPreviousIntent]
   /// * [ToggleDrawerIntent]
   void toggleMarker() {
+    _autoplayNotifier.pause();
     _markerNotifier.toggle();
 
     _disabledIntents = {
