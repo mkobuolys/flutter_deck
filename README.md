@@ -142,6 +142,7 @@ class NewSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/new-slide',
+            title: 'New slide',
           ),
         );
 
@@ -163,6 +164,7 @@ class TitleSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/title-slide',
+            title: 'Title slide',
             footer: FlutterDeckFooterConfiguration(showFooter: false),
           ),
         );
@@ -348,6 +350,7 @@ class TemplateSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/template-slide',
+            title: 'Template slide',
           ),
         );
 
@@ -386,6 +389,7 @@ class CustomSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/custom-slide',
+            title: 'Custom slide',
           ),
         );
 
@@ -533,6 +537,7 @@ class FlutterDeckBulletListDemoSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/bullet-list-demo',
+            title: 'Bullet list demo',
             steps: 3, // Define the number of steps for the slide
           ),
         );
@@ -675,6 +680,7 @@ class TransitionsSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/transitions',
+            title: 'Transitions',
             transition: FlutterDeckTransition.rotation(), // Specify the transition for the slide
           ),
         );
@@ -713,6 +719,7 @@ class CustomTransitionSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/custom-transition',
+            title: 'Custom transition',
             transition: FlutterDeckTransition.custom(
               transitionBuilder: VerticalTransitionBuilder(),
             ),
@@ -735,6 +742,7 @@ class StepsDemoSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/steps-demo',
+            title: 'Steps demo',
             steps: 2,
           ),
         );
@@ -775,6 +783,12 @@ Widget build(BuildContext context) {
 ## Navigation drawer
 
 Every slide deck comes with a navigation drawer that can be used to navigate through the slide deck. The navigation drawer is automatically generated based on the slide deck configuration.
+
+The navigation drawer item title is generated based on the following rules:
+
+- The slide title is used if it is set in the slide configuration (`FlutterDeckSlideConfiguration.title`).
+- If the slide title is not set, the header title is used if it is set in the slide header configuration (`FlutterDeckHeaderConfiguration.title`).
+- The slide route is used otherwise.
 
 ![Navigation demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/navigation.gif?raw=true)
 
