@@ -2,24 +2,30 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/src/controls/actions/actions.dart';
+import 'package:flutter_deck/src/controls/fullscreen/fullscreen.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/widgets/internal/drawer/drawer.dart';
 import 'package:flutter_deck/src/widgets/internal/marker/marker.dart';
 
 /// The [ChangeNotifier] used to control the slide deck and handle cursor and
 /// deck controls visibility.
-class FlutterDeckControlsNotifier with ChangeNotifier {
+class FlutterDeckControlsNotifier
+    with ChangeNotifier
+    implements FlutterDeckFullscreenManagerBase {
   /// Creates a [FlutterDeckControlsNotifier].
   FlutterDeckControlsNotifier({
     required FlutterDeckDrawerNotifier drawerNotifier,
     required FlutterDeckMarkerNotifier markerNotifier,
+    required FlutterDeckFullscreenManagerBase fullscreenManager,
     required FlutterDeckRouter router,
   })  : _drawerNotifier = drawerNotifier,
         _markerNotifier = markerNotifier,
+        _fullscreenManager = fullscreenManager,
         _router = router;
 
   final FlutterDeckDrawerNotifier _drawerNotifier;
   final FlutterDeckMarkerNotifier _markerNotifier;
+  final FlutterDeckFullscreenManagerBase _fullscreenManager;
   final FlutterDeckRouter _router;
 
   var _controlsVisible = false;
@@ -68,6 +74,18 @@ class FlutterDeckControlsNotifier with ChangeNotifier {
     showControls();
     notifyListeners();
   }
+
+  @override
+  bool canFullscreen() => _fullscreenManager.canFullscreen();
+
+  @override
+  bool isInFullscreen() => _fullscreenManager.isInFullscreen();
+
+  @override
+  void enterFullscreen() => _fullscreenManager.enterFullscreen();
+
+  @override
+  void leaveFullscreen() => _fullscreenManager.leaveFullscreen();
 
   /// Show the cursor and controls.
   ///
