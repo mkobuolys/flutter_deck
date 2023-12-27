@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
+import 'package:flutter_deck/src/controls/fullscreen/fullscreen.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
@@ -121,6 +122,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
       autoplayNotifier: _autoplayNotifier,
       drawerNotifier: _drawerNotifier = FlutterDeckDrawerNotifier(),
       markerNotifier: _markerNotifier = FlutterDeckMarkerNotifier(),
+      fullscreenManager: FlutterDeckFullscreenManager(),
       router: _flutterDeckRouter,
     );
     _themeNotifier = FlutterDeckThemeNotifier(widget.themeMode);
