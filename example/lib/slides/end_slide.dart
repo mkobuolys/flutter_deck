@@ -6,6 +6,7 @@ class EndSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/end',
+            title: 'Thank you!',
             footer: FlutterDeckFooterConfiguration(showFooter: false),
           ),
         );

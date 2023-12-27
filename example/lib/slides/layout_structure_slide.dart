@@ -6,6 +6,7 @@ class LayoutStructureSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/layout-structure',
+            title: 'Layout structure',
           ),
         );
 

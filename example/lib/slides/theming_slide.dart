@@ -6,6 +6,7 @@ class ThemingSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/theming-slide',
+            title: 'Theming',
             header: FlutterDeckHeaderConfiguration(title: 'Theming'),
           ),
         );

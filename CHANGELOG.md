@@ -78,6 +78,9 @@
       )
       ```
 
+- feat: add `title` property to the `FlutterDeckSlideConfiguration`
+- feat: navigation drawer item title is generated from the slide configuration
+
 # 0.9.1
 
 - fix: adjust control widget styling and the default slide background color

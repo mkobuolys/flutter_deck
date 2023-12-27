@@ -101,12 +101,17 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   ///
   /// [steps] is the number of steps in the slide. The default is 1.
   ///
+  /// [title] is the title of the slide. If the title is set, it will be used in
+  /// the navigation drawer instead of the header title (or route as a
+  /// fallback).
+  ///
   /// [footer], [header], [progressIndicator], [showProgress], and [transition]
   /// are optional overrides for the global configuration.
   const FlutterDeckSlideConfiguration({
     required this.route,
     this.hidden = false,
     this.steps = 1,
+    this.title,
     FlutterDeckFooterConfiguration? footer,
     FlutterDeckHeaderConfiguration? header,
     FlutterDeckProgressIndicator? progressIndicator,
@@ -124,6 +129,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
     required this.route,
     this.hidden = false,
     this.steps = 1,
+    this.title,
     super.footer,
     super.header,
     super.progressIndicator,
@@ -137,6 +143,12 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
 
   /// The route for the slide.
   final String route;
+
+  /// The title of the slide.
+  ///
+  /// If the title is set, it will be used in the navigation drawer instead of
+  /// the header title (or route as a fallback).
+  final String? title;
 
   /// Whether the slide is hidden or not.
   ///
@@ -164,6 +176,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
       route: route,
       hidden: hidden,
       steps: steps,
+      title: title,
       footer: _footerConfigurationOverride ?? configuration.footer,
       header: _headerConfigurationOverride ?? configuration.header,
       progressIndicator:

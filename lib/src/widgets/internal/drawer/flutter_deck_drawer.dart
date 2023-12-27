@@ -36,6 +36,19 @@ class _SlideCard extends StatelessWidget {
   final FlutterDeckRouterSlide slide;
   final int index;
 
+  String _getSlideTitle() {
+    final configuration = slide.configuration;
+    final title = configuration.title;
+
+    if (title != null) return title;
+
+    final header = configuration.header;
+
+    if (header.showHeader) return header.title;
+
+    return configuration.route;
+  }
+
   @override
   Widget build(BuildContext context) {
     final currentSlideNumber = context.flutterDeck.slideNumber;
@@ -45,7 +58,7 @@ class _SlideCard extends StatelessWidget {
     return ListTile(
       selected: isActive,
       leading: Text('$slideNumber.'),
-      title: Text(slide.configuration.route),
+      title: Text(_getSlideTitle()),
       onTap: () {
         if (!isActive) context.flutterDeck.goToSlide(slideNumber);
 
