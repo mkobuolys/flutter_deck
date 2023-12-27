@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_deck/src/controls/actions/actions.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
-import 'package:flutter_deck/src/fullscreen/fullscreen.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 
 /// A widget that allows the user to control the slide deck.
@@ -253,10 +252,19 @@ class _FullscreenButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controlsNotifier = context.flutterDeck.controlsNotifier;
+    final isInFullscreen = controlsNotifier.isInFullscreen();
+
     return MenuItemButton(
-      leadingIcon: const Icon(Icons.fullscreen_rounded),
-      onPressed: isInFullscreen() ? leaveFullscreen : enterFullscreen,
-      child: Text(isInFullscreen() ? 'Leave fullscreen' : 'Enter fullscreen'),
+      leadingIcon: Icon(
+        isInFullscreen
+            ? Icons.fullscreen_exit_rounded
+            : Icons.fullscreen_rounded,
+      ),
+      onPressed: isInFullscreen
+          ? controlsNotifier.leaveFullscreen
+          : controlsNotifier.enterFullscreen,
+      child: Text(isInFullscreen ? 'Leave full screen' : 'Enter full screen'),
     );
   }
 }
@@ -290,6 +298,9 @@ class _OptionsMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controlsNotifier = context.flutterDeck.controlsNotifier;
+    final canFullscreen = controlsNotifier.canFullscreen();
+
     return MenuButtonTheme(
       data: MenuButtonThemeData(
         style: ButtonStyle(
@@ -307,7 +318,7 @@ class _OptionsMenuButton extends StatelessWidget {
         menuChildren: [
           const _ThemeButton(),
           const _MarkerButton(),
-          if (canFullscreen()) const _FullscreenButton(),
+          if (canFullscreen) const _FullscreenButton(),
         ],
       ),
     );
