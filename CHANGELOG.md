@@ -81,7 +81,7 @@
 - feat: add `title` property to the `FlutterDeckSlideConfiguration`
 - feat: navigation drawer item title is generated from the slide configuration
 - feat: add full screen mode toggle (web only)
-- feat: add slide deck autoplay controls
+- feat: add slide deck auto-play controls
 
 # 0.9.1
 
