@@ -804,12 +804,12 @@ FlutterDeckConfiguration(
 )
 ```
 
-To disable the keyboard shortcuts, set the `shortcuts` property to `FlutterDeckShortcutsConfiguration.disabled()`:
+To disable the keyboard shortcuts, set the `shortcuts` property to `FlutterDeckShortcutsConfiguration(enabled: false)`:
 
 ```dart
 FlutterDeckConfiguration(
   controls: const FlutterDeckControlsConfiguration(
-    shortcuts: FlutterDeckShortcutsConfiguration.disabled(),
+    shortcuts: FlutterDeckShortcutsConfiguration(enabled: false),
   ),
   <...>
 )
