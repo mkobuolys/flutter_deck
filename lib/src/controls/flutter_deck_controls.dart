@@ -15,6 +15,7 @@ import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 /// * Marker controls
 /// * Toggle fullscreen button (when on a supported platform)
 /// * Theme switcher
+/// * Autoplay controls
 ///
 /// Controls are only rendered if they are enabled in the global configuration.
 /// Control component visibility is also handled by this widget. The controls
@@ -61,14 +62,9 @@ class FlutterDeckControls extends StatelessWidget {
   }
 }
 
-class _Controls extends StatefulWidget {
+class _Controls extends StatelessWidget {
   const _Controls();
 
-  @override
-  State<_Controls> createState() => _ControlsState();
-}
-
-class _ControlsState extends State<_Controls> {
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -228,6 +224,146 @@ class _MarkerControls extends StatelessWidget {
   }
 }
 
+class _AutoplayMenuButton extends StatelessWidget {
+  const _AutoplayMenuButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final autoplayNotifier = context.flutterDeck.autoplayNotifier;
+
+    return SubmenuButton(
+      leadingIcon: const Icon(Icons.play_arrow_rounded),
+      menuChildren: [
+        MenuItemButton(
+          leadingIcon: autoplayNotifier.isPlaying
+              ? const Icon(Icons.pause_rounded)
+              : const Icon(Icons.play_arrow_rounded),
+          onPressed: autoplayNotifier.isPlaying
+              ? autoplayNotifier.pause
+              : autoplayNotifier.play,
+          child: const Text('Play'),
+        ),
+        const _PopupMenuDivider(),
+        const _AutoplayDurationButton(
+          duration: Duration(seconds: 1),
+          label: 'Every second',
+        ),
+        const _AutoplayDurationButton(
+          duration: Duration(seconds: 2),
+          label: 'Every 2 seconds',
+        ),
+        const _AutoplayDurationButton(
+          duration: Duration(seconds: 3),
+          label: 'Every 3 seconds',
+        ),
+        const _AutoplayDurationButton(
+          duration: Duration(seconds: 5),
+          label: 'Every 5 seconds',
+        ),
+        const _AutoplayDurationButton(
+          duration: Duration(seconds: 10),
+          label: 'Every 10 seconds',
+        ),
+        const _AutoplayDurationButton(
+          duration: Duration(seconds: 15),
+          label: 'Every 15 seconds',
+        ),
+        const _AutoplayDurationButton(
+          duration: Duration(seconds: 30),
+          label: 'Every 30 seconds',
+        ),
+        const _AutoplayDurationButton(
+          duration: Duration(seconds: 60),
+          label: 'Every minute',
+        ),
+        const _PopupMenuDivider(),
+        const _AutoplayLoopButton(),
+      ],
+      child: const Text('Auto-play'),
+    );
+  }
+}
+
+class _AutoplayDurationButton extends StatelessWidget {
+  const _AutoplayDurationButton({
+    required this.duration,
+    required this.label,
+  });
+
+  final Duration duration;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final autoplayNotifier = context.flutterDeck.autoplayNotifier;
+
+    return ListenableBuilder(
+      listenable: autoplayNotifier,
+      builder: (context, _) {
+        final autoplayDuration = autoplayNotifier.autoplayDuration;
+
+        return _AutoplaySelectionButton(
+          selected: autoplayDuration == duration,
+          label: label,
+          onPressed: () => autoplayNotifier.updateAutoplayDuration(duration),
+        );
+      },
+    );
+  }
+}
+
+class _AutoplayLoopButton extends StatelessWidget {
+  const _AutoplayLoopButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final autoplayNotifier = context.flutterDeck.autoplayNotifier;
+
+    return ListenableBuilder(
+      listenable: autoplayNotifier,
+      builder: (context, _) {
+        final isLooping = autoplayNotifier.isLooping;
+
+        return _AutoplaySelectionButton(
+          selected: isLooping,
+          label: 'Loop',
+          onPressed: autoplayNotifier.toggleLooping,
+        );
+      },
+    );
+  }
+}
+
+class _AutoplaySelectionButton extends StatelessWidget {
+  const _AutoplaySelectionButton({
+    required this.label,
+    required this.selected,
+    required this.onPressed,
+  });
+
+  final String label;
+  final bool selected;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return MenuItemButton(
+      closeOnActivate: false,
+      leadingIcon: selected
+          ? const Icon(Icons.check_rounded)
+          : const SizedBox(width: 24),
+      trailingIcon: const SizedBox(width: 24),
+      onPressed: onPressed,
+      child: Text(
+        label,
+        style: TextStyle(
+          fontWeight: selected ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
+    );
+  }
+}
+
 class _MarkerButton extends StatelessWidget {
   const _MarkerButton();
 
@@ -319,8 +455,22 @@ class _OptionsMenuButton extends StatelessWidget {
           const _ThemeButton(),
           const _MarkerButton(),
           if (canFullscreen) const _FullscreenButton(),
+          const _PopupMenuDivider(),
+          const _AutoplayMenuButton(),
         ],
       ),
+    );
+  }
+}
+
+class _PopupMenuDivider extends StatelessWidget {
+  const _PopupMenuDivider();
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: Theme.of(context).colorScheme.surface,
+      child: const Divider(indent: 12),
     );
   }
 }
