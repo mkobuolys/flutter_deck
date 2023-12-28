@@ -780,7 +780,42 @@ Widget build(BuildContext context) {
 
 ![Steps demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/steps.gif?raw=true)
 
-## Navigation drawer
+## Controls
+
+By default, every slide deck comes with a presenter toolbar that can be used to control the slide deck. Also, some of the controls can be accessed by using keyboard shortcuts.
+
+To disable all the controls (e.g. you use your own UI to control the slide deck), set the `controls` property for the slide deck configuration to `FlutterDeckControlsConfiguration.disabled()`:
+
+```dart
+FlutterDeckConfiguration(
+  controls: FlutterDeckControlsConfiguration.disabled(),
+  <...>
+)
+```
+
+To disable the presenter toolbar, set the `presenterToolbarVisible` property to `false`:
+
+```dart
+FlutterDeckConfiguration(
+  controls: const FlutterDeckControlsConfiguration(
+    presenterToolbarVisible: false,
+  ),
+  <...>
+)
+```
+
+To disable the keyboard shortcuts, set the `shortcuts` property to `FlutterDeckShortcutsConfiguration.disabled()`:
+
+```dart
+FlutterDeckConfiguration(
+  controls: const FlutterDeckControlsConfiguration(
+    shortcuts: FlutterDeckShortcutsConfiguration.disabled(),
+  ),
+  <...>
+)
+```
+
+### Navigation drawer
 
 Every slide deck comes with a navigation drawer that can be used to navigate through the slide deck. The navigation drawer is automatically generated based on the slide deck configuration.
 
@@ -792,11 +827,17 @@ The navigation drawer item title is generated based on the following rules:
 
 ![Navigation demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/navigation.gif?raw=true)
 
-## Marker tool
+### Marker tool
 
-The marker tool allows you to draw on top of the slide. It can be used to highlight specific parts of the slide, or to draw anything you want. The tool is available in the deck controls, or just press "M" on your keyboard (it's also possible to specify a custom key binding for the `toggleMarker` shortcut in `FlutterDeckShortcutsConfiguration`).
+The marker tool allows you to draw on top of the slide. It can be used to highlight specific parts of the slide, or to draw anything you want. The tool is available in the presenter toolbar, or just press "M" on your keyboard (it's also possible to specify a custom key binding for the `toggleMarker` shortcut in `FlutterDeckShortcutsConfiguration`).
 
 ![Marker demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/marker.gif?raw=true)
+
+### Auto-play
+
+The auto-play feature allows you to automatically navigate through the slide deck. It can be used to create a presentation that runs on its own. The auto-play feature is available in the presenter toolbar.
+
+![Auto-play demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/autoplay.gif?raw=true)
 
 ## Generating slides
 
