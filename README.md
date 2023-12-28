@@ -71,10 +71,18 @@ FlutterDeckApp(
       presenterToolbarVisible: true,
       shortcuts: FlutterDeckShortcutsConfiguration(
         enabled: true,
-        nextSlide: [LogicalKeyboardKey.arrowRight],
-        previousSlide: [LogicalKeyboardKey.arrowLeft],
-        toggleMarker: [LogicalKeyboardKey.keyM],
-        toggleNavigationDrawer: [LogicalKeyboardKey.period],
+        nextSlide: SingleActivator(LogicalKeyboardKey.arrowRight),
+        previousSlide: SingleActivator(LogicalKeyboardKey.arrowLeft),
+        toggleMarker: SingleActivator(
+          LogicalKeyboardKey.keyM,
+          control: true,
+          meta: true,
+        ),
+        toggleNavigationDrawer: SingleActivator(
+          LogicalKeyboardKey.period,
+          control: true,
+          meta: true,
+        ),
       ),
     ),
     footer: const FlutterDeckFooterConfiguration(
