@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_deck/src/controls/actions/actions.dart';
+import 'package:flutter_deck/src/controls/localized_shortcut_labeler.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
@@ -101,7 +101,10 @@ class _PreviousButton extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.previousSlide.toShortcutString();
+    final shortcut = LocalizedShortcutLabeler.instance.getShortcutLabel(
+      shortcuts.previousSlide,
+      MaterialLocalizations.of(context),
+    );
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -130,7 +133,10 @@ class _NextButton extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.nextSlide.toShortcutString();
+    final shortcut = LocalizedShortcutLabeler.instance.getShortcutLabel(
+      shortcuts.nextSlide,
+      MaterialLocalizations.of(context),
+    );
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -163,7 +169,10 @@ class _SlideNumberButton extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.toggleNavigationDrawer.toShortcutString();
+    final shortcut = LocalizedShortcutLabeler.instance.getShortcutLabel(
+      shortcuts.toggleNavigationDrawer,
+      MaterialLocalizations.of(context),
+    );
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -197,7 +206,10 @@ class _MarkerControls extends StatelessWidget {
     final controlsNotifier = flutterDeck.controlsNotifier;
     final markerNotifier = flutterDeck.markerNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.toggleMarker.toShortcutString();
+    final shortcut = LocalizedShortcutLabeler.instance.getShortcutLabel(
+      shortcuts.toggleMarker,
+      MaterialLocalizations.of(context),
+    );
 
     return ListenableBuilder(
       listenable: markerNotifier,
@@ -379,7 +391,10 @@ class _MarkerButton extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.toggleMarker.toShortcutString();
+    final shortcut = LocalizedShortcutLabeler.instance.getShortcutLabel(
+      shortcuts.toggleMarker,
+      MaterialLocalizations.of(context),
+    );
 
     return MenuItemButton(
       leadingIcon: const Icon(Icons.edit_rounded),
@@ -487,8 +502,4 @@ class _PopupMenuDivider extends StatelessWidget {
       child: const Divider(indent: 12),
     );
   }
-}
-
-extension _ShortcutExtensions on Set<LogicalKeyboardKey> {
-  String toShortcutString() => map((key) => key.keyLabel).join('+');
 }

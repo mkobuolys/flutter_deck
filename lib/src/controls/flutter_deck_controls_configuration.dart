@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 /// The configuration for the slide deck controls.
 class FlutterDeckControlsConfiguration {
@@ -11,6 +12,11 @@ class FlutterDeckControlsConfiguration {
   /// - Previous slide: \[ArrowLeft\]
   /// - Toggle marker: \[KeyM\]
   /// - Toggle navigation drawer: \[Period\]
+  ///
+  /// See also:
+  /// - [SingleActivator] for more information on how to define a key
+  /// combination.
+  /// - [LogicalKeyboardKey] for a list of all available keys.
   const FlutterDeckControlsConfiguration({
     this.presenterToolbarVisible = true,
     this.shortcuts = const FlutterDeckShortcutsConfiguration(),
@@ -39,55 +45,32 @@ class FlutterDeckShortcutsConfiguration {
   /// - Previous slide: \[ArrowLeft\]
   /// - Toggle marker: \[KeyM\]
   /// - Toggle navigation drawer: \[Period\]
+  ///
+  /// See also:
+  /// - [SingleActivator] for more information on how to define a key
+  /// combination.
+  /// - [LogicalKeyboardKey] for a list of all available keys.
   const FlutterDeckShortcutsConfiguration({
     this.enabled = true,
-    List<LogicalKeyboardKey> nextSlide = const [
-      LogicalKeyboardKey.arrowRight,
-    ],
-    List<LogicalKeyboardKey> previousSlide = const [
-      LogicalKeyboardKey.arrowLeft,
-    ],
-    List<LogicalKeyboardKey> toggleMarker = const [
-      LogicalKeyboardKey.keyM,
-    ],
-    List<LogicalKeyboardKey> toggleNavigationDrawer = const [
-      LogicalKeyboardKey.period,
-    ],
-  })  : _nextSlide = nextSlide,
-        _previousSlide = previousSlide,
-        _toggleMarker = toggleMarker,
-        _toggleNavigationDrawer = toggleNavigationDrawer;
-
-  /// Creates a configuration for the slide deck keyboard shortcuts where they
-  /// are disabled.
-  const FlutterDeckShortcutsConfiguration.disabled()
-      : enabled = false,
-        _nextSlide = const [],
-        _previousSlide = const [],
-        _toggleMarker = const [],
-        _toggleNavigationDrawer = const [];
+    this.nextSlide = const SingleActivator(LogicalKeyboardKey.arrowRight),
+    this.previousSlide = const SingleActivator(LogicalKeyboardKey.arrowLeft),
+    this.toggleMarker = const SingleActivator(LogicalKeyboardKey.keyM),
+    this.toggleNavigationDrawer =
+        const SingleActivator(LogicalKeyboardKey.period),
+  });
 
   /// Whether keyboard shortcuts are enabled or not.
   final bool enabled;
 
-  final List<LogicalKeyboardKey> _nextSlide;
-
   /// The key combination to use for going to the next slide.
-  Set<LogicalKeyboardKey> get nextSlide => {..._nextSlide};
-
-  final List<LogicalKeyboardKey> _previousSlide;
+  final SingleActivator nextSlide;
 
   /// The key combination to use for going to the previous slide.
-  Set<LogicalKeyboardKey> get previousSlide => {..._previousSlide};
-
-  final List<LogicalKeyboardKey> _toggleMarker;
+  final SingleActivator previousSlide;
 
   /// The key combination to use for toggling the marker.
-  Set<LogicalKeyboardKey> get toggleMarker => {..._toggleMarker};
-
-  final List<LogicalKeyboardKey> _toggleNavigationDrawer;
+  final SingleActivator toggleMarker;
 
   /// The key combination to use for toggling the navigation drawer.
-  Set<LogicalKeyboardKey> get toggleNavigationDrawer =>
-      {..._toggleNavigationDrawer};
+  final SingleActivator toggleNavigationDrawer;
 }

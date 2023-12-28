@@ -71,10 +71,18 @@ FlutterDeckApp(
       presenterToolbarVisible: true,
       shortcuts: FlutterDeckShortcutsConfiguration(
         enabled: true,
-        nextSlide: [LogicalKeyboardKey.arrowRight],
-        previousSlide: [LogicalKeyboardKey.arrowLeft],
-        toggleMarker: [LogicalKeyboardKey.keyM],
-        toggleNavigationDrawer: [LogicalKeyboardKey.period],
+        nextSlide: SingleActivator(LogicalKeyboardKey.arrowRight),
+        previousSlide: SingleActivator(LogicalKeyboardKey.arrowLeft),
+        toggleMarker: SingleActivator(
+          LogicalKeyboardKey.keyM,
+          control: true,
+          meta: true,
+        ),
+        toggleNavigationDrawer: SingleActivator(
+          LogicalKeyboardKey.period,
+          control: true,
+          meta: true,
+        ),
       ),
     ),
     footer: const FlutterDeckFooterConfiguration(
@@ -804,12 +812,12 @@ FlutterDeckConfiguration(
 )
 ```
 
-To disable the keyboard shortcuts, set the `shortcuts` property to `FlutterDeckShortcutsConfiguration.disabled()`:
+To disable the keyboard shortcuts, set the `shortcuts` property to `FlutterDeckShortcutsConfiguration(enabled: false)`:
 
 ```dart
 FlutterDeckConfiguration(
   controls: const FlutterDeckControlsConfiguration(
-    shortcuts: FlutterDeckShortcutsConfiguration.disabled(),
+    shortcuts: FlutterDeckShortcutsConfiguration(enabled: false),
   ),
   <...>
 )

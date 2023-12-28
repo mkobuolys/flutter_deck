@@ -39,7 +39,7 @@
 
       ```
       FlutterDeckControlsConfiguration(
-        shortcuts: FlutterDeckShortcutsConfiguration.disabled(),
+        shortcuts: FlutterDeckShortcutsConfiguration(enabled: false),
         <...>,
       )
       ```
@@ -52,6 +52,7 @@
     - `previousKey` -> `previousSlide`
     - `openDrawerKey` -> `toggleNavigationDrawer`
     - `toggleMarkerKey` -> `toggleMarker`
+
     - **Migration**: instead of:
 
       ```
@@ -69,14 +70,31 @@
       ```
       FlutterDeckControlsConfiguration(
         shortcuts: FlutterDeckShortcutsConfiguration(
-          nextSlide: [LogicalKeyboardKey.arrowRight],
-          previousSlide: [LogicalKeyboardKey.arrowLeft],
-          toggleMarker: [LogicalKeyboardKey.keyM],
-          toggleNavigationDrawer: [LogicalKeyboardKey.period],
+          nextSlide: SingleActivator(LogicalKeyboardKey.arrowRight),
+          previousSlide: SingleActivator(LogicalKeyboardKey.arrowLeft),
+          toggleMarker: SingleActivator(LogicalKeyboardKey.keyM),
+          toggleNavigationDrawer: SingleActivator(LogicalKeyboardKey.period),
         ),
         <...>,
       )
       ```
+
+- feat: add support for key combinations for shortcuts
+
+  - Instead of passing a `LogicalKeyboardKey`, pass a `SingleActivator`. It enables you not only to specify a single key, but also its modifiers:
+
+    ```
+    FlutterDeckControlsConfiguration(
+      shortcuts: FlutterDeckShortcutsConfiguration(
+        nextSlide: SingleActivator(
+          LogicalKeyboardKey.arrowRight,
+          control: true,
+        ),
+        <...>,
+      ),
+      <...>,
+    )
+    ```
 
 - feat: add `title` property to the `FlutterDeckSlideConfiguration`
 - feat: navigation drawer item title is generated from the slide configuration
