@@ -41,6 +41,9 @@ class FlutterDeck extends InheritedWidget {
   ///
   /// The [speakerInfo] is optional and is used to access the speaker info.
   ///
+  /// The [autoplayNotifier] is required and is used to control the slide deck's
+  /// autoplay feature.
+  ///
   /// The [controlsNotifier] is required and is used to control the slide deck.
   ///
   /// The [drawerNotifier] is required and is used to control the slide deck's
@@ -55,6 +58,7 @@ class FlutterDeck extends InheritedWidget {
     required FlutterDeckConfiguration configuration,
     required FlutterDeckRouter router,
     required FlutterDeckSpeakerInfo? speakerInfo,
+    required FlutterDeckAutoplayNotifier autoplayNotifier,
     required FlutterDeckControlsNotifier controlsNotifier,
     required FlutterDeckDrawerNotifier drawerNotifier,
     required FlutterDeckMarkerNotifier markerNotifier,
@@ -64,6 +68,7 @@ class FlutterDeck extends InheritedWidget {
   })  : _configuration = configuration,
         _router = router,
         _speakerInfo = speakerInfo,
+        _autoplayNotifier = autoplayNotifier,
         _controlsNotifier = controlsNotifier,
         _drawerNotifier = drawerNotifier,
         _markerNotifier = markerNotifier,
@@ -72,6 +77,7 @@ class FlutterDeck extends InheritedWidget {
   final FlutterDeckConfiguration _configuration;
   final FlutterDeckRouter _router;
   final FlutterDeckSpeakerInfo? _speakerInfo;
+  final FlutterDeckAutoplayNotifier _autoplayNotifier;
   final FlutterDeckControlsNotifier _controlsNotifier;
   final FlutterDeckDrawerNotifier _drawerNotifier;
   final FlutterDeckMarkerNotifier _markerNotifier;
@@ -117,6 +123,9 @@ class FlutterDeck extends InheritedWidget {
 
   /// Returns the global configuration for the slide deck.
   FlutterDeckConfiguration get globalConfiguration => _configuration;
+
+  /// Returns the [FlutterDeckAutoplayNotifier] for the slide deck.
+  FlutterDeckAutoplayNotifier get autoplayNotifier => _autoplayNotifier;
 
   /// Returns the [FlutterDeckControlsNotifier] for the slide deck.
   FlutterDeckControlsNotifier get controlsNotifier => _controlsNotifier;
