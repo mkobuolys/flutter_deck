@@ -1,4 +1,4 @@
-# NEXT
+# 0.10.0
 
 - refactor: rework flutter deck controls
 
