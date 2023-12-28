@@ -229,57 +229,64 @@ class _AutoplayMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final autoplayNotifier = context.flutterDeck.autoplayNotifier;
+    final flutterDeck = context.flutterDeck;
+    final autoplayNotifier = flutterDeck.autoplayNotifier;
+    final markerNotifier = flutterDeck.markerNotifier;
 
-    return SubmenuButton(
-      leadingIcon: const Icon(Icons.play_arrow_rounded),
-      menuChildren: [
-        MenuItemButton(
-          leadingIcon: autoplayNotifier.isPlaying
-              ? const Icon(Icons.pause_rounded)
-              : const Icon(Icons.play_arrow_rounded),
-          onPressed: autoplayNotifier.isPlaying
-              ? autoplayNotifier.pause
-              : autoplayNotifier.play,
-          child: const Text('Play'),
-        ),
-        const _PopupMenuDivider(),
-        const _AutoplayDurationButton(
-          duration: Duration(seconds: 1),
-          label: 'Every second',
-        ),
-        const _AutoplayDurationButton(
-          duration: Duration(seconds: 2),
-          label: 'Every 2 seconds',
-        ),
-        const _AutoplayDurationButton(
-          duration: Duration(seconds: 3),
-          label: 'Every 3 seconds',
-        ),
-        const _AutoplayDurationButton(
-          duration: Duration(seconds: 5),
-          label: 'Every 5 seconds',
-        ),
-        const _AutoplayDurationButton(
-          duration: Duration(seconds: 10),
-          label: 'Every 10 seconds',
-        ),
-        const _AutoplayDurationButton(
-          duration: Duration(seconds: 15),
-          label: 'Every 15 seconds',
-        ),
-        const _AutoplayDurationButton(
-          duration: Duration(seconds: 30),
-          label: 'Every 30 seconds',
-        ),
-        const _AutoplayDurationButton(
-          duration: Duration(seconds: 60),
-          label: 'Every minute',
-        ),
-        const _PopupMenuDivider(),
-        const _AutoplayLoopButton(),
-      ],
-      child: const Text('Auto-play'),
+    return ListenableBuilder(
+      listenable: markerNotifier,
+      builder: (context, _) => SubmenuButton(
+        leadingIcon: const Icon(Icons.play_arrow_rounded),
+        menuChildren: [
+          if (!markerNotifier.enabled) ...[
+            MenuItemButton(
+              leadingIcon: autoplayNotifier.isPlaying
+                  ? const Icon(Icons.pause_rounded)
+                  : const Icon(Icons.play_arrow_rounded),
+              onPressed: autoplayNotifier.isPlaying
+                  ? autoplayNotifier.pause
+                  : autoplayNotifier.play,
+              child: const Text('Play'),
+            ),
+            const _PopupMenuDivider(),
+            const _AutoplayDurationButton(
+              duration: Duration(seconds: 1),
+              label: 'Every second',
+            ),
+            const _AutoplayDurationButton(
+              duration: Duration(seconds: 2),
+              label: 'Every 2 seconds',
+            ),
+            const _AutoplayDurationButton(
+              duration: Duration(seconds: 3),
+              label: 'Every 3 seconds',
+            ),
+            const _AutoplayDurationButton(
+              duration: Duration(seconds: 5),
+              label: 'Every 5 seconds',
+            ),
+            const _AutoplayDurationButton(
+              duration: Duration(seconds: 10),
+              label: 'Every 10 seconds',
+            ),
+            const _AutoplayDurationButton(
+              duration: Duration(seconds: 15),
+              label: 'Every 15 seconds',
+            ),
+            const _AutoplayDurationButton(
+              duration: Duration(seconds: 30),
+              label: 'Every 30 seconds',
+            ),
+            const _AutoplayDurationButton(
+              duration: Duration(seconds: 60),
+              label: 'Every minute',
+            ),
+            const _PopupMenuDivider(),
+            const _AutoplayLoopButton(),
+          ],
+        ],
+        child: const Text('Auto-play'),
+      ),
     );
   }
 }
@@ -388,19 +395,26 @@ class _FullscreenButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controlsNotifier = context.flutterDeck.controlsNotifier;
-    final isInFullscreen = controlsNotifier.isInFullscreen();
+    final flutterDeck = context.flutterDeck;
+    final controlsNotifier = flutterDeck.controlsNotifier;
+    final markerNotifier = flutterDeck.markerNotifier;
 
-    return MenuItemButton(
-      leadingIcon: Icon(
-        isInFullscreen
-            ? Icons.fullscreen_exit_rounded
-            : Icons.fullscreen_rounded,
+    final isInFullscreen = controlsNotifier.isInFullscreen();
+    final onPressed = isInFullscreen
+        ? controlsNotifier.leaveFullscreen
+        : controlsNotifier.enterFullscreen;
+
+    return ListenableBuilder(
+      listenable: markerNotifier,
+      builder: (context, _) => MenuItemButton(
+        leadingIcon: Icon(
+          isInFullscreen
+              ? Icons.fullscreen_exit_rounded
+              : Icons.fullscreen_rounded,
+        ),
+        onPressed: !markerNotifier.enabled ? onPressed : null,
+        child: Text(isInFullscreen ? 'Leave full screen' : 'Enter full screen'),
       ),
-      onPressed: isInFullscreen
-          ? controlsNotifier.leaveFullscreen
-          : controlsNotifier.enterFullscreen,
-      child: Text(isInFullscreen ? 'Leave full screen' : 'Enter full screen'),
     );
   }
 }
