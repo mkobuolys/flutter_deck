@@ -1,14 +1,60 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
+
+const _slideCardHeight = 48.0;
 
 /// A widget that is used as a navigation drawer for the [FlutterDeck].
 ///
 /// This widget renders a list of all the slides in the deck. The user can tap
 /// on any slide to navigate to it.
-class FlutterDeckDrawer extends StatelessWidget {
+class FlutterDeckDrawer extends StatefulWidget {
   /// Creates a [FlutterDeckDrawer].
   const FlutterDeckDrawer({super.key});
+
+  @override
+  State<FlutterDeckDrawer> createState() => _FlutterDeckDrawerState();
+}
+
+class _FlutterDeckDrawerState extends State<FlutterDeckDrawer> {
+  late final ScrollController _controller;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    _controller = ScrollController(initialScrollOffset: _initialScrollOffset);
+  }
+
+  double get _initialScrollOffset {
+    final router = context.flutterDeck.router;
+    final itemsCount = router.slides.length;
+    final viewHeight = MediaQuery.sizeOf(context).height;
+
+    if (viewHeight >= itemsCount * _slideCardHeight) return 0;
+
+    final index = router.getCurrentSlideIndex();
+    final itemsInView = (viewHeight / _slideCardHeight).floor();
+
+    if (index < itemsInView / 2) return 0;
+
+    final remainingOffset = viewHeight - itemsInView * _slideCardHeight;
+    final scrollToIndex = math.min(
+      index - itemsInView ~/ 3,
+      itemsCount - itemsInView,
+    );
+
+    return scrollToIndex * _slideCardHeight - remainingOffset;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +63,7 @@ class FlutterDeckDrawer extends StatelessWidget {
 
     return Drawer(
       child: ListView.builder(
+        controller: _controller,
         itemBuilder: (context, index) => _SlideCard(
           slide: slides[index],
           index: index,
