@@ -412,6 +412,32 @@ class CustomSlide extends FlutterDeckSlideWidget {
 }
 ```
 
+## Generating slides
+
+This package comes with a [mason][mason_link] template that can be used to generate a new slide for the slide deck.
+
+Ensure you have the [mason_cli][mason_cli_link] installed:
+
+```sh
+dart pub global activate mason_cli
+```
+
+Install the [flutter_deck_slide][flutter_deck_slide_brick] template:
+
+```sh
+# Install locally
+mason add flutter_deck_slide
+
+# Install globally
+mason add -g flutter_deck_slide
+```
+
+Generate a new slide:
+
+```sh
+mason make flutter_deck_slide
+```
+
 ## Theming
 
 You can customize the theme of your slide deck by providing a `FlutterDeckThemeData` to the `FlutterDeckApp` widget:
@@ -846,32 +872,6 @@ The marker tool allows you to draw on top of the slide. It can be used to highli
 The auto-play feature allows you to automatically navigate through the slide deck. It can be used to create a presentation that runs on its own. The auto-play feature is available in the presenter toolbar.
 
 ![Auto-play demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/autoplay.gif?raw=true)
-
-## Generating slides
-
-This package comes with a [mason][mason_link] template that can be used to generate a new slide for the slide deck.
-
-Ensure you have the [mason_cli][mason_cli_link] installed:
-
-```sh
-dart pub global activate mason_cli
-```
-
-Install the [flutter_deck_slide][flutter_deck_slide_brick] template:
-
-```sh
-# Install locally
-mason add flutter_deck_slide
-
-# Install globally
-mason add -g flutter_deck_slide
-```
-
-Generate a new slide:
-
-```sh
-mason make flutter_deck_slide
-```
 
 ## Presentations built with flutter_deck 🚀
 
