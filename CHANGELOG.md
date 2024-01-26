@@ -1,6 +1,7 @@
 # NEXT
 
 - feat: set scroll position to currently active slide on navigation drawer open
+- fix: FlutterDeckBulletList scaling issues
 
 # 0.10.1
 
