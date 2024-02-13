@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 
-const _slideCardHeight = 48.0;
+const _navigationDrawerWidth = 400.0;
+const _navigationItemHeight = 48.0;
 
 /// A widget that is used as a navigation drawer for the [FlutterDeck].
 ///
@@ -40,20 +41,20 @@ class _FlutterDeckDrawerState extends State<FlutterDeckDrawer> {
     final itemsCount = router.slides.length;
     final viewHeight = MediaQuery.sizeOf(context).height;
 
-    if (viewHeight >= itemsCount * _slideCardHeight) return 0;
+    if (viewHeight >= itemsCount * _navigationItemHeight) return 0;
 
     final index = router.getCurrentSlideIndex();
-    final itemsInView = (viewHeight / _slideCardHeight).floor();
+    final itemsInView = (viewHeight / _navigationItemHeight).floor();
 
     if (index < itemsInView / 2) return 0;
 
-    final remainingOffset = viewHeight - itemsInView * _slideCardHeight;
+    final remainingOffset = viewHeight - itemsInView * _navigationItemHeight;
     final scrollToIndex = math.min(
       index - itemsInView ~/ 3,
       itemsCount - itemsInView,
     );
 
-    return scrollToIndex * _slideCardHeight - remainingOffset;
+    return scrollToIndex * _navigationItemHeight - remainingOffset;
   }
 
   @override
@@ -62,6 +63,7 @@ class _FlutterDeckDrawerState extends State<FlutterDeckDrawer> {
     final slides = flutterDeck.router.slides;
 
     return Drawer(
+      width: _navigationDrawerWidth,
       child: ListView.builder(
         controller: _controller,
         itemBuilder: (context, index) => _SlideCard(
@@ -105,7 +107,11 @@ class _SlideCard extends StatelessWidget {
     return ListTile(
       selected: isActive,
       leading: Text('$slideNumber.'),
-      title: Text(_getSlideTitle()),
+      title: Text(
+        _getSlideTitle(),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
       onTap: () {
         if (!isActive) context.flutterDeck.goToSlide(slideNumber);
 

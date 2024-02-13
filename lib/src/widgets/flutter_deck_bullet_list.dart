@@ -44,7 +44,7 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 ///   }
 /// }
 /// ```
-class FlutterDeckBulletList extends StatelessWidget {
+class FlutterDeckBulletList extends StatefulWidget {
   /// Creates a widget that renders a list of bullet points.
   ///
   /// Bullet point [items] are rendered as a row with a bullet point and the
@@ -60,11 +60,7 @@ class FlutterDeckBulletList extends StatelessWidget {
     this.useSteps = false,
     this.bulletPointWidget,
     super.key,
-  })  : _autoSizeGroup = AutoSizeGroup(),
-        assert(
-          items.isNotEmpty,
-          'You must provide at least one bullet point.',
-        );
+  }) : assert(items.isNotEmpty, 'You must provide at least one bullet point.');
 
   /// A list of bullet points.
   final List<String> items;
@@ -76,24 +72,28 @@ class FlutterDeckBulletList extends StatelessWidget {
   /// A widget to use as the bullet point. If not provided, a dot will be used.
   final Widget? bulletPointWidget;
 
-  /// Used to synchronize the font size of the bullet points.
-  final AutoSizeGroup _autoSizeGroup;
+  @override
+  State<FlutterDeckBulletList> createState() => _FlutterDeckBulletListState();
+}
+
+class _FlutterDeckBulletListState extends State<FlutterDeckBulletList> {
+  final _autoSizeGroup = AutoSizeGroup();
 
   @override
   Widget build(BuildContext context) {
-    if (!useSteps) {
+    if (!widget.useSteps) {
       return _BulletList(
-        items: items,
+        items: widget.items,
         autoSizeGroup: _autoSizeGroup,
-        bulletPointWidget: bulletPointWidget,
+        bulletPointWidget: widget.bulletPointWidget,
       );
     }
 
     return FlutterDeckSlideStepsBuilder(
       builder: (context, stepNumber) => _BulletList(
-        items: items,
+        items: widget.items,
         autoSizeGroup: _autoSizeGroup,
-        bulletPointWidget: bulletPointWidget,
+        bulletPointWidget: widget.bulletPointWidget,
         stepNumber: stepNumber,
       ),
     );
@@ -119,17 +119,18 @@ class _BulletList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         for (var i = 0; i < items.length; i++)
-          if (stepNumber == null || stepNumber != null && i + 1 <= stepNumber!)
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: _BulletListItem(
-                  group: autoSizeGroup,
-                  text: items[i],
-                  bulletPointWidget: bulletPointWidget,
-                ),
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: _BulletListItem(
+                group: autoSizeGroup,
+                text: items[i],
+                visible: stepNumber == null ||
+                    stepNumber != null && i + 1 <= stepNumber!,
+                bulletPointWidget: bulletPointWidget,
               ),
             ),
+          ),
       ],
     );
   }
@@ -139,24 +140,29 @@ class _BulletListItem extends StatelessWidget {
   const _BulletListItem({
     required this.group,
     required this.text,
+    required this.visible,
     this.bulletPointWidget,
   });
 
   final AutoSizeGroup group;
   final String text;
+  final bool visible;
   final Widget? bulletPointWidget;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        bulletPointWidget ?? _AutoSizeText('\u2022', group: group),
-        const SizedBox(width: 8),
-        Expanded(
-          child: _AutoSizeText(text, group: group),
-        ),
-      ],
+    return Visibility.maintain(
+      visible: visible,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          bulletPointWidget ?? _AutoSizeText('\u2022', group: group),
+          const SizedBox(width: 8),
+          Expanded(
+            child: _AutoSizeText(text, group: group),
+          ),
+        ],
+      ),
     );
   }
 }
