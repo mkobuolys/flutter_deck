@@ -883,6 +883,7 @@ The auto-play feature allows you to automatically navigate through the slide dec
 | [Make smarter decisions faster with Firebase Remote Config](https://github.com/mkobuolys/f3-firebase-remote-config-talk)                                        | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link] & [Darja Orlova](https://x.com/dariadroid) |
 | [Flutter for the win: Cross-platform development at maximum power](https://github.com/polilluminato/linuxday-2023-presentation)                                 | Italian    | [Alberto Bonacina](https://x.com/polilluminato)                                              |
 | [ReArch: A Reactive Approach to Application Architecture Supporting Side Effects](https://github.com/GregoryConrad/rearch-dart/tree/main/examples/presentation) | English    | [Gregory Conrad](https://github.com/GregoryConrad)                                           |
+| [Flutter demo](https://github.com/thpir/flutter-presentation)                                                                                                   | Dutch      | [Thijs Pirmez](https://www.linkedin.com/in/thijs-pirmez-973327230/)                          |
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
