@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:go_router/go_router.dart';
@@ -63,7 +64,7 @@ class FlutterDeckRouter {
               key: state.pageKey,
               restorationId: state.pageKey.value,
               transitionsBuilder: slide.configuration.transition.build,
-              child: slide.widget.build(context),
+              child: Builder(builder: slide.widget.build),
             ),
           ),
       ],
