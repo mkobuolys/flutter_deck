@@ -1,3 +1,7 @@
+# NEXT
+
+- fix: hot reload doesn't work on macOS
+
 # 0.11.0
 
 - feat: set scroll position to currently active slide on navigation drawer open

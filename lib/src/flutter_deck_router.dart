@@ -5,16 +5,6 @@ import 'package:go_router/go_router.dart';
 
 const _queryParameterStep = 'step';
 
-class _FlutterDeckSlidePage extends StatelessWidget {
-  const _FlutterDeckSlidePage(this.slide);
-  final FlutterDeckRouterSlide slide;
-
-  @override
-  Widget build(BuildContext context) {
-    return slide.widget.build(context);
-  }
-}
-
 /// A slide route for the slide deck.
 class FlutterDeckRouterSlide {
   /// Creates a slide route for the slide deck.
@@ -74,7 +64,7 @@ class FlutterDeckRouter {
               key: state.pageKey,
               restorationId: state.pageKey.value,
               transitionsBuilder: slide.configuration.transition.build,
-              child: _FlutterDeckSlidePage(slide),
+              child: Builder(builder: slide.widget.build),
             ),
           ),
       ],
