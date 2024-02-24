@@ -1,4 +1,4 @@
-# NEXT
+# 0.11.1
 
 - fix: hot reload doesn't work on macOS
 
