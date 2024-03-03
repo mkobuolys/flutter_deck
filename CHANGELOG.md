@@ -1,3 +1,7 @@
+# Next
+
+- feat: add support for slide deck localization
+
 # 0.11.1
 
 - fix: hot reload doesn't work on macOS

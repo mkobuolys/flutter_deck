@@ -39,6 +39,9 @@ class FlutterDeckApp extends StatefulWidget {
   /// The [themeMode] argument can be used to provide a custom theme mode for
   /// the slide deck.
   ///
+  /// The [locale], [localizationsDelegates] and [supportedLocales] arguments
+  /// are equivalent to those of [MaterialApp]'s.
+  ///
   /// See also:
   ///
   /// * [FlutterDeckSlide], which represents a single slide.
@@ -56,6 +59,9 @@ class FlutterDeckApp extends StatefulWidget {
     this.lightTheme,
     this.darkTheme,
     this.themeMode = ThemeMode.system,
+    this.locale,
+    this.localizationsDelegates,
+    this.supportedLocales = const <Locale>[Locale('en')],
     super.key,
   }) : assert(slides.length > 0, 'You must provide at least one slide');
 
@@ -95,6 +101,25 @@ class FlutterDeckApp extends StatefulWidget {
   ///
   /// By default, the system theme mode is used.
   final ThemeMode themeMode;
+
+  /// The initial locale for the slide deck.
+  ///
+  /// See also:
+  /// * [MaterialApp.locale], which is equivalent to this argument.
+  final Locale? locale;
+
+  /// The delegates for the slide deck's localization.
+  ///
+  /// See also:
+  /// * [MaterialApp.localizationsDelegates], which is equivalent to this
+  /// argument.
+  final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
+
+  /// The list of locales that the slide deck has been localized for.
+  ///
+  /// See also:
+  /// * [MaterialApp.supportedLocales], which is equivalent to this argument.
+  final Iterable<Locale> supportedLocales;
 
   @override
   State<FlutterDeckApp> createState() => _FlutterDeckAppState();
@@ -173,6 +198,9 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
             ),
           ),
           debugShowCheckedModeBanner: false,
+          locale: widget.locale,
+          localizationsDelegates: widget.localizationsDelegates,
+          supportedLocales: widget.supportedLocales,
         );
       },
     );
