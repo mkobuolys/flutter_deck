@@ -19,9 +19,9 @@ Demo: https://mkobuolys.github.io/flutter_deck/
 
 ## Table of contents
 
-- **[Installation 💻](#installation-💻)**
-- **[Hello flutter_deck! 🧑‍💻](#hello-flutter_deck-🧑‍💻)**
-- **[Slide templates 📃](#slide-templates-📃)**
+- **[Installation 💻](#installation-)**
+- **[Hello flutter_deck! 🧑‍💻](#hello-flutter_deck-)**
+- **[Slide templates 📃](#slide-templates-)**
   - **[Title slide](#title-slide)**
   - **[Blank slide](#blank-slide)**
   - **[Big fact slide](#big-fact-slide)**
@@ -30,22 +30,22 @@ Demo: https://mkobuolys.github.io/flutter_deck/
   - **[Split slide](#split-slide)**
   - **[Template slide](#template-slide)**
   - **[Custom slide](#custom-slide)**
-- **[Generating slides ⚙️](#generating-slides-⚙️)**
-- **[Theming 🎨](#theming-🎨)**
-- **[Slide visibility 🙈](#slide-visibility-🙈)**
-- **[Widgets 🧱](#widgets-🧱)**
+- **[Generating slides ⚙️](#generating-slides-)**
+- **[Theming 🎨](#theming-)**
+- **[Slide visibility 🙈](#slide-visibility-)**
+- **[Widgets 🧱](#widgets-)**
   - **[FlutterDeckBulletList](#flutterdeckbulletlist)**
   - **[FlutterDeckCodeHighlight](#flutterdeckcodehighlight)**
 - **[Accessing slide deck state from the code 🔧](#accessing-slide-deck-state-from-the-code-🔧)**
-- **[Transitions ➡️](#transitions-➡️)**
-- **[Steps 🐾](#steps-🐾)**
-- **[Localization 🌍](#localization-🌍)**
-- **[Controls 🕹️](#controls-🕹️)**
+- **[Transitions ➡️](#transitions-)**
+- **[Steps 🐾](#steps-)**
+- **[Localization 🌍](#localization-)**
+- **[Controls 🕹️](#controls-)**
   - **[Navigation drawer](#navigation-drawer)**
   - **[Marker tool](#marker-tool)**
   - **[Auto-play](#auto-play)**
   - **[Changing locale](#changing-locale)**
-- **[Presentations built with flutter_deck 🚀](#presentations-built-with-flutter_deck-🚀)**
+- **[Presentations built with flutter_deck 🚀](#presentations-built-with-flutter_deck-)**
 
 ## Installation 💻
 
