@@ -350,6 +350,7 @@ class _AutoplayDurationButton extends StatelessWidget {
         return _MenuSelectionButton(
           selected: autoplayDuration == duration,
           label: label,
+          closeOnActivate: false,
           onPressed: () => autoplayNotifier.updateAutoplayDuration(duration),
         );
       },
@@ -372,6 +373,7 @@ class _AutoplayLoopButton extends StatelessWidget {
         return _MenuSelectionButton(
           selected: isLooping,
           label: 'Loop',
+          closeOnActivate: false,
           onPressed: autoplayNotifier.toggleLooping,
         );
       },
@@ -384,16 +386,18 @@ class _MenuSelectionButton extends StatelessWidget {
     required this.label,
     required this.selected,
     required this.onPressed,
+    this.closeOnActivate = true,
   });
 
   final String label;
   final bool selected;
+  final bool closeOnActivate;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return MenuItemButton(
-      closeOnActivate: false,
+      closeOnActivate: closeOnActivate,
       leadingIcon: selected
           ? const Icon(Icons.check_rounded)
           : const SizedBox(width: 24),
