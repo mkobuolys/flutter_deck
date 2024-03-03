@@ -1,6 +1,7 @@
 # Next
 
 - feat: add support for slide deck localization
+- feat: add controls for localization
 
 # 0.11.1
 
