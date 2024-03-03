@@ -30,14 +30,14 @@ Demo: https://mkobuolys.github.io/flutter_deck/
   - **[Split slide](#split-slide)**
   - **[Template slide](#template-slide)**
   - **[Custom slide](#custom-slide)**
-- **[Generating slides ⚙️](#generating-slides-)**
+- **[Generating slides ⚙️](#generating-slides-⚙️)**
 - **[Theming 🎨](#theming-)**
 - **[Slide visibility 🙈](#slide-visibility-)**
 - **[Widgets 🧱](#widgets-)**
   - **[FlutterDeckBulletList](#flutterdeckbulletlist)**
   - **[FlutterDeckCodeHighlight](#flutterdeckcodehighlight)**
-- **[Accessing slide deck state from the code 🔧](#accessing-slide-deck-state-from-the-code-🔧)**
-- **[Transitions ➡️](#transitions-)**
+- **[Accessing slide deck state from the code 🔧](#accessing-slide-deck-state-from-the-code-)**
+- **[Transitions ➡️](#transitions-➡️)**
 - **[Steps 🐾](#steps-)**
 - **[Localization 🌍](#localization-)**
 - **[Controls 🕹️](#controls-)**
