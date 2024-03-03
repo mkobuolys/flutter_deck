@@ -36,16 +36,16 @@ Demo: https://mkobuolys.github.io/flutter_deck/
 - **[🧱 Widgets](#-widgets)**
   - **[FlutterDeckBulletList](#flutterdeckbulletlist)**
   - **[FlutterDeckCodeHighlight](#flutterdeckcodehighlight)**
-- **[⚙️ Accessing slide deck state from the code](#-accessing-slide-deck-state-from-the-code)**
-- **[➡️ Transitions](#-transitions)**
+- **[📦 Accessing slide deck state from the code](#-accessing-slide-deck-state-from-the-code)**
+- **[🔀 Transitions](#-transitions)**
 - **[🐾 Steps](#-steps)**
 - **[🌍 Localization](#-localization)**
-- **[🕹️ Controls](#-controls)**
+- **[🎮 Controls](#-controls)**
   - **[Navigation drawer](#navigation-drawer)**
   - **[Marker tool](#marker-tool)**
   - **[Auto-play](#auto-play)**
   - **[Changing locale](#changing-locale)**
-- **[🚀 Presentations built with flutter_deck](#-presentations-built-with-flutter_deck-)**
+- **[🚀 Presentations built with flutter_deck](#-presentations-built-with-flutter_deck)**
 
 ## 💻 Installation
 
@@ -676,7 +676,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
 
 ![FlutterDeckCodeHighlight](https://github.com/mkobuolys/flutter_deck/blob/main/images/code_highlighting.png?raw=true)
 
-## ⚙️ Accessing slide deck state from the code
+## 📦 Accessing slide deck state from the code
 
 By using the `FlutterDeck` extensions, you can access the slide deck state and its methods from anywhere in the app:
 
@@ -715,7 +715,7 @@ Widget build(BuildContext context) {
 }
 ```
 
-## ➡️ Transitions
+## 🔀 Transitions
 
 This package comes with a few predefined transitions that can be used for your slides:
 
@@ -862,7 +862,7 @@ FlutterDeckApp(
 );
 ```
 
-## 🕹️ Controls
+## 🎮 Controls
 
 By default, every slide deck comes with a presenter toolbar that can be used to control the slide deck. Also, some of the controls can be accessed by using keyboard shortcuts.
 
