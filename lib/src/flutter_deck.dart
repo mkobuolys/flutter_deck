@@ -28,6 +28,8 @@ import 'package:flutter_deck/src/widgets/internal/internal.dart';
 /// * [FlutterDeckControlsNotifier], which is used to control the slide deck.
 /// * [FlutterDeckDrawerNotifier], which is used to control the slide deck's
 /// drawer.
+/// * [FlutterDeckLocalizationNotifier], which is used to control the slide
+/// deck's localization.
 /// * [FlutterDeckMarkerNotifier], which is used to control the slide deck's
 /// marker.
 /// * [FlutterDeckThemeNotifier], which is used to control the slide deck's
@@ -49,6 +51,9 @@ class FlutterDeck extends InheritedWidget {
   /// The [drawerNotifier] is required and is used to control the slide deck's
   /// drawer.
   ///
+  /// The [localizationNotifier] is required and is used to control the slide
+  /// deck's localization.
+  ///
   /// The [markerNotifier] is required and is used to control the slide deck's
   /// marker.
   ///
@@ -61,6 +66,7 @@ class FlutterDeck extends InheritedWidget {
     required FlutterDeckAutoplayNotifier autoplayNotifier,
     required FlutterDeckControlsNotifier controlsNotifier,
     required FlutterDeckDrawerNotifier drawerNotifier,
+    required FlutterDeckLocalizationNotifier localizationNotifier,
     required FlutterDeckMarkerNotifier markerNotifier,
     required FlutterDeckThemeNotifier themeNotifier,
     required super.child,
@@ -71,6 +77,7 @@ class FlutterDeck extends InheritedWidget {
         _autoplayNotifier = autoplayNotifier,
         _controlsNotifier = controlsNotifier,
         _drawerNotifier = drawerNotifier,
+        _localizationNotifier = localizationNotifier,
         _markerNotifier = markerNotifier,
         _themeNotifier = themeNotifier;
 
@@ -80,6 +87,7 @@ class FlutterDeck extends InheritedWidget {
   final FlutterDeckAutoplayNotifier _autoplayNotifier;
   final FlutterDeckControlsNotifier _controlsNotifier;
   final FlutterDeckDrawerNotifier _drawerNotifier;
+  final FlutterDeckLocalizationNotifier _localizationNotifier;
   final FlutterDeckMarkerNotifier _markerNotifier;
   final FlutterDeckThemeNotifier _themeNotifier;
 
@@ -132,6 +140,10 @@ class FlutterDeck extends InheritedWidget {
 
   /// Returns the [FlutterDeckDrawerNotifier] for the slide deck.
   FlutterDeckDrawerNotifier get drawerNotifier => _drawerNotifier;
+
+  /// Returns the [FlutterDeckLocalizationNotifier] for the slide deck.
+  FlutterDeckLocalizationNotifier get localizationNotifier =>
+      _localizationNotifier;
 
   /// Returns the [FlutterDeckMarkerNotifier] for the slide deck.
   FlutterDeckMarkerNotifier get markerNotifier => _markerNotifier;

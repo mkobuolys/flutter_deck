@@ -303,6 +303,32 @@ class _AutoplayMenuButton extends StatelessWidget {
   }
 }
 
+class _LocalizationMenuButton extends StatelessWidget {
+  const _LocalizationMenuButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final flutterDeck = context.flutterDeck;
+    final localizationNotifier = flutterDeck.localizationNotifier;
+
+    return ValueListenableBuilder(
+      valueListenable: localizationNotifier,
+      builder: (context, locale, _) => SubmenuButton(
+        leadingIcon: const Icon(Icons.language_rounded),
+        menuChildren: [
+          for (final supportedLocale in localizationNotifier.supportedLocales)
+            _MenuSelectionButton(
+              selected: supportedLocale == locale,
+              label: supportedLocale.languageCode,
+              onPressed: () => localizationNotifier.update(supportedLocale),
+            ),
+        ],
+        child: Text('Language: ${locale.languageCode}'),
+      ),
+    );
+  }
+}
+
 class _AutoplayDurationButton extends StatelessWidget {
   const _AutoplayDurationButton({
     required this.duration,
@@ -321,7 +347,7 @@ class _AutoplayDurationButton extends StatelessWidget {
       builder: (context, _) {
         final autoplayDuration = autoplayNotifier.autoplayDuration;
 
-        return _AutoplaySelectionButton(
+        return _MenuSelectionButton(
           selected: autoplayDuration == duration,
           label: label,
           onPressed: () => autoplayNotifier.updateAutoplayDuration(duration),
@@ -343,7 +369,7 @@ class _AutoplayLoopButton extends StatelessWidget {
       builder: (context, _) {
         final isLooping = autoplayNotifier.isLooping;
 
-        return _AutoplaySelectionButton(
+        return _MenuSelectionButton(
           selected: isLooping,
           label: 'Loop',
           onPressed: autoplayNotifier.toggleLooping,
@@ -353,8 +379,8 @@ class _AutoplayLoopButton extends StatelessWidget {
   }
 }
 
-class _AutoplaySelectionButton extends StatelessWidget {
-  const _AutoplaySelectionButton({
+class _MenuSelectionButton extends StatelessWidget {
+  const _MenuSelectionButton({
     required this.label,
     required this.selected,
     required this.onPressed,
@@ -463,8 +489,10 @@ class _OptionsMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controlsNotifier = context.flutterDeck.controlsNotifier;
+    final flutterDeck = context.flutterDeck;
+    final controlsNotifier = flutterDeck.controlsNotifier;
     final canFullscreen = controlsNotifier.canFullscreen();
+    final supportedLocales = flutterDeck.localizationNotifier.supportedLocales;
 
     return MenuButtonTheme(
       data: MenuButtonThemeData(
@@ -486,6 +514,7 @@ class _OptionsMenuButton extends StatelessWidget {
           if (canFullscreen) const _FullscreenButton(),
           const _PopupMenuDivider(),
           const _AutoplayMenuButton(),
+          if (supportedLocales.length > 1) const _LocalizationMenuButton(),
         ],
       ),
     );
