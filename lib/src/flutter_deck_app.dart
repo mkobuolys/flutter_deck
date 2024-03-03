@@ -39,8 +39,8 @@ class FlutterDeckApp extends StatefulWidget {
   /// The [themeMode] argument can be used to provide a custom theme mode for
   /// the slide deck.
   ///
-  /// The [locale], [localizationsDelegates] and [supportedLocales] arguments are
-  /// equivalent to those of [MaterialApp]'s.
+  /// The [locale], [localizationsDelegates] and [supportedLocales] arguments
+  /// are equivalent to those of [MaterialApp]'s.
   ///
   /// See also:
   ///
@@ -111,7 +111,8 @@ class FlutterDeckApp extends StatefulWidget {
   /// The delegates for the slide deck's localization.
   ///
   /// See also:
-  /// * [MaterialApp.localizationsDelegates], which is equivalent to this argument.
+  /// * [MaterialApp.localizationsDelegates], which is equivalent to this
+  /// argument.
   final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
 
   /// The list of locales that the slide deck has been localized for.
