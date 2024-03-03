@@ -15,6 +15,37 @@ Demo: https://mkobuolys.github.io/flutter_deck/
 - 🚀 Predictable API to access the slide deck state and its methods from anywhere in the app.
 - 📦 Out of the box slide templates, widgets, transitions and controls.
 - 🎨 Custom theming and light/dark mode support.
+- 🌍 Built-in localization support.
+
+## Table of contents
+
+- **[Installation 💻](#installation-💻)**
+- **[Hello flutter_deck! 🧑‍💻](#hello-flutter_deck-🧑‍💻)**
+- **[Slide templates 📃](#slide-templates-📃)**
+  - **[Title slide](#title-slide)**
+  - **[Blank slide](#blank-slide)**
+  - **[Big fact slide](#big-fact-slide)**
+  - **[Image slide](#image-slide)**
+  - **[Quote slide](#quote-slide)**
+  - **[Split slide](#split-slide)**
+  - **[Template slide](#template-slide)**
+  - **[Custom slide](#custom-slide)**
+- **[Generating slides ⚙️](#generating-slides-⚙️)**
+- **[Theming 🎨](#theming-🎨)**
+- **[Slide visibility 🙈](#slide-visibility-🙈)**
+- **[Widgets 🧱](#widgets-🧱)**
+  - **[FlutterDeckBulletList](#flutterdeckbulletlist)**
+  - **[FlutterDeckCodeHighlight](#flutterdeckcodehighlight)**
+- **[Accessing slide deck state from the code 🔧](#accessing-slide-deck-state-from-the-code-🔧)**
+- **[Transitions ➡️](#transitions-➡️)**
+- **[Steps 🐾](#steps-🐾)**
+- **[Localization 🌍](#localization-🌍)**
+- **[Controls 🕹️](#controls-🕹️)**
+  - **[Navigation drawer](#navigation-drawer)**
+  - **[Marker tool](#marker-tool)**
+  - **[Auto-play](#auto-play)**
+  - **[Changing locale](#changing-locale)**
+- **[Presentations built with flutter_deck 🚀](#presentations-built-with-flutter_deck-🚀)**
 
 ## Installation 💻
 
@@ -33,7 +64,7 @@ Install it:
 flutter packages get
 ```
 
-## Hello <s>World</s> flutter_deck! 🧑‍💻
+## Hello flutter_deck! 🧑‍💻
 
 Use `FlutterDeckApp` as your slide deck's root widget and pass a list of `FlutterDeckSlideWidget` widgets to it:
 
@@ -139,7 +170,7 @@ FlutterDeckApp(
 );
 ```
 
-## Slides
+## Slide templates 📃
 
 To create a slide, extend the `FlutterDeckSlideWidget` class and override the `build` method that returns a `FlutterDeckSlide` widget. `FlutterDeckSlide` supports a few predefined slide templates that help you to create a slide faster.
 
@@ -412,7 +443,7 @@ class CustomSlide extends FlutterDeckSlideWidget {
 }
 ```
 
-## Generating slides
+## Generating slides ⚙️
 
 This package comes with a [mason][mason_link] template that can be used to generate a new slide for the slide deck.
 
@@ -438,7 +469,7 @@ Generate a new slide:
 mason make flutter_deck_slide
 ```
 
-## Theming
+## Theming 🎨
 
 You can customize the theme of your slide deck by providing a `FlutterDeckThemeData` to the `FlutterDeckApp` widget:
 
@@ -530,7 +561,7 @@ FlutterDeckSlide.template(
 );
 ```
 
-## Slide visibility
+## Slide visibility 🙈
 
 By default, all slides are visible and available in the slide deck. However, you can hide a slide by setting the `hidden` property to `true` for the slide configuration:
 
@@ -555,7 +586,7 @@ class HiddenSlide extends FlutterDeckSlideWidget {
 }
 ```
 
-## Widgets
+## Widgets 🧱
 
 This package comes with a few predefined widgets that could be used in your slide deck.
 
@@ -645,7 +676,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
 
 ![FlutterDeckCodeHighlight](https://github.com/mkobuolys/flutter_deck/blob/main/images/code_highlighting.png?raw=true)
 
-## Accessing slide deck state from the code
+## Accessing slide deck state from the code 🔧
 
 By using the `FlutterDeck` extensions, you can access the slide deck state and its methods from anywhere in the app:
 
@@ -684,7 +715,7 @@ Widget build(BuildContext context) {
 }
 ```
 
-## Transitions
+## Transitions ➡️
 
 This package comes with a few predefined transitions that can be used for your slides:
 
@@ -764,7 +795,7 @@ class CustomTransitionSlide extends FlutterDeckSlideWidget {
 }
 ```
 
-## Steps
+## Steps 🐾
 
 Steps is a feature that allows you to navigate through a slide, well, step by step. You can access the current step from any widget. This way, you can reveal or hide content, run animations, etc.
 
@@ -814,7 +845,24 @@ Widget build(BuildContext context) {
 
 ![Steps demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/steps.gif?raw=true)
 
-## Controls
+## Localization 🌍
+
+This package comes with a built-in localization support. You can change the locale of the slide deck at runtime (see [controls](#controls)). The updated locale will be applied to the whole slide deck.
+
+To localize the slide deck, follow the instructions provided in the [official Flutter documentation](https://flutter.dev/docs/development/accessibility-and-localization/internationalization).
+
+Then, provide `AppLocalizations` when creating the slide deck:
+
+```dart
+FlutterDeckApp(
+  <...>
+  locale: const Locale('en'), // The initial locale of the slide deck
+  localizationsDelegates: AppLocalizations.localizationsDelegates,
+  supportedLocales: AppLocalizations.supportedLocales,
+);
+```
+
+## Controls 🕹️
 
 By default, every slide deck comes with a presenter toolbar that can be used to control the slide deck. Also, some of the controls can be accessed by using keyboard shortcuts.
 
@@ -872,6 +920,12 @@ The marker tool allows you to draw on top of the slide. It can be used to highli
 The auto-play feature allows you to automatically navigate through the slide deck. It can be used to create a presentation that runs on its own. The auto-play feature is available in the presenter toolbar.
 
 ![Auto-play demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/autoplay.gif?raw=true)
+
+### Changing locale
+
+You can change the locale of the slide deck at runtime. The updated locale will be applied to the whole slide deck. The locale can be changed using the presenter toolbar.
+
+![Localization demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/localization.gif?raw=true)
 
 ## Presentations built with flutter_deck 🚀
 

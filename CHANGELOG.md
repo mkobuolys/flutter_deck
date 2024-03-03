@@ -1,6 +1,8 @@
 # Next
 
 - feat: add support for slide deck localization
+- feat: add controls for localization
+- docs: add table of contents to README.md
 
 # 0.11.1
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
+import 'package:flutter_deck_example/l10n/l10n.dart';
 import 'package:flutter_deck_example/slides/slides.dart';
 
 void main() {
@@ -96,6 +97,7 @@ class FlutterDeckExample extends StatelessWidget {
         MarkerSlide(),
         ThemingSlide(),
         BackgroundSlide(),
+        LocalizationSlide(),
         TransitionsSlide(),
         StepsSlide(),
         CodeHighlightSlide(),
@@ -108,6 +110,9 @@ class FlutterDeckExample extends StatelessWidget {
         socialHandle: 'flutter_deck',
         imagePath: 'assets/flutter_logo.png',
       ),
+      locale: const Locale('en'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }
