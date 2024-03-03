@@ -102,19 +102,19 @@ class FlutterDeckApp extends StatefulWidget {
   /// By default, the system theme mode is used.
   final ThemeMode themeMode;
 
-  /// The initial locale for the slide.
+  /// The initial locale for the slide deck.
   ///
   /// See also:
   /// * [MaterialApp.locale], which is equivalent to this argument.
   final Locale? locale;
 
-  /// The delegates for the slide's localization.
+  /// The delegates for the slide deck's localization.
   ///
   /// See also:
   /// * [MaterialApp.localizationsDelegates], which is equivalent to this argument.
   final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
 
-  /// The list of locales that the slide has been localized for.
+  /// The list of locales that the slide deck has been localized for.
   ///
   /// See also:
   /// * [MaterialApp.supportedLocales], which is equivalent to this argument.
