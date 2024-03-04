@@ -1,4 +1,4 @@
-# NEXT
+# 0.12.2
 
 - fix: ignore unnecessary_import lint rule
 
