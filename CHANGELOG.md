@@ -1,3 +1,7 @@
+# NEXT
+
+- fix: ignore unnecessary_import lint rule
+
 # 0.12.1
 
 - fix: support Flutter versions <3.19.0
