@@ -1,3 +1,7 @@
+# 0.12.1
+
+- fix: support Flutter versions <3.19.0
+
 # 0.12.0
 
 - feat: add support for slide deck localization
