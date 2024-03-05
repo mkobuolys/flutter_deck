@@ -47,7 +47,8 @@ class FlutterDeckTitleSlide extends StatelessWidget {
     final configuration = context.flutterDeck.configuration;
     final footerConfiguration = configuration.footer;
     final headerConfiguration = configuration.header;
-    final speakerInfo = context.flutterDeck.speakerInfo;
+    final speakerInfo = context.flutterDeck.speakerInfo ??
+        context.flutterDeck.speakerInfoBuilder?.call(context);
 
     return FlutterDeckSlideBase(
       backgroundBuilder: backgroundBuilder,

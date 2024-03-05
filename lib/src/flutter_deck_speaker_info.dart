@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 /// Stores information about the speaker.
 class FlutterDeckSpeakerInfo {
   /// Creates a new [FlutterDeckSpeakerInfo] instance.
@@ -24,3 +26,8 @@ class FlutterDeckSpeakerInfo {
   /// This should be a path to an image asset in the app's assets directory.
   final String imagePath;
 }
+
+/// A function to build [FlutterDeckSpeakerInfo] instance using [BuildContext].
+typedef FlutterDeckSpeakerInfoBuilder = FlutterDeckSpeakerInfo Function(
+  BuildContext context,
+);

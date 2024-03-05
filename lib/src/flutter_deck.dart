@@ -63,6 +63,7 @@ class FlutterDeck extends InheritedWidget {
     required FlutterDeckConfiguration configuration,
     required FlutterDeckRouter router,
     required FlutterDeckSpeakerInfo? speakerInfo,
+    required FlutterDeckSpeakerInfoBuilder? speakerInfoBuilder,
     required FlutterDeckAutoplayNotifier autoplayNotifier,
     required FlutterDeckControlsNotifier controlsNotifier,
     required FlutterDeckDrawerNotifier drawerNotifier,
@@ -74,6 +75,7 @@ class FlutterDeck extends InheritedWidget {
   })  : _configuration = configuration,
         _router = router,
         _speakerInfo = speakerInfo,
+        _speakerInfoBuilder = speakerInfoBuilder,
         _autoplayNotifier = autoplayNotifier,
         _controlsNotifier = controlsNotifier,
         _drawerNotifier = drawerNotifier,
@@ -84,6 +86,7 @@ class FlutterDeck extends InheritedWidget {
   final FlutterDeckConfiguration _configuration;
   final FlutterDeckRouter _router;
   final FlutterDeckSpeakerInfo? _speakerInfo;
+  final FlutterDeckSpeakerInfoBuilder? _speakerInfoBuilder;
   final FlutterDeckAutoplayNotifier _autoplayNotifier;
   final FlutterDeckControlsNotifier _controlsNotifier;
   final FlutterDeckDrawerNotifier _drawerNotifier;
@@ -124,6 +127,9 @@ class FlutterDeck extends InheritedWidget {
 
   /// Returns the speaker info.
   FlutterDeckSpeakerInfo? get speakerInfo => _speakerInfo;
+
+  /// Returns the builder to build [FlutterDeckSpeakerInfo].
+  FlutterDeckSpeakerInfoBuilder? get speakerInfoBuilder => _speakerInfoBuilder;
 
   /// Returns the configuration for the current slide.
   FlutterDeckSlideConfiguration get configuration =>

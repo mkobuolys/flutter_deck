@@ -69,6 +69,8 @@ class FlutterDeckFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = FlutterDeckFooterTheme.of(context);
+    final speakerInfo = context.flutterDeck.speakerInfo ??
+        context.flutterDeck.speakerInfoBuilder?.call(context);
 
     return Padding(
       padding: FlutterDeckLayout.slidePadding,
@@ -83,7 +85,7 @@ class FlutterDeckFooter extends StatelessWidget {
             )
           else if (showSocialHandle)
             Text(
-              context.flutterDeck.speakerInfo?.socialHandle ?? '',
+              speakerInfo?.socialHandle ?? '',
               style: theme.socialHandleTextStyle?.copyWith(
                 color: theme.socialHandleColor,
                 fontWeight: FontWeight.bold,

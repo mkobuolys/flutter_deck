@@ -58,6 +58,7 @@ class FlutterDeckApp extends StatefulWidget {
     required this.slides,
     this.configuration = const FlutterDeckConfiguration(),
     this.speakerInfo,
+    this.speakerInfoBuilder,
     this.lightTheme,
     this.darkTheme,
     this.themeMode = ThemeMode.system,
@@ -88,6 +89,9 @@ class FlutterDeckApp extends StatefulWidget {
 
   /// Information about the speaker.
   final FlutterDeckSpeakerInfo? speakerInfo;
+
+  /// Builder function to create [FlutterDeckSpeakerInfo] using [BuildContext].
+  final FlutterDeckSpeakerInfoBuilder? speakerInfoBuilder;
 
   /// The theme to use when the app is in light mode.
   ///
@@ -194,6 +198,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
               configuration: widget.configuration,
               router: _flutterDeckRouter,
               speakerInfo: widget.speakerInfo,
+              speakerInfoBuilder: widget.speakerInfoBuilder,
               autoplayNotifier: _autoplayNotifier,
               controlsNotifier: _controlsNotifier,
               drawerNotifier: _drawerNotifier,
