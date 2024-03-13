@@ -596,6 +596,8 @@ A widget that renders a list of bullet points. Bullet point items are rendered a
 
 If `useSteps` is true for the slide configuration, the bullet points will be rendered one by one as the user steps through the slide.
 
+You can use `stepOffset` to shift the Item's appearance. e.g. if you set `stepOffset: 1,` the first item will only show after the first step has been made. Remember to increase the `steps` of the Slide Configuration.
+
 ```dart
 class FlutterDeckBulletListDemoSlide extends FlutterDeckSlideWidget {
   const FlutterDeckBulletListDemoSlide()
