@@ -36,17 +36,25 @@ class FlutterDeckCodeHighlight extends StatelessWidget {
     super.key,
     String? fileName,
     String language = 'dart',
+    TextStyle? textStyle,
   })  : _code = code,
         _fileName = fileName,
-        _language = language;
+        _language = language,
+        _textStyle = textStyle;
 
   final String _code;
   final String? _fileName;
   final String _language;
+  final TextStyle? _textStyle;
 
   @override
   Widget build(BuildContext context) {
     final theme = FlutterDeckCodeHighlightTheme.of(context);
+
+    var effectiveTextStyle = _textStyle;
+    if (_textStyle == null || (_textStyle?.inherit ?? false)) {
+      effectiveTextStyle = theme.textStyle?.merge(_textStyle) ?? _textStyle;
+    }
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -62,7 +70,7 @@ class FlutterDeckCodeHighlight extends StatelessWidget {
             if (_fileName != null) ...[
               Text(
                 _fileName!,
-                style: theme.textStyle,
+                style: effectiveTextStyle,
               ),
               const SizedBox(height: 4),
             ],
@@ -70,7 +78,7 @@ class FlutterDeckCodeHighlight extends StatelessWidget {
               _code,
               language: _language,
               padding: const EdgeInsets.all(16),
-              textStyle: theme.textStyle,
+              textStyle: effectiveTextStyle,
               theme: Theme.of(context).brightness == Brightness.dark
                   ? vs2015Theme
                   : defaultTheme,
