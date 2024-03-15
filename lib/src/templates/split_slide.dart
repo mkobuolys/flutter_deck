@@ -76,20 +76,21 @@ class FlutterDeckSplitSlide extends StatelessWidget {
     final headerConfiguration = configuration.header;
 
     return FlutterDeckSlideBase(
-      backgroundBuilder: (context) => FlutterDeckBackground.custom(
-        child: Row(
-          children: [
-            _BackgroundSection(
-              flex: splitRatio.left,
-              color: theme.leftBackgroundColor,
-            ),
-            _BackgroundSection(
-              flex: splitRatio.right,
-              color: theme.rightBackgroundColor,
-            ),
-          ],
-        ),
-      ),
+      backgroundBuilder: backgroundBuilder ??
+          (context) => FlutterDeckBackground.custom(
+                child: Row(
+                  children: [
+                    _BackgroundSection(
+                      flex: splitRatio.left,
+                      color: theme.leftBackgroundColor,
+                    ),
+                    _BackgroundSection(
+                      flex: splitRatio.right,
+                      color: theme.rightBackgroundColor,
+                    ),
+                  ],
+                ),
+              ),
       contentBuilder: (context) => Row(
         children: [
           _ContentSection(
