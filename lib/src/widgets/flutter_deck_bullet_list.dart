@@ -58,6 +58,7 @@ class FlutterDeckBulletList extends StatefulWidget {
   FlutterDeckBulletList({
     this.items = const [],
     this.useSteps = false,
+    this.stepOffset = 0,
     this.bulletPointWidget,
     super.key,
   }) : assert(items.isNotEmpty, 'You must provide at least one bullet point.');
@@ -68,6 +69,20 @@ class FlutterDeckBulletList extends StatefulWidget {
   /// Whether to render the bullet points one by one as the user steps through
   /// the slide.
   final bool useSteps;
+
+  /// Use this to offset the step number for the first item in the list. This
+  /// can be used to start showing [items] later in a slide. For instance, when
+  /// you have two bullet lists on the same slide, and you want to show the
+  /// second list after the first one.
+  ///
+  /// If the value is `1`, the first item in the list will not be shown
+  /// directly.
+  ///
+  /// If the value is negative, you can show more than just the first item
+  /// directly.
+  ///
+  /// Default is `0` (no offset).
+  final int stepOffset;
 
   /// A widget to use as the bullet point. If not provided, a dot will be used.
   final Widget? bulletPointWidget;
@@ -94,7 +109,7 @@ class _FlutterDeckBulletListState extends State<FlutterDeckBulletList> {
         items: widget.items,
         autoSizeGroup: _autoSizeGroup,
         bulletPointWidget: widget.bulletPointWidget,
-        stepNumber: stepNumber,
+        stepNumber: stepNumber - widget.stepOffset,
       ),
     );
   }

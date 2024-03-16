@@ -596,6 +596,8 @@ A widget that renders a list of bullet points. Bullet point items are rendered a
 
 If `useSteps` is true for the slide configuration, the bullet points will be rendered one by one as the user steps through the slide.
 
+You can use `stepOffset` to offset the step number for the first item in the list. For instance, if you set `stepOffset` to 1, the first item will only be visible when the user steps to the second step. Remember to increase the number of `steps` for the slide configuration if you use `stepOffset`.
+
 ```dart
 class FlutterDeckBulletListDemoSlide extends FlutterDeckSlideWidget {
   const FlutterDeckBulletListDemoSlide()
@@ -929,16 +931,16 @@ You can change the locale of the slide deck at runtime. The updated locale will 
 
 ## 🚀 Presentations built with flutter_deck
 
-| Title                                                                                                                                                           | Language   | Author                                                                                       |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------- |
-| [Let me introduce you to Flutter](https://github.com/mkobuolys/introduction-to-flutter)                                                                         | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link]                                            |
-| [Control your Flutter application on the fly with Firebase Remote Config](https://github.com/mkobuolys/firebase-remote-config-talk)                             | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link]                                            |
-| [Introduction to Flutter Web](https://github.com/afucher/flutter_web_101)                                                                                       | Portuguese | [Arthur Fücher](https://x.com/Thur)                                                          |
-| [Make smarter decisions faster with Firebase Remote Config](https://github.com/mkobuolys/f3-firebase-remote-config-talk)                                        | English    | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link] & [Darja Orlova](https://x.com/dariadroid) |
-| [Flutter for the win: Cross-platform development at maximum power](https://github.com/polilluminato/linuxday-2023-presentation)                                 | Italian    | [Alberto Bonacina](https://x.com/polilluminato)                                              |
-| [ReArch: A Reactive Approach to Application Architecture Supporting Side Effects](https://github.com/GregoryConrad/rearch-dart/tree/main/examples/presentation) | English    | [Gregory Conrad](https://github.com/GregoryConrad)                                           |
-| [Flutter demo](https://github.com/thpir/flutter-presentation)                                                                                                   | Dutch      | [Thijs Pirmez](https://www.linkedin.com/in/thijs-pirmez-973327230/)                          |
-| [Build Dynamic Slide Decks with Flutter](https://github.com/chooyan-eng/slide_decks_with_flutter)                                                               | English / Japanese | [Tsuyoshi Chujo](https://twitter.com/tsuyoshi_chujo)                          |
+| Title                                                                                                                                                           | Language           | Author                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | -------------------------------------------------------------------------------------------- |
+| [Let me introduce you to Flutter](https://github.com/mkobuolys/introduction-to-flutter)                                                                         | English            | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link]                                            |
+| [Control your Flutter application on the fly with Firebase Remote Config](https://github.com/mkobuolys/firebase-remote-config-talk)                             | English            | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link]                                            |
+| [Introduction to Flutter Web](https://github.com/afucher/flutter_web_101)                                                                                       | Portuguese         | [Arthur Fücher](https://x.com/Thur)                                                          |
+| [Make smarter decisions faster with Firebase Remote Config](https://github.com/mkobuolys/f3-firebase-remote-config-talk)                                        | English            | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link] & [Darja Orlova](https://x.com/dariadroid) |
+| [Flutter for the win: Cross-platform development at maximum power](https://github.com/polilluminato/linuxday-2023-presentation)                                 | Italian            | [Alberto Bonacina](https://x.com/polilluminato)                                              |
+| [ReArch: A Reactive Approach to Application Architecture Supporting Side Effects](https://github.com/GregoryConrad/rearch-dart/tree/main/examples/presentation) | English            | [Gregory Conrad](https://github.com/GregoryConrad)                                           |
+| [Flutter demo](https://github.com/thpir/flutter-presentation)                                                                                                   | Dutch              | [Thijs Pirmez](https://www.linkedin.com/in/thijs-pirmez-973327230/)                          |
+| [Build Dynamic Slide Decks with Flutter](https://github.com/chooyan-eng/slide_decks_with_flutter)                                                               | English / Japanese | [Tsuyoshi Chujo](https://twitter.com/tsuyoshi_chujo)                                         |
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
