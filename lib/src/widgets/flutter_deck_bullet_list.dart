@@ -70,13 +70,18 @@ class FlutterDeckBulletList extends StatefulWidget {
   /// the slide.
   final bool useSteps;
 
-  /// Use this to offset the list items steps
-  /// If this is `1` the first item will not be shown directly
+  /// Use this to offset the step number for the first item in the list. This
+  /// can be used to start showing [items] later in a slide. For instance, when
+  /// you have two bullet lists on the same slide, and you want to show the
+  /// second list after the first one.
   ///
-  /// This can be uses to start showing items from the list later in a slide if
-  /// e.g the bullet list is on the right side of a slide
+  /// If the value is `1`, the first item in the list will not be shown
+  /// directly.
   ///
-  /// If this is negative you can show more than just the first item directly
+  /// If the value is negative, you can show more than just the first item
+  /// directly.
+  ///
+  /// Default is `0` (no offset).
   final int stepOffset;
 
   /// A widget to use as the bullet point. If not provided, a dot will be used.
