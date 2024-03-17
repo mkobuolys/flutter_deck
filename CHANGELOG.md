@@ -1,4 +1,4 @@
-# NEXT
+# 0.13.0
 
 - feat: support header and footer builder overrides in slide templates
 - feat: add `stepOffset` property to `FlutterDeckBulletList`
