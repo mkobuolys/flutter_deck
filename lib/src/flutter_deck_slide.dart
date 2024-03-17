@@ -312,8 +312,8 @@ class FlutterDeckSlide extends StatelessWidget {
   /// it will render the speaker info below the title and subtitle.
   ///
   /// The [title] argument must not be null. The [subtitle],
-  /// [backgroundBuilder], [footerBuilder], and [headerBuilder] arguments are
-  /// optional.
+  /// [backgroundBuilder], [footerBuilder], [headerBuilder], and
+  /// [speakerInfoBuilder] arguments are optional.
   ///
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.title({
@@ -322,6 +322,7 @@ class FlutterDeckSlide extends StatelessWidget {
     WidgetBuilder? backgroundBuilder,
     WidgetBuilder? footerBuilder,
     WidgetBuilder? headerBuilder,
+    WidgetBuilder? speakerInfoBuilder,
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
@@ -331,6 +332,7 @@ class FlutterDeckSlide extends StatelessWidget {
             backgroundBuilder: backgroundBuilder,
             footerBuilder: footerBuilder,
             headerBuilder: headerBuilder,
+            speakerInfoBuilder: speakerInfoBuilder,
           ),
           theme: theme,
           key: key,

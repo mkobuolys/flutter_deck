@@ -22,19 +22,22 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 ///
 /// To use a custom header, you can pass the [headerBuilder].
 ///
+/// To use a custom speaker info widget, you can pass the [speakerInfoBuilder].
+///
 /// This template uses the [FlutterDeckTitleSlideTheme] to style the slide.
 class FlutterDeckTitleSlide extends StatelessWidget {
   /// Creates a new title slide.
   ///
   /// The [title] argument must not be null. The [subtitle],
-  /// [backgroundBuilder], [footerBuilder], and [headerBuilder] arguments are
-  /// optional.
+  /// [backgroundBuilder], [footerBuilder], [headerBuilder], and
+  /// [speakerInfoBuilder] arguments are optional.
   const FlutterDeckTitleSlide({
     required this.title,
     this.subtitle,
     this.backgroundBuilder,
     this.footerBuilder,
     this.headerBuilder,
+    this.speakerInfoBuilder,
     super.key,
   });
 
@@ -55,6 +58,9 @@ class FlutterDeckTitleSlide extends StatelessWidget {
   /// A builder for the header of the slide.
   final WidgetBuilder? headerBuilder;
 
+  /// A builder for the speaker info part of the slide.
+  final WidgetBuilder? speakerInfoBuilder;
+
   Widget _buildFooter(BuildContext context) =>
       footerBuilder?.call(context) ??
       FlutterDeckFooter.fromConfiguration(
@@ -67,16 +73,24 @@ class FlutterDeckTitleSlide extends StatelessWidget {
         configuration: context.flutterDeck.configuration.header,
       );
 
+  Widget? _buildSpeakerInfo(BuildContext context) {
+    if (speakerInfoBuilder != null) return speakerInfoBuilder!(context);
+
+    final speakerInfo = context.flutterDeck.speakerInfo;
+
+    return speakerInfo != null
+        ? FlutterDeckSpeakerInfoWidget(speakerInfo: speakerInfo)
+        : null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = FlutterDeckTitleSlideTheme.of(context);
-    final FlutterDeck(
-      configuration: FlutterDeckSlideConfiguration(
-        footer: footerConfiguration,
-        header: headerConfiguration,
-      ),
-      speakerInfo: speakerInfo,
-    ) = context.flutterDeck;
+    final FlutterDeckSlideConfiguration(
+      footer: footerConfiguration,
+      header: headerConfiguration,
+    ) = context.flutterDeck.configuration;
+    final speakerInfo = _buildSpeakerInfo(context);
 
     return FlutterDeckSlideBase(
       backgroundBuilder: backgroundBuilder,
@@ -97,7 +111,7 @@ class FlutterDeckTitleSlide extends StatelessWidget {
             ],
             if (speakerInfo != null) ...[
               const SizedBox(height: 64),
-              FlutterDeckSpeakerInfoWidget(speakerInfo: speakerInfo),
+              speakerInfo,
             ],
           ],
         ),
