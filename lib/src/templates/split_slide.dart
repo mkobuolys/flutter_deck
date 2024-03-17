@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/templates/slide_base.dart';
@@ -37,12 +38,17 @@ class SplitSlideRatio {
 ///
 /// To use a custom background, you can pass the [backgroundBuilder].
 ///
+/// To use a custom footer, you can pass the [footerBuilder].
+///
+/// To use a custom header, you can pass the [headerBuilder].
+///
 /// This template uses the [FlutterDeckSplitSlideTheme] to style the slide.
 class FlutterDeckSplitSlide extends StatelessWidget {
   /// Creates a new split slide.
   ///
   /// The [leftBuilder] and [rightBuilder] arguments must not be null. The
-  /// [backgroundBuilder] and [splitRatio] arguments are optional.
+  /// [backgroundBuilder], [footerBuilder], [headerBuilder] and [splitRatio]
+  /// arguments are optional.
   ///
   /// If [splitRatio] is not specified, the left and right columns will have the
   /// same width.
@@ -50,6 +56,8 @@ class FlutterDeckSplitSlide extends StatelessWidget {
     required this.leftBuilder,
     required this.rightBuilder,
     this.backgroundBuilder,
+    this.footerBuilder,
+    this.headerBuilder,
     SplitSlideRatio? splitRatio,
     super.key,
   }) : splitRatio = splitRatio ?? const SplitSlideRatio();
@@ -63,17 +71,62 @@ class FlutterDeckSplitSlide extends StatelessWidget {
   /// A builder for the background of the slide.
   final WidgetBuilder? backgroundBuilder;
 
+  /// A builder for the footer of the slide.
+  final WidgetBuilder? footerBuilder;
+
+  /// A builder for the header of the slide.
+  final WidgetBuilder? headerBuilder;
+
   /// The ratio of the left and right columns.
   ///
   /// By default, the left and right columns will have the same width.
   final SplitSlideRatio splitRatio;
 
+  Widget _buildFooter(BuildContext context) {
+    final theme = FlutterDeckSplitSlideTheme.of(context);
+
+    return footerBuilder?.call(context) ??
+        FlutterDeckFooterTheme(
+          data: FlutterDeckFooterTheme.of(context).copyWith(
+            slideNumberColor: theme.rightColor,
+            socialHandleColor: theme.leftColor,
+          ),
+          child: FlutterDeckFooter.fromConfiguration(
+            configuration: context.flutterDeck.configuration.footer,
+          ),
+        );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    final theme = FlutterDeckSplitSlideTheme.of(context);
+
+    return headerBuilder?.call(context) ??
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final maxWidth = constraints.maxWidth *
+                splitRatio.left /
+                (splitRatio.left + splitRatio.right);
+
+            return FlutterDeckHeaderTheme(
+              data: FlutterDeckHeaderTheme.of(context).copyWith(
+                color: theme.leftColor,
+              ),
+              child: FlutterDeckHeader.fromConfiguration(
+                configuration: context.flutterDeck.configuration.header,
+                maxWidth: maxWidth,
+              ),
+            );
+          },
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = FlutterDeckSplitSlideTheme.of(context);
-    final configuration = context.flutterDeck.configuration;
-    final footerConfiguration = configuration.footer;
-    final headerConfiguration = configuration.header;
+    final FlutterDeckSlideConfiguration(
+      footer: footerConfiguration,
+      header: headerConfiguration,
+    ) = context.flutterDeck.configuration;
 
     return FlutterDeckSlideBase(
       backgroundBuilder: backgroundBuilder ??
@@ -105,36 +158,8 @@ class FlutterDeckSplitSlide extends StatelessWidget {
           ),
         ],
       ),
-      footerBuilder: footerConfiguration.showFooter
-          ? (context) => FlutterDeckFooterTheme(
-                data: FlutterDeckFooterTheme.of(context).copyWith(
-                  slideNumberColor: theme.rightColor,
-                  socialHandleColor: theme.leftColor,
-                ),
-                child: FlutterDeckFooter.fromConfiguration(
-                  configuration: footerConfiguration,
-                ),
-              )
-          : null,
-      headerBuilder: headerConfiguration.showHeader
-          ? (context) => LayoutBuilder(
-                builder: (context, constraints) {
-                  final maxWidth = constraints.maxWidth *
-                      splitRatio.left /
-                      (splitRatio.left + splitRatio.right);
-
-                  return FlutterDeckHeaderTheme(
-                    data: FlutterDeckHeaderTheme.of(context).copyWith(
-                      color: theme.leftColor,
-                    ),
-                    child: FlutterDeckHeader.fromConfiguration(
-                      configuration: headerConfiguration,
-                      maxWidth: maxWidth,
-                    ),
-                  );
-                },
-              )
-          : null,
+      footerBuilder: footerConfiguration.showFooter ? _buildFooter : null,
+      headerBuilder: headerConfiguration.showHeader ? _buildHeader : null,
     );
   }
 }

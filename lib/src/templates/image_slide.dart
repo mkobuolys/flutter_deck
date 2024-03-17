@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/templates/slide_base.dart';
@@ -16,16 +17,23 @@ typedef ImageBuilder = Image Function(BuildContext context);
 ///
 /// To use a custom background, you can pass the [backgroundBuilder].
 ///
+/// To use a custom footer, you can pass the [footerBuilder].
+///
+/// To use a custom header, you can pass the [headerBuilder].
+///
 /// This template uses the [FlutterDeckImageSlideTheme] to style the slide.
 class FlutterDeckImageSlide extends StatelessWidget {
   /// Creates a new image slide.
   ///
-  /// The [imageBuilder] argument must not be null. The [label] and
-  /// [backgroundBuilder] arguments are optional.
+  /// The [imageBuilder] argument must not be null. The [label],
+  /// [backgroundBuilder], [footerBuilder], and [headerBuilder] arguments are
+  /// optional.
   const FlutterDeckImageSlide({
     required this.imageBuilder,
     this.label,
     this.backgroundBuilder,
+    this.footerBuilder,
+    this.headerBuilder,
     super.key,
   });
 
@@ -40,12 +48,31 @@ class FlutterDeckImageSlide extends StatelessWidget {
   /// A builder for the background of the slide.
   final WidgetBuilder? backgroundBuilder;
 
+  /// A builder for the footer of the slide.
+  final WidgetBuilder? footerBuilder;
+
+  /// A builder for the header of the slide.
+  final WidgetBuilder? headerBuilder;
+
+  Widget _buildFooter(BuildContext context) =>
+      footerBuilder?.call(context) ??
+      FlutterDeckFooter.fromConfiguration(
+        configuration: context.flutterDeck.configuration.footer,
+      );
+
+  Widget _buildHeader(BuildContext context) =>
+      headerBuilder?.call(context) ??
+      FlutterDeckHeader.fromConfiguration(
+        configuration: context.flutterDeck.configuration.header,
+      );
+
   @override
   Widget build(BuildContext context) {
     final theme = FlutterDeckImageSlideTheme.of(context);
-    final configuration = context.flutterDeck.configuration;
-    final footerConfiguration = configuration.footer;
-    final headerConfiguration = configuration.header;
+    final FlutterDeckSlideConfiguration(
+      footer: footerConfiguration,
+      header: headerConfiguration,
+    ) = context.flutterDeck.configuration;
 
     return FlutterDeckSlideBase(
       backgroundBuilder: backgroundBuilder,
@@ -63,16 +90,8 @@ class FlutterDeckImageSlide extends StatelessWidget {
           ],
         ),
       ),
-      footerBuilder: footerConfiguration.showFooter
-          ? (context) => FlutterDeckFooter.fromConfiguration(
-                configuration: footerConfiguration,
-              )
-          : null,
-      headerBuilder: headerConfiguration.showHeader
-          ? (context) => FlutterDeckHeader.fromConfiguration(
-                configuration: headerConfiguration,
-              )
-          : null,
+      footerBuilder: footerConfiguration.showFooter ? _buildFooter : null,
+      headerBuilder: headerConfiguration.showHeader ? _buildHeader : null,
     );
   }
 }

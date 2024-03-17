@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
@@ -17,16 +18,26 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 ///
 /// To use a custom background, you can pass the [backgroundBuilder].
 ///
+/// To use a custom footer, you can pass the [footerBuilder].
+///
+/// To use a custom header, you can pass the [headerBuilder].
+///
+/// To use a custom speaker info widget, you can pass the [speakerInfoBuilder].
+///
 /// This template uses the [FlutterDeckTitleSlideTheme] to style the slide.
 class FlutterDeckTitleSlide extends StatelessWidget {
   /// Creates a new title slide.
   ///
-  /// The [title] argument must not be null. The [subtitle] and
-  /// [backgroundBuilder] arguments are optional.
+  /// The [title] argument must not be null. The [subtitle],
+  /// [backgroundBuilder], [footerBuilder], [headerBuilder], and
+  /// [speakerInfoBuilder] arguments are optional.
   const FlutterDeckTitleSlide({
     required this.title,
     this.subtitle,
     this.backgroundBuilder,
+    this.footerBuilder,
+    this.headerBuilder,
+    this.speakerInfoBuilder,
     super.key,
   });
 
@@ -41,13 +52,45 @@ class FlutterDeckTitleSlide extends StatelessWidget {
   /// A builder for the background of the slide.
   final WidgetBuilder? backgroundBuilder;
 
+  /// A builder for the footer of the slide.
+  final WidgetBuilder? footerBuilder;
+
+  /// A builder for the header of the slide.
+  final WidgetBuilder? headerBuilder;
+
+  /// A builder for the speaker info part of the slide.
+  final WidgetBuilder? speakerInfoBuilder;
+
+  Widget _buildFooter(BuildContext context) =>
+      footerBuilder?.call(context) ??
+      FlutterDeckFooter.fromConfiguration(
+        configuration: context.flutterDeck.configuration.footer,
+      );
+
+  Widget _buildHeader(BuildContext context) =>
+      headerBuilder?.call(context) ??
+      FlutterDeckHeader.fromConfiguration(
+        configuration: context.flutterDeck.configuration.header,
+      );
+
+  Widget? _buildSpeakerInfo(BuildContext context) {
+    if (speakerInfoBuilder != null) return speakerInfoBuilder!(context);
+
+    final speakerInfo = context.flutterDeck.speakerInfo;
+
+    return speakerInfo != null
+        ? FlutterDeckSpeakerInfoWidget(speakerInfo: speakerInfo)
+        : null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = FlutterDeckTitleSlideTheme.of(context);
-    final configuration = context.flutterDeck.configuration;
-    final footerConfiguration = configuration.footer;
-    final headerConfiguration = configuration.header;
-    final speakerInfo = context.flutterDeck.speakerInfo;
+    final FlutterDeckSlideConfiguration(
+      footer: footerConfiguration,
+      header: headerConfiguration,
+    ) = context.flutterDeck.configuration;
+    final speakerInfo = _buildSpeakerInfo(context);
 
     return FlutterDeckSlideBase(
       backgroundBuilder: backgroundBuilder,
@@ -68,21 +111,13 @@ class FlutterDeckTitleSlide extends StatelessWidget {
             ],
             if (speakerInfo != null) ...[
               const SizedBox(height: 64),
-              FlutterDeckSpeakerInfoWidget(speakerInfo: speakerInfo),
+              speakerInfo,
             ],
           ],
         ),
       ),
-      footerBuilder: footerConfiguration.showFooter
-          ? (context) => FlutterDeckFooter.fromConfiguration(
-                configuration: footerConfiguration,
-              )
-          : null,
-      headerBuilder: headerConfiguration.showHeader
-          ? (context) => FlutterDeckHeader.fromConfiguration(
-                configuration: headerConfiguration,
-              )
-          : null,
+      footerBuilder: footerConfiguration.showFooter ? _buildFooter : null,
+      headerBuilder: headerConfiguration.showHeader ? _buildHeader : null,
     );
   }
 }

@@ -99,8 +99,9 @@ class FlutterDeckSlide extends StatelessWidget {
   /// This constructor creates a big fact slide in a slide deck with the default
   /// header and footer.
   ///
-  /// The [title] argument must not be null. The [subtitle] and
-  /// [backgroundBuilder] arguments are optional.
+  /// The [title] argument must not be null. The [subtitle],
+  /// [backgroundBuilder], [footerBuilder], and [headerBuilder] arguments are
+  /// optional.
   ///
   /// [subtitleMaxLines] is the maximum number of lines for the subtitle. By
   /// default it is 3.
@@ -110,6 +111,8 @@ class FlutterDeckSlide extends StatelessWidget {
     required String title,
     String? subtitle,
     WidgetBuilder? backgroundBuilder,
+    WidgetBuilder? footerBuilder,
+    WidgetBuilder? headerBuilder,
     int? subtitleMaxLines,
     FlutterDeckThemeData? theme,
     Key? key,
@@ -118,6 +121,8 @@ class FlutterDeckSlide extends StatelessWidget {
             title: title,
             subtitle: subtitle,
             backgroundBuilder: backgroundBuilder,
+            footerBuilder: footerBuilder,
+            headerBuilder: headerBuilder,
             subtitleMaxLines: subtitleMaxLines,
           ),
           theme: theme,
@@ -129,19 +134,23 @@ class FlutterDeckSlide extends StatelessWidget {
   /// This constructor creates a blank slide in a slide deck with the default
   /// header and footer, and the content in-between.
   ///
-  /// The [builder] argument must not be null. The [backgroundBuilder] argument
-  /// is optional.
+  /// The [builder] argument must not be null. The [backgroundBuilder],
+  /// [footerBuilder], and [headerBuilder] arguments are optional.
   ///
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.blank({
     required WidgetBuilder builder,
     WidgetBuilder? backgroundBuilder,
+    WidgetBuilder? footerBuilder,
+    WidgetBuilder? headerBuilder,
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
           builder: (context) => FlutterDeckBlankSlide(
             builder: builder,
             backgroundBuilder: backgroundBuilder,
+            footerBuilder: footerBuilder,
+            headerBuilder: headerBuilder,
           ),
           theme: theme,
           key: key,
@@ -172,14 +181,17 @@ class FlutterDeckSlide extends StatelessWidget {
   /// and footer, and the image in-between.The image can be a local asset or a
   /// network image.
   ///
-  /// The [imageBuilder] argument must not be null. The [label] and
-  /// [backgroundBuilder] arguments are optional.
+  /// The [imageBuilder] argument must not be null. The [label],
+  /// [backgroundBuilder], [footerBuilder], and [headerBuilder] arguments are
+  /// optional.
   ///
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.image({
     required ImageBuilder imageBuilder,
     String? label,
     WidgetBuilder? backgroundBuilder,
+    WidgetBuilder? footerBuilder,
+    WidgetBuilder? headerBuilder,
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
@@ -187,6 +199,8 @@ class FlutterDeckSlide extends StatelessWidget {
             imageBuilder: imageBuilder,
             label: label,
             backgroundBuilder: backgroundBuilder,
+            footerBuilder: footerBuilder,
+            headerBuilder: headerBuilder,
           ),
           theme: theme,
           key: key,
@@ -197,8 +211,9 @@ class FlutterDeckSlide extends StatelessWidget {
   /// This constructor creates a quote slide in a slide deck with the default
   /// header and footer.
   ///
-  /// The [quote] argument must not be null. The [attribution] and
-  /// [backgroundBuilder] arguments are optional.
+  /// The [quote] argument must not be null. The [attribution],
+  /// [backgroundBuilder], [footerBuilder], and [headerBuilder] arguments are
+  /// optional.
   ///
   /// [quoteMaxLines] is the maximum number of lines for the quote. By default
   /// it is 5.
@@ -208,6 +223,8 @@ class FlutterDeckSlide extends StatelessWidget {
     required String quote,
     String? attribution,
     WidgetBuilder? backgroundBuilder,
+    WidgetBuilder? footerBuilder,
+    WidgetBuilder? headerBuilder,
     int? quoteMaxLines,
     FlutterDeckThemeData? theme,
     Key? key,
@@ -217,6 +234,8 @@ class FlutterDeckSlide extends StatelessWidget {
             attribution: attribution,
             quoteMaxLines: quoteMaxLines,
             backgroundBuilder: backgroundBuilder,
+            footerBuilder: footerBuilder,
+            headerBuilder: headerBuilder,
           ),
           theme: theme,
           key: key,
@@ -230,7 +249,8 @@ class FlutterDeckSlide extends StatelessWidget {
   /// left and right columns.
   ///
   /// The [leftBuilder] and [rightBuilder] arguments must not be null. The
-  /// [backgroundBuilder] and [splitRatio] arguments are optional.
+  /// [backgroundBuilder], [footerBuilder], [headerBuilder], and [splitRatio]
+  /// arguments are optional.
   ///
   /// If [splitRatio] is not specified, the left and right columns will have the
   /// same width.
@@ -240,6 +260,8 @@ class FlutterDeckSlide extends StatelessWidget {
     required WidgetBuilder leftBuilder,
     required WidgetBuilder rightBuilder,
     WidgetBuilder? backgroundBuilder,
+    WidgetBuilder? footerBuilder,
+    WidgetBuilder? headerBuilder,
     SplitSlideRatio? splitRatio,
     FlutterDeckThemeData? theme,
     Key? key,
@@ -248,6 +270,8 @@ class FlutterDeckSlide extends StatelessWidget {
             leftBuilder: leftBuilder,
             rightBuilder: rightBuilder,
             backgroundBuilder: backgroundBuilder,
+            footerBuilder: footerBuilder,
+            headerBuilder: headerBuilder,
             splitRatio: splitRatio,
           ),
           theme: theme,
@@ -287,14 +311,18 @@ class FlutterDeckSlide extends StatelessWidget {
   /// the [title] and [subtitle]. Also, if the [FlutterDeckSpeakerInfo] is set,
   /// it will render the speaker info below the title and subtitle.
   ///
-  /// The [title] argument must not be null. The [subtitle] and
-  /// [backgroundBuilder] arguments are optional.
+  /// The [title] argument must not be null. The [subtitle],
+  /// [backgroundBuilder], [footerBuilder], [headerBuilder], and
+  /// [speakerInfoBuilder] arguments are optional.
   ///
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.title({
     required String title,
     String? subtitle,
     WidgetBuilder? backgroundBuilder,
+    WidgetBuilder? footerBuilder,
+    WidgetBuilder? headerBuilder,
+    WidgetBuilder? speakerInfoBuilder,
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
@@ -302,6 +330,9 @@ class FlutterDeckSlide extends StatelessWidget {
             title: title,
             subtitle: subtitle,
             backgroundBuilder: backgroundBuilder,
+            footerBuilder: footerBuilder,
+            headerBuilder: headerBuilder,
+            speakerInfoBuilder: speakerInfoBuilder,
           ),
           theme: theme,
           key: key,

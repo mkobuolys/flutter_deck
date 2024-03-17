@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/templates/slide_base.dart';
@@ -14,11 +15,18 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 /// enabled in the configuration.
 ///
 /// To use a custom background, you can pass the [backgroundBuilder].
+///
+/// To use a custom footer, you can pass the [footerBuilder].
+///
+/// To use a custom header, you can pass the [headerBuilder].
+///
+/// This template uses the [FlutterDeckQuoteSlideTheme] to style the slide.
 class FlutterDeckQuoteSlide extends StatelessWidget {
   /// Creates a new quote slide.
   ///
-  /// The [quote] argument must not be null. The [attribution] and
-  /// [backgroundBuilder] arguments are optional.
+  /// The [quote] argument must not be null. The [attribution],
+  /// [backgroundBuilder], [footerBuilder], and [headerBuilder] arguments are
+  /// optional.
   ///
   /// [quoteMaxLines] is the maximum number of lines for the quote. By default
   /// it is 5.
@@ -27,6 +35,8 @@ class FlutterDeckQuoteSlide extends StatelessWidget {
     this.attribution,
     int? quoteMaxLines,
     this.backgroundBuilder,
+    this.footerBuilder,
+    this.headerBuilder,
     super.key,
   }) : quoteMaxLines = quoteMaxLines ?? 5;
 
@@ -42,12 +52,31 @@ class FlutterDeckQuoteSlide extends StatelessWidget {
   /// A builder for the background of the slide.
   final WidgetBuilder? backgroundBuilder;
 
+  /// A builder for the footer of the slide.
+  final WidgetBuilder? footerBuilder;
+
+  /// A builder for the header of the slide.
+  final WidgetBuilder? headerBuilder;
+
+  Widget _buildFooter(BuildContext context) =>
+      footerBuilder?.call(context) ??
+      FlutterDeckFooter.fromConfiguration(
+        configuration: context.flutterDeck.configuration.footer,
+      );
+
+  Widget _buildHeader(BuildContext context) =>
+      headerBuilder?.call(context) ??
+      FlutterDeckHeader.fromConfiguration(
+        configuration: context.flutterDeck.configuration.header,
+      );
+
   @override
   Widget build(BuildContext context) {
     final theme = FlutterDeckQuoteSlideTheme.of(context);
-    final configuration = context.flutterDeck.configuration;
-    final footerConfiguration = configuration.footer;
-    final headerConfiguration = configuration.header;
+    final FlutterDeckSlideConfiguration(
+      footer: footerConfiguration,
+      header: headerConfiguration,
+    ) = context.flutterDeck.configuration;
 
     return FlutterDeckSlideBase(
       backgroundBuilder: backgroundBuilder,
@@ -80,16 +109,8 @@ class FlutterDeckQuoteSlide extends StatelessWidget {
           ),
         ),
       ),
-      footerBuilder: footerConfiguration.showFooter
-          ? (context) => FlutterDeckFooter.fromConfiguration(
-                configuration: footerConfiguration,
-              )
-          : null,
-      headerBuilder: headerConfiguration.showHeader
-          ? (context) => FlutterDeckHeader.fromConfiguration(
-                configuration: headerConfiguration,
-              )
-          : null,
+      footerBuilder: footerConfiguration.showFooter ? _buildFooter : null,
+      headerBuilder: headerConfiguration.showHeader ? _buildHeader : null,
     );
   }
 }
