@@ -1,3 +1,9 @@
+# NEXT
+
+- feat: support header and footer builder overrides in slide templates
+- feat: add `stepOffset` property to `FlutterDeckBulletList`
+- fix: `backgroundBuilder` not working with `FlutterDeckSlide.split`
+
 # 0.12.2
 
 - fix: ignore unnecessary_import lint rule
