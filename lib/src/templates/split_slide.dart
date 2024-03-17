@@ -100,23 +100,24 @@ class FlutterDeckSplitSlide extends StatelessWidget {
   Widget _buildHeader(BuildContext context) {
     final theme = FlutterDeckSplitSlideTheme.of(context);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final maxWidth = constraints.maxWidth *
-            splitRatio.left /
-            (splitRatio.left + splitRatio.right);
+    return headerBuilder?.call(context) ??
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final maxWidth = constraints.maxWidth *
+                splitRatio.left /
+                (splitRatio.left + splitRatio.right);
 
-        return FlutterDeckHeaderTheme(
-          data: FlutterDeckHeaderTheme.of(context).copyWith(
-            color: theme.leftColor,
-          ),
-          child: FlutterDeckHeader.fromConfiguration(
-            configuration: context.flutterDeck.configuration.header,
-            maxWidth: maxWidth,
-          ),
+            return FlutterDeckHeaderTheme(
+              data: FlutterDeckHeaderTheme.of(context).copyWith(
+                color: theme.leftColor,
+              ),
+              child: FlutterDeckHeader.fromConfiguration(
+                configuration: context.flutterDeck.configuration.header,
+                maxWidth: maxWidth,
+              ),
+            );
+          },
         );
-      },
-    );
   }
 
   @override
