@@ -43,7 +43,7 @@ class _FlutterDeckDrawerState extends State<FlutterDeckDrawer> {
 
     if (viewHeight >= itemsCount * _navigationItemHeight) return 0;
 
-    final index = router.getCurrentSlideIndex();
+    final index = router.currentSlideIndex;
     final itemsInView = (viewHeight / _navigationItemHeight).floor();
 
     if (index < itemsInView / 2) return 0;
