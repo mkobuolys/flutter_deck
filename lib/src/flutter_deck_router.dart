@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
@@ -42,6 +43,9 @@ class FlutterDeckRouter {
   /// displayed. The first slide will be displayed when the app is first opened.
   final List<FlutterDeckRouterSlide> slides;
 
+  late int _currentSlideIndex;
+  late int _currentSlideStep;
+
   late GoRouter _router;
 
   /// Builds the [GoRouter] for the slide deck.
@@ -50,6 +54,7 @@ class FlutterDeckRouter {
   /// the MaterialApp or CupertinoApp's `router` constructor.
   GoRouter build() {
     _validateRoutes();
+    _initRouterData();
 
     return _router = GoRouter(
       routes: [
@@ -71,6 +76,23 @@ class FlutterDeckRouter {
     );
   }
 
+  void _initRouterData() {
+    _currentSlideIndex = 0;
+    _currentSlideStep = 1;
+
+    if (!kIsWeb) return;
+
+    final uri = Uri.parse(Uri.base.fragment);
+    final slideIndex = slides.indexWhere((s) => s.route == uri.path);
+
+    if (slideIndex < 0) return;
+
+    final stepNumber = uri.queryParameters[_queryParameterStep];
+
+    _currentSlideIndex = slideIndex;
+    _currentSlideStep = stepNumber != null ? int.tryParse(stepNumber) ?? 1 : 1;
+  }
+
   /// Adds a listener to the slide router.
   void addListener(void Function() listener) =>
       _router.routeInformationProvider.addListener(listener);
@@ -84,31 +106,21 @@ class FlutterDeckRouter {
   /// If the current step is the last step, the next slide is displayed.
   /// If the current slide is the last slide, nothing happens.
   void next() {
-    final curr = getCurrentSlideIndex();
+    final steps = currentSlideConfiguration.steps;
 
-    assert(curr > -1, 'No slide found.');
+    if (steps > 1 && _currentSlideStep < steps) {
+      final location = Uri(
+        path: slides[_currentSlideIndex].route,
+        queryParameters: {_queryParameterStep: '${++_currentSlideStep}'},
+      ).toString();
 
-    final configuration = getCurrentSlideConfiguration();
-    final steps = configuration.steps;
-
-    if (steps > 1) {
-      final currentStep = getCurrentStep();
-
-      if (currentStep < steps) {
-        final location = Uri(
-          path: slides[curr].route,
-          queryParameters: {_queryParameterStep: '${currentStep + 1}'},
-        ).toString();
-
-        return _router.go(location);
-      }
+      return _router.go(location);
     }
 
-    final nextIndex = curr + 1;
+    if (_currentSlideIndex + 1 >= slides.length) return;
 
-    if (nextIndex >= slides.length) return;
-
-    _router.go(slides[nextIndex].route);
+    _currentSlideStep = 1;
+    _router.go(slides[++_currentSlideIndex].route);
   }
 
   /// Go to the previous slide or step.
@@ -116,31 +128,21 @@ class FlutterDeckRouter {
   /// If the current step is the first step, the previous slide is displayed.
   /// If the current slide is the first slide, nothing happens.
   void previous() {
-    final curr = getCurrentSlideIndex();
+    final steps = currentSlideConfiguration.steps;
 
-    assert(curr > -1, 'No slide found.');
+    if (steps > 1 && _currentSlideStep > 1) {
+      final location = Uri(
+        path: slides[_currentSlideIndex].route,
+        queryParameters: {_queryParameterStep: '${--_currentSlideStep}'},
+      ).toString();
 
-    final configuration = getCurrentSlideConfiguration();
-    final steps = configuration.steps;
-
-    if (steps > 1) {
-      final currentStep = getCurrentStep();
-
-      if (currentStep > 1) {
-        final location = Uri(
-          path: slides[curr].route,
-          queryParameters: {_queryParameterStep: '${currentStep - 1}'},
-        ).toString();
-
-        return _router.go(location);
-      }
+      return _router.go(location);
     }
 
-    final prevIndex = curr - 1;
+    if (_currentSlideIndex - 1 < 0) return;
 
-    if (prevIndex < 0) return;
-
-    _router.go(slides[prevIndex].route);
+    _currentSlideStep = 1;
+    _router.go(slides[--_currentSlideIndex].route);
   }
 
   /// Go to a specific slide by its number.
@@ -151,7 +153,8 @@ class FlutterDeckRouter {
 
     if (index < 0 || index >= slides.length) return;
 
-    _router.go(slides[index].route);
+    _currentSlideStep = 1;
+    _router.go(slides[_currentSlideIndex = index].route);
   }
 
   /// Go to a specific step by its number.
@@ -159,57 +162,32 @@ class FlutterDeckRouter {
   /// If the step number is invalid or the same as the current step,
   /// nothing happens.
   void goToStep(int stepNumber) {
-    final currentStep = getCurrentStep();
-    final configuration = getCurrentSlideConfiguration();
-    final steps = configuration.steps;
+    final steps = currentSlideConfiguration.steps;
 
-    if (stepNumber == currentStep || stepNumber < 1 || stepNumber > steps) {
+    if (stepNumber == _currentSlideStep ||
+        stepNumber < 1 ||
+        stepNumber > steps) {
       return;
     }
 
     final location = Uri(
-      path: configuration.route,
+      path: currentSlideConfiguration.route,
       queryParameters: {_queryParameterStep: '$stepNumber'},
     ).toString();
 
-    return _router.go(location);
+    _currentSlideStep = stepNumber;
+    _router.go(location);
   }
 
   /// Returns the configuration for the current slide.
-  ///
-  /// If no slide is found, an assertion is thrown.
-  FlutterDeckSlideConfiguration getCurrentSlideConfiguration() {
-    final index = getCurrentSlideIndex();
-
-    assert(index > -1, 'No configuration found.');
-
-    return slides[index].configuration;
-  }
-
-  /// Returns the current step of the slide.
-  ///
-  /// If no step is found, 1 is returned.
-  int getCurrentStep() {
-    final queryParameterStep = _currentUri.queryParameters[_queryParameterStep];
-
-    if (queryParameterStep == null) return 1;
-
-    return int.tryParse(queryParameterStep) ?? 1;
-  }
+  FlutterDeckSlideConfiguration get currentSlideConfiguration =>
+      slides[_currentSlideIndex].configuration;
 
   /// Returns the index of the current slide.
-  int getCurrentSlideIndex() => slides.indexWhere(
-        (s) => s.route == _currentUri.path,
-      );
+  int get currentSlideIndex => _currentSlideIndex;
 
-  Uri get _currentUri {
-    final lastMatch = _router.routerDelegate.currentConfiguration.last;
-    final matchList = lastMatch is ImperativeRouteMatch
-        ? lastMatch.matches
-        : _router.routerDelegate.currentConfiguration;
-
-    return matchList.uri;
-  }
+  /// Returns the current step of the slide.
+  int get currentStep => _currentSlideStep;
 
   void _validateRoutes() {
     final duplicatedRoutes = slides

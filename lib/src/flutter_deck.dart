@@ -117,17 +117,17 @@ class FlutterDeck extends InheritedWidget {
   void goToStep(int stepNumber) => _router.goToStep(stepNumber);
 
   /// Returns the current slide number.
-  int get slideNumber => _router.getCurrentSlideIndex() + 1;
+  int get slideNumber => _router.currentSlideIndex + 1;
 
   /// Returns the current step number.
-  int get stepNumber => _router.getCurrentStep();
+  int get stepNumber => _router.currentStep;
 
   /// Returns the speaker info.
   FlutterDeckSpeakerInfo? get speakerInfo => _speakerInfo;
 
   /// Returns the configuration for the current slide.
   FlutterDeckSlideConfiguration get configuration =>
-      _router.getCurrentSlideConfiguration();
+      _router.currentSlideConfiguration;
 
   /// Returns the global configuration for the slide deck.
   FlutterDeckConfiguration get globalConfiguration => _configuration;

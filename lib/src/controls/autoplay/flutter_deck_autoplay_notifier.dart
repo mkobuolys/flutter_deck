@@ -55,9 +55,9 @@ class FlutterDeckAutoplayNotifier extends ChangeNotifier {
   }
 
   void _onNext(_) {
-    final configuration = _router.getCurrentSlideConfiguration();
-    final slideNumber = _router.getCurrentSlideIndex() + 1;
-    final stepNumber = _router.getCurrentStep();
+    final configuration = _router.currentSlideConfiguration;
+    final slideNumber = _router.currentSlideIndex + 1;
+    final stepNumber = _router.currentStep;
 
     final isLastSlide = slideNumber == _router.slides.length;
     final isLastStep = stepNumber == configuration.steps;
