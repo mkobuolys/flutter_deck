@@ -1,3 +1,7 @@
+# NEXT
+
+- refactor: handle internal slide indexing in the router
+
 # 0.13.0
 
 - feat: support header and footer builder overrides in slide templates
