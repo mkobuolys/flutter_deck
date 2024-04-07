@@ -29,6 +29,7 @@
 .pub/
 build/
 pubspec.lock
+pubspec_overrides.yaml
 
 # Web related
 lib/generated_plugin_registrant.dart
