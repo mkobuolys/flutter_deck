@@ -1,0 +1,16 @@
+name: flutter_deck_ws_server
+description: A WebSocket server for flutter_deck_ws_client.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  broadcast_bloc: ^0.1.0-dev.2
+  dart_frog: ^1.0.0
+  dart_frog_web_socket: ^1.0.0
+  flutter_deck_client: ^0.1.0
+
+dev_dependencies:
+  very_good_analysis: ^5.1.0

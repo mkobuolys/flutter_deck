@@ -46,3 +46,6 @@ coverage
 # Mason
 mason-lock.json
 .mason
+
+# dart_frog related
+.dart_frog
