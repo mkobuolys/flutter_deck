@@ -20,18 +20,18 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-        working-directory: ./example
+        working-directory: ./packages/flutter_deck/example
 
       - name: Replace index.html
         run: mv gh_pages.index.html index.html
-        working-directory: ./example/web
+        working-directory: ./packages/flutter_deck/example/web
 
       - name: Build web
         run: flutter build web --release --web-renderer=canvaskit
-        working-directory: ./example
+        working-directory: ./packages/flutter_deck/example
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./example/build/web
+          publish_dir: ./packages/flutter_deck/example/build/web
