@@ -1,0 +1,4 @@
+name: flutter_deck
+
+packages:
+  - packages/**
