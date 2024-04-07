@@ -1,0 +1,22 @@
+name: flutter_deck_ws_client
+description: A WebSocket client for the flutter_deck package.
+version: 0.1.0
+homepage: https://github.com/mkobuolys/flutter_deck
+repository: https://github.com/mkobuolys/flutter_deck/tree/main/packages/flutter_deck_ws_client
+issue_tracker: https://github.com/mkobuolys/flutter_deck/issues
+topics:
+  - flutterdeck
+  - presentation
+  - slides
+funding:
+  - https://github.com/sponsors/mkobuolys
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter_deck_client: ^0.1.0
+  web_socket_client: ^0.1.1
+
+dev_dependencies:
+  very_good_analysis: ^5.1.0
