@@ -23,7 +23,7 @@ Then, use the `FlutterDeckWebClient` class when creating your `FlutterDeckApp` p
 
 ```dart
 FlutterDeckApp(
-  client: const FlutterDeckWebClient(), // Use the Web client
+  client: FlutterDeckWebClient(), // Use the Web client
   configuration: const FlutterDeckConfiguration(...),
   slides: [
     <...>
