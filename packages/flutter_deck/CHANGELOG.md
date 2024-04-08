@@ -1,5 +1,7 @@
 # NEXT
 
+- feat: add presenter view
+- chore: update project structure
 - refactor: handle internal slide indexing in the router
 
 # 0.13.0
