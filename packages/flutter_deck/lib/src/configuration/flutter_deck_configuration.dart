@@ -99,6 +99,9 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   /// included in the slide deck and cannot be navigated to. The default is
   /// false.
   ///
+  /// [speakerNotes] are the speaker notes for the slide. The default is an
+  /// empty string.
+  ///
   /// [steps] is the number of steps in the slide. The default is 1.
   ///
   /// [title] is the title of the slide. If the title is set, it will be used in
@@ -110,6 +113,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   const FlutterDeckSlideConfiguration({
     required this.route,
     this.hidden = false,
+    this.speakerNotes = '',
     this.steps = 1,
     this.title,
     FlutterDeckFooterConfiguration? footer,
@@ -128,6 +132,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   const FlutterDeckSlideConfiguration._({
     required this.route,
     this.hidden = false,
+    this.speakerNotes = '',
     this.steps = 1,
     this.title,
     super.footer,
@@ -149,6 +154,14 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   /// If the title is set, it will be used in the navigation drawer instead of
   /// the header title (or route as a fallback).
   final String? title;
+
+  /// The speaker notes for the slide.
+  ///
+  /// Speaker notes are not shown in the slide deck and are only visible in the
+  /// presenter view.
+  ///
+  /// The default is an empty string.
+  final String speakerNotes;
 
   /// Whether the slide is hidden or not.
   ///
@@ -175,6 +188,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
     return FlutterDeckSlideConfiguration._(
       route: route,
       hidden: hidden,
+      speakerNotes: speakerNotes,
       steps: steps,
       title: title,
       footer: _footerConfigurationOverride ?? configuration.footer,

@@ -3,6 +3,7 @@ import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
+import 'package:flutter_deck/src/presenter/presenter.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 
@@ -68,6 +69,7 @@ class FlutterDeck extends InheritedWidget {
     required FlutterDeckDrawerNotifier drawerNotifier,
     required FlutterDeckLocalizationNotifier localizationNotifier,
     required FlutterDeckMarkerNotifier markerNotifier,
+    required FlutterDeckPresenterController presenterController,
     required FlutterDeckThemeNotifier themeNotifier,
     required super.child,
     super.key,
@@ -79,6 +81,7 @@ class FlutterDeck extends InheritedWidget {
         _drawerNotifier = drawerNotifier,
         _localizationNotifier = localizationNotifier,
         _markerNotifier = markerNotifier,
+        _presenterController = presenterController,
         _themeNotifier = themeNotifier;
 
   final FlutterDeckConfiguration _configuration;
@@ -89,6 +92,7 @@ class FlutterDeck extends InheritedWidget {
   final FlutterDeckDrawerNotifier _drawerNotifier;
   final FlutterDeckLocalizationNotifier _localizationNotifier;
   final FlutterDeckMarkerNotifier _markerNotifier;
+  final FlutterDeckPresenterController _presenterController;
   final FlutterDeckThemeNotifier _themeNotifier;
 
   /// Returns the [FlutterDeckRouter] for the slide deck.
@@ -147,6 +151,10 @@ class FlutterDeck extends InheritedWidget {
 
   /// Returns the [FlutterDeckMarkerNotifier] for the slide deck.
   FlutterDeckMarkerNotifier get markerNotifier => _markerNotifier;
+
+  /// Returns the [FlutterDeckPresenterController] for the slide deck.
+  FlutterDeckPresenterController get presenterController =>
+      _presenterController;
 
   /// Returns the [FlutterDeckThemeNotifier] for the slide deck.
   FlutterDeckThemeNotifier get themeNotifier => _themeNotifier;

@@ -54,6 +54,20 @@ class FlutterDeckControlsNotifier
     notifyListeners();
   }
 
+  /// Go to the slide with the given [slideNumber].
+  void goToSlide(int slideNumber) {
+    _autoplayNotifier.pause();
+    _router.goToSlide(slideNumber);
+    notifyListeners();
+  }
+
+  /// Go to the slide step with the given [stepNumber].
+  void goToStep(int stepNumber) {
+    _autoplayNotifier.pause();
+    _router.goToStep(stepNumber);
+    notifyListeners();
+  }
+
   /// Toggle the navigation drawer.
   void toggleDrawer() {
     _autoplayNotifier.pause();

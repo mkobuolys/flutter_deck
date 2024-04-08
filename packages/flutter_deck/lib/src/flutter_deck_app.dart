@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
@@ -5,9 +6,11 @@ import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
+import 'package:flutter_deck/src/presenter/presenter.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
+import 'package:flutter_deck_client/flutter_deck_client.dart';
 import 'package:go_router/go_router.dart';
 
 const _defaultLocale = Locale('en');
@@ -44,6 +47,11 @@ class FlutterDeckApp extends StatefulWidget {
   /// The [locale], [localizationsDelegates] and [supportedLocales] arguments
   /// are equivalent to those of [MaterialApp]'s.
   ///
+  /// The [client] argument provides a client to use for the presenter view. The
+  /// [isPresenterView] argument is used to determine if the app should run
+  /// as a presenter view. If this argument is provided, the [client] argument
+  /// must also be provided.
+  ///
   /// See also:
   ///
   /// * [FlutterDeckSlide], which represents a single slide.
@@ -56,6 +64,7 @@ class FlutterDeckApp extends StatefulWidget {
   /// speaker.
   const FlutterDeckApp({
     required this.slides,
+    this.client,
     this.configuration = const FlutterDeckConfiguration(),
     this.speakerInfo,
     this.lightTheme,
@@ -64,8 +73,17 @@ class FlutterDeckApp extends StatefulWidget {
     this.locale = _defaultLocale,
     this.localizationsDelegates,
     this.supportedLocales = const <Locale>[_defaultLocale],
+    bool? isPresenterView,
     super.key,
-  }) : assert(slides.length > 0, 'You must provide at least one slide');
+  })  : assert(slides.length > 0, 'You must provide at least one slide'),
+        assert(
+          isPresenterView == null || client != null,
+          'You must provide a client when providing isPresenterView',
+        ),
+        isPresenterView = !kIsWeb ? isPresenterView : null;
+
+  /// The client to use for the presenter view.
+  final FlutterDeckClient? client;
 
   /// A global configuration for the slide deck.
   ///
@@ -124,6 +142,13 @@ class FlutterDeckApp extends StatefulWidget {
   /// * [MaterialApp.supportedLocales], which is equivalent to this argument.
   final Iterable<Locale> supportedLocales;
 
+  /// Whether the app should run as a presenter view.
+  ///
+  /// This argument is only used on non-web platforms. On the web, the app will
+  /// automatically determine if it should run as a presenter view based on the
+  /// URL.
+  final bool? isPresenterView;
+
   @override
   State<FlutterDeckApp> createState() => _FlutterDeckAppState();
 }
@@ -137,6 +162,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
   late FlutterDeckDrawerNotifier _drawerNotifier;
   late FlutterDeckLocalizationNotifier _localizationNotifier;
   late FlutterDeckMarkerNotifier _markerNotifier;
+  late FlutterDeckPresenterController _presenterController;
   late FlutterDeckThemeNotifier _themeNotifier;
 
   @override
@@ -146,10 +172,12 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
     _buildRouter();
 
     _autoplayNotifier = FlutterDeckAutoplayNotifier(router: _flutterDeckRouter);
+    _drawerNotifier = FlutterDeckDrawerNotifier();
+    _markerNotifier = FlutterDeckMarkerNotifier();
     _controlsNotifier = FlutterDeckControlsNotifier(
       autoplayNotifier: _autoplayNotifier,
-      drawerNotifier: _drawerNotifier = FlutterDeckDrawerNotifier(),
-      markerNotifier: _markerNotifier = FlutterDeckMarkerNotifier(),
+      drawerNotifier: _drawerNotifier,
+      markerNotifier: _markerNotifier,
       fullscreenManager: FlutterDeckFullscreenManager(),
       router: _flutterDeckRouter,
     );
@@ -158,6 +186,25 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
       supportedLocales: widget.supportedLocales,
     );
     _themeNotifier = FlutterDeckThemeNotifier(widget.themeMode);
+    _presenterController = FlutterDeckPresenterController(
+      client: widget.client,
+      controlsNotifier: _controlsNotifier,
+      localizationNotifier: _localizationNotifier,
+      markerNotifier: _markerNotifier,
+      themeNotifier: _themeNotifier,
+      router: _flutterDeckRouter,
+    );
+
+    if (widget.client != null && !(widget.isPresenterView ?? true)) {
+      _presenterController.init();
+    }
+  }
+
+  @override
+  void dispose() {
+    _presenterController.dispose();
+
+    super.dispose();
   }
 
   void _buildRouter() {
@@ -173,7 +220,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
     ];
 
     _flutterDeckRouter = FlutterDeckRouter(slides: slides);
-    _router = _flutterDeckRouter.build();
+    _router = _flutterDeckRouter.build(isPresenterView: widget.isPresenterView);
   }
 
   @override
@@ -199,6 +246,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
               drawerNotifier: _drawerNotifier,
               localizationNotifier: _localizationNotifier,
               markerNotifier: _markerNotifier,
+              presenterController: _presenterController,
               themeNotifier: _themeNotifier,
               child: FlutterDeckControlsListener(
                 notifier: _controlsNotifier,

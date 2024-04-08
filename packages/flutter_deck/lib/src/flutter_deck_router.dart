@@ -2,9 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
+import 'package:flutter_deck/src/presenter/presenter.dart';
 import 'package:go_router/go_router.dart';
 
 const _queryParameterStep = 'step';
+const _presenterViewRoute = '/presenter-view';
 
 /// A slide route for the slide deck.
 class FlutterDeckRouterSlide {
@@ -31,7 +33,10 @@ class FlutterDeckRouterSlide {
 ///
 /// This class is used to build the [GoRouter] for the FlutterDeckApp and to
 /// control the navigation between slides.
-class FlutterDeckRouter {
+///
+/// [FlutterDeckRouter] is a [ChangeNotifier] and notifies listeners when the
+/// current slide or step changes.
+class FlutterDeckRouter extends ChangeNotifier {
   /// Default constructor for [FlutterDeckRouter].
   FlutterDeckRouter({
     required this.slides,
@@ -45,6 +50,7 @@ class FlutterDeckRouter {
 
   late int _currentSlideIndex;
   late int _currentSlideStep;
+  late bool _isPresenterView;
 
   late GoRouter _router;
 
@@ -52,37 +58,56 @@ class FlutterDeckRouter {
   ///
   /// This method should only be called once and the result should be passed to
   /// the MaterialApp or CupertinoApp's `router` constructor.
-  GoRouter build() {
+  ///
+  /// The optional parameter [isPresenterView] can be used to force the deck to
+  /// run in presenter view mode or not. If not provided, the deck will run in
+  /// presenter view mode if the app is running on the web and the route is
+  /// `/presenter-view`.
+  GoRouter build({bool? isPresenterView}) {
     _validateRoutes();
-    _initRouterData();
+    _initRouterData(isPresenterView: isPresenterView);
 
     return _router = GoRouter(
-      routes: [
-        GoRoute(
-          path: '/',
-          redirect: (_, __) => slides.first.route,
-        ),
-        for (final slide in slides)
-          GoRoute(
-            path: slide.route,
-            pageBuilder: (context, state) => CustomTransitionPage(
-              key: state.pageKey,
-              restorationId: state.pageKey.value,
-              transitionsBuilder: slide.configuration.transition.build,
-              child: Builder(builder: slide.widget.build),
-            ),
-          ),
-      ],
-    );
+      routes: _isPresenterView
+          ? [
+              GoRoute(path: '/', redirect: (_, __) => _presenterViewRoute),
+              GoRoute(
+                path: _presenterViewRoute,
+                builder: (_, __) => const PresenterView(),
+              ),
+            ]
+          : [
+              GoRoute(path: '/', redirect: (_, __) => slides.first.route),
+              for (final slide in slides)
+                GoRoute(
+                  path: slide.route,
+                  pageBuilder: (context, state) => CustomTransitionPage(
+                    key: state.pageKey,
+                    restorationId: state.pageKey.value,
+                    transitionsBuilder: slide.configuration.transition.build,
+                    child: Builder(builder: slide.widget.build),
+                  ),
+                ),
+            ],
+    )..routeInformationProvider.addListener(notifyListeners);
   }
 
-  void _initRouterData() {
+  void _initRouterData({bool? isPresenterView}) {
     _currentSlideIndex = 0;
     _currentSlideStep = 1;
+    _isPresenterView = false;
+
+    if (isPresenterView != null) {
+      _isPresenterView = isPresenterView;
+      return;
+    }
 
     if (!kIsWeb) return;
 
     final uri = Uri.parse(Uri.base.fragment);
+
+    _isPresenterView = uri.path == _presenterViewRoute;
+
     final slideIndex = slides.indexWhere((s) => s.route == uri.path);
 
     if (slideIndex < 0) return;
@@ -93,14 +118,6 @@ class FlutterDeckRouter {
     _currentSlideStep = stepNumber != null ? int.tryParse(stepNumber) ?? 1 : 1;
   }
 
-  /// Adds a listener to the slide router.
-  void addListener(void Function() listener) =>
-      _router.routeInformationProvider.addListener(listener);
-
-  /// Removes a listener from the slide router.
-  void removeListener(void Function() listener) =>
-      _router.routeInformationProvider.removeListener(listener);
-
   /// Go to the next slide or step.
   ///
   /// If the current step is the last step, the next slide is displayed.
@@ -109,18 +126,17 @@ class FlutterDeckRouter {
     final steps = currentSlideConfiguration.steps;
 
     if (steps > 1 && _currentSlideStep < steps) {
-      final location = Uri(
-        path: slides[_currentSlideIndex].route,
-        queryParameters: {_queryParameterStep: '${++_currentSlideStep}'},
-      ).toString();
+      _currentSlideStep++;
 
-      return _router.go(location);
+      return _updateRoute();
     }
 
     if (_currentSlideIndex + 1 >= slides.length) return;
 
+    _currentSlideIndex++;
     _currentSlideStep = 1;
-    _router.go(slides[++_currentSlideIndex].route);
+
+    _updateRoute();
   }
 
   /// Go to the previous slide or step.
@@ -131,21 +147,20 @@ class FlutterDeckRouter {
     final steps = currentSlideConfiguration.steps;
 
     if (steps > 1 && _currentSlideStep > 1) {
-      final location = Uri(
-        path: slides[_currentSlideIndex].route,
-        queryParameters: {_queryParameterStep: '${--_currentSlideStep}'},
-      ).toString();
+      _currentSlideStep--;
 
-      return _router.go(location);
+      return _updateRoute();
     }
 
     if (_currentSlideIndex - 1 < 0) return;
 
+    _currentSlideIndex--;
     _currentSlideStep = 1;
-    _router.go(slides[--_currentSlideIndex].route);
+
+    _updateRoute();
   }
 
-  /// Go to a specific slide by its number.
+  /// Go to the slide with the given [slideNumber].
   ///
   /// If the slide number is invalid, nothing happens.
   void goToSlide(int slideNumber) {
@@ -153,11 +168,13 @@ class FlutterDeckRouter {
 
     if (index < 0 || index >= slides.length) return;
 
+    _currentSlideIndex = index;
     _currentSlideStep = 1;
-    _router.go(slides[_currentSlideIndex = index].route);
+
+    _updateRoute();
   }
 
-  /// Go to a specific step by its number.
+  /// Go to the slide step with the given [stepNumber].
   ///
   /// If the step number is invalid or the same as the current step,
   /// nothing happens.
@@ -170,12 +187,20 @@ class FlutterDeckRouter {
       return;
     }
 
+    _currentSlideStep = stepNumber;
+    _updateRoute();
+  }
+
+  void _updateRoute() {
+    if (_isPresenterView) return notifyListeners();
+
     final location = Uri(
-      path: currentSlideConfiguration.route,
-      queryParameters: {_queryParameterStep: '$stepNumber'},
+      path: slides[_currentSlideIndex].route,
+      queryParameters: _currentSlideStep > 1
+          ? {_queryParameterStep: '$_currentSlideStep'}
+          : null,
     ).toString();
 
-    _currentSlideStep = stepNumber;
     _router.go(location);
   }
 
@@ -189,7 +214,16 @@ class FlutterDeckRouter {
   /// Returns the current step of the slide.
   int get currentStep => _currentSlideStep;
 
+  /// Whether the deck runs in presenter view mode.
+  bool get isPresenterView => _isPresenterView;
+
   void _validateRoutes() {
+    assert(
+      !slides.map((s) => s.route).contains(_presenterViewRoute),
+      'The route $_presenterViewRoute is reserved for the presenter view. '
+      'Please use a different route.',
+    );
+
     final duplicatedRoutes = slides
         .fold(
           <String, List<String>>{},

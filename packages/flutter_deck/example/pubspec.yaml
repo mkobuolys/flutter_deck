@@ -14,6 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_deck:
     path: ..
+  flutter_deck_web_client: ^0.1.0
   flutter_localizations:
     sdk: flutter
   intl: ^0.18.1
