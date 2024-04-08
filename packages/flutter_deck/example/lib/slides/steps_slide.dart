@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
+const _speakerNotes = '''
+- Use steps to navigate through a slide step by step.
+- You can access the current step from any widget.
+- FlutterDeckBulletList widget supports steps out of the box.
+''';
+
 class StepsSlide extends FlutterDeckSlideWidget {
   const StepsSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/steps',
             steps: 3,
+            speakerNotes: _speakerNotes,
             header: FlutterDeckHeaderConfiguration(title: 'Slide steps'),
           ),
         );

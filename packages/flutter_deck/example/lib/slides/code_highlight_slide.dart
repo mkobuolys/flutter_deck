@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
+const _speakerNotes = '''
+- Use FlutterDeckCodeHighlight widget to highlight code.
+- It supports multiple programming languages.
+- You can customize the text style and background color.
+''';
+
 class CodeHighlightSlide extends FlutterDeckSlideWidget {
   const CodeHighlightSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/code-highlight',
+            speakerNotes: _speakerNotes,
             header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
           ),
         );

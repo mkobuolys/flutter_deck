@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
+const _speakerNotes = '''
+- The template slide template renders a header, a footer, and a content area.
+''';
+
 class LayoutStructureSlide extends FlutterDeckSlideWidget {
   const LayoutStructureSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/layout-structure',
+            speakerNotes: _speakerNotes,
             title: 'Layout structure',
           ),
         );

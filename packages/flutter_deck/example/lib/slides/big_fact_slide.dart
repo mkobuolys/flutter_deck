@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
+const _speakerNotes = '''
+- The big fact slide is a template slide with a large title and a subtitle.
+- You can customize the text styles and colors.
+''';
+
 class BigFactSlide extends FlutterDeckSlideWidget {
   const BigFactSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/big-fact',
+            speakerNotes: _speakerNotes,
             header: FlutterDeckHeaderConfiguration(
               title: 'Big fact slide template',
             ),

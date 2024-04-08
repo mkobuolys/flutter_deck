@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
+const _speakerNotes = '''
+- You can set the global theme for the whole deck.
+- You can override the theme for a single slide.
+''';
+
 class ThemingSlide extends FlutterDeckSlideWidget {
   const ThemingSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/theming-slide',
             title: 'Theming',
+            speakerNotes: _speakerNotes,
             header: FlutterDeckHeaderConfiguration(title: 'Theming'),
           ),
         );

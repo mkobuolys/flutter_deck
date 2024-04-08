@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
+const _speakerNotes = '''
+- The quote slide template renders a quote and an attribution.
+- You can change the text styles and colors.
+''';
+
 class QuoteSlide extends FlutterDeckSlideWidget {
   const QuoteSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/quote',
+            speakerNotes: _speakerNotes,
             header: FlutterDeckHeaderConfiguration(
               title: 'Quote slide template',
             ),
