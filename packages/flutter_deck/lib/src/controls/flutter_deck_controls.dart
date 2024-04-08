@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/controls/actions/actions.dart';
 import 'package:flutter_deck/src/controls/localized_shortcut_labeler.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// A widget that allows the user to control the slide deck.
 ///
@@ -168,6 +170,7 @@ class _SlideNumberButton extends StatelessWidget {
 
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
+    final router = flutterDeck.router;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
     final shortcut = LocalizedShortcutLabeler.instance.getShortcutLabel(
       shortcuts.toggleNavigationDrawer,
@@ -175,24 +178,27 @@ class _SlideNumberButton extends StatelessWidget {
     );
 
     return ListenableBuilder(
-      listenable: controlsNotifier,
-      builder: (context, child) {
-        final enabled =
-            !controlsNotifier.intentDisabled(const ToggleDrawerIntent());
+      listenable: router,
+      builder: (context, child) => ListenableBuilder(
+        listenable: controlsNotifier,
+        builder: (context, child) {
+          final enabled =
+              !controlsNotifier.intentDisabled(const ToggleDrawerIntent());
 
-        return IconButton(
-          icon: Text(
-            '${flutterDeck.slideNumber}',
-            style: TextStyle(
-              color: enabled ? theme.iconTheme.color : theme.disabledColor,
-              fontWeight: FontWeight.bold,
+          return IconButton(
+            icon: Text(
+              '${flutterDeck.slideNumber}',
+              style: TextStyle(
+                color: enabled ? theme.iconTheme.color : theme.disabledColor,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          tooltip: 'Open navigation drawer'
-              '${shortcuts.enabled ? ' ($shortcut)' : ''}',
-          onPressed: enabled ? controlsNotifier.toggleDrawer : null,
-        );
-      },
+            tooltip: 'Open navigation drawer'
+                '${shortcuts.enabled ? ' ($shortcut)' : ''}',
+            onPressed: enabled ? controlsNotifier.toggleDrawer : null,
+          );
+        },
+      ),
     );
   }
 }
@@ -258,7 +264,7 @@ class _AutoplayMenuButton extends StatelessWidget {
               onPressed: autoplayNotifier.isPlaying
                   ? autoplayNotifier.pause
                   : autoplayNotifier.play,
-              child: const Text('Play'),
+              child: Text(autoplayNotifier.isPlaying ? 'Pause' : 'Play'),
             ),
             const _PopupMenuDivider(),
             const _AutoplayDurationButton(
@@ -435,6 +441,24 @@ class _MarkerButton extends StatelessWidget {
   }
 }
 
+class _PresenterViewButton extends StatelessWidget {
+  const _PresenterViewButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final presenterController = context.flutterDeck.presenterController;
+
+    return MenuItemButton(
+      leadingIcon: const Icon(Icons.forum_rounded),
+      onPressed: () {
+        presenterController.init();
+        launchUrl(Uri.parse('#/presenter-view'));
+      },
+      child: const Text('Open presenter view'),
+    );
+  }
+}
+
 class _FullscreenButton extends StatelessWidget {
   const _FullscreenButton();
 
@@ -494,6 +518,7 @@ class _OptionsMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final flutterDeck = context.flutterDeck;
+    final router = flutterDeck.router;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final canFullscreen = controlsNotifier.canFullscreen();
     final supportedLocales = flutterDeck.localizationNotifier.supportedLocales;
@@ -519,6 +544,7 @@ class _OptionsMenuButton extends StatelessWidget {
           const _PopupMenuDivider(),
           const _AutoplayMenuButton(),
           if (supportedLocales.length > 1) const _LocalizationMenuButton(),
+          if (kIsWeb && !router.isPresenterView) const _PresenterViewButton(),
         ],
       ),
     );

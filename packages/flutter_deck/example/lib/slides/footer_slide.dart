@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
+const _speakerNotes = '''
+- You can use a custom footer widget in your slides.
+- This example showcases a custom footer with an icon and text.
+''';
+
 class FooterSlide extends FlutterDeckSlideWidget {
   const FooterSlide()
       : super(
@@ -11,6 +16,7 @@ class FooterSlide extends FlutterDeckSlideWidget {
               widget: _CustomFooter(),
             ),
             route: '/footer-slide',
+            speakerNotes: _speakerNotes,
             header: FlutterDeckHeaderConfiguration(
               title: 'Custom footer slide',
             ),

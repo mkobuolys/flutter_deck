@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck_example/l10n/l10n.dart';
 import 'package:flutter_deck_example/slides/slides.dart';
+import 'package:flutter_deck_web_client/flutter_deck_web_client.dart';
 
 void main() {
   runApp(const FlutterDeckExample());
@@ -13,6 +14,7 @@ class FlutterDeckExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterDeckApp(
+      client: FlutterDeckWebClient(),
       // You could use the default configuration or create your own.
       configuration: FlutterDeckConfiguration(
         // Define a global background for the light and dark themes separately.

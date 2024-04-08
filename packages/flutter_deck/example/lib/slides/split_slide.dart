@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
+const _speakerNotes = '''
+- The split slide template renders two columns, one on the left and one on right.
+- You can change the split ratio based on your needs.
+''';
+
 class SplitSlide extends FlutterDeckSlideWidget {
   const SplitSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/split-slide',
+            speakerNotes: _speakerNotes,
             header: FlutterDeckHeaderConfiguration(
               title: 'Split slide template',
             ),

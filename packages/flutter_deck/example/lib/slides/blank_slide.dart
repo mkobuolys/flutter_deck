@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
+const _speakerNotes = '''
+- The blank slide template renders a header and a footer.
+- The remaining space is free for your imagination.
+''';
+
 class BlankSlide extends FlutterDeckSlideWidget {
   const BlankSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/blank-slide',
+            speakerNotes: _speakerNotes,
             header: FlutterDeckHeaderConfiguration(
               title: 'Blank slide template',
             ),

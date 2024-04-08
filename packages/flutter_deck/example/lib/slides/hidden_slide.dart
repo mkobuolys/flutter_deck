@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
+const _speakerNotes = '''
+- This slide is hidden. Oh, but you can't see it...
+''';
+
 class HiddenSlide extends FlutterDeckSlideWidget {
   const HiddenSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/hidden',
+            speakerNotes: _speakerNotes,
             hidden: true,
           ),
         );

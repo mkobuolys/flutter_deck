@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
+const _speakerNotes = '''
+- The background can be defined globally for the light and dark themes separately.
+- It can be a solid color, gradient, image or any custom widget.
+- You can override it later for each slide.
+''';
+
 class BackgroundSlide extends FlutterDeckSlideWidget {
   const BackgroundSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/background',
+            speakerNotes: _speakerNotes,
             header: FlutterDeckHeaderConfiguration(title: 'Background'),
           ),
         );

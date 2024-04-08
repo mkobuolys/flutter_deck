@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck_example/l10n/l10n.dart';
 
+const _speakerNotes = '''
+- You can localize your slide deck using the same approach as any other Flutter app.
+- Use deck controls to change the locale and see the text change without restarting your presentation!
+''';
+
 class LocalizationSlide extends FlutterDeckSlideWidget {
   const LocalizationSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/localization',
+            speakerNotes: _speakerNotes,
             header: FlutterDeckHeaderConfiguration(
               title: 'Slide deck localization',
             ),
