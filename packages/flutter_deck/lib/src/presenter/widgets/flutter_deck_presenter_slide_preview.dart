@@ -65,8 +65,6 @@ class _SlidePreview extends StatelessWidget {
   final bool next;
 
   String _getHeader(int slideCount) {
-    if (index >= slideCount) return 'End of presentation';
-
     final slideInfo = 'Slide ${index + 1} of $slideCount';
 
     return next ? 'Next: $slideInfo' : 'Current: $slideInfo';
@@ -92,37 +90,65 @@ class _SlidePreview extends StatelessWidget {
     final slides = flutterDeck.router.slides;
     final aspectRatio =
         slideSize.isResponsive ? 16 / 9 : slideSize.width! / slideSize.height!;
+    final isLastSlide = index >= slides.length;
 
     return Column(
       children: [
-        Text(_getHeader(slides.length)),
+        Text(isLastSlide ? '' : _getHeader(slides.length)),
         const SizedBox(height: 8),
         Expanded(
-          child: index < slides.length
-              ? AspectRatio(
-                  aspectRatio: aspectRatio,
-                  child: Container(
+          child: AspectRatio(
+            aspectRatio: aspectRatio,
+            child: isLastSlide
+                ? Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Center(
+                      child: _SlideTitle(
+                        autoSizeGroup: autoSizeGroup,
+                        color: Theme.of(context).colorScheme.onSurface,
+                        title: 'End of presentation',
+                      ),
+                    ),
+                  )
+                : Container(
                     color: Theme.of(context).colorScheme.secondary,
                     padding: const EdgeInsets.all(16),
                     child: Center(
-                      child: AutoSizeText(
-                        _getSlideTitle(slides[index]),
-                        group: autoSizeGroup,
-                        style: FlutterDeckTheme.of(context)
-                            .textTheme
-                            .bodyLarge
-                            .copyWith(
-                              color: Theme.of(context).colorScheme.onSecondary,
-                              fontWeight: FontWeight.w500,
-                            ),
-                        maxLines: 1,
+                      child: _SlideTitle(
+                        autoSizeGroup: autoSizeGroup,
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        title: _getSlideTitle(slides[index]),
                       ),
                     ),
                   ),
-                )
-              : const SizedBox.shrink(),
+          ),
         ),
       ],
+    );
+  }
+}
+
+class _SlideTitle extends StatelessWidget {
+  const _SlideTitle({
+    required this.autoSizeGroup,
+    required this.color,
+    required this.title,
+  });
+
+  final AutoSizeGroup autoSizeGroup;
+  final Color color;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return AutoSizeText(
+      title,
+      group: autoSizeGroup,
+      maxLines: 1,
+      style: FlutterDeckTheme.of(context)
+          .textTheme
+          .bodyLarge
+          .copyWith(color: color, fontWeight: FontWeight.w500),
     );
   }
 }
