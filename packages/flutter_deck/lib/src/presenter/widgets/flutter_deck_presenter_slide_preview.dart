@@ -1,5 +1,7 @@
-import 'package:flutter/widgets.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
+import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 
 /// Renders the preview of the current and next slide.
@@ -8,7 +10,11 @@ import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 /// the next slide.
 class FlutterDeckPresenterSlidePreview extends StatelessWidget {
   /// Creates a [FlutterDeckPresenterSlidePreview] widget.
-  const FlutterDeckPresenterSlidePreview({super.key});
+  FlutterDeckPresenterSlidePreview({super.key})
+      : autoSizeGroup = AutoSizeGroup();
+
+  /// The auto size group for the text widgets.
+  final AutoSizeGroup autoSizeGroup;
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +28,19 @@ class FlutterDeckPresenterSlidePreview extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(16),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
+              Flexible(
                 child: _SlidePreview(
+                  autoSizeGroup: autoSizeGroup,
                   index: currentSlideIndex,
                 ),
               ),
               const SizedBox(width: 16),
-              Expanded(
+              Flexible(
                 child: _SlidePreview(
+                  autoSizeGroup: autoSizeGroup,
                   index: currentSlideIndex + 1,
                   next: true,
                 ),
@@ -45,10 +55,12 @@ class FlutterDeckPresenterSlidePreview extends StatelessWidget {
 
 class _SlidePreview extends StatelessWidget {
   const _SlidePreview({
+    required this.autoSizeGroup,
     required this.index,
     this.next = false,
   });
 
+  final AutoSizeGroup autoSizeGroup;
   final int index;
   final bool next;
 
@@ -60,11 +72,26 @@ class _SlidePreview extends StatelessWidget {
     return next ? 'Next: $slideInfo' : 'Current: $slideInfo';
   }
 
+  String _getSlideTitle(FlutterDeckRouterSlide slide) {
+    final configuration = slide.configuration;
+    final title = configuration.title;
+
+    if (title != null) return title;
+
+    final header = configuration.header;
+
+    if (header.showHeader) return header.title;
+
+    return configuration.route;
+  }
+
   @override
   Widget build(BuildContext context) {
     final flutterDeck = context.flutterDeck;
     final slideSize = flutterDeck.globalConfiguration.slideSize;
     final slides = flutterDeck.router.slides;
+    final aspectRatio =
+        slideSize.isResponsive ? 16 / 9 : slideSize.width! / slideSize.height!;
 
     return Column(
       children: [
@@ -72,14 +99,24 @@ class _SlidePreview extends StatelessWidget {
         const SizedBox(height: 8),
         Expanded(
           child: index < slides.length
-              ? FittedBox(
+              ? AspectRatio(
+                  aspectRatio: aspectRatio,
                   child: Container(
-                    color:
-                        FlutterDeckTheme.of(context).slideTheme.backgroundColor,
-                    height: slideSize.height,
-                    width: slideSize.width,
-                    child: AbsorbPointer(
-                      child: slides[index].widget.build(context),
+                    color: Theme.of(context).colorScheme.secondary,
+                    padding: const EdgeInsets.all(16),
+                    child: Center(
+                      child: AutoSizeText(
+                        _getSlideTitle(slides[index]),
+                        group: autoSizeGroup,
+                        style: FlutterDeckTheme.of(context)
+                            .textTheme
+                            .bodyLarge
+                            .copyWith(
+                              color: Theme.of(context).colorScheme.onSecondary,
+                              fontWeight: FontWeight.w500,
+                            ),
+                        maxLines: 1,
+                      ),
                     ),
                   ),
                 )

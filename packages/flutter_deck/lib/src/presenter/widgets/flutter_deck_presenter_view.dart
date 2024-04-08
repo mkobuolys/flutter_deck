@@ -45,13 +45,13 @@ class _PresenterViewState extends State<PresenterView> {
             onDrawerToggle: () => scaffoldState.isDrawerOpen
                 ? scaffoldState.closeDrawer()
                 : scaffoldState.openDrawer(),
-            child: const FlutterDeckControls(
+            child: FlutterDeckControls(
               child: Column(
                 children: [
-                  FlutterDeckPresenterTimer(),
+                  const FlutterDeckPresenterTimer(),
                   Expanded(child: FlutterDeckPresenterSlidePreview()),
-                  Divider(),
-                  Expanded(flex: 2, child: FlutterDeckSpeakerNotes()),
+                  const Divider(),
+                  const Expanded(flex: 2, child: FlutterDeckSpeakerNotes()),
                 ],
               ),
             ),
