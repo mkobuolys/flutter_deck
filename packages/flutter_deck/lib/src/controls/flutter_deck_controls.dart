@@ -170,6 +170,7 @@ class _SlideNumberButton extends StatelessWidget {
 
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
+    final router = flutterDeck.router;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
     final shortcut = LocalizedShortcutLabeler.instance.getShortcutLabel(
       shortcuts.toggleNavigationDrawer,
@@ -177,24 +178,27 @@ class _SlideNumberButton extends StatelessWidget {
     );
 
     return ListenableBuilder(
-      listenable: controlsNotifier,
-      builder: (context, child) {
-        final enabled =
-            !controlsNotifier.intentDisabled(const ToggleDrawerIntent());
+      listenable: router,
+      builder: (context, child) => ListenableBuilder(
+        listenable: controlsNotifier,
+        builder: (context, child) {
+          final enabled =
+              !controlsNotifier.intentDisabled(const ToggleDrawerIntent());
 
-        return IconButton(
-          icon: Text(
-            '${flutterDeck.slideNumber}',
-            style: TextStyle(
-              color: enabled ? theme.iconTheme.color : theme.disabledColor,
-              fontWeight: FontWeight.bold,
+          return IconButton(
+            icon: Text(
+              '${flutterDeck.slideNumber}',
+              style: TextStyle(
+                color: enabled ? theme.iconTheme.color : theme.disabledColor,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          tooltip: 'Open navigation drawer'
-              '${shortcuts.enabled ? ' ($shortcut)' : ''}',
-          onPressed: enabled ? controlsNotifier.toggleDrawer : null,
-        );
-      },
+            tooltip: 'Open navigation drawer'
+                '${shortcuts.enabled ? ' ($shortcut)' : ''}',
+            onPressed: enabled ? controlsNotifier.toggleDrawer : null,
+          );
+        },
+      ),
     );
   }
 }
