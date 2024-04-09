@@ -1,4 +1,4 @@
-# NEXT
+# 0.14.0
 
 - feat: add presenter view
 - feat: add speaker notes to the slide configuration

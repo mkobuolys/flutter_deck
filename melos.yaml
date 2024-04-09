@@ -1,4 +1,9 @@
-name: flutter_deck_workspace
+name: flutter_deck
 
 packages:
   - packages/**
+
+scripts:
+  analyze:
+    run: melos exec --no-private -- dart analyze .
+    description: Run `dart analyze` in all packages.
