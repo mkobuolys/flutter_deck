@@ -33,20 +33,26 @@ class FlutterDeckCodeHighlight extends StatelessWidget {
   /// https://github.com/git-touch/highlight.dart/tree/master/highlight/lib/languages
   const FlutterDeckCodeHighlight({
     required String code,
-    super.key,
-    String? fileName,
     String language = 'dart',
+    String? fileName,
+    TextStyle? textStyle,
+    super.key,
   })  : _code = code,
         _fileName = fileName,
-        _language = language;
+        _language = language,
+        _textStyle = textStyle;
 
   final String _code;
   final String? _fileName;
   final String _language;
+  final TextStyle? _textStyle;
 
   @override
   Widget build(BuildContext context) {
     final theme = FlutterDeckCodeHighlightTheme.of(context);
+    final textStyle = _textStyle == null || (_textStyle?.inherit ?? false)
+        ? theme.textStyle?.merge(_textStyle) ?? _textStyle
+        : _textStyle;
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -60,17 +66,14 @@ class FlutterDeckCodeHighlight extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (_fileName != null) ...[
-              Text(
-                _fileName!,
-                style: theme.textStyle,
-              ),
+              Text(_fileName!, style: textStyle),
               const SizedBox(height: 4),
             ],
             HighlightView(
               _code,
               language: _language,
               padding: const EdgeInsets.all(16),
-              textStyle: theme.textStyle,
+              textStyle: textStyle,
               theme: Theme.of(context).brightness == Brightness.dark
                   ? vs2015Theme
                   : defaultTheme,

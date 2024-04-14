@@ -1,3 +1,7 @@
+# NEXT
+
+- feat: add `textStyle` property to the `FlutterDeckCodeHighlight` widget
+
 # 0.14.0
 
 - feat: add presenter view
