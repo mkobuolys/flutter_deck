@@ -76302,12 +76302,14 @@ p=r.r
 if(p==null)p=1/0
 return A.ib(this.d,this.c,p,null,q,null)}}
 A.Ka.prototype={
-B(a){var s,r=null,q=A.axe(a),p=t.p,o=A.b([],p),n=q.b
-B.b.S(o,A.b([A.bJ("code_highlight_slide.dart",r,r,r,r,r,r,r,n,r,r,r),B.E9],p))
-p=A.a6(a).ay.a===B.S?B.XM:B.Y5
-s=B.d.aC(" ",8)
-o.push(new A.L5(A.arO("import 'package:flutter/material.dart';\nimport 'package:flutter_deck/flutter_deck.dart';\n\nclass CodeHighlightSlide extends FlutterDeckSlideWidget {\n  const CodeHighlightSlide()\n      : super(\n          configuration: const FlutterDeckSlideConfiguration(\n            route: '/code-highlight',\n            header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),\n          ),\n        );\n\n  @override\n  FlutterDeckSlide build(BuildContext context) {\n    return FlutterDeckSlide.blank(\n      builder: (context) => const Center(\n        child: Text('Use FlutterDeckCodeHighlight widget to highlight code!'),\n      ),\n    );\n  }\n}","\t",s),"dart",p,B.aO,n,r))
-return A.lQ(new A.bt(B.fu,A.e8(o,B.bB,B.a7,B.bM),r),new A.d5(q.a,r,r,B.lM,r,r,B.aF),B.bC)}}
+B(a){var s,r,q=null,p=A.axe(a),o=p.b.aD(q),n=o
+o=t.p
+s=A.b([],o)
+B.b.S(s,A.b([A.bJ("code_highlight_slide.dart",q,q,q,q,q,q,q,n,q,q,q),B.E9],o))
+o=A.a6(a).ay.a===B.S?B.XM:B.Y5
+r=B.d.aC(" ",8)
+s.push(new A.L5(A.arO("import 'package:flutter/material.dart';\nimport 'package:flutter_deck/flutter_deck.dart';\n\nclass CodeHighlightSlide extends FlutterDeckSlideWidget {\n  const CodeHighlightSlide()\n      : super(\n          configuration: const FlutterDeckSlideConfiguration(\n            route: '/code-highlight',\n            header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),\n          ),\n        );\n\n  @override\n  FlutterDeckSlide build(BuildContext context) {\n    return FlutterDeckSlide.blank(\n      builder: (context) => const Center(\n        child: Text('Use FlutterDeckCodeHighlight widget to highlight code!'),\n      ),\n    );\n  }\n}","\t",r),"dart",o,B.aO,n,q))
+return A.lQ(new A.bt(B.fu,A.e8(s,B.bB,B.a7,B.bM),q),new A.d5(p.a,q,q,B.lM,q,q,B.aF),B.bC)}}
 A.Kg.prototype={
 B(a){var s,r,q=null,p=A.axg(a),o=A.b([],t.p),n=this.e
 if(n instanceof A.f)o.push(A.eo(n,q,B.aE,!0,a.G(t.Q).f.as.r,q,q,B.a9))
@@ -76679,7 +76681,9 @@ for(s=J.au(a);s.t();)p.$1(s.gJ(s))
 return q},
 B(a){var s,r=this,q=null,p=r.e,o=p.i(0,"root")
 o=o==null?q:o.b
-s=A.jD(q,q,o==null?B.p:o,q,q,q,q,q,"monospace",q,q,q,q,q,q,q,q,!0,q,q,q,q,q,q,q,q).aD(r.r)
+s=A.jD(q,q,o==null?B.p:o,q,q,q,q,q,"monospace",q,q,q,q,q,q,q,q,!0,q,q,q,q,q,q,q,q)
+o=r.r
+if(o!=null)s=s.aD(o)
 p=p.i(0,"root")
 p=p==null?q:p.c
 if(p==null)p=B.n
