@@ -1046,6 +1046,7 @@ flutter run -t main_presenter.dart
 | [ReArch: A Reactive Approach to Application Architecture Supporting Side Effects](https://github.com/GregoryConrad/rearch-dart/tree/main/examples/presentation) | English            | [Gregory Conrad](https://github.com/GregoryConrad)                                           |
 | [Flutter demo](https://github.com/thpir/flutter-presentation)                                                                                                   | Dutch              | [Thijs Pirmez](https://www.linkedin.com/in/thijs-pirmez-973327230/)                          |
 | [Build Dynamic Slide Decks with Flutter](https://github.com/chooyan-eng/slide_decks_with_flutter)                                                               | English / Japanese | [Tsuyoshi Chujo](https://twitter.com/tsuyoshi_chujo)                                         |
+| [Building Responsive UIs in Flutter](https://dario-digregorio.github.io/flutter_responsive/)                                                                    | English            | [Dario Digregorio](https://x.com/DigregorioDario)                                            |
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
