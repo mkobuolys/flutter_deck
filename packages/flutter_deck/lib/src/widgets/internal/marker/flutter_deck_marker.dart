@@ -37,14 +37,12 @@ class FlutterDeckMarker extends StatelessWidget {
     return ListenableBuilder(
       listenable: notifier,
       builder: (context, child) {
-        var widget = child!;
+        final paths = notifier.paths;
 
-        if (notifier.enabled) {
-          final paths = notifier.paths;
-
-          widget = Stack(
-            children: [
-              widget,
+        return Stack(
+          children: [
+            child!,
+            if (notifier.enabled)
               GestureDetector(
                 onPanStart: (details) => _updatePath(
                   context,
@@ -68,11 +66,8 @@ class FlutterDeckMarker extends StatelessWidget {
                   ),
                 ),
               ),
-            ],
-          );
-        }
-
-        return widget;
+          ],
+        );
       },
       child: child,
     );
