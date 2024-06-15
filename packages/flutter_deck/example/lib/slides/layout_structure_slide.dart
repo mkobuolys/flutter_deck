@@ -19,7 +19,7 @@ class LayoutStructureSlide extends FlutterDeckSlideWidget {
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.template(
       backgroundBuilder: (context) => FlutterDeckBackground.solid(
-        Theme.of(context).colorScheme.background,
+        Theme.of(context).colorScheme.surface,
       ),
       contentBuilder: (context) => Center(
         child: Text(

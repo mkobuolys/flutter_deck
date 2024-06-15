@@ -32,7 +32,7 @@ class FlutterDeckThemeData {
       useMaterial3: true,
     );
     textTheme ??= const FlutterDeckTextTheme().apply(
-      color: theme.colorScheme.onBackground,
+      color: theme.colorScheme.onSurface,
     );
 
     return FlutterDeckThemeData.fromThemeAndText(theme, textTheme);
@@ -71,21 +71,21 @@ class FlutterDeckThemeData {
         subtitleTextStyle: textTheme.subtitle,
       ),
       bulletListTheme: FlutterDeckBulletListThemeData(
-        color: colorScheme.onBackground,
+        color: colorScheme.onSurface,
         textStyle: textTheme.title,
       ),
       codeHighlightTheme: FlutterDeckCodeHighlightThemeData(
-        backgroundColor: colorScheme.background,
+        backgroundColor: colorScheme.surface,
         textStyle: textTheme.bodyMedium,
       ),
       footerTheme: FlutterDeckFooterThemeData(
-        slideNumberColor: colorScheme.onBackground,
+        slideNumberColor: colorScheme.onSurface,
         slideNumberTextStyle: textTheme.bodySmall,
-        socialHandleColor: colorScheme.onBackground,
+        socialHandleColor: colorScheme.onSurface,
         socialHandleTextStyle: textTheme.bodyMedium,
       ),
       headerTheme: FlutterDeckHeaderThemeData(
-        color: colorScheme.onBackground,
+        color: colorScheme.onSurface,
         textStyle: textTheme.header,
       ),
       imageSlideTheme: FlutterDeckImageSlideThemeData(
@@ -96,8 +96,8 @@ class FlutterDeckThemeData {
         quoteTextStyle: textTheme.title.copyWith(fontStyle: FontStyle.italic),
       ),
       slideTheme: FlutterDeckSlideThemeData(
-        backgroundColor: colorScheme.background,
-        color: colorScheme.onBackground,
+        backgroundColor: colorScheme.surface,
+        color: colorScheme.onSurface,
       ),
       speakerInfoWidgetTheme: FlutterDeckSpeakerInfoWidgetThemeData(
         descriptionTextStyle: textTheme.bodyMedium,
@@ -105,8 +105,8 @@ class FlutterDeckThemeData {
         socialHandleTextStyle: textTheme.bodyMedium,
       ),
       splitSlideTheme: FlutterDeckSplitSlideThemeData(
-        leftBackgroundColor: colorScheme.background,
-        leftColor: colorScheme.onBackground,
+        leftBackgroundColor: colorScheme.surface,
+        leftColor: colorScheme.onSurface,
         rightBackgroundColor: colorScheme.primary,
         rightColor: colorScheme.onPrimary,
       ),

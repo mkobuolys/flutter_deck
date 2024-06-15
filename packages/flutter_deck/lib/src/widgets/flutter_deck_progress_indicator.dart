@@ -103,7 +103,7 @@ class _FlutterDeckProgressIndicatorState
         return Container(
           height: 4,
           width: maxWidth,
-          color: widget.backgroundColor ?? colorScheme.background,
+          color: widget.backgroundColor ?? colorScheme.surface,
           child: Align(
             alignment: Alignment.centerLeft,
             child: Container(

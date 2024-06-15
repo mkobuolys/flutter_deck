@@ -1,5 +1,6 @@
 # NEXT
 
+- feat: support Flutter 3.22
 - feat: add `textStyle` property to the `FlutterDeckCodeHighlight` widget
 - fix: keep the slide state when marker is toggled
 

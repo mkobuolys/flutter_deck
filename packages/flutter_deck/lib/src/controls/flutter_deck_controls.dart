@@ -526,7 +526,7 @@ class _OptionsMenuButton extends StatelessWidget {
     return MenuButtonTheme(
       data: MenuButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(
+          backgroundColor: WidgetStatePropertyAll(
             Theme.of(context).colorScheme.surface,
           ),
         ),
