@@ -2,6 +2,7 @@
 
 - feat: support Flutter 3.22
 - feat: add `textStyle` property to the `FlutterDeckCodeHighlight` widget
+- feat: add slide step number to the presenter view
 - fix: keep the slide state when marker is toggled
 
 # 0.14.0
