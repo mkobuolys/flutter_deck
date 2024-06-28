@@ -23906,11 +23906,13 @@ L7:function L7(a,b){this.c=a
 this.a=b},
 a7N:function a7N(a,b){this.a=a
 this.b=b},
-ER:function ER(a,b,c,d){var _=this
+ER:function ER(a,b,c,d,e,f){var _=this
 _.c=a
 _.d=b
 _.e=c
-_.a=d},
+_.f=d
+_.r=e
+_.a=f},
 ES:function ES(a,b,c,d){var _=this
 _.c=a
 _.d=b
@@ -78184,10 +78186,13 @@ A.L7.prototype={
 D(a){var s=a.I(t.G).r
 return new A.di(new A.a7N(this,s),null,s,null)}}
 A.a7N.prototype={
-$2(a,b){var s,r=null,q=this.b.b
-q===$&&A.c()
-s=this.a.c
-return new A.bB(B.aQ,A.i1(A.b([new A.fy(1,B.bT,new A.ER(s,q,!1,r),r),B.EK,new A.fy(1,B.bT,new A.ER(s,q+1,!0,r),r)],t.p),B.a0,B.c8,B.bE),r)},
+$2(a,b){var s,r,q,p=null,o=this.b,n=o.b
+n===$&&A.c()
+s=o.a[n].a
+r=o.c
+r===$&&A.c()
+q=this.a.c
+return new A.bB(B.aQ,A.i1(A.b([new A.fy(1,B.bT,new A.ER(q,n,!1,r,s.at,p),p),B.EK,new A.fy(1,B.bT,new A.ER(q,n+1,!0,p,p,p),p)],t.p),B.a0,B.c8,B.bE),p)},
 $S:503}
 A.ER.prototype={
 a1o(a){var s,r=a.a,q=r.z
@@ -78205,6 +78210,10 @@ r=i.length
 q=h>=r
 if(q)r=""
 else{p="Slide "+(h+1)+" of "+r
+r=m.f
+if(r!=null){o=m.r
+o=(o==null?1:o)>1}else o=!1
+if(o)p+=" (step "+A.r(r)+" of "+A.r(m.r)+")"
 r=m.e?"Next: "+p:"Current: "+p}r=A.bQ(r,l,l,l,l,l,l,l,l,l,l,l)
 o=m.c
 if(q)h=new A.bB(B.aQ,A.cb(new A.ES(o,A.a3(a).ax.k3,"End of presentation",l),l,l),l)
