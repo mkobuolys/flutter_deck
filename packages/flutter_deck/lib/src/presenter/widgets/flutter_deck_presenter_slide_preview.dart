@@ -23,7 +23,12 @@ class FlutterDeckPresenterSlidePreview extends StatelessWidget {
     return ListenableBuilder(
       listenable: router,
       builder: (context, child) {
-        final currentSlideIndex = router.currentSlideIndex;
+        final FlutterDeckRouter(
+          :currentSlideConfiguration,
+          :currentSlideIndex,
+          :currentStep
+        ) = router;
+        final slideSteps = currentSlideConfiguration.steps;
 
         return Padding(
           padding: const EdgeInsets.all(16),
@@ -35,6 +40,8 @@ class FlutterDeckPresenterSlidePreview extends StatelessWidget {
                 child: _SlidePreview(
                   autoSizeGroup: autoSizeGroup,
                   index: currentSlideIndex,
+                  step: currentStep,
+                  steps: slideSteps,
                 ),
               ),
               const SizedBox(width: 16),
@@ -58,14 +65,22 @@ class _SlidePreview extends StatelessWidget {
     required this.autoSizeGroup,
     required this.index,
     this.next = false,
+    this.step,
+    this.steps,
   });
 
   final AutoSizeGroup autoSizeGroup;
   final int index;
   final bool next;
+  final int? step;
+  final int? steps;
 
   String _getHeader(int slideCount) {
-    final slideInfo = 'Slide ${index + 1} of $slideCount';
+    var slideInfo = 'Slide ${index + 1} of $slideCount';
+
+    if (step != null && (steps ?? 1) > 1) {
+      slideInfo += ' (step $step of $steps)';
+    }
 
     return next ? 'Next: $slideInfo' : 'Current: $slideInfo';
   }
