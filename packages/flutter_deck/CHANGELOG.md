@@ -1,4 +1,4 @@
-# NEXT
+# 0.15.0
 
 - feat: support Flutter 3.22
 - feat: add `textStyle` property to the `FlutterDeckCodeHighlight` widget
