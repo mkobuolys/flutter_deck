@@ -24,3 +24,4 @@ jobs:
     with:
       flutter_channel: stable
       min_coverage: 0 # Disable for now 😬
+      working_directory: ./packages/flutter_deck
