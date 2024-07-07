@@ -1,3 +1,7 @@
+# NEXT
+
+- chore: update very_good_analysis to v6.0.0
+
 # 0.1.1
 
 - docs: add example README.md
