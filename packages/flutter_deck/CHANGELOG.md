@@ -1,5 +1,6 @@
 # NEXT
 
+- fix: header max width change on window resize
 - chore: update go_router to v14.2.0
 - chore: update very_good_analysis to v6.0.0
 
