@@ -64,9 +64,7 @@ class FlutterDeckHeader extends StatelessWidget {
 
     return Container(
       alignment: Alignment.centerLeft,
-      constraints: BoxConstraints(
-        maxWidth: maxWidth ?? MediaQuery.of(context).size.width,
-      ),
+      constraints: BoxConstraints(maxWidth: maxWidth ?? double.infinity),
       child: Padding(
         padding: FlutterDeckLayout.slidePadding,
         child: AutoSizeText(
