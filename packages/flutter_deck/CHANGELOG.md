@@ -1,3 +1,8 @@
+# NEXT
+
+- chore: update go_router to v14.2.0
+- chore: update very_good_analysis to v6.0.0
+
 # 0.15.0
 
 - feat: support Flutter 3.22
