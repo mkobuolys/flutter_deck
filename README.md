@@ -1050,7 +1050,7 @@ flutter run -t main_presenter.dart
 | [Enhance your Flutter painting skills](https://github.com/letsar/fluttercon_2024)                                                                               | English            | [Romain Rastel](https://x.com/lets4r)                                                        |
 | [Lessons Learned from Launching a Flutter app in Production](https://bizz84.github.io/fluttercon24_slides_web)                                                  | English            | [Andrea Bizzotto](https://x.com/biz84)                                                       |
 | [Cat-like Development: Flutter for Efficiency](https://github.com/mkobuolys/ldd)                                                                                | English            | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link]                                            |
-| [Saving data before the app getting killed! Easy state restoration with Flutter](https://state-restoration-presentation.vercel.app/#/speaker)                   | English            | [Lucas Goldner](https://x.com/LucasGoldner)                                            |
+| [Saving data before the app getting killed! Easy state restoration with Flutter](https://state-restoration-presentation.vercel.app/#/speaker)                   | English            | [Lucas Goldner](https://x.com/LucasGoldner)                                                  |
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
