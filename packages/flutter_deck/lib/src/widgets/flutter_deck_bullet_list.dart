@@ -60,6 +60,7 @@ class FlutterDeckBulletList extends StatefulWidget {
     this.useSteps = false,
     this.stepOffset = 0,
     this.bulletPointWidget,
+    this.autoSizeGroup,
     super.key,
   }) : assert(items.isNotEmpty, 'You must provide at least one bullet point.');
 
@@ -87,12 +88,16 @@ class FlutterDeckBulletList extends StatefulWidget {
   /// A widget to use as the bullet point. If not provided, a dot will be used.
   final Widget? bulletPointWidget;
 
+  /// An optional [AutoSizeGroup] to use for the text sizing in the list. If not
+  /// provided, a new group will be created.
+  final AutoSizeGroup? autoSizeGroup;
+
   @override
   State<FlutterDeckBulletList> createState() => _FlutterDeckBulletListState();
 }
 
 class _FlutterDeckBulletListState extends State<FlutterDeckBulletList> {
-  final _autoSizeGroup = AutoSizeGroup();
+  late final _autoSizeGroup = widget.autoSizeGroup ?? AutoSizeGroup();
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +137,7 @@ class _BulletList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         for (var i = 0; i < items.length; i++)
           Flexible(

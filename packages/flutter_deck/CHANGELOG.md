@@ -1,6 +1,8 @@
 # NEXT
 
+- feat: allow passing `AutoSizeGroup` as a property to `FlutterDeckBulletList`
 - fix: header max width change on window resize
+- fix: `FlutterDeckSlide.split` slide template alignment issues
 - chore: update go_router to v14.2.0
 - chore: update very_good_analysis to v6.0.0
 
