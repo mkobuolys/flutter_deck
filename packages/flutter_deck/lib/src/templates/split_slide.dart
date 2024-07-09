@@ -132,6 +132,7 @@ class FlutterDeckSplitSlide extends StatelessWidget {
       backgroundBuilder: backgroundBuilder ??
           (context) => FlutterDeckBackground.custom(
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     _BackgroundSection(
                       flex: splitRatio.left,
@@ -145,6 +146,7 @@ class FlutterDeckSplitSlide extends StatelessWidget {
                 ),
               ),
       contentBuilder: (context) => Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _ContentSection(
             flex: splitRatio.left,
