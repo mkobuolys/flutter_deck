@@ -1051,6 +1051,7 @@ flutter run -t main_presenter.dart
 | [Lessons Learned from Launching a Flutter app in Production](https://bizz84.github.io/fluttercon24_slides_web)                                                  | English            | [Andrea Bizzotto](https://x.com/biz84)                                                       |
 | [Cat-like Development: Flutter for Efficiency](https://github.com/mkobuolys/ldd)                                                                                | English            | [Mangirdas Kazlauskas][mangirdas_kazlauskas_link]                                            |
 | [Saving data before the app getting killed! Easy state restoration with Flutter](https://state-restoration-presentation.vercel.app/#/speaker)                   | English            | [Lucas Goldner](https://x.com/LucasGoldner)                                                  |
+| [Code Meets Art: Flutter for Creative Coding](https://github.com/Roaa94/flutter-meets-art)                                                                      | English            | [Roaa Khaddam](https://x.com/roaakdm)                                                        |
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
