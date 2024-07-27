@@ -1,0 +1,66 @@
+<nav class="main">
+  <ol class="organization-links">
+    <!-- Hard-coded, specific top-level menu items -->
+    {% if package.github != null %}
+    <a href="{{  package.github.url  }}" target="_blank" role="button" class="btn"><span class="fa fa-brands fa-github"></span>&nbsp;&nbsp;GitHub</a>
+    {% endif %}
+
+    {% if package.discord != null %}
+    <a href="{{  package.discord  }}" target="_blank" role="button" class="btn"><span class="fa fa-brands fa-discord"></span>&nbsp;&nbsp;Discord</a>
+    {% endif %}
+
+    {% if package.sponsorship != null %}
+    <a href="{{  package.sponsorship  }}" target="_blank" role="button" class="btn"><span class="fa fa-dollar-sign"></span>&nbsp;&nbsp;Sponsor</a>
+    {% endif %}
+  </ol>
+
+  <div class="organization-nav-divider">&nbsp;</div>
+
+  {% if navigation != null %}
+  <ol>
+    {% for item in navigation.items %}
+    {% if item.tag == null %}
+    <!-- Top-level menu item -->
+    <li><a href="{{  item.url  }}">{{  item.title  }}</a></li>
+    {% else %}
+    <!-- Group of menu items -->
+    <div class="link-group">
+      <span class="title">{{  item.title  }}</span>
+      <ol>
+        {% for page in pages.byTag(item.tag, sortBy=item.sortBy) %}
+        <li><a href="{{  page.data.url  }}">{{  page.data.title  }}</a></li>
+        {% endfor %}
+      </ol>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </ol>
+
+  {% if navigation.show_contributors %}
+  {% set contributors = github[package.github.organization][package.github.name] %}
+  <div class="contributors">
+    <span class="title">Contributors <span class="count">({{  contributors | length  }})</span></span>
+    <ol>
+      {% for contributor in (contributors|take(4)) %}
+      <li class="contributor">
+        <!-- Note: We show the contributor photo as a background image because -->
+        <!--       displaying it as an <img> results in a few extra pixels above -->
+        <!--       the image that we couldn't get rid of -->
+        <a href="{{  contributor.userUrl  }}" target="_blank" title="{{  contributor.userId  }}" style="background-image: url('{{  contributor.avatarUrl  }}');">
+        </a>
+      </li>
+      {% endfor %}
+
+      {% if contributors|length > 4 %}
+      <li class="remaining-count">
+        <div class="bubble">
+          <span class="count">+{{  contributors|length - 4  }}</span>
+        </div>
+      </li>
+      {% endif %}
+    </ol>
+  </div>
+  {% endif %}
+
+  {% endif %}
+</nav>

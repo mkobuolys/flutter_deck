@@ -1,0 +1,312 @@
+$contributorDiameter: 32px;
+$contributorRadius: 16px;
+
+.navbar {
+  margin-bottom: 24px;
+
+  font-size: 16px;
+  line-height: 1em;
+
+  .navbar-brand {
+    .name {
+      padding-left: 16px;
+
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+
+  #docsearch {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .DocSearch-Button-Placeholder {
+      width: 150px;
+
+      text-align: left;
+    }
+  }
+
+  .nav-item {
+    margin-left: 0.75em;
+    margin-right: 0.75em;
+
+    > a.nav-link {
+      margin: 0;
+      padding: 0;
+    }
+
+    .fa {
+      cursor: pointer;
+
+      font-size: 22px;
+    }
+  }
+}
+
+#drawerNav {
+  overflow-y: auto;
+
+  padding-top: 48px;
+  padding-bottom: 72px;
+  padding-left: 48px;
+  padding-right: 48px;
+
+  li {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+
+    a {
+      display: block;
+    }
+  }
+
+  .contributors {
+    li {
+      margin:0;
+      margin-right: 8px;
+    }
+  }
+
+  .exit {
+    position: absolute;
+
+    top: 16px;
+    right: 24px;
+
+    color: BLACK;
+  }
+}
+
+nav.main {
+  ol.organization-links {
+    a {
+      display: block;
+      margin-top: 8px;
+      margin-bottom: 8px;
+
+      border-radius: 8px;
+    }
+
+    .fa {
+      // Constant width so that icons of different widths still align
+      // label text across multiple buttons.
+      width: 24px;
+    }
+  }
+
+  .organization-nav-divider {
+    margin-top: 32px;
+    margin-bottom: 32px;
+
+    padding: 0;
+
+    height: 1px;
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+
+    list-style-type: none;
+  }
+
+  & > ol > li {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .link-group {
+    margin-top: 50px;
+
+    .title {
+      font-weight: bold;
+    }
+
+    ol {
+      padding-left: 16px;
+      border-left: 2px solid #FF8888;
+
+      li {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+      }
+    }
+  }
+
+  .contributors {
+    margin-top: 50px;
+
+    .title {
+      display: block;
+      margin-bottom: 16px;
+
+      font-weight: bold;
+
+      .count {
+        font-size: 0.7em;
+      }
+    }
+
+    ol {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .contributor {
+      display: block;
+
+      margin: 0;
+      margin-right: 8px;
+
+      height: $contributorDiameter;
+      padding: 0;
+
+      a {
+        display: block;
+        width: $contributorDiameter;
+        height: $contributorDiameter;
+        border-radius: $contributorRadius;
+
+        // Note: We show the contributor photo as a background image because
+        //       displaying it as an <img> results in a few extra pixels above
+        //       the image that we couldn't get rid of.
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+      }
+    }
+
+    .remaining-count {
+      display: block;
+      margin: 0;
+      padding: 0;
+
+      height: $contributorDiameter;
+
+      .bubble {
+        display: block;
+
+        margin: 0;
+        padding: 0;
+
+        width: $contributorDiameter;
+        height: $contributorDiameter;
+        border-radius: $contributorRadius;
+
+        background: RED;
+
+        .count {
+          display: block;
+          width: $contributorDiameter;
+          height: $contributorDiameter;
+
+          text-align: center;
+          line-height: $contributorDiameter;
+          vertical-align: middle;
+
+          font-size: 10px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+main.page-content {
+  padding-left: 48px;
+  padding-right: 48px;
+  padding-bottom: 72px;
+
+  @media(width <= 768px) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  header {
+    margin-bottom: 48px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+
+    text-align: center;
+  }
+
+  h2, h3, h4, h5, h6 {
+    margin-top: 1em;
+  }
+
+  pre code {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
+  img {
+    display: block;
+
+    max-width: 100%;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+}
+
+.table-of-contents {
+  ol {
+    // This style applies to all levels of lists in the ToC.
+    margin: 0;
+    padding: 0;
+    padding-left: 16px;
+
+    list-style-type: none;
+
+    font-size: 14px;
+  }
+
+  > ol {
+    padding-left: 32px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-right: 0;
+
+    li {
+      margin-top: 1em;
+      margin-bottom: 1em;
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+footer {
+  padding-top: 72px;
+  padding-bottom: 72px;
+  padding-left: 48px;
+  padding-right: 48px;
+
+  text-align: center;
+
+  .built-with {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
