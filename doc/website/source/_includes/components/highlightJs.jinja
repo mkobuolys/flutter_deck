@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/oxygen.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/dart.min.js"></script>
+
+<script>
+  const lightTheme = "oxygen";
+  const darkTheme = "obsidian";
+
+  hljs.highlightAll();
+
+  function goToHighlightJsLightMode() {
+    removeHighlightJsTheme(darkTheme);
+    addHighlightJsTheme(lightTheme);
+  }
+
+  function goToHighlightJsDarkMode() {
+    removeHighlightJsTheme(lightTheme);
+    addHighlightJsTheme(darkTheme);
+  }
+
+  function removeHighlightJsTheme(themeName) {
+    const existingStylesheet = document.querySelector(`link[href*="${themeName}"]`);
+    if (existingStylesheet) {
+      existingStylesheet.remove();
+    } else {
+      console.log("Couldn't find the light stylesheet to remove it");
+    }
+  }
+
+  function addHighlightJsTheme(themeName) {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/${themeName}.min.css`;
+
+    document.querySelector("head").append(link);
+    document.querySelector("span").textContent = themeName;
+  }
+</script>

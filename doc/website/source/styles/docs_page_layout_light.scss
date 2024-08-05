@@ -1,0 +1,105 @@
+$lightBackground: WHITE;
+$dividerColor: #EBEBEB;
+
+html[data-bs-theme="light"] {
+  background: $lightBackground;
+
+  .navbar {
+    background: $lightBackground;
+    border-bottom: 1px solid $dividerColor;
+
+    .navbar-brand {
+      .name {
+        color: #333333;
+      }
+    }
+
+    .nav-item {
+      .nav-link.active {
+        color: WHITE;
+      }
+
+      .fa {
+        color: #444444;
+
+        &:hover {
+          color: BLACK;
+        }
+      }
+    }
+  }
+
+  nav.main {
+    ol.organization-links {
+      a {
+        background: rgba(0, 0, 0, 0.02);
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.10);
+        }
+      }
+    }
+
+    .organization-nav-divider {
+      background: $dividerColor;
+    }
+
+    a {
+      color: #666666;
+
+      &:hover {
+        color: #222222;
+      }
+    }
+
+    .link-group {
+      ol {
+        border-left: 2px solid #FF8888;
+      }
+    }
+
+    .contributors {
+      .remaining-count {
+        .bubble {
+          background: #F0F0F0;
+        }
+      }
+    }
+  }
+
+  main {
+    header {
+      background: rgba(0, 0, 0, 0.02);
+
+      color: #222222;
+    }
+  }
+
+  .table-of-contents {
+    ol {
+      border-left: 1px solid #EBEBEB;
+
+      li {
+        a {
+          color: #666666;
+
+          &:hover {
+            color: BLACK;
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    background: #F8F8F8;
+
+    color: #888888;
+
+    .built-with {
+      a {
+        color: #CCCC00;
+      }
+    }
+  }
+}
