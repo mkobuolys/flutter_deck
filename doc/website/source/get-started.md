@@ -124,6 +124,6 @@ You have a Flutter project with a configured `FlutterDeckApp` widget. Consider e
 following guides to build up your slide show:
 
  * [Start theming your presentation](/guides/theming/)
- * Create pre-defined slide types: [titles](/slide-templates/title-slide/), [images](/slide-templates/image-slide/), and [split slides](/slide-templates/split-slide/)
+ * Create predefined slide types: [titles](/slide-templates/title-slide/), [images](/slide-templates/image-slide/), and [split slides](/slide-templates/split-slide/)
  * [Localize your presentation](/guides/localization/)
  * [Control your presentation playback](/playback/controls)
