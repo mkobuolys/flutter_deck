@@ -10,12 +10,13 @@ class FlutterDeckFullscreenManager implements FlutterDeckFullscreenManagerBase {
   bool canFullscreen() => true;
 
   @override
-  bool isInFullscreen() => html.window.document.fullscreenElement != null;
+  Future<bool> isInFullscreen() async =>
+      html.window.document.fullscreenElement != null;
 
   @override
-  void enterFullscreen() =>
+  Future<void> enterFullscreen() async =>
       html.window.document.documentElement?.requestFullscreen();
 
   @override
-  void leaveFullscreen() => html.window.document.exitFullscreen();
+  Future<void> leaveFullscreen() async => html.window.document.exitFullscreen();
 }

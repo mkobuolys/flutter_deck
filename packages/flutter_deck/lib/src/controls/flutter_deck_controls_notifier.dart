@@ -101,13 +101,13 @@ class FlutterDeckControlsNotifier
   bool canFullscreen() => _fullscreenManager.canFullscreen();
 
   @override
-  bool isInFullscreen() => _fullscreenManager.isInFullscreen();
+  Future<bool> isInFullscreen() => _fullscreenManager.isInFullscreen();
 
   @override
-  void enterFullscreen() => _fullscreenManager.enterFullscreen();
+  Future<void> enterFullscreen() => _fullscreenManager.enterFullscreen();
 
   @override
-  void leaveFullscreen() => _fullscreenManager.leaveFullscreen();
+  Future<void> leaveFullscreen() => _fullscreenManager.leaveFullscreen();
 
   /// Show the cursor and controls.
   ///
