@@ -30,8 +30,15 @@ jobs:
         run: flutter build web --release --web-renderer=canvaskit
         working-directory: ./packages/flutter_deck/example
 
+      - name: Build docs website
+        run: dart run bin/main.dart
+        working-directory: ./doc/website
+
+      - name: Move example to docs website
+        run: mv ./packages/flutter_deck/example/build/web ./doc/website/build/example
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./packages/flutter_deck/example/build/web
+          publish_dir: ./doc/website/build/example
