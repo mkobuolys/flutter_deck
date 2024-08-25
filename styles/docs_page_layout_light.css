@@ -1,0 +1,60 @@
+html[data-bs-theme=light] {
+  background: WHITE;
+}
+html[data-bs-theme=light] .navbar {
+  background: WHITE;
+  border-bottom: 1px solid #EBEBEB;
+}
+html[data-bs-theme=light] .navbar .navbar-brand .name {
+  color: #333333;
+}
+html[data-bs-theme=light] .navbar .nav-item .nav-link.active {
+  color: WHITE;
+}
+html[data-bs-theme=light] .navbar .nav-item .fa {
+  color: #444444;
+}
+html[data-bs-theme=light] .navbar .nav-item .fa:hover {
+  color: BLACK;
+}
+html[data-bs-theme=light] nav.main ol.organization-links a {
+  background: rgba(0, 0, 0, 0.02);
+}
+html[data-bs-theme=light] nav.main ol.organization-links a:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+html[data-bs-theme=light] nav.main .organization-nav-divider {
+  background: #EBEBEB;
+}
+html[data-bs-theme=light] nav.main a {
+  color: #666666;
+}
+html[data-bs-theme=light] nav.main a:hover {
+  color: #222222;
+}
+html[data-bs-theme=light] nav.main .link-group ol {
+  border-left: 2px solid #FF8888;
+}
+html[data-bs-theme=light] nav.main .contributors .remaining-count .bubble {
+  background: #F0F0F0;
+}
+html[data-bs-theme=light] main header {
+  background: rgba(0, 0, 0, 0.02);
+  color: #222222;
+}
+html[data-bs-theme=light] .table-of-contents ol {
+  border-left: 1px solid #EBEBEB;
+}
+html[data-bs-theme=light] .table-of-contents ol li a {
+  color: #666666;
+}
+html[data-bs-theme=light] .table-of-contents ol li a:hover {
+  color: BLACK;
+}
+html[data-bs-theme=light] footer {
+  background: #F8F8F8;
+  color: #888888;
+}
+html[data-bs-theme=light] footer .built-with a {
+  color: #CCCC00;
+}

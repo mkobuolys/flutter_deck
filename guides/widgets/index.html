@@ -3,7 +3,7 @@
 <html lang="en" data-bs-theme="light">
   <head>
     <meta charset="utf-8">
-    <title>Welcome to Flutter Deck</title>
+    <title>Flutter Deck Widgets</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
@@ -416,104 +416,122 @@
         <!-- Page/article content -->
         <main class="page-content col-12 col-lg-10 col-xl-8">
           <header>
-            <h1>Welcome to Flutter Deck</h1>
+            <h1>Flutter Deck Widgets</h1>
           </header>
 
-         <p>Welcome to <code>flutter_deck</code>, a Flutter package to generate slideshows with Flutter widgets,
-which run on all platforms.</p>
-<p>Demo: <a href="https://mkobuolys.github.io/flutter_deck/">https://mkobuolys.github.io/flutter_deck/</a></p>
-<h2 id="features-">Features 🪄</h2>
-<ul>
-<li>💙 Slide deck is built as any other Flutter app.</li>
-<li>🧭 Navigator 2.0 support - each slide is rendered as an individual page with a deep link to it.</li>
-<li>🐾 Steps - each slide can have multiple steps that can be navigated through.</li>
-<li>🎓 Presenter view - control your presentation from a separate screen or (even) device.</li>
-<li>⚙️ Define a global configuration once and override it per slide if needed.</li>
-<li>🚀 Predictable API to access the slide deck state and its methods from anywhere in the app.</li>
-<li>📦 Out of the box slide templates, widgets, transitions and controls.</li>
-<li>🎨 Custom theming and light/dark mode support.</li>
-<li>🌍 Built-in localization support.</li>
-</ul>
-<h2 id="quickstart">Quickstart</h2>
-<p>Create a new Flutter project and add <code>flutter_deck</code> as a dependency in your <code>pubspec.yaml</code> file:</p>
-<pre><code class="language-yaml">dependencies:
-  flutter_deck:
+         <p>This package comes with a few predefined widgets that could be used in your slide deck.</p>
+<h3 id="flutterdeckbulletlist">FlutterDeckBulletList</h3>
+<p>A widget that renders a list of bullet points. Bullet point items are rendered as a row with a bullet point and the text. The bullet point is rendered as a dot by default, but can be customized by providing a <code>bulletPointWidget</code>. The text is rendered as an <code>AutoSizeText</code> widget and is automatically resized to fit the available space.</p>
+<p>If <code>useSteps</code> is true for the slide configuration, the bullet points will be rendered one by one as the user steps through the slide.</p>
+<p>You can use <code>stepOffset</code> to offset the step number for the first item in the list. For instance, if you set <code>stepOffset</code> to 1, the first item will only be visible when the user steps to the second step. Remember to increase the number of <code>steps</code> for the slide configuration if you use <code>stepOffset</code>.</p>
+<pre><code class="language-dart">class FlutterDeckBulletListDemoSlide extends FlutterDeckSlideWidget {
+  const FlutterDeckBulletListDemoSlide()
+      : super(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/bullet-list-demo',
+            title: 'Bullet list demo',
+            steps: 3, // Define the number of steps for the slide
+          ),
+        );
+
+  @override
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.split(
+      leftBuilder: (context) =&gt; FlutterDeckBulletList(
+        useSteps: true, // Enable steps for the bullet list
+        items: const [
+          'This is a step',
+          'This is another step',
+          'This is a third step',
+        ],
+      ),
+      rightBuilder: (context) =&gt; const Text('FlutterDeckBulletList demo'),
+    );
+  }
+}
 </code></pre>
-<p>Dig into critical features with the <a href="/get-started">Get Started guide</a>.</p>
-<h2 style="margin-top: 128px; text-align: center; text-transform: uppercase;">Contributors</h2>
-<p style="text-align: center; color: rgba(255, 255, 255, 0.5);">Built by the following contributors.</p>
-<ol style="list-style-type: none; margin: 0; padding: 0; text-align: center;">
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/mkobuolys" target="_blank" title="mkobuolys">
-      <img src="https://avatars.githubusercontent.com/u/17415795?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/mansourzaki" target="_blank" title="mansourzaki">
-      <img src="https://avatars.githubusercontent.com/u/43302116?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/Goddchen" target="_blank" title="Goddchen">
-      <img src="https://avatars.githubusercontent.com/u/673051?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/bryanoli" target="_blank" title="bryanoli">
-      <img src="https://avatars.githubusercontent.com/u/66151079?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/PranavMasekar" target="_blank" title="PranavMasekar">
-      <img src="https://avatars.githubusercontent.com/u/83063593?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/chooyan-eng" target="_blank" title="chooyan-eng">
-      <img src="https://avatars.githubusercontent.com/u/20849526?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/GregoryConrad" target="_blank" title="GregoryConrad">
-      <img src="https://avatars.githubusercontent.com/u/15874617?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/ABausG" target="_blank" title="ABausG">
-      <img src="https://avatars.githubusercontent.com/u/7288963?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/apps/dependabot" target="_blank" title="dependabot[bot]">
-      <img src="https://avatars.githubusercontent.com/in/29110?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/matthew-carroll" target="_blank" title="matthew-carroll">
-      <img src="https://avatars.githubusercontent.com/u/7259036?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/tomcheung" target="_blank" title="tomcheung">
-      <img src="https://avatars.githubusercontent.com/u/9416042?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/polilluminato" target="_blank" title="polilluminato">
-      <img src="https://avatars.githubusercontent.com/u/202140?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/dario-digregorio" target="_blank" title="dario-digregorio">
-      <img src="https://avatars.githubusercontent.com/u/32966133?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/lucas-goldner" target="_blank" title="lucas-goldner">
-      <img src="https://avatars.githubusercontent.com/u/65627237?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-</ol>
+<h3 id="flutterdeckcodehighlight">FlutterDeckCodeHighlight</h3>
+<p>Provides a widget that gives you customizable syntax highlighting for many languages.</p>
+<pre><code class="language-dart">class CodeHighlightSlide extends FlutterDeckSlideWidget {
+  const CodeHighlightSlide()
+      : super(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/code-highlight',
+            header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
+          ),
+        );
+
+  @override
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.blank(
+      builder: (context) =&gt; const Center(
+        child: FlutterDeckCodeHighlight(
+          code: '''
+import 'package:flutter/material.dart';
+import 'package:flutter_deck/flutter_deck.dart';
+
+class CodeHighlightSlide extends FlutterDeckSlideWidget {
+  const CodeHighlightSlide()
+      : super(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/code-highlight',
+            header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
+          ),
+        );
+
+  @override
+  FlutterDeckSlide build(BuildContext context) {
+    return FlutterDeckSlide.blank(
+      builder: (context) =&gt; const Center(
+        child: Text('Use FlutterDeckCodeHighlight widget to highlight code!'),
+      ),
+    );
+  }
+}''',
+          fileName: 'code_highlight_slide.dart',
+          language: 'dart',
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<p><img src="https://github.com/mkobuolys/flutter_deck/blob/main/images/code_highlighting.png?raw=true" alt="FlutterDeckCodeHighlight" /></p>
+<h2 id="-accessing-slide-deck-state-from-the-code">📦 Accessing slide deck state from the code</h2>
+<p>By using the <code>FlutterDeck</code> extensions, you can access the slide deck state and its methods from anywhere in the app:</p>
+<pre><code class="language-dart">@override
+Widget build(BuildContext context) {
+  // Retrieve the FlutterDeck instance from the context.
+  // Or by using the extension method: context.flutterDeck
+  final flutterDeck = FlutterDeck.of(context);
+
+  // Retrieve the FlutterDeckRouter instance for this slide deck.
+  final router = flutterDeck.router;
+  // Retrieve the current slide configuration.
+  final configuration = flutterDeck.configuration;
+  // Retrieve the global slide deck configuration.
+  final globalConfiguration = flutterDeck.globalConfiguration;
+  // Retrieve the speaker info.
+  final speakerInfo = flutterDeck.speakerInfo;
+
+  // Go to the next slide.
+  flutterDeck.next();
+  // Go to the previous slide.
+  flutterDeck.previous();
+
+  // Retrieve the current slide number.
+  final slideNumber = flutterDeck.slideNumber;
+  // Go to the first slide.
+  flutterDeck.goToSlide(1);
+
+  // Retrieve the current step number.
+  final stepNumber = flutterDeck.stepNumber;
+  // Go to the first step.
+  flutterDeck.goToStep(1);
+
+  &lt;...&gt;
+}
+</code></pre>
 
         </main>
 
@@ -522,8 +540,9 @@ which run on all platforms.</p>
           
           <div class="table-of-contents">
            <ol>
-<li><a href="#features-%F0%9F%AA%84">Features 🪄</a></li>
-<li><a href="#quickstart">Quickstart</a></li>
+<li><a href="#flutterdeckbulletlist">FlutterDeckBulletList</a></li>
+<li><a href="#flutterdeckcodehighlight">FlutterDeckCodeHighlight</a></li>
+<li><a href="#%F0%9F%93%A6-accessing-slide-deck-state-from-the-code">📦 Accessing slide deck state from the code</a></li>
 </ol>
 
           </div>

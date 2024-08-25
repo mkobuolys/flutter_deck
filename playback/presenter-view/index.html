@@ -3,7 +3,7 @@
 <html lang="en" data-bs-theme="light">
   <head>
     <meta charset="utf-8">
-    <title>Welcome to Flutter Deck</title>
+    <title>Presenter View</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
@@ -416,104 +416,78 @@
         <!-- Page/article content -->
         <main class="page-content col-12 col-lg-10 col-xl-8">
           <header>
-            <h1>Welcome to Flutter Deck</h1>
+            <h1>Presenter View</h1>
           </header>
 
-         <p>Welcome to <code>flutter_deck</code>, a Flutter package to generate slideshows with Flutter widgets,
-which run on all platforms.</p>
-<p>Demo: <a href="https://mkobuolys.github.io/flutter_deck/">https://mkobuolys.github.io/flutter_deck/</a></p>
-<h2 id="features-">Features 🪄</h2>
-<ul>
-<li>💙 Slide deck is built as any other Flutter app.</li>
-<li>🧭 Navigator 2.0 support - each slide is rendered as an individual page with a deep link to it.</li>
-<li>🐾 Steps - each slide can have multiple steps that can be navigated through.</li>
-<li>🎓 Presenter view - control your presentation from a separate screen or (even) device.</li>
-<li>⚙️ Define a global configuration once and override it per slide if needed.</li>
-<li>🚀 Predictable API to access the slide deck state and its methods from anywhere in the app.</li>
-<li>📦 Out of the box slide templates, widgets, transitions and controls.</li>
-<li>🎨 Custom theming and light/dark mode support.</li>
-<li>🌍 Built-in localization support.</li>
-</ul>
-<h2 id="quickstart">Quickstart</h2>
-<p>Create a new Flutter project and add <code>flutter_deck</code> as a dependency in your <code>pubspec.yaml</code> file:</p>
+         <p>The presenter view allows you to control your presentation from a separate screen or (even) device. It displays the current slide, speaker notes, and a timer.</p>
+<p><img src="https://github.com/mkobuolys/flutter_deck/blob/main/images/presenter-view.gif?raw=true" alt="Presenter view demo" /></p>
+<p>To enable the presenter view, you to use one of the <a href="https://pub.dev/packages/flutter_deck_client">flutter_deck_client</a> implementations. The client synchronizes the state of the slide deck with the presenter view and vice versa.</p>
+<h3 id="web-only-flutter_deck_web_client">(Web only) flutter_deck_web_client</h3>
+<p>If you plan to run your slide deck on the web, it is recommended to use the <a href="https://pub.dev/packages/flutter_deck_web_client">flutter_deck_web_client</a> package. This client does not require any server-side code to run and works out of the box on any Web browser.</p>
+<p>All you need to do is to add the package to your <code>pubspec.yaml</code>:</p>
 <pre><code class="language-yaml">dependencies:
-  flutter_deck:
+  flutter_deck_web_client: any
 </code></pre>
-<p>Dig into critical features with the <a href="/get-started">Get Started guide</a>.</p>
-<h2 style="margin-top: 128px; text-align: center; text-transform: uppercase;">Contributors</h2>
-<p style="text-align: center; color: rgba(255, 255, 255, 0.5);">Built by the following contributors.</p>
-<ol style="list-style-type: none; margin: 0; padding: 0; text-align: center;">
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/mkobuolys" target="_blank" title="mkobuolys">
-      <img src="https://avatars.githubusercontent.com/u/17415795?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/mansourzaki" target="_blank" title="mansourzaki">
-      <img src="https://avatars.githubusercontent.com/u/43302116?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/Goddchen" target="_blank" title="Goddchen">
-      <img src="https://avatars.githubusercontent.com/u/673051?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/bryanoli" target="_blank" title="bryanoli">
-      <img src="https://avatars.githubusercontent.com/u/66151079?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/PranavMasekar" target="_blank" title="PranavMasekar">
-      <img src="https://avatars.githubusercontent.com/u/83063593?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/chooyan-eng" target="_blank" title="chooyan-eng">
-      <img src="https://avatars.githubusercontent.com/u/20849526?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/GregoryConrad" target="_blank" title="GregoryConrad">
-      <img src="https://avatars.githubusercontent.com/u/15874617?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/ABausG" target="_blank" title="ABausG">
-      <img src="https://avatars.githubusercontent.com/u/7288963?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/apps/dependabot" target="_blank" title="dependabot[bot]">
-      <img src="https://avatars.githubusercontent.com/in/29110?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/matthew-carroll" target="_blank" title="matthew-carroll">
-      <img src="https://avatars.githubusercontent.com/u/7259036?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/tomcheung" target="_blank" title="tomcheung">
-      <img src="https://avatars.githubusercontent.com/u/9416042?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/polilluminato" target="_blank" title="polilluminato">
-      <img src="https://avatars.githubusercontent.com/u/202140?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/dario-digregorio" target="_blank" title="dario-digregorio">
-      <img src="https://avatars.githubusercontent.com/u/32966133?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-  <li style="display: inline-block; margin: 0; padding: 0;">
-    <a href="https://github.com/lucas-goldner" target="_blank" title="lucas-goldner">
-      <img src="https://avatars.githubusercontent.com/u/65627237?v=4" style="display: inline-block; width: 64px; height: 64px; border-radius: 32px; margin: 16px;">
-    </a>
-  </li>
-</ol>
+<p>And pass the <code>FlutterDeckWebClient</code> to the <code>FlutterDeckApp</code> widget:</p>
+<pre><code class="language-dart">FlutterDeckApp(
+  client: const FlutterDeckWebClient(), // Use the Web client
+  configuration: const FlutterDeckConfiguration(...),
+  slides: [
+    &lt;...&gt;
+  ],
+);
+</code></pre>
+<h3 id="flutter_deck_ws_client">flutter_deck_ws_client</h3>
+<p>This client is a WebSocket-based implementation that requires a server-side code to run. The server-side code is responsible for synchronizing the state of the slide deck with the presenter view and vice versa. However, this implementation can be used on any platform. E.g., you can control your slide deck from your mobile device.</p>
+<p>To use the client, add the <a href="https://pub.dev/packages/flutter_deck_ws_client">flutter_deck_ws_client</a> package to your <code>pubspec.yaml</code>:</p>
+<pre><code class="language-yaml">dependencies:
+  flutter_deck_ws_client: any
+</code></pre>
+<p>Extract your <code>FlutterDeckApp</code> widget to a separate file:</p>
+<pre><code class="language-dart">/// flutter_deck_example.dart
+class FlutterDeckExample extends StatelessWidget {
+  const FlutterDeckExample({
+    required this.isPresenterView,
+    super.key,
+  });
+
+  final bool isPresenterView;
+
+  @override
+  Widget build(BuildContext context) {
+    return FlutterDeckApp(
+      client: FlutterDeckWsClient(uri: Uri.parse('ws://localhost:8080')), // Use the WebSocket client
+      isPresenterView: isPresenterView,
+      &lt;...&gt;
+    );
+  }
+}
+</code></pre>
+<p>Then, create two entry points for your slide deck: one for the presenter view and one for the slide deck itself:</p>
+<pre><code class="language-dart">/// main.dart
+void main() {
+  runApp(const FlutterDeckExample(isPresenterView: false));
+}
+</code></pre>
+<pre><code class="language-dart">/// main_presenter.dart
+void main() {
+  runApp(const FlutterDeckExample(isPresenterView: true));
+}
+</code></pre>
+<p>Launch the WebSocket server, e.g., <a href="https://github.com/mkobuolys/flutter_deck/tree/main/packages/flutter_deck_ws_server">flutter_deck_ws_server</a>:</p>
+<pre><code class="language-sh"># Install the dart_frog cli from source
+dart pub global activate dart_frog_cli
+
+# Start the dev server
+dart_frog dev
+</code></pre>
+<p>Launch your presentation as two separate Flutter applications:</p>
+<pre><code class="language-sh"># Run the slide deck
+flutter run -t main.dart
+
+# Run the presenter view
+flutter run -t main_presenter.dart
+</code></pre>
 
         </main>
 
@@ -522,8 +496,8 @@ which run on all platforms.</p>
           
           <div class="table-of-contents">
            <ol>
-<li><a href="#features-%F0%9F%AA%84">Features 🪄</a></li>
-<li><a href="#quickstart">Quickstart</a></li>
+<li><a href="#(web-only)-flutter_deck_web_client">(Web only) flutter_deck_web_client</a></li>
+<li><a href="#flutter_deck_ws_client">flutter_deck_ws_client</a></li>
 </ol>
 
           </div>

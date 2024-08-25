@@ -1,0 +1,229 @@
+.navbar {
+  margin-bottom: 24px;
+  font-size: 16px;
+  line-height: 1em;
+}
+.navbar .navbar-brand .name {
+  padding-left: 16px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.navbar #docsearch {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.navbar #docsearch .DocSearch-Button-Placeholder {
+  width: 150px;
+  text-align: left;
+}
+.navbar .nav-item {
+  margin-left: 0.75em;
+  margin-right: 0.75em;
+}
+.navbar .nav-item > a.nav-link {
+  margin: 0;
+  padding: 0;
+}
+.navbar .nav-item .fa {
+  cursor: pointer;
+  font-size: 22px;
+}
+
+#drawerNav {
+  overflow-y: auto;
+  padding-top: 48px;
+  padding-bottom: 72px;
+  padding-left: 48px;
+  padding-right: 48px;
+}
+#drawerNav li {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+#drawerNav li a {
+  display: block;
+}
+#drawerNav .contributors li {
+  margin: 0;
+  margin-right: 8px;
+}
+#drawerNav .exit {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  color: BLACK;
+}
+
+nav.main ol.organization-links a {
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+}
+nav.main ol.organization-links .fa {
+  width: 24px;
+}
+nav.main .organization-nav-divider {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  padding: 0;
+  height: 1px;
+}
+nav.main ol {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+nav.main > ol > li {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+nav.main a {
+  text-decoration: none;
+}
+nav.main .link-group {
+  margin-top: 50px;
+}
+nav.main .link-group .title {
+  font-weight: bold;
+}
+nav.main .link-group ol {
+  padding-left: 16px;
+  border-left: 2px solid #FF8888;
+}
+nav.main .link-group ol li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+nav.main .contributors {
+  margin-top: 50px;
+}
+nav.main .contributors .title {
+  display: block;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+nav.main .contributors .title .count {
+  font-size: 0.7em;
+}
+nav.main .contributors ol {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+nav.main .contributors .contributor {
+  display: block;
+  margin: 0;
+  margin-right: 8px;
+  height: 32px;
+  padding: 0;
+}
+nav.main .contributors .contributor a {
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+nav.main .contributors .remaining-count {
+  display: block;
+  margin: 0;
+  padding: 0;
+  height: 32px;
+}
+nav.main .contributors .remaining-count .bubble {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background: RED;
+}
+nav.main .contributors .remaining-count .bubble .count {
+  display: block;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  line-height: 32px;
+  vertical-align: middle;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+main.page-content {
+  padding-left: 48px;
+  padding-right: 48px;
+  padding-bottom: 72px;
+}
+@media (width <= 768px) {
+  main.page-content {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+main.page-content header {
+  margin-bottom: 48px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  text-align: center;
+}
+main.page-content h2, main.page-content h3, main.page-content h4, main.page-content h5, main.page-content h6 {
+  margin-top: 1em;
+}
+main.page-content pre code {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+main.page-content img {
+  display: block;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+.table-of-contents ol {
+  margin: 0;
+  padding: 0;
+  padding-left: 16px;
+  list-style-type: none;
+  font-size: 14px;
+}
+.table-of-contents > ol {
+  padding-left: 32px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-right: 0;
+}
+.table-of-contents > ol li {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.table-of-contents > ol li a {
+  text-decoration: none;
+}
+
+footer {
+  padding-top: 72px;
+  padding-bottom: 72px;
+  padding-left: 48px;
+  padding-right: 48px;
+  text-align: center;
+}
+footer .built-with {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+footer .built-with a {
+  text-decoration: none;
+}

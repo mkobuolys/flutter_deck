@@ -1,0 +1,53 @@
+html[data-bs-theme=dark] .navbar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+html[data-bs-theme=dark] .navbar .navbar-brand .name {
+  color: WHITE;
+}
+html[data-bs-theme=dark] .navbar .nav-item a, html[data-bs-theme=dark] .navbar .nav-item .fa {
+  color: #CCCCCC;
+}
+html[data-bs-theme=dark] .navbar .nav-item a:hover, html[data-bs-theme=dark] .navbar .nav-item .fa:hover {
+  color: WHITE;
+}
+html[data-bs-theme=dark] nav.main ol.organization-links a {
+  background: rgba(255, 255, 255, 0.02);
+}
+html[data-bs-theme=dark] nav.main ol.organization-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+html[data-bs-theme=dark] nav.main .organization-nav-divider {
+  background: rgba(255, 255, 255, 0.05);
+}
+html[data-bs-theme=dark] nav.main a {
+  color: #AAAAAA;
+}
+html[data-bs-theme=dark] nav.main a:hover {
+  color: WHITE;
+}
+html[data-bs-theme=dark] nav.main .link-group ol {
+  border-left: 2px solid #FF8888;
+}
+html[data-bs-theme=dark] nav.main .contributors .remaining-count .bubble {
+  background: #333333;
+}
+html[data-bs-theme=dark] main header {
+  background: rgba(255, 255, 255, 0.02);
+  color: WHITE;
+}
+html[data-bs-theme=dark] .table-of-contents ol {
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+html[data-bs-theme=dark] .table-of-contents ol li a {
+  color: #CCCCCC;
+}
+html[data-bs-theme=dark] .table-of-contents ol li a:hover {
+  color: WHITE;
+}
+html[data-bs-theme=dark] footer {
+  background: #202026;
+  color: #AAAAAA;
+}
+html[data-bs-theme=dark] footer .built-with a {
+  color: #FFFF00;
+}
