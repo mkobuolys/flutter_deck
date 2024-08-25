@@ -4,7 +4,7 @@
 [![License: MIT][license_badge]][license_link]
 ![FlutterDeck Header](https://github.com/mkobuolys/flutter_deck/blob/main/images/header.png?raw=true)
 
-Demo: https://mkobuolys.github.io/flutter_deck/
+Docs: https://flutterdeck.dev
 
 ## Features 🪄
 
