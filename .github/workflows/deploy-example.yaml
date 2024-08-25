@@ -18,7 +18,10 @@ jobs:
         with:
           channel: stable
 
-      - name: Install dependencies
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install dependencies (example)
         run: flutter pub get
         working-directory: ./packages/flutter_deck/example
 
@@ -29,6 +32,10 @@ jobs:
       - name: Build web
         run: flutter build web --release --web-renderer=canvaskit
         working-directory: ./packages/flutter_deck/example
+
+      - name: Install dependencies (docs website)
+        run: dart pub get
+        working-directory: ./doc/website
 
       - name: Build docs website
         run: dart run bin/main.dart
