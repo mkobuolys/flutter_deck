@@ -69,7 +69,7 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
-    needs: build
+    needs: build_docs
     runs-on: ubuntu-latest
 
     permissions:
