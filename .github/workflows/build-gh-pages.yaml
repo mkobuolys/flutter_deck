@@ -6,9 +6,11 @@ on:
       - main
 
 jobs:
-  build:
-    name: Build
+  build_demo:
+    name: Build flutter_deck demo presentation
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./packages/flutter_deck/example
 
     steps:
       - name: Checkout
@@ -19,39 +21,54 @@ jobs:
         with:
           channel: stable
 
-      - name: Setup Dart
-        uses: dart-lang/setup-dart@v1
-
-      - name: Install dependencies (example)
+      - name: Install dependencies
         run: flutter pub get
-        working-directory: ./packages/flutter_deck/example
 
       - name: Replace index.html
-        run: mv gh_pages.index.html index.html
-        working-directory: ./packages/flutter_deck/example/web
+        run: mv web/gh_pages.index.html web/index.html
 
       - name: Build web
         run: flutter build web --release --web-renderer=canvaskit
-        working-directory: ./packages/flutter_deck/example
 
-      - name: Install dependencies (docs website)
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-presentation
+          path: build/web
+
+  build_docs:
+    name: Build flutter_deck docs website
+    needs: build_demo
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./doc/website
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install dependencies
         run: dart pub get
-        working-directory: ./doc/website
 
       - name: Build docs website
         run: dart run bin/main.dart
-        working-directory: ./doc/website
 
-      - name: Move example to docs website
-        run: mv ./packages/flutter_deck/example/build/web ./doc/website/build/demo
+      - name: Download flutter_deck demo presentation
+        uses: actions/download-artifact@v4
+        with:
+          name: demo-presentation
+          path: build/demo
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./doc/website/build
+          path: build
 
   deploy:
-    name: Deploy
+    name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
 
