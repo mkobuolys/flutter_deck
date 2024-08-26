@@ -12,13 +12,13 @@ import 'package:flutter_deck/src/widgets/internal/marker/marker.dart';
 /// deck controls visibility.
 class FlutterDeckControlsNotifier
     with ChangeNotifier
-    implements FlutterDeckFullscreenManagerBase {
+    implements FlutterDeckFullscreenManager {
   /// Creates a [FlutterDeckControlsNotifier].
   FlutterDeckControlsNotifier({
     required FlutterDeckAutoplayNotifier autoplayNotifier,
     required FlutterDeckDrawerNotifier drawerNotifier,
     required FlutterDeckMarkerNotifier markerNotifier,
-    required FlutterDeckFullscreenManagerBase fullscreenManager,
+    required FlutterDeckFullscreenManager fullscreenManager,
     required FlutterDeckRouter router,
   })  : _autoplayNotifier = autoplayNotifier,
         _drawerNotifier = drawerNotifier,
@@ -29,7 +29,7 @@ class FlutterDeckControlsNotifier
   final FlutterDeckAutoplayNotifier _autoplayNotifier;
   final FlutterDeckDrawerNotifier _drawerNotifier;
   final FlutterDeckMarkerNotifier _markerNotifier;
-  final FlutterDeckFullscreenManagerBase _fullscreenManager;
+  final FlutterDeckFullscreenManager _fullscreenManager;
   final FlutterDeckRouter _router;
 
   var _controlsVisible = false;

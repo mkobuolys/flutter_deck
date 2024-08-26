@@ -2,10 +2,15 @@
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
-import 'package:flutter_deck/src/controls/fullscreen/fullscreen.dart';
+import 'package:flutter_deck/src/controls/fullscreen/window_proxy/window_proxy.dart';
 
-/// The web implementation of [FlutterDeckFullscreenManagerBase].
-class FlutterDeckFullscreenManager implements FlutterDeckFullscreenManagerBase {
+/// The web implementation of [WindowProxyBase].
+class WindowProxy implements WindowProxyBase {
+  @override
+  Future<void> initialize() async {
+    // No need for initialization
+  }
+
   @override
   bool canFullscreen() => true;
 

@@ -1,25 +1,45 @@
-export 'stub.dart'
-    if (dart.library.io) 'io.dart'
-    if (dart.library.html) 'web.dart';
+import 'package:flutter_deck/src/controls/fullscreen/window_proxy/window_proxy.dart';
 
 /// Describes a collection of functions that can mutate and retrieve
 /// the application's fullscreen state.
-abstract class FlutterDeckFullscreenManagerBase {
+class FlutterDeckFullscreenManager {
+  /// Default constructor for [FlutterDeckFullscreenManager].
+  ///
+  /// The [windowProxy] is required for getting and setting window properties
+  /// from underlying platform.
+  ///
+  FlutterDeckFullscreenManager(WindowProxyBase windowProxy)
+      : _windowProxy = windowProxy;
+
+  final WindowProxyBase _windowProxy;
+  bool _initialized = false;
+
+  Future<WindowProxyBase> get _instance async {
+    if (!_initialized) {
+      await _windowProxy.initialize();
+      _initialized = true;
+    }
+    return _windowProxy;
+  }
+
   /// Returns whether or not this platform has support to enter/leave fullscreen
-  bool canFullscreen() => false;
+  bool canFullscreen() => _windowProxy.canFullscreen();
 
   /// Returns whether or not the application is currently fullscreen
-  Future<bool> isInFullscreen() => throw UnsupportedError(
-        'isInFullscreen cannot be called on this platform',
-      );
+  Future<bool> isInFullscreen() async {
+    final windowProxy = await _instance;
+    return windowProxy.isInFullscreen();
+  }
 
   /// Application enters fullscreen
-  Future<void> enterFullscreen() => throw UnsupportedError(
-        'enterFullscreen cannot be called on this platform',
-      );
+  Future<void> enterFullscreen() async {
+    final windowProxy = await _instance;
+    await windowProxy.enterFullscreen();
+  }
 
   /// Application leaves fullscreen
-  Future<void> leaveFullscreen() => throw UnsupportedError(
-        'leaveFullscreen cannot be called on this platform',
-      );
+  Future<void> leaveFullscreen() async {
+    final windowProxy = await _instance;
+    await windowProxy.leaveFullscreen();
+  }
 }
