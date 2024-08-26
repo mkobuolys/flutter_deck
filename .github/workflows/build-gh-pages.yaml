@@ -24,8 +24,11 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Where am I
+        run: ls -la
+
       - name: Replace index.html
-        run: mv ./web/gh_pages.index.html ./web/index.html
+        run: mv web/gh_pages.index.html web/index.html
 
       - name: Build web
         run: flutter build web --release --web-renderer=canvaskit
