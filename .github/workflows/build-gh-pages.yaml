@@ -43,7 +43,7 @@ jobs:
         working-directory: ./doc/website
 
       - name: Move example to docs website
-        run: mv ./packages/flutter_deck/example/build/web ./doc/website/build/example
+        run: mv ./packages/flutter_deck/example/build/web ./doc/website/build/demo
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
