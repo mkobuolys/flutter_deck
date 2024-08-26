@@ -8,10 +8,11 @@ contentRenderers:
   # Second, render Markdown to HTML.
   - markdown
 ---
+
 Welcome to `flutter_deck`, a Flutter package to generate slideshows with Flutter widgets,
 which run on all platforms.
 
-Demo: [https://mkobuolys.github.io/flutter_deck/](https://mkobuolys.github.io/flutter_deck/)
+Check out the [example slide deck](/demo) to see what you can build with `flutter_deck`.
 
 ## Features 🪄
 
@@ -26,6 +27,7 @@ Demo: [https://mkobuolys.github.io/flutter_deck/](https://mkobuolys.github.io/fl
 - 🌍 Built-in localization support.
 
 ## Quickstart
+
 Create a new Flutter project and add `flutter_deck` as a dependency in your `pubspec.yaml` file:
 
 ```yaml

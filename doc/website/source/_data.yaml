@@ -4,31 +4,27 @@ package:
   title: Flutter Deck
   description: A slideshow generator for Flutter developers
   is_on_pub: true
-  
+
   github:
     url: https://github.com/mkobuolys/flutter_deck
     organization: mkobuolys
     name: flutter_deck
-  
-  discord: 
+
+  discord:
   sponsorship: https://github.com/sponsors/mkobuolys
 
 # Configuration of the GitHub plugin for loading info about GitHub repositories.
 github:
   contributors:
     repositories:
-      
       - { organization: mkobuolys, name: flutter_deck }
-      
 
 # The default layout applied to all pages in this website.
 layout: layouts/docs_page.jinja
 
 # The global navigation manu for all documentation pages in this website.
 navigation:
-  
   show_contributors: true
-  
 
   items:
     - title: Welcome
@@ -36,6 +32,9 @@ navigation:
 
     - title: "Get Started"
       url: /get-started
+
+    - title: "Live demo"
+      url: /demo
 
     - title: Showcase
       url: /showcase
