@@ -3,8 +3,8 @@
 ![Pub Version](https://img.shields.io/pub/v/flutter_deck?colorB=blue)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mkobuolys/flutter_deck/build-gh-pages.yaml?logo=github)
 ![GitHub Repo stars](https://img.shields.io/github/stars/mkobuolys/flutter_deck?style=flat&logo=github&colorB=deeppink&label=stars)
-[![License: MIT][license_badge]][license_link]
-![flutter_deck docs](https://img.shields.io/badge/flutter__deck-docs-blueviolet?style=flat&label=flutter_deck&link=https%3A%2F%2Fflutterdeck.dev)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![flutter_deck docs](https://img.shields.io/badge/flutter__deck-docs-blueviolet?style=flat&label=flutter_deck)](https://flutterdeck.dev)
 ![FlutterDeck Header](https://github.com/mkobuolys/flutter_deck/blob/main/images/header.png?raw=true)
 
 Docs: https://flutterdeck.dev
@@ -1057,8 +1057,6 @@ flutter run -t main_presenter.dart
 | [Code Meets Art: Flutter for Creative Coding](https://github.com/Roaa94/flutter-meets-art)                                                                      | English            | [Roaa Khaddam](https://x.com/roaakdm)                                                        |
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
-[license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[license_link]: https://opensource.org/licenses/MIT
 [mason_link]: https://pub.dev/packages/mason
 [mason_cli_link]: https://pub.dev/packages/mason_cli
 [flutter_deck_slide_brick]: https://brickhub.dev/bricks/flutter_deck_slide
