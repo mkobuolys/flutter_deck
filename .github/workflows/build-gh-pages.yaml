@@ -9,8 +9,10 @@ jobs:
   build_demo:
     name: Build flutter_deck demo presentation
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./packages/flutter_deck/example
+
+    defaults:
+      run:
+        working-directory: ./packages/flutter_deck/example
 
     steps:
       - name: Checkout
@@ -23,9 +25,6 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-
-      - name: Where am I
-        run: ls -la
 
       - name: Replace index.html
         run: mv web/gh_pages.index.html web/index.html
@@ -43,8 +42,10 @@ jobs:
     name: Build flutter_deck docs website
     needs: build_demo
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./doc/website
+
+    defaults:
+      run:
+        working-directory: ./doc/website
 
     steps:
       - name: Checkout
