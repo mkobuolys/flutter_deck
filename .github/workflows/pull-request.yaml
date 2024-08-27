@@ -36,6 +36,10 @@ jobs:
       - name: Setup Melos
         run: dart pub global activate melos
 
+      - name: Generate l10n for flutter_deck example
+        run: flutter gen-l10n
+        working-directory: packages/flutter_deck/example
+
       - name: Melos bootstrap
         run: melos bootstrap
 
@@ -67,3 +71,6 @@ jobs:
 
       - name: Run Melos test
         run: melos run test
+
+      - name: Check if Melos test passes
+        run: echo $?
