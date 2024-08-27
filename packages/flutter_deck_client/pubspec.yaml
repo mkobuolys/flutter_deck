@@ -18,4 +18,5 @@ dependencies:
   meta: ^1.11.0
 
 dev_dependencies:
+  test: ^1.25.8
   very_good_analysis: ^6.0.0
