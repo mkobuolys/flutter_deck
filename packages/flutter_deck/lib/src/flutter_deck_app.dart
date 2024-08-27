@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
+import 'package:flutter_deck/src/controls/fullscreen/window_proxy/window_proxy.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
@@ -178,7 +179,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
       autoplayNotifier: _autoplayNotifier,
       drawerNotifier: _drawerNotifier,
       markerNotifier: _markerNotifier,
-      fullscreenManager: FlutterDeckFullscreenManager(),
+      fullscreenManager: FlutterDeckFullscreenManager(WindowProxy()),
       router: _flutterDeckRouter,
     );
     _localizationNotifier = FlutterDeckLocalizationNotifier(

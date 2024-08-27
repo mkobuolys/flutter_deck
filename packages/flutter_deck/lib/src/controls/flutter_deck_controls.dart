@@ -468,22 +468,30 @@ class _FullscreenButton extends StatelessWidget {
     final controlsNotifier = flutterDeck.controlsNotifier;
     final markerNotifier = flutterDeck.markerNotifier;
 
-    final isInFullscreen = controlsNotifier.isInFullscreen();
-    final onPressed = isInFullscreen
-        ? controlsNotifier.leaveFullscreen
-        : controlsNotifier.enterFullscreen;
+    return FutureBuilder(
+      future: controlsNotifier.isInFullscreen(),
+      initialData: false,
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        final isInFullscreen = snapshot.data ?? false;
+        final onPressed = isInFullscreen
+            ? controlsNotifier.leaveFullscreen
+            : controlsNotifier.enterFullscreen;
 
-    return ListenableBuilder(
-      listenable: markerNotifier,
-      builder: (context, _) => MenuItemButton(
-        leadingIcon: Icon(
-          isInFullscreen
-              ? Icons.fullscreen_exit_rounded
-              : Icons.fullscreen_rounded,
-        ),
-        onPressed: !markerNotifier.enabled ? onPressed : null,
-        child: Text(isInFullscreen ? 'Leave full screen' : 'Enter full screen'),
-      ),
+        return ListenableBuilder(
+          listenable: markerNotifier,
+          builder: (context, _) => MenuItemButton(
+            leadingIcon: Icon(
+              isInFullscreen
+                  ? Icons.fullscreen_exit_rounded
+                  : Icons.fullscreen_rounded,
+            ),
+            onPressed: !markerNotifier.enabled ? onPressed : null,
+            child: Text(
+              isInFullscreen ? 'Leave full screen' : 'Enter full screen',
+            ),
+          ),
+        );
+      },
     );
   }
 }
