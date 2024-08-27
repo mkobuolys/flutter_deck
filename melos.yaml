@@ -5,5 +5,8 @@ packages:
 
 scripts:
   analyze:
-    run: melos exec --no-private -- dart analyze .
-    description: Run `dart analyze` in all packages.
+    exec: dart analyze .
+  format:
+    exec: dart format --set-exit-if-changed .
+  test:
+    exec: flutter test

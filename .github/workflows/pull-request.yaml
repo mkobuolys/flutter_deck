@@ -1,0 +1,69 @@
+name: Pull request checks
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  semantic-pull-request:
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
+
+  spell-check:
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
+    with:
+      includes: "**/*.md"
+      modified_files_only: false
+
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Setup Melos
+        run: dart pub global activate melos
+
+      - name: Melos bootstrap
+        run: melos bootstrap
+
+      - name: Run Melos analyze
+        run: melos run analyze
+
+      - name: Check if Melos analyze passes
+        run: echo $?
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Setup Melos
+        run: dart pub global activate melos
+
+      - name: Melos bootstrap
+        run: melos bootstrap
+
+      - name: Run Melos test
+        run: melos run test
