@@ -3,6 +3,9 @@ name: flutter_deck
 packages:
   - packages/**
 
+ignore:
+  - packages/**/example
+
 scripts:
   analyze:
     exec: dart analyze .
