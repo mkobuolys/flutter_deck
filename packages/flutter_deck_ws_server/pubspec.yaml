@@ -13,4 +13,5 @@ dependencies:
   flutter_deck_client: ^0.1.0
 
 dev_dependencies:
+  test: ^1.25.8
   very_good_analysis: ^6.0.0
