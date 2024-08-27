@@ -476,6 +476,7 @@ class _FullscreenButton extends StatelessWidget {
         final onPressed = isInFullscreen
             ? controlsNotifier.leaveFullscreen
             : controlsNotifier.enterFullscreen;
+
         return ListenableBuilder(
           listenable: markerNotifier,
           builder: (context, _) => MenuItemButton(
@@ -486,9 +487,7 @@ class _FullscreenButton extends StatelessWidget {
             ),
             onPressed: !markerNotifier.enabled ? onPressed : null,
             child: Text(
-              isInFullscreen //
-                  ? 'Leave full screen'
-                  : 'Enter full screen',
+              isInFullscreen ? 'Leave full screen' : 'Enter full screen',
             ),
           ),
         );
