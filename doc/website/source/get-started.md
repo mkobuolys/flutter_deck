@@ -1,7 +1,9 @@
 ---
 title: Get Started
 ---
+
 ## First Steps
+
 First, create a new Flutter project for your slideshow.
 
 Next, add `flutter_deck` as a dependency in your `pubspec.yaml` file:
@@ -14,7 +16,8 @@ dependencies:
 You're now ready to leverage the power of `flutter_deck` to quickly assemble a great
 slideshow presentation with Flutter widgets and Dart code!
 
-## 🧑‍💻 Hello flutter_deck!
+## Hello flutter_deck!
+
 Use `FlutterDeckApp` as your slide deck's root widget and pass a list of `FlutterDeckSlideWidget` widgets to it:
 
 ```dart
@@ -120,10 +123,11 @@ FlutterDeckApp(
 ```
 
 ## Next Steps
+
 You have a Flutter project with a configured `FlutterDeckApp` widget. Consider exploring the
 following guides to build up your slide show:
 
- * [Start theming your presentation](/guides/theming/)
- * Create predefined slide types: [titles](/slide-templates/title-slide/), [images](/slide-templates/image-slide/), and [split slides](/slide-templates/split-slide/)
- * [Localize your presentation](/guides/localization/)
- * [Control your presentation playback](/playback/controls)
+- [Start theming your presentation](/guides/theming/)
+- Create predefined slide types: [titles](/slide-templates/title-slide/), [images](/slide-templates/image-slide/), and [split slides](/slide-templates/split-slide/)
+- [Localize your presentation](/guides/localization/)
+- [Control your presentation playback](/playback/controls)

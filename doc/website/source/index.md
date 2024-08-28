@@ -12,9 +12,9 @@ contentRenderers:
 Welcome to `flutter_deck`, a Flutter package to generate slideshows with Flutter widgets,
 which run on all platforms.
 
-Check out the [example slide deck](/demo) to see what you can build with `flutter_deck`.
+Check out the [example](/demo) to see what you can build with `flutter_deck`.
 
-## Features 🪄
+## Features
 
 - 💙 Slide deck is built as any other Flutter app.
 - 🧭 Navigator 2.0 support - each slide is rendered as an individual page with a deep link to it.

@@ -2,6 +2,7 @@
 title: Flutter Deck Widgets
 navOrder: 4
 ---
+
 This package comes with a few predefined widgets that could be used in your slide deck.
 
 ### FlutterDeckBulletList
@@ -92,7 +93,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
 
 ![FlutterDeckCodeHighlight](https://github.com/mkobuolys/flutter_deck/blob/main/images/code_highlighting.png?raw=true)
 
-## 📦 Accessing slide deck state from the code
+## Accessing slide deck state from the code
 
 By using the `FlutterDeck` extensions, you can access the slide deck state and its methods from anywhere in the app:
 
