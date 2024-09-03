@@ -1,6 +1,6 @@
 # NEXT
 
-- chore: update very_good_analysis to v6.0.0
+- chore: use a common analysis_options.yaml file
 
 # 0.1.1
 

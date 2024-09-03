@@ -1,10 +1,14 @@
 # NEXT
 
 - feat: allow passing `AutoSizeGroup` as a property to `FlutterDeckBulletList`
+- feat: add full screen management for desktop platforms
 - fix: header max width change on window resize
 - fix: `FlutterDeckSlide.split` slide template alignment issues
+- docs: launch a documentation website
+- ci: update GitHub Actions workflows for PRs and the main branch
 - chore: update go_router to v14.2.0
-- chore: update very_good_analysis to v6.0.0
+- chore: update melos to v6.1.0
+- chore: use a common analysis_options.yaml file
 
 # 0.15.0
 
