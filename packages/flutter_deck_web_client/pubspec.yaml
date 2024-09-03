@@ -1,6 +1,6 @@
 name: flutter_deck_web_client
 description: A Web client for the flutter_deck package that allows you to control the presentation from another browser tab or window.
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/mkobuolys/flutter_deck
 repository: https://github.com/mkobuolys/flutter_deck/tree/main/packages/flutter_deck_web_client
 issue_tracker: https://github.com/mkobuolys/flutter_deck/issues
@@ -15,7 +15,7 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  flutter_deck_client: ^0.1.0
+  flutter_deck_client: ^0.1.2
   web: ^0.5.1
 
 dev_dependencies:
