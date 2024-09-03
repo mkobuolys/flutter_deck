@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 /// This is used internally only.
 class FlutterDeckThemeNotifier extends ValueNotifier<ThemeMode> {
   /// Creates a [FlutterDeckThemeNotifier] with the given [value].
-  FlutterDeckThemeNotifier(super.value);
+  FlutterDeckThemeNotifier(super._value);
 
   /// Changes the value of the [FlutterDeckThemeNotifier] to the given
   /// [themeMode].

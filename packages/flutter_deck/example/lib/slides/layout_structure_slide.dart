@@ -36,7 +36,7 @@ class LayoutStructureSlide extends FlutterDeckSlideWidget {
         return ColoredBox(
           color: colorScheme.secondary,
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             child: Center(
               child: Text(
                 'Footer goes here...',
@@ -55,7 +55,7 @@ class LayoutStructureSlide extends FlutterDeckSlideWidget {
         return ColoredBox(
           color: colorScheme.primary,
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             child: Center(
               child: Text(
                 'Header goes here...',

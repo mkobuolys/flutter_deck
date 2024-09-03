@@ -9,9 +9,9 @@ environment:
   flutter: ">=3.10.0"
 
 dependencies:
+  cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
   flutter_deck:
     path: ..
   flutter_deck_web_client: ^0.1.1
@@ -22,7 +22,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
 
 flutter:
   generate: true

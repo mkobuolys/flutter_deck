@@ -1,5 +1,5 @@
 /// The power of [Flutter](https://flutter.dev/), in your presentations.
-library flutter_deck;
+library;
 
 export 'src/configuration/configuration.dart';
 export 'src/flutter_deck.dart';
