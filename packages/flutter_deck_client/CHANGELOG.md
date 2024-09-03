@@ -1,4 +1,4 @@
-# NEXT
+# 0.1.2
 
 - chore: use a common analysis_options.yaml file
 

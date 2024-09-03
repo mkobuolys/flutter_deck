@@ -1,4 +1,4 @@
-# NEXT
+# 0.1.2
 
 - chore: update very_good_analysis to v6.0.0
 

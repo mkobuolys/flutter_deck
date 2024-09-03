@@ -1,4 +1,4 @@
-# NEXT
+# 0.16.0
 
 - feat: allow passing `AutoSizeGroup` as a property to `FlutterDeckBulletList`
 - feat: add full screen management for desktop platforms
