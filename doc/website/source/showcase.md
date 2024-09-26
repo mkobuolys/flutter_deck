@@ -59,4 +59,8 @@ The following presentations were created with `flutter_deck`:
  * English
  * [Roaa Khaddam](https://x.com/roaakdm)
 
+[Don't Leave Your Assets in Their Pajamas —Transform Them](https://assets-transform-presentation.vercel.app/#/)
+ * English
+ * [Lucas Goldner](https://x.com/LucasGoldner)
+
 [mangirdas_kazlauskas_link]: https://x.com/mkobuolys
