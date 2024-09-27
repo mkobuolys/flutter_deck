@@ -1,6 +1,6 @@
 ---
 name: Add Presentation Example
-about: Add a new presentation example built with flutter_deck to README.md
+about: Add a new presentation example built with flutter_deck to the documentation website
 title: "docs: "
 labels: documentation
 ---
