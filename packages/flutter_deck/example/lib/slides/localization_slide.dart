@@ -8,7 +8,7 @@ const _speakerNotes = '''
 ''';
 
 class LocalizationSlide extends FlutterDeckSlideWidget {
-  const LocalizationSlide()
+  const LocalizationSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/localization',

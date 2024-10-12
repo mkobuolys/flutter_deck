@@ -8,7 +8,7 @@ const _speakerNotes = '''
 ''';
 
 class CodeHighlightSlide extends FlutterDeckSlideWidget {
-  const CodeHighlightSlide()
+  const CodeHighlightSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/code-highlight',

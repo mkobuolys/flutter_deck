@@ -8,7 +8,7 @@ const _speakerNotes = '''
 ''';
 
 class MarkerSlide extends FlutterDeckSlideWidget {
-  const MarkerSlide()
+  const MarkerSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/marker',

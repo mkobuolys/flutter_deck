@@ -85,25 +85,47 @@ class FlutterDeckExample extends StatelessWidget {
         ),
       ),
       // Presentation is build automatically from the list of slides.
-      slides: const [
-        TitleSlide(),
-        LayoutStructureSlide(),
-        BlankSlide(),
-        SplitSlide(),
-        ImageSlide(),
-        BigFactSlide(),
-        QuoteSlide(),
-        FooterSlide(),
-        HiddenSlide(),
-        DrawerSlide(),
-        MarkerSlide(),
-        ThemingSlide(),
-        BackgroundSlide(),
-        LocalizationSlide(),
-        TransitionsSlide(),
-        StepsSlide(),
-        CodeHighlightSlide(),
-        EndSlide(),
+      slides: [
+        const TitleSlide(),
+        const LayoutStructureSlide(),
+        const BlankSlide(),
+        const SplitSlide(),
+        const ImageSlide(),
+        const BigFactSlide(),
+        const QuoteSlide(),
+        const FooterSlide(),
+        const HiddenSlide(),
+        const DrawerSlide(),
+        const MarkerSlide(),
+        const ThemingSlide(),
+        const BackgroundSlide(),
+        const LocalizationSlide(),
+        const TransitionsSlide(),
+        const StepsSlide(),
+        const CodeHighlightSlide(),
+        // You can use any widget as a slide.
+        Scaffold(
+          backgroundColor: Colors.red,
+          body: Builder(
+            builder: (context) => Center(
+              child: Text(
+                'Use any widget as a slide!',
+                style: FlutterDeckTheme.of(context).textTheme.title,
+              ),
+            ),
+          ),
+        ),
+        // You can use the FlutterDeckSlide widgets without subclassing them.
+        FlutterDeckSlide.title(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/end',
+            title: 'Thank you!',
+            speakerNotes: '- Use flutter_deck to create your own slides.',
+            footer: FlutterDeckFooterConfiguration(showFooter: false),
+          ),
+          title: 'Thank you! 👋',
+          subtitle: "Now it's your turn to use flutter_deck!",
+        ),
       ],
       // Do not forget to introduce yourself!
       speakerInfo: const FlutterDeckSpeakerInfo(

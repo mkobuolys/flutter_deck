@@ -6,7 +6,7 @@ const _speakerNotes = '''
 ''';
 
 class HiddenSlide extends FlutterDeckSlideWidget {
-  const HiddenSlide()
+  const HiddenSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/hidden',

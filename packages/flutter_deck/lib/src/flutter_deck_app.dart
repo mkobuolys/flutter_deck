@@ -103,7 +103,7 @@ class FlutterDeckApp extends StatefulWidget {
   ///
   /// The order of the slides determines the order in which they will be
   /// displayed. The first slide will be displayed when the app is first opened.
-  final List<FlutterDeckSlideWidget> slides;
+  final List<Widget> slides;
 
   /// Information about the speaker.
   final FlutterDeckSpeakerInfo? speakerInfo;
@@ -208,19 +208,27 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
     super.dispose();
   }
 
-  void _buildRouter() {
-    final slides = [
-      for (final slide in widget.slides.where((s) => !s.configuration.hidden))
-        FlutterDeckRouterSlide(
-          configuration: slide.configuration.mergeWithGlobal(
-            widget.configuration,
-          ),
-          route: slide.configuration.route,
-          widget: slide,
-        ),
-    ];
+  FlutterDeckRouterSlide? _buildRouterSlide((int, Widget) indexedSlide) {
+    final (index, slide) = indexedSlide;
+    final slideConfiguration =
+        slide is FlutterDeckSlideWidget ? slide.configuration : null;
 
-    _flutterDeckRouter = FlutterDeckRouter(slides: slides);
+    if (slideConfiguration?.hidden ?? false) return null;
+
+    final configuration = slideConfiguration ??
+        FlutterDeckSlideConfiguration(route: '/slide-${index + 1}');
+
+    return FlutterDeckRouterSlide(
+      configuration: configuration.mergeWithGlobal(widget.configuration),
+      route: configuration.route,
+      widget: slide,
+    );
+  }
+
+  void _buildRouter() {
+    final slides = widget.slides.indexed.map(_buildRouterSlide).nonNulls;
+
+    _flutterDeckRouter = FlutterDeckRouter(slides: [...slides]);
     _router = _flutterDeckRouter.build(isPresenterView: widget.isPresenterView);
   }
 

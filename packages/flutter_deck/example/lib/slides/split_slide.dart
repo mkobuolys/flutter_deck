@@ -7,7 +7,7 @@ const _speakerNotes = '''
 ''';
 
 class SplitSlide extends FlutterDeckSlideWidget {
-  const SplitSlide()
+  const SplitSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/split-slide',

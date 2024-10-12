@@ -5,74 +5,18 @@ import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
-import 'package:flutter_deck/src/theme/templates/flutter_deck_slide_theme.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 
-/// An abstract class that must be extended when creating a new slide for the
-/// slide deck.
 ///
-/// This class is used to create a new slide for the slide deck. It ensures that
-/// each slide has a defined [FlutterDeckSlideConfiguration] and a [build]
-/// method to create the slide. Diffently from the [StatelessWidget] class, the
-/// [build] method returns a [FlutterDeckSlide] instead of a [Widget].
-///
-/// Uses [FlutterDeckSlideTheme] as a base to style the slide.
-///
-/// See also:
-///
-/// * [FlutterDeckSlide], which represents a slide in a slide deck.
-/// * [FlutterDeckSlide.blank], which creates a blank slide.
-/// * [FlutterDeckSlide.custom], which creates a custom slide.
-/// * [FlutterDeckSlide.image], which creates a slide with an image.
-/// * [FlutterDeckSlide.split], which creates a slide with two columns.
-/// * [FlutterDeckSlide.template], which creates a slide with a standard layout.
-/// * [FlutterDeckSlide.title], which creates a title slide.
-///
-/// Example:
-///
-/// ```dart
-/// import 'package:flutter/widgets.dart';
-/// import 'package:flutter_deck/flutter_deck.dart';
-///
-/// class ExampleSlide extends FlutterDeckSlideWidget {
-///   const ExampleSlide()
-///       : super(
-///           configuration: const FlutterDeckSlideConfiguration(
-///             route: '/example',
-///             header: FlutterDeckHeaderConfiguration(title: 'Example'),
-///           ),
-///         );
-///
-///   @override
-///   FlutterDeckSlide build(BuildContext context) {
-///     return FlutterDeckSlide.blank(
-///       theme: FlutterDeckTheme.of(context).copyWith(
-///         slideTheme: const FlutterDeckSlideThemeData(
-///           color: Colors.white,
-///           backgroundColor: Colors.black87,
-///         ),
-///       ),
-///       builder: (context) => const Center(
-///         child: Text('This is an example slide'),
-///       ),
-///     );
-///   }
-/// }
-/// ```
-abstract class FlutterDeckSlideWidget {
-  /// Creates a new slide for the slide deck.
+abstract class FlutterDeckSlideWidget extends StatelessWidget {
   ///
-  /// This constructor must be called by the subclasses to create a new slide.
-  /// The [configuration] argument must not be null.
   const FlutterDeckSlideWidget({
-    required this.configuration,
+    this.configuration,
+    super.key,
   });
 
-  /// The configuration of the slide.
-  final FlutterDeckSlideConfiguration configuration;
-
-  /// Creates the slide.
-  FlutterDeckSlide build(BuildContext context);
+  ///
+  final FlutterDeckSlideConfiguration? configuration;
 }
 
 /// The main widget for a slide in a slide deck.
@@ -82,7 +26,7 @@ abstract class FlutterDeckSlideWidget {
 /// navigation drawer.
 ///
 /// To create a new slide, use one of the named constructors.
-class FlutterDeckSlide extends StatelessWidget {
+class FlutterDeckSlide extends FlutterDeckSlideWidget {
   /// Creates a new slide.
   ///
   /// This constructor is private and should not be used directly. Instead, use
@@ -90,6 +34,7 @@ class FlutterDeckSlide extends StatelessWidget {
   const FlutterDeckSlide._({
     required WidgetBuilder builder,
     required FlutterDeckThemeData? theme,
+    super.configuration,
     super.key,
   })  : _builder = builder,
         _theme = theme;
@@ -109,6 +54,7 @@ class FlutterDeckSlide extends StatelessWidget {
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.bigFact({
     required String title,
+    FlutterDeckSlideConfiguration? configuration,
     String? subtitle,
     WidgetBuilder? backgroundBuilder,
     WidgetBuilder? footerBuilder,
@@ -117,6 +63,7 @@ class FlutterDeckSlide extends StatelessWidget {
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
+          configuration: configuration,
           builder: (context) => FlutterDeckBigFactSlide(
             title: title,
             subtitle: subtitle,
@@ -140,12 +87,14 @@ class FlutterDeckSlide extends StatelessWidget {
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.blank({
     required WidgetBuilder builder,
+    FlutterDeckSlideConfiguration? configuration,
     WidgetBuilder? backgroundBuilder,
     WidgetBuilder? footerBuilder,
     WidgetBuilder? headerBuilder,
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
+          configuration: configuration,
           builder: (context) => FlutterDeckBlankSlide(
             builder: builder,
             backgroundBuilder: backgroundBuilder,
@@ -167,9 +116,11 @@ class FlutterDeckSlide extends StatelessWidget {
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   const FlutterDeckSlide.custom({
     required WidgetBuilder builder,
+    FlutterDeckSlideConfiguration? configuration,
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
+          configuration: configuration,
           builder: builder,
           theme: theme,
           key: key,
@@ -188,6 +139,7 @@ class FlutterDeckSlide extends StatelessWidget {
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.image({
     required ImageBuilder imageBuilder,
+    FlutterDeckSlideConfiguration? configuration,
     String? label,
     WidgetBuilder? backgroundBuilder,
     WidgetBuilder? footerBuilder,
@@ -195,6 +147,7 @@ class FlutterDeckSlide extends StatelessWidget {
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
+          configuration: configuration,
           builder: (context) => FlutterDeckImageSlide(
             imageBuilder: imageBuilder,
             label: label,
@@ -221,6 +174,7 @@ class FlutterDeckSlide extends StatelessWidget {
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.quote({
     required String quote,
+    FlutterDeckSlideConfiguration? configuration,
     String? attribution,
     WidgetBuilder? backgroundBuilder,
     WidgetBuilder? footerBuilder,
@@ -229,6 +183,7 @@ class FlutterDeckSlide extends StatelessWidget {
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
+          configuration: configuration,
           builder: (context) => FlutterDeckQuoteSlide(
             quote: quote,
             attribution: attribution,
@@ -259,6 +214,7 @@ class FlutterDeckSlide extends StatelessWidget {
   FlutterDeckSlide.split({
     required WidgetBuilder leftBuilder,
     required WidgetBuilder rightBuilder,
+    FlutterDeckSlideConfiguration? configuration,
     WidgetBuilder? backgroundBuilder,
     WidgetBuilder? footerBuilder,
     WidgetBuilder? headerBuilder,
@@ -266,6 +222,7 @@ class FlutterDeckSlide extends StatelessWidget {
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
+          configuration: configuration,
           builder: (context) => FlutterDeckSplitSlide(
             leftBuilder: leftBuilder,
             rightBuilder: rightBuilder,
@@ -287,6 +244,7 @@ class FlutterDeckSlide extends StatelessWidget {
   ///
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.template({
+    FlutterDeckSlideConfiguration? configuration,
     WidgetBuilder? backgroundBuilder,
     WidgetBuilder? contentBuilder,
     WidgetBuilder? footerBuilder,
@@ -294,6 +252,7 @@ class FlutterDeckSlide extends StatelessWidget {
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
+          configuration: configuration,
           builder: (context) => FlutterDeckSlideBase(
             backgroundBuilder: backgroundBuilder,
             contentBuilder: contentBuilder,
@@ -318,6 +277,7 @@ class FlutterDeckSlide extends StatelessWidget {
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.title({
     required String title,
+    FlutterDeckSlideConfiguration? configuration,
     String? subtitle,
     WidgetBuilder? backgroundBuilder,
     WidgetBuilder? footerBuilder,
@@ -326,6 +286,7 @@ class FlutterDeckSlide extends StatelessWidget {
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
+          configuration: configuration,
           builder: (context) => FlutterDeckTitleSlide(
             title: title,
             subtitle: subtitle,

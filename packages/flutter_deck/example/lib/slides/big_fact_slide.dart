@@ -7,7 +7,7 @@ const _speakerNotes = '''
 ''';
 
 class BigFactSlide extends FlutterDeckSlideWidget {
-  const BigFactSlide()
+  const BigFactSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/big-fact',

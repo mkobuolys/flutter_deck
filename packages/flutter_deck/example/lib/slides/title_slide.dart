@@ -7,7 +7,7 @@ const _speakerNotes = '''
 ''';
 
 class TitleSlide extends FlutterDeckSlideWidget {
-  const TitleSlide()
+  const TitleSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/intro',

@@ -3,7 +3,6 @@ export 'big_fact_slide.dart';
 export 'blank_slide.dart';
 export 'code_highlight_slide.dart';
 export 'drawer_slide.dart';
-export 'end_slide.dart';
 export 'footer_slide.dart';
 export 'hidden_slide.dart';
 export 'image_slide.dart';

@@ -7,7 +7,7 @@ const _speakerNotes = '''
 ''';
 
 class TransitionsSlide extends FlutterDeckSlideWidget {
-  const TransitionsSlide()
+  const TransitionsSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/transitions',
