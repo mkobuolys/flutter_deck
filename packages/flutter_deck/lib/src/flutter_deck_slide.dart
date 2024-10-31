@@ -391,3 +391,16 @@ class _SlideBody extends StatelessWidget {
     );
   }
 }
+
+///
+extension FlutterDeckSlideWidgetX on Widget {
+  ///
+  FlutterDeckSlideWidget withSlideConfiguration(
+    FlutterDeckSlideConfiguration configuration,
+  ) {
+    return FlutterDeckSlide.custom(
+      configuration: configuration,
+      builder: (context) => this,
+    );
+  }
+}

@@ -210,18 +210,25 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
 
   FlutterDeckRouterSlide? _buildRouterSlide((int, Widget) indexedSlide) {
     final (index, slide) = indexedSlide;
-    final slideConfiguration =
-        slide is FlutterDeckSlideWidget ? slide.configuration : null;
 
-    if (slideConfiguration?.hidden ?? false) return null;
+    var slideWidget = slide;
 
-    final configuration = slideConfiguration ??
-        FlutterDeckSlideConfiguration(route: '/slide-${index + 1}');
+    if (slideWidget is! FlutterDeckSlideWidget) {
+      final defaultConfiguration = FlutterDeckSlideConfiguration(
+        route: '/slide-${index + 1}',
+      );
+
+      slideWidget = slide.withSlideConfiguration(defaultConfiguration);
+    }
+
+    final configuration = slideWidget.configuration!;
+
+    if (configuration.hidden) return null;
 
     return FlutterDeckRouterSlide(
       configuration: configuration.mergeWithGlobal(widget.configuration),
       route: configuration.route,
-      widget: slide,
+      widget: slideWidget,
     );
   }
 
