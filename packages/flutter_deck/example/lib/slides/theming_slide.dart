@@ -7,7 +7,7 @@ const _speakerNotes = '''
 ''';
 
 class ThemingSlide extends FlutterDeckSlideWidget {
-  const ThemingSlide({super.key})
+  const ThemingSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/theming-slide',

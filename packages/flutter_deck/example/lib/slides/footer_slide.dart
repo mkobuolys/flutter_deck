@@ -7,7 +7,7 @@ const _speakerNotes = '''
 ''';
 
 class FooterSlide extends FlutterDeckSlideWidget {
-  const FooterSlide({super.key})
+  const FooterSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             footer: FlutterDeckFooterConfiguration(

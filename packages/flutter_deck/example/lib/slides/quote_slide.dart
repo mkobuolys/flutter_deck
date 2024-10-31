@@ -7,7 +7,7 @@ const _speakerNotes = '''
 ''';
 
 class QuoteSlide extends FlutterDeckSlideWidget {
-  const QuoteSlide({super.key})
+  const QuoteSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/quote',

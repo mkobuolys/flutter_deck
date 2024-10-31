@@ -8,7 +8,7 @@ const _speakerNotes = '''
 ''';
 
 class StepsSlide extends FlutterDeckSlideWidget {
-  const StepsSlide({super.key})
+  const StepsSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/steps',

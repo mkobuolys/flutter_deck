@@ -8,7 +8,7 @@ const _speakerNotes = '''
 ''';
 
 class DrawerSlide extends FlutterDeckSlideWidget {
-  const DrawerSlide({super.key})
+  const DrawerSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/drawer',

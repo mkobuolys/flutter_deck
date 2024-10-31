@@ -8,7 +8,7 @@ const _speakerNotes = '''
 ''';
 
 class BackgroundSlide extends FlutterDeckSlideWidget {
-  const BackgroundSlide({super.key})
+  const BackgroundSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/background',

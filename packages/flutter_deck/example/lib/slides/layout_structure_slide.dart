@@ -6,7 +6,7 @@ const _speakerNotes = '''
 ''';
 
 class LayoutStructureSlide extends FlutterDeckSlideWidget {
-  const LayoutStructureSlide({super.key})
+  const LayoutStructureSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/layout-structure',
