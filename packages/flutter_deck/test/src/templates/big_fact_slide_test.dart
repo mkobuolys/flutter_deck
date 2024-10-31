@@ -75,7 +75,7 @@ void main() {
 }
 
 class BigFactSlide extends FlutterDeckSlideWidget {
-  const BigFactSlide({super.key})
+  const BigFactSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/big-fact',

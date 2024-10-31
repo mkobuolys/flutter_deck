@@ -72,7 +72,7 @@ void main() {
 }
 
 class ImageSlide extends FlutterDeckSlideWidget {
-  const ImageSlide({super.key})
+  const ImageSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/image-slide',

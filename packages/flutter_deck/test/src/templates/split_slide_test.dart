@@ -87,7 +87,7 @@ void main() {
 }
 
 class SplitSlide extends FlutterDeckSlideWidget {
-  const SplitSlide({super.key})
+  const SplitSlide()
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/split-slide',
