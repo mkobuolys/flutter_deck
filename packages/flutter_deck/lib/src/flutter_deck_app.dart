@@ -208,22 +208,23 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
     super.dispose();
   }
 
-  FlutterDeckRouterSlide? _buildRouterSlide((int, Widget) indexedSlide) {
+  bool _filterHidden(Widget slide) =>
+      slide is! FlutterDeckSlideWidget ||
+      !(slide.configuration?.hidden ?? false);
+
+  FlutterDeckRouterSlide _buildRouterSlide((int, Widget) indexedSlide) {
     final (index, slide) = indexedSlide;
+    final defaultConfiguration = FlutterDeckSlideConfiguration(
+      route: '/slide-${index + 1}',
+    );
 
     var slideWidget = slide;
 
     if (slideWidget is! FlutterDeckSlideWidget) {
-      final defaultConfiguration = FlutterDeckSlideConfiguration(
-        route: '/slide-${index + 1}',
-      );
-
       slideWidget = slide.withSlideConfiguration(defaultConfiguration);
     }
 
-    final configuration = slideWidget.configuration!;
-
-    if (configuration.hidden) return null;
+    final configuration = slideWidget.configuration ?? defaultConfiguration;
 
     return FlutterDeckRouterSlide(
       configuration: configuration.mergeWithGlobal(widget.configuration),
@@ -233,7 +234,8 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
   }
 
   void _buildRouter() {
-    final slides = widget.slides.indexed.map(_buildRouterSlide).nonNulls;
+    final slides =
+        widget.slides.where(_filterHidden).indexed.map(_buildRouterSlide);
 
     _flutterDeckRouter = FlutterDeckRouter(slides: slides.toList());
     _router = _flutterDeckRouter.build(isPresenterView: widget.isPresenterView);
