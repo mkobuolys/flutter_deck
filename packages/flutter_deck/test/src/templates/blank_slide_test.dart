@@ -70,7 +70,7 @@ void main() {
 }
 
 class BlankSlide extends FlutterDeckSlideWidget {
-  const BlankSlide()
+  const BlankSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/blank-slide',

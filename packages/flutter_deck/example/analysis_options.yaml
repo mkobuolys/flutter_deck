@@ -4,3 +4,4 @@ linter:
   rules:
     avoid_redundant_argument_values: false
     public_member_api_docs: false
+    use_key_in_widget_constructors: false
