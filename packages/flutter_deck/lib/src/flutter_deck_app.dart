@@ -234,10 +234,13 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
   }
 
   void _buildRouter() {
-    final slides =
-        widget.slides.where(_filterHidden).indexed.map(_buildRouterSlide);
+    final slides = widget.slides
+        .where(_filterHidden)
+        .indexed
+        .map(_buildRouterSlide)
+        .toList();
 
-    _flutterDeckRouter = FlutterDeckRouter(slides: slides.toList());
+    _flutterDeckRouter = FlutterDeckRouter(slides: slides);
     _router = _flutterDeckRouter.build(isPresenterView: widget.isPresenterView);
   }
 
