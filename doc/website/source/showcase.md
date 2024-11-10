@@ -27,7 +27,7 @@ The following presentations were created with `flutter_deck`:
 [Flutter for the win: Cross-platform development at maximum power](https://github.com/polilluminato/linuxday-2023-presentation)
 
 - Italian
-- [Alberto Bonacina](https://x.com/polilluminato)
+- [Alberto Bonacina](https://www.linkedin.com/in/bonacinaalberto/)
 
 [ReArch: A Reactive Approach to Application Architecture Supporting Side Effects](https://github.com/GregoryConrad/rearch-dart/tree/main/examples/presentation)
 
@@ -78,5 +78,10 @@ The following presentations were created with `flutter_deck`:
 
 - English
 - [Lucas Goldner](https://x.com/LucasGoldner)
+
+[Sviluppa la tua prima applicazione per Linux con Flutter](https://github.com/polilluminato/linuxday-2024-presentation)
+
+- Italian
+- [Alberto Bonacina](https://www.linkedin.com/in/bonacinaalberto/)
 
 [mangirdas_kazlauskas_link]: https://x.com/mkobuolys
