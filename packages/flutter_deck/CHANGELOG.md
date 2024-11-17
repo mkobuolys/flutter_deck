@@ -229,7 +229,7 @@
             );
 
       @override
-      Widget build(BuildContext context) {
+      FlutterDeckSlide build(BuildContext context) {
         <...>
       }
     }
@@ -268,7 +268,7 @@
             );
 
       @override
-      Widget build(BuildContext context) {
+      FlutterDeckSlide build(BuildContext context) {
         return FlutterDeckSlide.title(
           title: 'Here goes the title of the slide',
           subtitle: 'Here goes the subtitle of the slide (optional)',
@@ -292,7 +292,7 @@
             );
 
       @override
-      Widget body(BuildContext context) {
+      FlutterDeckSlide body(BuildContext context) {
         return Text('Here goes the content of the slide');
       }
     }
@@ -313,7 +313,7 @@
             );
 
       @override
-      Widget build(BuildContext context) {
+      FlutterDeckSlide build(BuildContext context) {
         return FlutterDeckSlide.blank(
           builder: (context) => const Text('Here goes the content of the slide'),
         );
@@ -358,7 +358,7 @@
             );
 
       @override
-      Widget build(BuildContext context) {
+      FlutterDeckSlide build(BuildContext context) {
         return FlutterDeckSlide.image(
           imageBuilder: (context) => Image.asset('assets/image.png'),
           label: 'Here goes the label of the image (optional)',
@@ -408,7 +408,7 @@
             );
 
       @override
-      Widget build(BuildContext context) {
+      FlutterDeckSlide build(BuildContext context) {
         return FlutterDeckSlide.split(
           leftBuilder: (context) {
             return const Text('Here goes the LEFT section content of the slide');
@@ -477,7 +477,7 @@
             );
 
       @override
-      Widget build(BuildContext context) {
+      FlutterDeckSlide build(BuildContext context) {
         return FlutterDeckSlide.template(
           backgroundBuilder: (context) => FlutterDeckBackground.solid(
             Theme.of(context).colorScheme.background,
@@ -529,7 +529,7 @@
             );
 
       @override
-      Widget build(BuildContext context) {
+      FlutterDeckSlide build(BuildContext context) {
         return FlutterDeckSlide.custom(
           builder: (context) {
             return const Text('Here goes your custom slide content...');
