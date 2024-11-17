@@ -1,3 +1,7 @@
+# 0.3.0
+
+- feat: update to support flutter_deck v0.17.0
+
 # 0.2.0
 
 - feat: add `quote` slide template
