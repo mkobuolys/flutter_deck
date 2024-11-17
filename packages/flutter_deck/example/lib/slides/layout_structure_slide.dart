@@ -16,7 +16,7 @@ class LayoutStructureSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.template(
       backgroundBuilder: (context) => FlutterDeckBackground.solid(
         Theme.of(context).colorScheme.surface,

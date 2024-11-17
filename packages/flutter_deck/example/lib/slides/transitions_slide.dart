@@ -18,7 +18,7 @@ class TransitionsSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.split(
       leftBuilder: (context) => FlutterDeckBulletList(
         items: const [

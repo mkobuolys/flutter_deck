@@ -19,7 +19,7 @@ class BigFactSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     const title = '100%';
     const subtitle = 'The test coverage value that flutter_deck will probably '
         'never achieve';

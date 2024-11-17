@@ -75,7 +75,7 @@ void main() {
 }
 
 class TitleSlide extends FlutterDeckSlideWidget {
-  const TitleSlide()
+  const TitleSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/title-slide',
@@ -83,7 +83,7 @@ class TitleSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.title(
       title: 'Title',
       subtitle: 'Subtitle',

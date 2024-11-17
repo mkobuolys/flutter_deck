@@ -72,7 +72,7 @@ void main() {
 }
 
 class ImageSlide extends FlutterDeckSlideWidget {
-  const ImageSlide()
+  const ImageSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/image-slide',
@@ -80,7 +80,7 @@ class ImageSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.image(
       imageBuilder: (context) => Image.asset('assets/header.png'),
       key: const Key('Image Key'),

@@ -18,7 +18,7 @@ class DrawerSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => Center(
         child: Text(

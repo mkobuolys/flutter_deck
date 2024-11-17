@@ -2,6 +2,7 @@
 title: Custom Slide
 navOrder: 8
 ---
+
 To create a custom slide (without any predefined template), use the `FlutterDeckSlide.custom` constructor and pass a custom `builder` to it.
 
 ```dart
@@ -15,7 +16,7 @@ class CustomSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.custom(
       builder: (context) {
         return const Text('Here goes your custom slide content...');

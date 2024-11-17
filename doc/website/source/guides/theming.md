@@ -1,7 +1,8 @@
 ---
 title: Theming
-navOrder: 1
+navOrder: 2
 ---
+
 You can customize the theme of your slide deck by providing a `FlutterDeckThemeData` to the `FlutterDeckApp` widget:
 
 ```dart
@@ -41,7 +42,7 @@ class ThemingSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.split(
       theme: FlutterDeckTheme.of(context).copyWith(
         splitSlideTheme: const FlutterDeckSplitSlideThemeData(

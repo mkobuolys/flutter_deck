@@ -2,6 +2,7 @@
 title: Quote Slide
 navOrder: 4
 ---
+
 To create a quote slide, use the `FlutterDeckSlide.quote` constructor. It is responsible for rendering the quote and attribution below it.
 
 ```dart
@@ -17,7 +18,7 @@ class QuoteSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.quote(
       quote: '"If you really look closely, most overnight successes took a long time."',
       attribution: '- Steve Jobs',

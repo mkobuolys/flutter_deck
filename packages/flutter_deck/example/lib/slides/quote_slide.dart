@@ -19,7 +19,7 @@ class QuoteSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     const quote = '"If you really look closely, most overnight successes '
         'took a long time."';
     const attribution = '- Steve Jobs';

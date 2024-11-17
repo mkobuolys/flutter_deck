@@ -2,6 +2,7 @@
 title: Blank Slide
 navOrder: 7
 ---
+
 To create a title slide, use the `FlutterDeckSlide.blank` constructor. It is responsible for rendering the default header and footer of the slide deck, and rendering the content of the slide using the provided `builder`.
 
 ```dart
@@ -17,7 +18,7 @@ class BlankSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => const Text('Here goes the content of the slide'),
     );

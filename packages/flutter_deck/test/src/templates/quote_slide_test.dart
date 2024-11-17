@@ -79,7 +79,7 @@ void main() {
 }
 
 class QuoteSlide extends FlutterDeckSlideWidget {
-  const QuoteSlide()
+  const QuoteSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/quote',
@@ -87,7 +87,7 @@ class QuoteSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.quote(
       quote: _quote,
       attribution: _attribution,

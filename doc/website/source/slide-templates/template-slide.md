@@ -2,6 +2,7 @@
 title: Template Slide
 navOrder: 6
 ---
+
 To create a custom template slide, use the `FlutterDeckSlide.template` constructor. It is responsible for placing the header, footer, and content of the slide in the correct places. Also, it is responsible for displaying the background of the slide.
 
 ```dart
@@ -15,7 +16,7 @@ class TemplateSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.template(
       backgroundBuilder: (context) => FlutterDeckBackground.solid(
         Theme.of(context).colorScheme.background,

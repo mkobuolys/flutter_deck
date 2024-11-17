@@ -1,7 +1,8 @@
 ---
 title: Multi-Step Slides
-navOrder: 6
+navOrder: 4
 ---
+
 Steps is a feature that allows you to navigate through a slide, well, step by step. You can access the current step from any widget. This way, you can reveal or hide content, run animations, etc.
 
 To enable steps for a slide, you need to set the `steps` property for the slide configuration:

@@ -1,3 +1,8 @@
+# NEXT
+
+- feat: allow using any widget as a slide
+- docs: add 'Creating Slides' guide to the documentation website
+
 # 0.16.1
 
 - docs: update README.md

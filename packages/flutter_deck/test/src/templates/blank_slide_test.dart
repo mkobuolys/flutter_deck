@@ -70,7 +70,7 @@ void main() {
 }
 
 class BlankSlide extends FlutterDeckSlideWidget {
-  const BlankSlide()
+  const BlankSlide({super.key})
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/blank-slide',
@@ -78,7 +78,7 @@ class BlankSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => const Text('Test Content'),
       theme: FlutterDeckTheme.of(context).copyWith(

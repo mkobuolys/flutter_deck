@@ -2,6 +2,7 @@
 title: Big Fact Slide
 navOrder: 2
 ---
+
 To create a big fact slide, use the `FlutterDeckSlide.bigFact` constructor. It is responsible for rendering the title (fact) with the description (subtitle) below it.
 
 ```dart
@@ -17,7 +18,7 @@ class BigFactSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.bigFact(
       title: '100%',
       subtitle: 'The test coverage value that flutter_deck will probably never achieve',
