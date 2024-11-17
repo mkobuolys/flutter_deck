@@ -30,7 +30,7 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 ///         );
 ///
 ///   @override
-///   FlutterDeckSlide build(BuildContext context) {
+///   Widget build(BuildContext context) {
 ///     return FlutterDeckSlide.custom(
 ///       builder: (context) => FlutterDeckBulletList(
 ///         useSteps: true,

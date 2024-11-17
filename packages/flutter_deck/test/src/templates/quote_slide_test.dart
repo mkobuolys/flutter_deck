@@ -87,7 +87,7 @@ class QuoteSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.quote(
       quote: _quote,
       attribution: _attribution,

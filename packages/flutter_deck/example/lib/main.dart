@@ -105,11 +105,11 @@ class FlutterDeckExample extends StatelessWidget {
         const CodeHighlightSlide(),
         // You can use any widget as a slide.
         Scaffold(
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.blue,
           body: Builder(
             builder: (context) => Center(
               child: Text(
-                'Use any widget as a slide!',
+                'You can use any widget as a slide!',
                 style: FlutterDeckTheme.of(context).textTheme.title,
               ),
             ),

@@ -18,7 +18,7 @@ class BackgroundSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.blank(
       backgroundBuilder: (context) {
         final isDark = Theme.of(context).brightness == Brightness.dark;

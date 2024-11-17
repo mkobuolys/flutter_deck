@@ -2,6 +2,7 @@
 title: Split Slide
 navOrder: 5
 ---
+
 To create a split slide, use the `FlutterDeckSlide.split` constructor. It is responsible for rendering the default header and footer of the slide deck, and use the `leftBuilder` and `rightBuilder` to create the content of the left and right columns. Make sure to use text styles from `Theme` or `FlutterDeckTheme` to apply the correct text styling for specific slide sections.
 
 ```dart
@@ -17,7 +18,7 @@ class SplitSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.split(
       leftBuilder: (context) {
         return Text(

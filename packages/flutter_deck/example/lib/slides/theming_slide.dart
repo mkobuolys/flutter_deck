@@ -18,7 +18,7 @@ class ThemingSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.split(
       theme: FlutterDeckTheme.of(context).copyWith(
         splitSlideTheme: const FlutterDeckSplitSlideThemeData(

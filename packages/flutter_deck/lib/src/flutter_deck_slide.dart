@@ -7,15 +7,64 @@ import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 
+/// An abstract class that represents a slide in a slide deck.
 ///
+/// This class can be used to create a new slide for the slide deck. It ensures
+/// that each slide has a defined [FlutterDeckSlideConfiguration] and a [build]
+/// method to create the slide.
+///
+/// See also:
+///
+/// * [FlutterDeckSlide], which represents a slide in a slide deck.
+/// * [FlutterDeckSlide.blank], which creates a blank slide.
+/// * [FlutterDeckSlide.custom], which creates a custom slide.
+/// * [FlutterDeckSlide.image], which creates a slide with an image.
+/// * [FlutterDeckSlide.split], which creates a slide with two columns.
+/// * [FlutterDeckSlide.template], which creates a slide with a standard layout.
+/// * [FlutterDeckSlide.title], which creates a title slide.
+///
+/// Example:
+///
+/// ```dart
+/// import 'package:flutter/widgets.dart';
+/// import 'package:flutter_deck/flutter_deck.dart';
+///
+/// class ExampleSlide extends FlutterDeckSlideWidget {
+///   const ExampleSlide()
+///       : super(
+///           configuration: const FlutterDeckSlideConfiguration(
+///             route: '/example',
+///             header: FlutterDeckHeaderConfiguration(title: 'Example'),
+///           ),
+///         );
+///
+///   @override
+///   Widget build(BuildContext context) {
+///     return FlutterDeckSlide.blank(
+///       theme: FlutterDeckTheme.of(context).copyWith(
+///         slideTheme: const FlutterDeckSlideThemeData(
+///           color: Colors.white,
+///           backgroundColor: Colors.black87,
+///         ),
+///       ),
+///       builder: (context) => const Center(
+///         child: Text('This is an example slide'),
+///       ),
+///     );
+///   }
+/// }
+/// ```
 abstract class FlutterDeckSlideWidget extends StatelessWidget {
+  /// Creates a new slide for the slide deck.
   ///
+  /// This constructor must be called by the subclasses to create a new slide.
+  /// The [configuration] argument must not be null.
   const FlutterDeckSlideWidget({
     this.configuration,
     super.key,
   });
 
-  ///
+  /// The configuration of the slide.
   final FlutterDeckSlideConfiguration? configuration;
 }
 
@@ -43,6 +92,9 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   ///
   /// This constructor creates a big fact slide in a slide deck with the default
   /// header and footer.
+  ///
+  /// The [configuration] argument is optional. If not provided, the default
+  /// configuration will be used.
   ///
   /// The [title] argument must not be null. The [subtitle],
   /// [backgroundBuilder], [footerBuilder], and [headerBuilder] arguments are
@@ -81,6 +133,9 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   /// This constructor creates a blank slide in a slide deck with the default
   /// header and footer, and the content in-between.
   ///
+  /// The [configuration] argument is optional. If not provided, the default
+  /// configuration will be used.
+  ///
   /// The [builder] argument must not be null. The [backgroundBuilder],
   /// [footerBuilder], and [headerBuilder] arguments are optional.
   ///
@@ -111,6 +166,9 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   /// does not provide any default layout for the slide. It is up to the user to
   /// define it.
   ///
+  /// The [configuration] argument is optional. If not provided, the default
+  /// configuration will be used.
+  ///
   /// The [builder] argument must not be null.
   ///
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
@@ -131,6 +189,9 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   /// This constructor creates a slide in a slide deck with the default header
   /// and footer, and the image in-between.The image can be a local asset or a
   /// network image.
+  ///
+  /// The [configuration] argument is optional. If not provided, the default
+  /// configuration will be used.
   ///
   /// The [imageBuilder] argument must not be null. The [label],
   /// [backgroundBuilder], [footerBuilder], and [headerBuilder] arguments are
@@ -163,6 +224,9 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   ///
   /// This constructor creates a quote slide in a slide deck with the default
   /// header and footer.
+  ///
+  /// The [configuration] argument is optional. If not provided, the default
+  /// configuration will be used.
   ///
   /// The [quote] argument must not be null. The [attribution],
   /// [backgroundBuilder], [footerBuilder], and [headerBuilder] arguments are
@@ -203,6 +267,9 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   /// and use the [leftBuilder] and [rightBuilder] to create the content of the
   /// left and right columns.
   ///
+  /// The [configuration] argument is optional. If not provided, the default
+  /// configuration will be used.
+  ///
   /// The [leftBuilder] and [rightBuilder] arguments must not be null. The
   /// [backgroundBuilder], [footerBuilder], [headerBuilder], and [splitRatio]
   /// arguments are optional.
@@ -239,6 +306,9 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   ///
   /// This constructor creates a slide with a standard layout in a slide deck.
   ///
+  /// The [configuration] argument is optional. If not provided, the default
+  /// configuration will be used.
+  ///
   /// The [backgroundBuilder], [contentBuilder], [footerBuilder], and
   /// [headerBuilder] arguments are optional.
   ///
@@ -269,6 +339,9 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   /// header and footer, and the content in-between. The content is composed of
   /// the [title] and [subtitle]. Also, if the [FlutterDeckSpeakerInfo] is set,
   /// it will render the speaker info below the title and subtitle.
+  ///
+  /// The [configuration] argument is optional. If not provided, the default
+  /// configuration will be used.
   ///
   /// The [title] argument must not be null. The [subtitle],
   /// [backgroundBuilder], [footerBuilder], [headerBuilder], and
@@ -304,7 +377,8 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   final FlutterDeckThemeData? _theme;
 
   /// Returns the current theme used by any slide.
-  /// Being used for testing purposes
+  ///
+  /// Being used for testing purposes.
   @visibleForTesting
   FlutterDeckThemeData? get theme => _theme;
 
@@ -392,9 +466,12 @@ class _SlideBody extends StatelessWidget {
   }
 }
 
-///
+/// FlutterDeckSlideWidget extension methods for the [Widget] class.
 extension FlutterDeckSlideWidgetX on Widget {
+  /// Returns a new slide with the given [configuration].
   ///
+  /// This method can be used instead of subclassing [FlutterDeckSlideWidget] to
+  /// create a new slide.
   FlutterDeckSlideWidget withSlideConfiguration(
     FlutterDeckSlideConfiguration configuration,
   ) {

@@ -83,7 +83,7 @@ class BigFactSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.bigFact(
       title: '100%',
       subtitle: 'The test coverage value',

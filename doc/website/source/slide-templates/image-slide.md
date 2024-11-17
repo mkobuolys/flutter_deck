@@ -2,6 +2,7 @@
 title: Image Slide
 navOrder: 3
 ---
+
 To create an image slide, use the `FlutterDeckSlide.image` constructor. It is responsible for rendering the default header and footer of the slide deck, and rendering the image using the provided `imageBuilder`.
 
 ```dart
@@ -17,7 +18,7 @@ class ImageSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.image(
       imageBuilder: (context) => Image.asset('assets/image.png'),
       label: 'Here goes the label of the image (optional)',

@@ -20,7 +20,7 @@ class LocalizationSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     final locale = context.l10n.localeName;
 
     return FlutterDeckSlide.blank(

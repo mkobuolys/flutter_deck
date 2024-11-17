@@ -25,7 +25,7 @@ class FlutterDeckBulletListDemoSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.split(
       leftBuilder: (context) => FlutterDeckBulletList(
         useSteps: true, // Enable steps for the bullet list
@@ -56,7 +56,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => const Center(
         child: FlutterDeckCodeHighlight(
@@ -74,7 +74,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
         );
 
   @override
-  FlutterDeckSlide build(BuildContext context) {
+  Widget build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => const Center(
         child: Text('Use FlutterDeckCodeHighlight widget to highlight code!'),
