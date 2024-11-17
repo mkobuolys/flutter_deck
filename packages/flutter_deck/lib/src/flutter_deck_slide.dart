@@ -468,7 +468,7 @@ class _SlideBody extends StatelessWidget {
 
 /// FlutterDeckSlideWidget extension methods for the [Widget] class.
 extension FlutterDeckSlideWidgetX on Widget {
-  /// Returns a new slide with the given [configuration].
+  /// Returns a [FlutterDeckSlideWidget] with the given [configuration].
   ///
   /// This method can be used instead of subclassing [FlutterDeckSlideWidget] to
   /// create a new slide.

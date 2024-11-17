@@ -18,7 +18,7 @@ slideshow presentation with Flutter widgets and Dart code!
 
 ## Hello flutter_deck!
 
-Use `FlutterDeckApp` as your slide deck's root widget and pass a list of `FlutterDeckSlideWidget` widgets to it:
+Use `FlutterDeckApp` as your slide deck's root widget and pass a list of widgets as slides:
 
 ```dart
 void main() {
