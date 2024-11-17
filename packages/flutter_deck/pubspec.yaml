@@ -1,6 +1,6 @@
 name: flutter_deck
 description: A lightweight, customizable, and easy-to-use framework to create presentations in Flutter.
-version: 0.16.1
+version: 0.17.0
 homepage: https://github.com/mkobuolys/flutter_deck
 repository: https://github.com/mkobuolys/flutter_deck/tree/main/packages/flutter_deck
 issue_tracker: https://github.com/mkobuolys/flutter_deck/issues
@@ -8,6 +8,9 @@ topics:
   - flutterdeck
   - presentation
   - slides
+screenshots:
+  - description: The flutter_deck package header image.
+    path: screenshots/header.png
 funding:
   - https://github.com/sponsors/mkobuolys
 

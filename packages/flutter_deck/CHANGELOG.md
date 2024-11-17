@@ -1,4 +1,4 @@
-# NEXT
+# 0.17.0
 
 - feat: allow using any widget as a slide
 - docs: add 'Creating Slides' guide to the documentation website
