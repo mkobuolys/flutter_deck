@@ -292,7 +292,7 @@
             );
 
       @override
-      FlutterDeckSlide body(BuildContext context) {
+      Widget body(BuildContext context) {
         return Text('Here goes the content of the slide');
       }
     }
