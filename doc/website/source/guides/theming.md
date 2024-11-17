@@ -1,6 +1,6 @@
 ---
 title: Theming
-navOrder: 1
+navOrder: 2
 ---
 
 You can customize the theme of your slide deck by providing a `FlutterDeckThemeData` to the `FlutterDeckApp` widget:

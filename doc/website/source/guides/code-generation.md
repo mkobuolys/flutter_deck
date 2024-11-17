@@ -1,7 +1,8 @@
 ---
 title: Code Generation
-navOrder: 2
+navOrder: 9
 ---
+
 This package comes with a [mason](https://pub.dev/packages/mason) template that can be used to generate a new slide for the slide deck.
 
 Ensure you have the [mason_cli](https://pub.dev/packages/mason_cli) installed:

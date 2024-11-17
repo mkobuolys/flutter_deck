@@ -1,6 +1,6 @@
 ---
 title: Hiding Slides
-navOrder: 3
+navOrder: 5
 ---
 
 By default, all slides are visible and available in the slide deck. However, you can hide a slide by setting the `hidden` property to `true` for the slide configuration:

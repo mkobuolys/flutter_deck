@@ -1,7 +1,8 @@
 ---
 title: Transitions
-navOrder: 5
+navOrder: 7
 ---
+
 This package comes with a few predefined transitions that can be used for your slides:
 
 - `FlutterDeckTransition.none` (default)
