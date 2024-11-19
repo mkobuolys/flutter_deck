@@ -1,5 +1,3 @@
-# flutter_deck_client
-
 A common client interface and models for the [flutter_deck](https://pub.dev/packages/flutter_deck) package.
 
 ## Usage

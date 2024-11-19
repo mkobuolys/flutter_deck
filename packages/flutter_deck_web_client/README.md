@@ -1,5 +1,3 @@
-# flutter_deck_web_client
-
 A Web client for the [flutter_deck](https://pub.dev/packages/flutter_deck) package.
 
 ## About

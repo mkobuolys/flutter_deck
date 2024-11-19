@@ -1,5 +1,3 @@
-# flutter_deck_ws_client
-
 A WebSocket client for the [flutter_deck](https://pub.dev/packages/flutter_deck) package.
 
 ## About

@@ -1,5 +1,3 @@
-# flutter_deck
-
 ![Pub Version](https://img.shields.io/pub/v/flutter_deck?colorB=blue)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mkobuolys/flutter_deck/build-gh-pages.yaml?logo=github)
 ![GitHub Repo stars](https://img.shields.io/github/stars/mkobuolys/flutter_deck?style=flat&logo=github&colorB=deeppink&label=stars)
