@@ -8,6 +8,8 @@ import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/widgets/internal/drawer/drawer.dart';
 import 'package:flutter_deck/src/widgets/internal/marker/marker.dart';
 
+const _defaultControlsVisibleDuration = Duration(seconds: 3);
+
 /// The [ChangeNotifier] used to control the slide deck and handle cursor and
 /// deck controls visibility.
 class FlutterDeckControlsNotifier
@@ -33,6 +35,7 @@ class FlutterDeckControlsNotifier
   final FlutterDeckRouter _router;
 
   var _controlsVisible = false;
+  Duration _controlsVisibleDuration = _defaultControlsVisibleDuration;
   Timer? _controlsVisibleTimer;
 
   Set<Intent> _disabledIntents = {};
@@ -116,7 +119,7 @@ class FlutterDeckControlsNotifier
     _setControlsVisible(true);
 
     _controlsVisibleTimer = Timer(
-      const Duration(seconds: 3),
+      _controlsVisibleDuration,
       () => _setControlsVisible(false),
     );
   }
@@ -128,6 +131,16 @@ class FlutterDeckControlsNotifier
 
     _controlsVisible = visible;
     notifyListeners();
+  }
+
+  /// Toggle the cursor and controls visibility duration.
+  ///
+  /// The value toggles between 3 seconds and infinite (no auto-hide).
+  void toggleControlsVisibleDuration() {
+    _controlsVisibleDuration =
+        _controlsVisibleDuration > _defaultControlsVisibleDuration
+            ? _defaultControlsVisibleDuration
+            : const Duration(days: 1); // Infinite enough for this use case...
   }
 
   /// Whether the given [intent] is disabled.
