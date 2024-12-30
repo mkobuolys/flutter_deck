@@ -1,3 +1,11 @@
+# NEXT
+
+- fix: show controls on tap on mobile devices (iOS and Android)
+- fix: controls are auto-hidden when the cursor is over them
+- feat: add swipe left/right gestures to navigate between slides
+- feat: add control gestures configuration
+- docs: update documentation website
+
 # 0.17.0
 
 - feat: allow using any widget as a slide

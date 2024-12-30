@@ -71,11 +71,11 @@ class _Controls extends StatelessWidget {
   Widget build(BuildContext context) {
     final controlsNotifier = context.flutterDeck.controlsNotifier;
 
-    return MouseRegion(
-      onEnter: (_) => controlsNotifier.toggleControlsVisibleDuration(),
-      onExit: (_) => controlsNotifier.toggleControlsVisibleDuration(),
-      child: Theme(
-        data: ThemeData.light(),
+    return Theme(
+      data: ThemeData.light(),
+      child: MouseRegion(
+        onEnter: (_) => controlsNotifier.toggleControlsVisibleDuration(),
+        onExit: (_) => controlsNotifier.toggleControlsVisibleDuration(),
         child: Builder(
           builder: (context) => Container(
             margin: FlutterDeckLayout.slidePadding,
