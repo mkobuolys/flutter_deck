@@ -271,6 +271,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
               themeNotifier: _themeNotifier,
               child: FlutterDeckControlsListener(
                 controlsNotifier: _controlsNotifier,
+                markerNotifier: _markerNotifier,
                 child: FlutterDeckTheme(
                   data: theme,
                   child: child!,

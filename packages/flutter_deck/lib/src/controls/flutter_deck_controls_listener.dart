@@ -2,8 +2,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/src/controls/actions/actions.dart';
 import 'package:flutter_deck/src/controls/flutter_deck_controls_notifier.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
+import 'package:flutter_deck/src/widgets/internal/internal.dart';
 
-/// A widget that handles controls (actions and shortcuts) for the slide deck.
+/// A widget that handles controls (actions, gestures and shortcuts) for the
+/// slide deck.
 ///
 /// Key bindings are defined in global deck configuration. The following
 /// shortcuts are supported:
@@ -26,9 +28,13 @@ class FlutterDeckControlsListener extends StatelessWidget {
   ///
   /// [controlsNotifier] is the [FlutterDeckControlsNotifier] that will be used
   /// to control the slide deck.
+  ///
+  /// [markerNotifier] is the [FlutterDeckMarkerNotifier] that will be used to
+  /// control the slide deck's marker.
   const FlutterDeckControlsListener({
     required this.child,
     required this.controlsNotifier,
+    required this.markerNotifier,
     super.key,
   });
 
@@ -37,6 +43,9 @@ class FlutterDeckControlsListener extends StatelessWidget {
 
   /// The notifier used to control the slide deck.
   final FlutterDeckControlsNotifier controlsNotifier;
+
+  /// The notifier used to control the slide deck's marker.
+  final FlutterDeckMarkerNotifier markerNotifier;
 
   void _onHorizontalSwipe(DragEndDetails? details) {
     final velocity = details?.primaryVelocity;
@@ -55,7 +64,7 @@ class FlutterDeckControlsListener extends StatelessWidget {
 
     controlsNotifier.showControls();
 
-    if (!controlsVisible) return;
+    if (!controlsVisible || markerNotifier.enabled) return;
 
     controlsNotifier.next();
   }
@@ -63,17 +72,6 @@ class FlutterDeckControlsListener extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controls = context.flutterDeck.globalConfiguration.controls;
-    final gesturesEnabled = controls.gestures.enabled;
-
-    Widget? gestureDetector(Widget? child) {
-      if (!gesturesEnabled) return child;
-
-      return GestureDetector(
-        onHorizontalDragEnd: _onHorizontalSwipe,
-        onTap: _onTap,
-        child: child,
-      );
-    }
 
     Widget widget = Focus(
       autofocus: true,
@@ -84,7 +82,23 @@ class FlutterDeckControlsListener extends StatelessWidget {
               ? MouseCursor.defer
               : SystemMouseCursors.none,
           onHover: _onMouseHover,
-          child: gestureDetector(child),
+          child: ListenableBuilder(
+            listenable: markerNotifier,
+            builder: (context, child) {
+              if (!controls.gestures.enabled) return child!;
+
+              if (markerNotifier.enabled) {
+                return GestureDetector(onTap: _onTap, child: child);
+              }
+
+              return GestureDetector(
+                onHorizontalDragEnd: _onHorizontalSwipe,
+                onTap: _onTap,
+                child: child,
+              );
+            },
+            child: child,
+          ),
         ),
         child: child,
       ),
