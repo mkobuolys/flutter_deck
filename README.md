@@ -90,6 +90,7 @@ FlutterDeckApp(
     ),
     controls: const FlutterDeckControlsConfiguration(
       presenterToolbarVisible: true,
+      gestures: FlutterDeckGesturesConfiguration.mobileOnly(),
       shortcuts: FlutterDeckShortcutsConfiguration(
         enabled: true,
         nextSlide: SingleActivator(LogicalKeyboardKey.arrowRight),
