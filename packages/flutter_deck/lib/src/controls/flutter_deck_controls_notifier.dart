@@ -35,7 +35,7 @@ class FlutterDeckControlsNotifier
   final FlutterDeckRouter _router;
 
   var _controlsVisible = false;
-  Duration _controlsVisibleDuration = _defaultControlsVisibleDuration;
+  var _controlsVisibleDuration = _defaultControlsVisibleDuration;
   Timer? _controlsVisibleTimer;
 
   Set<Intent> _disabledIntents = {};
