@@ -69,25 +69,31 @@ class _Controls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controlsNotifier = context.flutterDeck.controlsNotifier;
+
     return Theme(
       data: ThemeData.light(),
-      child: Builder(
-        builder: (context) => Container(
-          margin: FlutterDeckLayout.slidePadding,
-          padding: const EdgeInsets.all(4),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(32),
-            color: Theme.of(context).colorScheme.surface,
-          ),
-          child: const Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _PreviousButton(),
-              _SlideNumberButton(),
-              _NextButton(),
-              _MarkerControls(),
-              _OptionsMenuButton(),
-            ],
+      child: MouseRegion(
+        onEnter: (_) => controlsNotifier.toggleControlsVisibleDuration(),
+        onExit: (_) => controlsNotifier.toggleControlsVisibleDuration(),
+        child: Builder(
+          builder: (context) => Container(
+            margin: FlutterDeckLayout.slidePadding,
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(32),
+              color: Theme.of(context).colorScheme.surface,
+            ),
+            child: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _PreviousButton(),
+                _SlideNumberButton(),
+                _NextButton(),
+                _MarkerControls(),
+                _OptionsMenuButton(),
+              ],
+            ),
           ),
         ),
       ),

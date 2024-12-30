@@ -404,6 +404,7 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
               notifier: context.flutterDeck.markerNotifier,
               child: Scaffold(
                 drawer: const FlutterDeckDrawer(),
+                drawerEnableOpenDragGesture: false,
                 body: _SlideBody(child: _builder(context)),
               ),
             ),

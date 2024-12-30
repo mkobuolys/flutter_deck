@@ -2,8 +2,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/src/controls/actions/actions.dart';
 import 'package:flutter_deck/src/controls/flutter_deck_controls_notifier.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
+import 'package:flutter_deck/src/widgets/internal/internal.dart';
 
-/// A widget that handles controls (actions and shortcuts) for the slide deck.
+/// A widget that handles controls (actions, gestures and shortcuts) for the
+/// slide deck.
 ///
 /// Key bindings are defined in global deck configuration. The following
 /// shortcuts are supported:
@@ -24,11 +26,15 @@ class FlutterDeckControlsListener extends StatelessWidget {
   /// [child] is the widget that will be wrapped by this widget. It should be
   /// the root of the slide deck.
   ///
-  /// [notifier] is the [FlutterDeckControlsNotifier] that will be used to
-  /// control the slide deck.
+  /// [controlsNotifier] is the [FlutterDeckControlsNotifier] that will be used
+  /// to control the slide deck.
+  ///
+  /// [markerNotifier] is the [FlutterDeckMarkerNotifier] that will be used to
+  /// control the slide deck's marker.
   const FlutterDeckControlsListener({
     required this.child,
-    required this.notifier,
+    required this.controlsNotifier,
+    required this.markerNotifier,
     super.key,
   });
 
@@ -36,7 +42,32 @@ class FlutterDeckControlsListener extends StatelessWidget {
   final Widget child;
 
   /// The notifier used to control the slide deck.
-  final FlutterDeckControlsNotifier notifier;
+  final FlutterDeckControlsNotifier controlsNotifier;
+
+  /// The notifier used to control the slide deck's marker.
+  final FlutterDeckMarkerNotifier markerNotifier;
+
+  void _onHorizontalSwipe(DragEndDetails? details) {
+    final velocity = details?.primaryVelocity;
+
+    if (velocity == null) return;
+
+    velocity > 0 ? controlsNotifier.previous() : controlsNotifier.next();
+  }
+
+  void _onMouseHover(PointerEvent event) {
+    controlsNotifier.showControls();
+  }
+
+  void _onTap() {
+    final controlsVisible = controlsNotifier.controlsVisible;
+
+    controlsNotifier.showControls();
+
+    if (!controlsVisible || markerNotifier.enabled) return;
+
+    controlsNotifier.next();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +76,29 @@ class FlutterDeckControlsListener extends StatelessWidget {
     Widget widget = Focus(
       autofocus: true,
       child: ListenableBuilder(
-        listenable: notifier,
+        listenable: controlsNotifier,
         builder: (context, child) => MouseRegion(
-          cursor: notifier.controlsVisible
+          cursor: controlsNotifier.controlsVisible
               ? MouseCursor.defer
               : SystemMouseCursors.none,
-          onHover: (_) => notifier.showControls(),
-          child: child,
+          onHover: _onMouseHover,
+          child: ListenableBuilder(
+            listenable: markerNotifier,
+            builder: (context, child) {
+              if (!controls.gestures.enabled) return child!;
+
+              if (markerNotifier.enabled) {
+                return GestureDetector(onTap: _onTap, child: child);
+              }
+
+              return GestureDetector(
+                onHorizontalDragEnd: _onHorizontalSwipe,
+                onTap: _onTap,
+                child: child,
+              );
+            },
+            child: child,
+          ),
         ),
         child: child,
       ),
@@ -62,10 +109,10 @@ class FlutterDeckControlsListener extends StatelessWidget {
     if (controls.presenterToolbarVisible || shortcuts.enabled) {
       widget = Actions(
         actions: <Type, Action<Intent>>{
-          GoNextIntent: GoNextAction(notifier),
-          GoPreviousIntent: GoPreviousAction(notifier),
-          ToggleDrawerIntent: ToggleDrawerAction(notifier),
-          ToggleMarkerIntent: ToggleMarkerAction(notifier),
+          GoNextIntent: GoNextAction(controlsNotifier),
+          GoPreviousIntent: GoPreviousAction(controlsNotifier),
+          ToggleDrawerIntent: ToggleDrawerAction(controlsNotifier),
+          ToggleMarkerIntent: ToggleMarkerAction(controlsNotifier),
         },
         child: widget,
       );

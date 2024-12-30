@@ -38,8 +38,9 @@ class FlutterDeckConfiguration {
   /// for the [FlutterDeckSlide].
   final FlutterDeckBackgroundConfiguration background;
 
-  /// Configures the controls for the slide deck.  By default, the presenter
-  /// toolbar is visible and the default keyboard controls are enabled.
+  /// Configures the controls for the slide deck. By default, the presenter
+  /// toolbar is visible, the default keyboard controls are enabled, and
+  /// gestures are enabled on mobile platforms only.
   ///
   /// The default keyboard shortcuts are:
   /// - Next slide: \[ArrowRight\]
