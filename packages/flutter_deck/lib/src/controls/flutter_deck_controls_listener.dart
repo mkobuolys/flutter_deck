@@ -63,6 +63,17 @@ class FlutterDeckControlsListener extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controls = context.flutterDeck.globalConfiguration.controls;
+    final gesturesEnabled = controls.gestures.enabled;
+
+    Widget? gestureDetector(Widget? child) {
+      if (!gesturesEnabled) return child;
+
+      return GestureDetector(
+        onHorizontalDragEnd: _onHorizontalSwipe,
+        onTap: _onTap,
+        child: child,
+      );
+    }
 
     Widget widget = Focus(
       autofocus: true,
@@ -73,11 +84,7 @@ class FlutterDeckControlsListener extends StatelessWidget {
               ? MouseCursor.defer
               : SystemMouseCursors.none,
           onHover: _onMouseHover,
-          child: GestureDetector(
-            onHorizontalDragEnd: _onHorizontalSwipe,
-            onTap: _onTap,
-            child: child,
-          ),
+          child: gestureDetector(child),
         ),
         child: child,
       ),

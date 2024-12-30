@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -69,6 +70,9 @@ class FlutterDeckGesturesConfiguration {
 
   /// The platforms where gestures are enabled.
   final Set<TargetPlatform> supportedPlatforms;
+
+  /// Whether gestures are enabled on the current platform or not.
+  bool get enabled => supportedPlatforms.contains(defaultTargetPlatform);
 }
 
 /// The configuration for the slide deck keyboard shortcuts.
