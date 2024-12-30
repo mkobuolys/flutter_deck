@@ -1,4 +1,4 @@
-# NEXT
+# 0.18.0
 
 - fix: show controls on tap on mobile devices (iOS and Android)
 - fix: controls are auto-hidden when the cursor is over them
