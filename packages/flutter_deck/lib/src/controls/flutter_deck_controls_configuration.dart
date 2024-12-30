@@ -4,8 +4,8 @@ import 'package:flutter/widgets.dart';
 /// The configuration for the slide deck controls.
 class FlutterDeckControlsConfiguration {
   /// Creates a configuration for the slide deck controls. By default, the
-  /// presenter toolbar is visible and the default keyboard controls are
-  /// enabled.
+  /// presenter toolbar is visible, the default keyboard controls are
+  /// enabled, and gestures are enabled on mobile platforms only.
   ///
   /// The default keyboard shortcuts are:
   /// - Next slide: \[ArrowRight\]
@@ -19,20 +19,56 @@ class FlutterDeckControlsConfiguration {
   /// - [LogicalKeyboardKey] for a list of all available keys.
   const FlutterDeckControlsConfiguration({
     this.presenterToolbarVisible = true,
+    this.gestures = const FlutterDeckGesturesConfiguration.mobileOnly(),
     this.shortcuts = const FlutterDeckShortcutsConfiguration(),
   });
 
   /// Creates a configuration for the slide deck controls where they are
   /// disabled.
   const FlutterDeckControlsConfiguration.disabled()
-      : presenterToolbarVisible = false,
-        shortcuts = const FlutterDeckShortcutsConfiguration(enabled: false);
+      : this(
+          presenterToolbarVisible: false,
+          gestures: const FlutterDeckGesturesConfiguration.disabled(),
+          shortcuts: const FlutterDeckShortcutsConfiguration.disabled(),
+        );
 
   /// Whether the presenter toolbar is visible or not.
   final bool presenterToolbarVisible;
 
+  /// The configuration for the slide deck controls gestures.
+  final FlutterDeckGesturesConfiguration gestures;
+
   /// The configuration for the slide deck keyboard shortcuts.
   final FlutterDeckShortcutsConfiguration shortcuts;
+}
+
+/// The configuration for the slide deck control gestures.
+///
+/// The gesture controls are only available on [supportedPlatforms]. By default,
+/// gestures are enabled on all platforms.
+class FlutterDeckGesturesConfiguration {
+  /// Creates a configuration for the slide deck control gestures.
+  const FlutterDeckGesturesConfiguration({
+    this.supportedPlatforms = const {...TargetPlatform.values},
+  });
+
+  /// Creates a configuration for the slide deck control gestures where they are
+  /// disabled.
+  const FlutterDeckGesturesConfiguration.disabled()
+      : this(supportedPlatforms: const {});
+
+  /// Creates a configuration for the slide deck control gestures where they are
+  /// enabled on mobile platforms only.
+  const FlutterDeckGesturesConfiguration.mobileOnly()
+      : this(
+          supportedPlatforms: const {
+            TargetPlatform.android,
+            TargetPlatform.iOS,
+          },
+        );
+
+  /// The platforms where gestures are enabled.
+  final Set<TargetPlatform> supportedPlatforms;
 }
 
 /// The configuration for the slide deck keyboard shortcuts.
@@ -58,6 +94,10 @@ class FlutterDeckShortcutsConfiguration {
     this.toggleNavigationDrawer =
         const SingleActivator(LogicalKeyboardKey.period),
   });
+
+  /// Creates a configuration for the slide deck keyboard shortcuts where they
+  /// are disabled.
+  const FlutterDeckShortcutsConfiguration.disabled() : this(enabled: false);
 
   /// Whether keyboard shortcuts are enabled or not.
   final bool enabled;
