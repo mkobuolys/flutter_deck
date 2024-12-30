@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/controls/actions/actions.dart';
-import 'package:flutter_deck/src/controls/flutter_deck_controls_notifier.dart';
 import 'package:flutter_deck/src/controls/localized_shortcut_labeler.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
@@ -54,9 +53,9 @@ class FlutterDeckControls extends StatelessWidget {
         children: [
           child!,
           if (controlsNotifier.controlsVisible)
-            Align(
+            const Align(
               alignment: AlignmentDirectional.bottomCenter,
-              child: _Controls(controlsNotifier: controlsNotifier),
+              child: _Controls(),
             ),
         ],
       ),
@@ -66,14 +65,12 @@ class FlutterDeckControls extends StatelessWidget {
 }
 
 class _Controls extends StatelessWidget {
-  const _Controls({
-    required this.controlsNotifier,
-  });
-
-  final FlutterDeckControlsNotifier controlsNotifier;
+  const _Controls();
 
   @override
   Widget build(BuildContext context) {
+    final controlsNotifier = context.flutterDeck.controlsNotifier;
+
     return MouseRegion(
       onEnter: (_) => controlsNotifier.toggleControlsVisibleDuration(),
       onExit: (_) => controlsNotifier.toggleControlsVisibleDuration(),
