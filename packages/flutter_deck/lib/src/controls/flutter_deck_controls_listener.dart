@@ -24,11 +24,11 @@ class FlutterDeckControlsListener extends StatelessWidget {
   /// [child] is the widget that will be wrapped by this widget. It should be
   /// the root of the slide deck.
   ///
-  /// [notifier] is the [FlutterDeckControlsNotifier] that will be used to
-  /// control the slide deck.
+  /// [controlsNotifier] is the [FlutterDeckControlsNotifier] that will be used
+  /// to control the slide deck.
   const FlutterDeckControlsListener({
     required this.child,
-    required this.notifier,
+    required this.controlsNotifier,
     super.key,
   });
 
@@ -36,7 +36,29 @@ class FlutterDeckControlsListener extends StatelessWidget {
   final Widget child;
 
   /// The notifier used to control the slide deck.
-  final FlutterDeckControlsNotifier notifier;
+  final FlutterDeckControlsNotifier controlsNotifier;
+
+  void _onHorizontalSwipe(DragEndDetails? details) {
+    final velocity = details?.primaryVelocity;
+
+    if (velocity == null) return;
+
+    velocity > 0 ? controlsNotifier.previous() : controlsNotifier.next();
+  }
+
+  void _onMouseHover(PointerEvent event) {
+    controlsNotifier.showControls();
+  }
+
+  void _onTap() {
+    final controlsVisible = controlsNotifier.controlsVisible;
+
+    controlsNotifier.showControls();
+
+    if (!controlsVisible) return;
+
+    controlsNotifier.next();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +67,17 @@ class FlutterDeckControlsListener extends StatelessWidget {
     Widget widget = Focus(
       autofocus: true,
       child: ListenableBuilder(
-        listenable: notifier,
+        listenable: controlsNotifier,
         builder: (context, child) => MouseRegion(
-          cursor: notifier.controlsVisible
+          cursor: controlsNotifier.controlsVisible
               ? MouseCursor.defer
               : SystemMouseCursors.none,
-          onHover: (_) => notifier.showControls(),
-          child: child,
+          onHover: _onMouseHover,
+          child: GestureDetector(
+            onHorizontalDragEnd: _onHorizontalSwipe,
+            onTap: _onTap,
+            child: child,
+          ),
         ),
         child: child,
       ),
@@ -62,10 +88,10 @@ class FlutterDeckControlsListener extends StatelessWidget {
     if (controls.presenterToolbarVisible || shortcuts.enabled) {
       widget = Actions(
         actions: <Type, Action<Intent>>{
-          GoNextIntent: GoNextAction(notifier),
-          GoPreviousIntent: GoPreviousAction(notifier),
-          ToggleDrawerIntent: ToggleDrawerAction(notifier),
-          ToggleMarkerIntent: ToggleMarkerAction(notifier),
+          GoNextIntent: GoNextAction(controlsNotifier),
+          GoPreviousIntent: GoPreviousAction(controlsNotifier),
+          ToggleDrawerIntent: ToggleDrawerAction(controlsNotifier),
+          ToggleMarkerIntent: ToggleMarkerAction(controlsNotifier),
         },
         child: widget,
       );

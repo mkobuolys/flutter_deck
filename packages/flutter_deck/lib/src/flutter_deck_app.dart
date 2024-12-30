@@ -270,7 +270,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
               presenterController: _presenterController,
               themeNotifier: _themeNotifier,
               child: FlutterDeckControlsListener(
-                notifier: _controlsNotifier,
+                controlsNotifier: _controlsNotifier,
                 child: FlutterDeckTheme(
                   data: theme,
                   child: child!,
