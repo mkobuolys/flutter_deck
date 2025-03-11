@@ -1,6 +1,6 @@
 # 0.2.0
 
-- **BREAKING**: updated `web` dependency to `^1.1.1`
+- **BREAKING**: update `web` dependency to `^1.1.1`
 
 # 0.1.2
 
