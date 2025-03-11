@@ -30,7 +30,7 @@ jobs:
         run: mv web/gh_pages.index.html web/index.html
 
       - name: Build web
-        run: flutter build web --release --web-renderer=canvaskit
+        run: flutter build web --release
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
