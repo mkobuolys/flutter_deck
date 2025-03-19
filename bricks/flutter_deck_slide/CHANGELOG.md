@@ -1,3 +1,7 @@
+# 0.4.0
+
+- chore: upgrade supported mason version to 0.11.0
+
 # 0.3.0
 
 - feat: update to support flutter_deck v0.17.0
