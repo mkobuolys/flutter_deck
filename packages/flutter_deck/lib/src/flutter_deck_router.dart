@@ -53,6 +53,17 @@ class FlutterDeckRouter extends ChangeNotifier {
 
   late GoRouter _router;
 
+  String? _getInitialRoute() {
+    final initialRoute =
+        slides.where((s) => s.configuration.initial).singleOrNull?.route;
+
+    if (!kIsWeb) return initialRoute;
+
+    final fragment = Uri.base.fragment;
+
+    return fragment.isNotEmpty ? Uri.parse(fragment).path : initialRoute;
+  }
+
   /// Builds the [GoRouter] for the slide deck.
   ///
   /// This method should only be called once and the result should be passed to
@@ -64,7 +75,13 @@ class FlutterDeckRouter extends ChangeNotifier {
   /// `/presenter-view`.
   GoRouter build({bool? isPresenterView}) {
     _validateRoutes();
-    _initRouterData(isPresenterView: isPresenterView);
+
+    final initialRoute = _getInitialRoute();
+
+    _initRouterData(
+      initialRoute: initialRoute,
+      isPresenterView: isPresenterView,
+    );
 
     return _router = GoRouter(
       routes: _isPresenterView
@@ -76,7 +93,10 @@ class FlutterDeckRouter extends ChangeNotifier {
               ),
             ]
           : [
-              GoRoute(path: '/', redirect: (_, __) => slides.first.route),
+              GoRoute(
+                path: '/',
+                redirect: (_, __) => initialRoute ?? slides.first.route,
+              ),
               for (final slide in slides)
                 GoRoute(
                   path: slide.route,
@@ -88,11 +108,15 @@ class FlutterDeckRouter extends ChangeNotifier {
                   ),
                 ),
             ],
+      initialLocation: initialRoute,
+      overridePlatformDefaultLocation: initialRoute != null,
     )..routeInformationProvider.addListener(notifyListeners);
   }
 
-  void _initRouterData({bool? isPresenterView}) {
-    _currentSlideIndex = 0;
+  void _initRouterData({String? initialRoute, bool? isPresenterView}) {
+    _currentSlideIndex = initialRoute != null
+        ? slides.indexWhere((s) => s.route == initialRoute)
+        : 0;
     _currentSlideStep = 1;
     _isPresenterView = false;
 
@@ -104,16 +128,9 @@ class FlutterDeckRouter extends ChangeNotifier {
     if (!kIsWeb) return;
 
     final uri = Uri.parse(Uri.base.fragment);
-
-    _isPresenterView = uri.path == _presenterViewRoute;
-
-    final slideIndex = slides.indexWhere((s) => s.route == uri.path);
-
-    if (slideIndex < 0) return;
-
     final stepNumber = uri.queryParameters[_queryParameterStep];
 
-    _currentSlideIndex = slideIndex;
+    _isPresenterView = uri.path == _presenterViewRoute;
     _currentSlideStep = stepNumber != null ? int.tryParse(stepNumber) ?? 1 : 1;
   }
 
@@ -243,6 +260,16 @@ class FlutterDeckRouter extends ChangeNotifier {
     assert(
       duplicatedRoutes.isEmpty,
       'Slide routes must be unique. Duplicate routes found: $duplicatedRoutes',
+    );
+
+    final initialSlides = slides
+        .where((slide) => slide.configuration.initial)
+        .map((slide) => slide.route);
+
+    assert(
+      initialSlides.length <= 1,
+      'There must be at most one initial slide. Initial slides found: '
+      '${initialSlides.join(', ')}',
     );
   }
 }
