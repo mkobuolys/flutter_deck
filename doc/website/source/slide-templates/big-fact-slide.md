@@ -1,5 +1,5 @@
 ---
-title: Big Fact Slide
+title: Big Fact slide
 navOrder: 2
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Hiding Slides
+title: Hiding slides
 navOrder: 5
 ---
 

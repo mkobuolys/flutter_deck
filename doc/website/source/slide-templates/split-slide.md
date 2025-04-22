@@ -1,5 +1,5 @@
 ---
-title: Split Slide
+title: Split slide
 navOrder: 5
 ---
 

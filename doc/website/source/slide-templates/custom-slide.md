@@ -1,5 +1,5 @@
 ---
-title: Custom Slide
+title: Custom slide
 navOrder: 8
 ---
 

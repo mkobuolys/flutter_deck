@@ -1,5 +1,5 @@
 ---
-title: Creating Slides
+title: Creating slides
 navOrder: 1
 ---
 

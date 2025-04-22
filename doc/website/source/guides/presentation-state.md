@@ -1,6 +1,6 @@
 ---
 title: Presentation state
-navOrder: 8
+navOrder: 9
 ---
 
 The slide deck state is managed by the `FlutterDeck` widget. This widget is responsible for managing the state of the slide deck, its configuration, navigation, and other details. By using the `FlutterDeck` extensions, you can access the slide deck state and its methods from anywhere in the app:

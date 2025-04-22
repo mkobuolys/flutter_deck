@@ -1,7 +1,8 @@
 ---
-title: Presenter View
+title: Presenter view
 navOrder: 6
 ---
+
 The presenter view allows you to control your presentation from a separate screen or (even) device. It displays the current slide, speaker notes, and a timer.
 
 ![Presenter view demo](https://github.com/mkobuolys/flutter_deck/blob/main/images/presenter-view.gif?raw=true)

@@ -1,7 +1,8 @@
 ---
-title: Navigation Drawer
+title: Navigation drawer
 navOrder: 2
 ---
+
 Every slide deck comes with a navigation drawer that can be used to navigate through the slide deck. The navigation drawer is automatically generated based on the slide deck configuration.
 
 The navigation drawer item title is generated based on the following rules:
