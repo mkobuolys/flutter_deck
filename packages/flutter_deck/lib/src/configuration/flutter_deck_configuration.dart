@@ -100,6 +100,9 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   /// included in the slide deck and cannot be navigated to. The default is
   /// false.
   ///
+  /// [initial] defines whether the slide is the initial slide or not. The
+  /// default is false.
+  ///
   /// [speakerNotes] are the speaker notes for the slide. The default is an
   /// empty string.
   ///
@@ -114,6 +117,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   const FlutterDeckSlideConfiguration({
     required this.route,
     this.hidden = false,
+    this.initial = false,
     this.speakerNotes = '',
     this.steps = 1,
     this.title,
@@ -133,6 +137,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   const FlutterDeckSlideConfiguration._({
     required this.route,
     this.hidden = false,
+    this.initial = false,
     this.speakerNotes = '',
     this.steps = 1,
     this.title,
@@ -172,6 +177,14 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   /// The default is false.
   final bool hidden;
 
+  /// Whether the slide is the initial slide or not.
+  ///
+  /// On Web, this property is only used when the path is not set. If the path
+  /// is set, it will determine the initial slide.
+  ///
+  /// The default is false.
+  final bool initial;
+
   /// The number of steps in the slide.
   final int steps;
 
@@ -189,6 +202,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
     return FlutterDeckSlideConfiguration._(
       route: route,
       hidden: hidden,
+      initial: initial,
       speakerNotes: speakerNotes,
       steps: steps,
       title: title,

@@ -1,5 +1,5 @@
 ---
-title: Blank Slide
+title: Blank slide
 navOrder: 7
 ---
 

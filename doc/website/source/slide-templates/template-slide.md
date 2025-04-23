@@ -1,5 +1,5 @@
 ---
-title: Template Slide
+title: Template slide
 navOrder: 6
 ---
 

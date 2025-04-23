@@ -1,5 +1,5 @@
 ---
-title: Multi-Step Slides
+title: Multi-Step slides
 navOrder: 4
 ---
 

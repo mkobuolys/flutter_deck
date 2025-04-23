@@ -1,5 +1,5 @@
 ---
-title: Image Slide
+title: Image slide
 navOrder: 3
 ---
 

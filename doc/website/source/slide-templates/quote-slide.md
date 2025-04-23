@@ -1,5 +1,5 @@
 ---
-title: Quote Slide
+title: Quote slide
 navOrder: 4
 ---
 

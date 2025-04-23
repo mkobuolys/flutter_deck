@@ -1,6 +1,6 @@
 ---
 title: Transitions
-navOrder: 7
+navOrder: 8
 ---
 
 This package comes with a few predefined transitions that can be used for your slides:
