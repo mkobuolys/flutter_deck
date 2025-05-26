@@ -20,11 +20,11 @@ class FlutterDeckDrawer extends StatefulWidget {
 }
 
 class _FlutterDeckDrawerState extends State<FlutterDeckDrawer> {
-  late final ScrollController _controller;
+  ScrollController? _controller;
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
 
     super.dispose();
   }
@@ -33,6 +33,7 @@ class _FlutterDeckDrawerState extends State<FlutterDeckDrawer> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    _controller?.dispose();
     _controller = ScrollController(initialScrollOffset: _initialScrollOffset);
   }
 
