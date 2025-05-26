@@ -6,7 +6,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=3.0.6 <4.0.0"
-  flutter: ">=3.10.0"
+  flutter: ">=3.10.0 <=3.27.4"
 
 dependencies:
   cupertino_icons: ^1.0.2

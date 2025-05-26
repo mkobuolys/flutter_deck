@@ -1,6 +1,7 @@
 # NEXT
 
 - feat: allow setting the initial slide in the `FlutterDeckSlideConfiguration`
+- fix: scroll controller initialization in the `FlutterDeckDrawer`
 
 # 0.18.0
 
