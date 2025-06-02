@@ -84,4 +84,15 @@ The following presentations were created with `flutter_deck`:
 - Italian
 - [Alberto Bonacina](https://www.linkedin.com/in/bonacinaalberto/)
 
+[All about AnimationController](https://chooyan-eng.github.io/animationcontroller_lt_slidedeck)
+
+- English / Japanese
+- [Tsuyoshi Chujo](https://x.com/tsuyoshi_chujo)
+
+[Haskell: Lead Your Flutter Code to the Next Level](https://chooyan-eng.github.io/flutter_ninjas_2025)
+
+- English
+- [Tsuyoshi Chujo](https://x.com/tsuyoshi_chujo)
+
 [mangirdas_kazlauskas_link]: https://x.com/mkobuolys
+
