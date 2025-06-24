@@ -76,12 +76,9 @@ class FlutterDeckApp extends StatefulWidget {
     this.supportedLocales = const <Locale>[_defaultLocale],
     bool? isPresenterView,
     super.key,
-  })  : assert(slides.length > 0, 'You must provide at least one slide'),
-        assert(
-          isPresenterView == null || client != null,
-          'You must provide a client when providing isPresenterView',
-        ),
-        isPresenterView = !kIsWeb ? isPresenterView : null;
+  }) : assert(slides.length > 0, 'You must provide at least one slide'),
+       assert(isPresenterView == null || client != null, 'You must provide a client when providing isPresenterView'),
+       isPresenterView = !kIsWeb ? isPresenterView : null;
 
   /// The client to use for the presenter view.
   final FlutterDeckClient? client;
@@ -208,15 +205,11 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
     super.dispose();
   }
 
-  bool _filterHidden(Widget slide) =>
-      slide is! FlutterDeckSlideWidget ||
-      !(slide.configuration?.hidden ?? false);
+  bool _filterHidden(Widget slide) => slide is! FlutterDeckSlideWidget || !(slide.configuration?.hidden ?? false);
 
   FlutterDeckRouterSlide _buildRouterSlide((int, Widget) indexedSlide) {
     final (index, slide) = indexedSlide;
-    final defaultConfiguration = FlutterDeckSlideConfiguration(
-      route: '/slide-${index + 1}',
-    );
+    final defaultConfiguration = FlutterDeckSlideConfiguration(route: '/slide-${index + 1}');
 
     var slideWidget = slide;
 
@@ -234,11 +227,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
   }
 
   void _buildRouter() {
-    final slides = widget.slides
-        .where(_filterHidden)
-        .indexed
-        .map(_buildRouterSlide)
-        .toList();
+    final slides = widget.slides.where(_filterHidden).indexed.map(_buildRouterSlide).toList();
 
     _flutterDeckRouter = FlutterDeckRouter(slides: slides);
     _router = _flutterDeckRouter.build(isPresenterView: widget.isPresenterView);
@@ -272,10 +261,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
               child: FlutterDeckControlsListener(
                 controlsNotifier: _controlsNotifier,
                 markerNotifier: _markerNotifier,
-                child: FlutterDeckTheme(
-                  data: theme,
-                  child: child!,
-                ),
+                child: FlutterDeckTheme(data: theme, child: child!),
               ),
             ),
             debugShowCheckedModeBanner: false,

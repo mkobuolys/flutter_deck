@@ -19,10 +19,7 @@ import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 /// slide deck.
 class FlutterDeckTitleSlideThemeData {
   /// Creates a theme to style [FlutterDeckTitleSlide].
-  const FlutterDeckTitleSlideThemeData({
-    this.subtitleTextStyle,
-    this.titleTextStyle,
-  });
+  const FlutterDeckTitleSlideThemeData({this.subtitleTextStyle, this.titleTextStyle});
 
   /// Text style for the subtitle of the slide.
   final TextStyle? subtitleTextStyle;
@@ -32,10 +29,7 @@ class FlutterDeckTitleSlideThemeData {
 
   /// Creates a copy of this object with the given fields replaced with the new
   /// values.
-  FlutterDeckTitleSlideThemeData copyWith({
-    TextStyle? subtitleTextStyle,
-    TextStyle? titleTextStyle,
-  }) {
+  FlutterDeckTitleSlideThemeData copyWith({TextStyle? subtitleTextStyle, TextStyle? titleTextStyle}) {
     return FlutterDeckTitleSlideThemeData(
       subtitleTextStyle: subtitleTextStyle ?? this.subtitleTextStyle,
       titleTextStyle: titleTextStyle ?? this.titleTextStyle,
@@ -47,10 +41,8 @@ class FlutterDeckTitleSlideThemeData {
     if (other == null) return this;
 
     return copyWith(
-      subtitleTextStyle: subtitleTextStyle?.merge(other.subtitleTextStyle) ??
-          other.subtitleTextStyle,
-      titleTextStyle:
-          titleTextStyle?.merge(other.titleTextStyle) ?? other.titleTextStyle,
+      subtitleTextStyle: subtitleTextStyle?.merge(other.subtitleTextStyle) ?? other.subtitleTextStyle,
+      titleTextStyle: titleTextStyle?.merge(other.titleTextStyle) ?? other.titleTextStyle,
     );
   }
 }
@@ -64,11 +56,7 @@ class FlutterDeckTitleSlideTheme extends InheritedTheme {
   /// Creates a theme to style [FlutterDeckTitleSlide].
   ///
   /// The [data] argument must not be null.
-  const FlutterDeckTitleSlideTheme({
-    required this.data,
-    required super.child,
-    super.key,
-  });
+  const FlutterDeckTitleSlideTheme({required this.data, required super.child, super.key});
 
   /// The visual properties of [FlutterDeckTitleSlide].
   final FlutterDeckTitleSlideThemeData data;
@@ -79,17 +67,14 @@ class FlutterDeckTitleSlideTheme extends InheritedTheme {
   ///
   /// The returned theme data will never be null.
   static FlutterDeckTitleSlideThemeData of(BuildContext context) {
-    final theme = context
-        .dependOnInheritedWidgetOfExactType<FlutterDeckTitleSlideTheme>();
+    final theme = context.dependOnInheritedWidgetOfExactType<FlutterDeckTitleSlideTheme>();
 
     return theme?.data ?? FlutterDeckTheme.of(context).titleSlideTheme;
   }
 
   @override
-  bool updateShouldNotify(FlutterDeckTitleSlideTheme oldWidget) =>
-      data != oldWidget.data;
+  bool updateShouldNotify(FlutterDeckTitleSlideTheme oldWidget) => data != oldWidget.data;
 
   @override
-  Widget wrap(BuildContext context, Widget child) =>
-      FlutterDeckTitleSlideTheme(data: data, child: child);
+  Widget wrap(BuildContext context, Widget child) => FlutterDeckTitleSlideTheme(data: data, child: child);
 }

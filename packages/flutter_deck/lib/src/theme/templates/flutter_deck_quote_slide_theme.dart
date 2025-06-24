@@ -19,10 +19,7 @@ import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 /// slide deck.
 class FlutterDeckQuoteSlideThemeData {
   /// Creates a theme to style [FlutterDeckQuoteSlide].
-  const FlutterDeckQuoteSlideThemeData({
-    this.attributionTextStyle,
-    this.quoteTextStyle,
-  });
+  const FlutterDeckQuoteSlideThemeData({this.attributionTextStyle, this.quoteTextStyle});
 
   /// Text style for the attribution of the quote.
   final TextStyle? attributionTextStyle;
@@ -32,10 +29,7 @@ class FlutterDeckQuoteSlideThemeData {
 
   /// Creates a copy of this object with the given fields replaced with the new
   /// values.
-  FlutterDeckQuoteSlideThemeData copyWith({
-    TextStyle? attributionTextStyle,
-    TextStyle? quoteTextStyle,
-  }) {
+  FlutterDeckQuoteSlideThemeData copyWith({TextStyle? attributionTextStyle, TextStyle? quoteTextStyle}) {
     return FlutterDeckQuoteSlideThemeData(
       attributionTextStyle: attributionTextStyle ?? this.attributionTextStyle,
       quoteTextStyle: quoteTextStyle ?? this.quoteTextStyle,
@@ -47,11 +41,8 @@ class FlutterDeckQuoteSlideThemeData {
     if (other == null) return this;
 
     return copyWith(
-      attributionTextStyle:
-          attributionTextStyle?.merge(other.attributionTextStyle) ??
-              other.attributionTextStyle,
-      quoteTextStyle:
-          quoteTextStyle?.merge(other.quoteTextStyle) ?? other.quoteTextStyle,
+      attributionTextStyle: attributionTextStyle?.merge(other.attributionTextStyle) ?? other.attributionTextStyle,
+      quoteTextStyle: quoteTextStyle?.merge(other.quoteTextStyle) ?? other.quoteTextStyle,
     );
   }
 }
@@ -65,11 +56,7 @@ class FlutterDeckQuoteSlideTheme extends InheritedTheme {
   /// Creates a theme to style [FlutterDeckQuoteSlide].
   ///
   /// The [data] argument must not be null.
-  const FlutterDeckQuoteSlideTheme({
-    required this.data,
-    required super.child,
-    super.key,
-  });
+  const FlutterDeckQuoteSlideTheme({required this.data, required super.child, super.key});
 
   /// The visual properties of [FlutterDeckQuoteSlide].
   final FlutterDeckQuoteSlideThemeData data;
@@ -82,17 +69,14 @@ class FlutterDeckQuoteSlideTheme extends InheritedTheme {
   ///
   /// The returned theme data will never be null.
   static FlutterDeckQuoteSlideThemeData of(BuildContext context) {
-    final theme = context
-        .dependOnInheritedWidgetOfExactType<FlutterDeckQuoteSlideTheme>();
+    final theme = context.dependOnInheritedWidgetOfExactType<FlutterDeckQuoteSlideTheme>();
 
     return theme?.data ?? FlutterDeckTheme.of(context).quoteSlideTheme;
   }
 
   @override
-  bool updateShouldNotify(covariant FlutterDeckQuoteSlideTheme oldWidget) =>
-      data != oldWidget.data;
+  bool updateShouldNotify(covariant FlutterDeckQuoteSlideTheme oldWidget) => data != oldWidget.data;
 
   @override
-  Widget wrap(BuildContext context, Widget child) =>
-      FlutterDeckQuoteSlideTheme(data: data, child: child);
+  Widget wrap(BuildContext context, Widget child) => FlutterDeckQuoteSlideTheme(data: data, child: child);
 }

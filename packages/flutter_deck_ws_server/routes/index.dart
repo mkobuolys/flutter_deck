@@ -8,10 +8,7 @@ Future<Response> onRequest(RequestContext context) async {
 
     if (cubit.state != null) channel.sink.add(cubit.state);
 
-    channel.stream.listen(
-      (state) => cubit.update(state as String),
-      onDone: () => cubit.unsubscribe(channel),
-    );
+    channel.stream.listen((state) => cubit.update(state as String), onDone: () => cubit.unsubscribe(channel));
   });
 
   return handler(context);

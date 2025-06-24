@@ -59,10 +59,7 @@ abstract class FlutterDeckSlideWidget extends StatelessWidget {
   ///
   /// This constructor must be called by the subclasses to create a new slide.
   /// The [configuration] argument must not be null.
-  const FlutterDeckSlideWidget({
-    this.configuration,
-    super.key,
-  });
+  const FlutterDeckSlideWidget({this.configuration, super.key});
 
   /// The configuration of the slide.
   final FlutterDeckSlideConfiguration? configuration;
@@ -85,8 +82,8 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     required FlutterDeckThemeData? theme,
     super.configuration,
     super.key,
-  })  : _builder = builder,
-        _theme = theme;
+  }) : _builder = builder,
+       _theme = theme;
 
   /// Creates a new big fact slide.
   ///
@@ -115,18 +112,18 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
-          configuration: configuration,
-          builder: (context) => FlutterDeckBigFactSlide(
-            title: title,
-            subtitle: subtitle,
-            backgroundBuilder: backgroundBuilder,
-            footerBuilder: footerBuilder,
-            headerBuilder: headerBuilder,
-            subtitleMaxLines: subtitleMaxLines,
-          ),
-          theme: theme,
-          key: key,
-        );
+         configuration: configuration,
+         builder: (context) => FlutterDeckBigFactSlide(
+           title: title,
+           subtitle: subtitle,
+           backgroundBuilder: backgroundBuilder,
+           footerBuilder: footerBuilder,
+           headerBuilder: headerBuilder,
+           subtitleMaxLines: subtitleMaxLines,
+         ),
+         theme: theme,
+         key: key,
+       );
 
   /// Creates a new blank slide.
   ///
@@ -149,16 +146,16 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
-          configuration: configuration,
-          builder: (context) => FlutterDeckBlankSlide(
-            builder: builder,
-            backgroundBuilder: backgroundBuilder,
-            footerBuilder: footerBuilder,
-            headerBuilder: headerBuilder,
-          ),
-          theme: theme,
-          key: key,
-        );
+         configuration: configuration,
+         builder: (context) => FlutterDeckBlankSlide(
+           builder: builder,
+           backgroundBuilder: backgroundBuilder,
+           footerBuilder: footerBuilder,
+           headerBuilder: headerBuilder,
+         ),
+         theme: theme,
+         key: key,
+       );
 
   /// Creates a new custom slide.
   ///
@@ -177,12 +174,7 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     FlutterDeckSlideConfiguration? configuration,
     FlutterDeckThemeData? theme,
     Key? key,
-  }) : this._(
-          configuration: configuration,
-          builder: builder,
-          theme: theme,
-          key: key,
-        );
+  }) : this._(configuration: configuration, builder: builder, theme: theme, key: key);
 
   /// Creates a new image slide.
   ///
@@ -208,17 +200,17 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
-          configuration: configuration,
-          builder: (context) => FlutterDeckImageSlide(
-            imageBuilder: imageBuilder,
-            label: label,
-            backgroundBuilder: backgroundBuilder,
-            footerBuilder: footerBuilder,
-            headerBuilder: headerBuilder,
-          ),
-          theme: theme,
-          key: key,
-        );
+         configuration: configuration,
+         builder: (context) => FlutterDeckImageSlide(
+           imageBuilder: imageBuilder,
+           label: label,
+           backgroundBuilder: backgroundBuilder,
+           footerBuilder: footerBuilder,
+           headerBuilder: headerBuilder,
+         ),
+         theme: theme,
+         key: key,
+       );
 
   /// Creates a new quote slide.
   ///
@@ -247,18 +239,18 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
-          configuration: configuration,
-          builder: (context) => FlutterDeckQuoteSlide(
-            quote: quote,
-            attribution: attribution,
-            quoteMaxLines: quoteMaxLines,
-            backgroundBuilder: backgroundBuilder,
-            footerBuilder: footerBuilder,
-            headerBuilder: headerBuilder,
-          ),
-          theme: theme,
-          key: key,
-        );
+         configuration: configuration,
+         builder: (context) => FlutterDeckQuoteSlide(
+           quote: quote,
+           attribution: attribution,
+           quoteMaxLines: quoteMaxLines,
+           backgroundBuilder: backgroundBuilder,
+           footerBuilder: footerBuilder,
+           headerBuilder: headerBuilder,
+         ),
+         theme: theme,
+         key: key,
+       );
 
   /// Creates a new slide with two columns.
   ///
@@ -289,18 +281,18 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
-          configuration: configuration,
-          builder: (context) => FlutterDeckSplitSlide(
-            leftBuilder: leftBuilder,
-            rightBuilder: rightBuilder,
-            backgroundBuilder: backgroundBuilder,
-            footerBuilder: footerBuilder,
-            headerBuilder: headerBuilder,
-            splitRatio: splitRatio,
-          ),
-          theme: theme,
-          key: key,
-        );
+         configuration: configuration,
+         builder: (context) => FlutterDeckSplitSlide(
+           leftBuilder: leftBuilder,
+           rightBuilder: rightBuilder,
+           backgroundBuilder: backgroundBuilder,
+           footerBuilder: footerBuilder,
+           headerBuilder: headerBuilder,
+           splitRatio: splitRatio,
+         ),
+         theme: theme,
+         key: key,
+       );
 
   /// Creates a new slide with a standard layout.
   ///
@@ -322,16 +314,16 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
-          configuration: configuration,
-          builder: (context) => FlutterDeckSlideBase(
-            backgroundBuilder: backgroundBuilder,
-            contentBuilder: contentBuilder,
-            footerBuilder: footerBuilder,
-            headerBuilder: headerBuilder,
-          ),
-          theme: theme,
-          key: key,
-        );
+         configuration: configuration,
+         builder: (context) => FlutterDeckSlideBase(
+           backgroundBuilder: backgroundBuilder,
+           contentBuilder: contentBuilder,
+           footerBuilder: footerBuilder,
+           headerBuilder: headerBuilder,
+         ),
+         theme: theme,
+         key: key,
+       );
 
   /// Creates a new title slide.
   ///
@@ -359,18 +351,18 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     FlutterDeckThemeData? theme,
     Key? key,
   }) : this._(
-          configuration: configuration,
-          builder: (context) => FlutterDeckTitleSlide(
-            title: title,
-            subtitle: subtitle,
-            backgroundBuilder: backgroundBuilder,
-            footerBuilder: footerBuilder,
-            headerBuilder: headerBuilder,
-            speakerInfoBuilder: speakerInfoBuilder,
-          ),
-          theme: theme,
-          key: key,
-        );
+         configuration: configuration,
+         builder: (context) => FlutterDeckTitleSlide(
+           title: title,
+           subtitle: subtitle,
+           backgroundBuilder: backgroundBuilder,
+           footerBuilder: footerBuilder,
+           headerBuilder: headerBuilder,
+           speakerInfoBuilder: speakerInfoBuilder,
+         ),
+         theme: theme,
+         key: key,
+       );
 
   final WidgetBuilder _builder;
 
@@ -390,11 +382,7 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
 
     return Theme(
       data: materialTheme.copyWith(
-        textTheme: materialTheme.textTheme.apply(
-          bodyColor: color,
-          displayColor: color,
-          decorationColor: color,
-        ),
+        textTheme: materialTheme.textTheme.apply(bodyColor: color, displayColor: color, decorationColor: color),
       ),
       child: FlutterDeckTheme(
         data: theme.copyWith(textTheme: theme.textTheme.apply(color: color)),
@@ -416,9 +404,7 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
 }
 
 class _SlideBody extends StatelessWidget {
-  const _SlideBody({
-    required this.child,
-  });
+  const _SlideBody({required this.child});
 
   final Widget child;
 
@@ -428,13 +414,7 @@ class _SlideBody extends StatelessWidget {
     final scaffoldState = Scaffold.of(context);
 
     var body = configuration.showProgress
-        ? Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              child,
-              configuration.progressIndicator,
-            ],
-          )
+        ? Stack(alignment: Alignment.bottomCenter, children: [child, configuration.progressIndicator])
         : child;
 
     final globalConfiguration = context.flutterDeck.globalConfiguration;
@@ -458,9 +438,7 @@ class _SlideBody extends StatelessWidget {
 
     return FlutterDeckDrawerListener(
       onDrawerToggle: () {
-        scaffoldState.isDrawerOpen
-            ? scaffoldState.closeDrawer()
-            : scaffoldState.openDrawer();
+        scaffoldState.isDrawerOpen ? scaffoldState.closeDrawer() : scaffoldState.openDrawer();
       },
       child: body,
     );
@@ -473,12 +451,7 @@ extension FlutterDeckSlideWidgetX on Widget {
   ///
   /// This method can be used instead of subclassing [FlutterDeckSlideWidget] to
   /// create a new slide.
-  FlutterDeckSlideWidget withSlideConfiguration(
-    FlutterDeckSlideConfiguration configuration,
-  ) {
-    return FlutterDeckSlide.custom(
-      configuration: configuration,
-      builder: (context) => this,
-    );
+  FlutterDeckSlideWidget withSlideConfiguration(FlutterDeckSlideConfiguration configuration) {
+    return FlutterDeckSlide.custom(configuration: configuration, builder: (context) => this);
   }
 }

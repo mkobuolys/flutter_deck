@@ -60,23 +60,17 @@ class FlutterDeckQuoteSlide extends StatelessWidget {
 
   Widget _buildFooter(BuildContext context) =>
       footerBuilder?.call(context) ??
-      FlutterDeckFooter.fromConfiguration(
-        configuration: context.flutterDeck.configuration.footer,
-      );
+      FlutterDeckFooter.fromConfiguration(configuration: context.flutterDeck.configuration.footer);
 
   Widget _buildHeader(BuildContext context) =>
       headerBuilder?.call(context) ??
-      FlutterDeckHeader.fromConfiguration(
-        configuration: context.flutterDeck.configuration.header,
-      );
+      FlutterDeckHeader.fromConfiguration(configuration: context.flutterDeck.configuration.header);
 
   @override
   Widget build(BuildContext context) {
     final theme = FlutterDeckQuoteSlideTheme.of(context);
-    final FlutterDeckSlideConfiguration(
-      footer: footerConfiguration,
-      header: headerConfiguration,
-    ) = context.flutterDeck.configuration;
+    final FlutterDeckSlideConfiguration(footer: footerConfiguration, header: headerConfiguration) =
+        context.flutterDeck.configuration;
 
     return FlutterDeckSlideBase(
       backgroundBuilder: backgroundBuilder,

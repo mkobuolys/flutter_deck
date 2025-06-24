@@ -7,12 +7,7 @@ import '../../test_utils.dart';
 void main() {
   group('TitleSlide', () {
     testWidgets('should render all layout elements', (tester) async {
-      final slideTester = SlideTester(
-        tester: tester,
-        showHeader: true,
-        showFooter: true,
-        slide: const TitleSlide(),
-      );
+      final slideTester = SlideTester(tester: tester, showHeader: true, showFooter: true, slide: const TitleSlide());
 
       await slideTester.pumpSlide();
 
@@ -31,12 +26,7 @@ void main() {
     });
 
     testWidgets('should apply theming', (tester) async {
-      final slideTester = SlideTester(
-        tester: tester,
-        showHeader: false,
-        showFooter: false,
-        slide: const TitleSlide(),
-      );
+      final slideTester = SlideTester(tester: tester, showHeader: false, showFooter: false, slide: const TitleSlide());
 
       await slideTester.pumpSlide();
 
@@ -75,12 +65,7 @@ void main() {
 }
 
 class TitleSlide extends FlutterDeckSlideWidget {
-  const TitleSlide({super.key})
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/title-slide',
-          ),
-        );
+  const TitleSlide({super.key}) : super(configuration: const FlutterDeckSlideConfiguration(route: '/title-slide'));
 
   @override
   Widget build(BuildContext context) {
@@ -88,10 +73,7 @@ class TitleSlide extends FlutterDeckSlideWidget {
       title: 'Title',
       subtitle: 'Subtitle',
       backgroundBuilder: (context) => FlutterDeckBackground.custom(
-        child: Container(
-          color: Colors.orange,
-          key: const Key('Deck Background'),
-        ),
+        child: Container(color: Colors.orange, key: const Key('Deck Background')),
       ),
       key: const Key('title slide'),
     );

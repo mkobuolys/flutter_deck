@@ -50,10 +50,7 @@ class _FlutterDeckDrawerState extends State<FlutterDeckDrawer> {
     if (index < itemsInView / 2) return 0;
 
     final remainingOffset = viewHeight - itemsInView * _navigationItemHeight;
-    final scrollToIndex = math.min(
-      index - itemsInView ~/ 3,
-      itemsCount - itemsInView,
-    );
+    final scrollToIndex = math.min(index - itemsInView ~/ 3, itemsCount - itemsInView);
 
     return scrollToIndex * _navigationItemHeight - remainingOffset;
   }
@@ -67,10 +64,7 @@ class _FlutterDeckDrawerState extends State<FlutterDeckDrawer> {
       width: _navigationDrawerWidth,
       child: ListView.builder(
         controller: _controller,
-        itemBuilder: (context, index) => _SlideCard(
-          slide: slides[index],
-          index: index,
-        ),
+        itemBuilder: (context, index) => _SlideCard(slide: slides[index], index: index),
         itemCount: slides.length,
       ),
     );
@@ -78,10 +72,7 @@ class _FlutterDeckDrawerState extends State<FlutterDeckDrawer> {
 }
 
 class _SlideCard extends StatelessWidget {
-  const _SlideCard({
-    required this.slide,
-    required this.index,
-  });
+  const _SlideCard({required this.slide, required this.index});
 
   final FlutterDeckRouterSlide slide;
   final int index;
@@ -108,11 +99,7 @@ class _SlideCard extends StatelessWidget {
     return ListTile(
       selected: isActive,
       leading: Text('$slideNumber.'),
-      title: Text(
-        _getSlideTitle(),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
+      title: Text(_getSlideTitle(), maxLines: 1, overflow: TextOverflow.ellipsis),
       onTap: () {
         if (!isActive) context.flutterDeck.goToSlide(slideNumber);
 

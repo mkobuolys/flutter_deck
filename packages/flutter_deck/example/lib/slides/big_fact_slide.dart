@@ -8,29 +8,26 @@ const _speakerNotes = '''
 
 class BigFactSlide extends FlutterDeckSlideWidget {
   const BigFactSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/big-fact',
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(
-              title: 'Big fact slide template',
-            ),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/big-fact',
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Big fact slide template'),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
     const title = '100%';
-    const subtitle = 'The test coverage value that flutter_deck will probably '
+    const subtitle =
+        'The test coverage value that flutter_deck will probably '
         'never achieve';
 
     return FlutterDeckSlide.bigFact(
       title: title,
       subtitle: subtitle,
       theme: FlutterDeckTheme.of(context).copyWith(
-        bigFactSlideTheme: const FlutterDeckBigFactSlideThemeData(
-          titleTextStyle: TextStyle(color: Colors.amber),
-        ),
+        bigFactSlideTheme: const FlutterDeckBigFactSlideThemeData(titleTextStyle: TextStyle(color: Colors.amber)),
       ),
     );
   }

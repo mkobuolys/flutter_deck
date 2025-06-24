@@ -1,3 +1,7 @@
+# NEXT
+
+- chore: bump to SDK 3.8.0
+
 # 0.1.2
 
 - chore: update very_good_analysis to v6.0.0

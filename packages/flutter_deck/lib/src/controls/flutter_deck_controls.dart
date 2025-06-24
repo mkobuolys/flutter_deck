@@ -29,10 +29,7 @@ class FlutterDeckControls extends StatelessWidget {
   /// Creates a [FlutterDeckControls].
   ///
   /// The [child] argument must not be null.
-  const FlutterDeckControls({
-    required this.child,
-    super.key,
-  });
+  const FlutterDeckControls({required this.child, super.key});
 
   /// The widget below this widget in the tree.
   final Widget child;
@@ -53,10 +50,7 @@ class FlutterDeckControls extends StatelessWidget {
         children: [
           child!,
           if (controlsNotifier.controlsVisible)
-            const Align(
-              alignment: AlignmentDirectional.bottomCenter,
-              child: _Controls(),
-            ),
+            const Align(alignment: AlignmentDirectional.bottomCenter, child: _Controls()),
         ],
       ),
       child: child,
@@ -119,12 +113,12 @@ class _PreviousButton extends StatelessWidget {
       builder: (context, child) {
         final isFirstSlide = flutterDeck.slideNumber == 1;
         final isFirstStep = flutterDeck.stepNumber == 1;
-        final enabled = !(isFirstSlide && isFirstStep) &&
-            !controlsNotifier.intentDisabled(const GoPreviousIntent());
+        final enabled = !(isFirstSlide && isFirstStep) && !controlsNotifier.intentDisabled(const GoPreviousIntent());
 
         return IconButton(
           icon: const Icon(Icons.keyboard_arrow_left_rounded),
-          tooltip: 'Previous'
+          tooltip:
+              'Previous'
               '${shortcuts.enabled ? ' ($shortcut)' : ''}',
           onPressed: enabled ? controlsNotifier.previous : null,
         );
@@ -149,16 +143,14 @@ class _NextButton extends StatelessWidget {
     return ListenableBuilder(
       listenable: controlsNotifier,
       builder: (context, child) {
-        final isLastSlide =
-            flutterDeck.slideNumber == flutterDeck.router.slides.length;
-        final isLastStep =
-            flutterDeck.stepNumber == flutterDeck.configuration.steps;
-        final enabled = !(isLastSlide && isLastStep) &&
-            !controlsNotifier.intentDisabled(const GoNextIntent());
+        final isLastSlide = flutterDeck.slideNumber == flutterDeck.router.slides.length;
+        final isLastStep = flutterDeck.stepNumber == flutterDeck.configuration.steps;
+        final enabled = !(isLastSlide && isLastStep) && !controlsNotifier.intentDisabled(const GoNextIntent());
 
         return IconButton(
           icon: const Icon(Icons.keyboard_arrow_right_rounded),
-          tooltip: 'Next'
+          tooltip:
+              'Next'
               '${shortcuts.enabled ? ' ($shortcut)' : ''}',
           onPressed: enabled ? controlsNotifier.next : null,
         );
@@ -188,8 +180,7 @@ class _SlideNumberButton extends StatelessWidget {
       builder: (context, child) => ListenableBuilder(
         listenable: controlsNotifier,
         builder: (context, child) {
-          final enabled =
-              !controlsNotifier.intentDisabled(const ToggleDrawerIntent());
+          final enabled = !controlsNotifier.intentDisabled(const ToggleDrawerIntent());
 
           return IconButton(
             icon: Text(
@@ -199,7 +190,8 @@ class _SlideNumberButton extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            tooltip: 'Open navigation drawer'
+            tooltip:
+                'Open navigation drawer'
                 '${shortcuts.enabled ? ' ($shortcut)' : ''}',
             onPressed: enabled ? controlsNotifier.toggleDrawer : null,
           );
@@ -230,16 +222,15 @@ class _MarkerControls extends StatelessWidget {
               children: [
                 IconButton(
                   icon: const Icon(Icons.edit_off_rounded),
-                  tooltip: 'Turn off marker'
+                  tooltip:
+                      'Turn off marker'
                       '${shortcuts.enabled ? ' ($shortcut)' : ''}',
                   onPressed: controlsNotifier.toggleMarker,
                 ),
                 IconButton(
                   icon: const Icon(Icons.delete_forever_rounded),
                   tooltip: 'Erase all',
-                  onPressed: markerNotifier.paths.isNotEmpty
-                      ? markerNotifier.clear
-                      : null,
+                  onPressed: markerNotifier.paths.isNotEmpty ? markerNotifier.clear : null,
                 ),
               ],
             )
@@ -267,44 +258,18 @@ class _AutoplayMenuButton extends StatelessWidget {
               leadingIcon: autoplayNotifier.isPlaying
                   ? const Icon(Icons.pause_rounded)
                   : const Icon(Icons.play_arrow_rounded),
-              onPressed: autoplayNotifier.isPlaying
-                  ? autoplayNotifier.pause
-                  : autoplayNotifier.play,
+              onPressed: autoplayNotifier.isPlaying ? autoplayNotifier.pause : autoplayNotifier.play,
               child: Text(autoplayNotifier.isPlaying ? 'Pause' : 'Play'),
             ),
             const _PopupMenuDivider(),
-            const _AutoplayDurationButton(
-              duration: Duration(seconds: 1),
-              label: 'Every second',
-            ),
-            const _AutoplayDurationButton(
-              duration: Duration(seconds: 2),
-              label: 'Every 2 seconds',
-            ),
-            const _AutoplayDurationButton(
-              duration: Duration(seconds: 3),
-              label: 'Every 3 seconds',
-            ),
-            const _AutoplayDurationButton(
-              duration: Duration(seconds: 5),
-              label: 'Every 5 seconds',
-            ),
-            const _AutoplayDurationButton(
-              duration: Duration(seconds: 10),
-              label: 'Every 10 seconds',
-            ),
-            const _AutoplayDurationButton(
-              duration: Duration(seconds: 15),
-              label: 'Every 15 seconds',
-            ),
-            const _AutoplayDurationButton(
-              duration: Duration(seconds: 30),
-              label: 'Every 30 seconds',
-            ),
-            const _AutoplayDurationButton(
-              duration: Duration(seconds: 60),
-              label: 'Every minute',
-            ),
+            const _AutoplayDurationButton(duration: Duration(seconds: 1), label: 'Every second'),
+            const _AutoplayDurationButton(duration: Duration(seconds: 2), label: 'Every 2 seconds'),
+            const _AutoplayDurationButton(duration: Duration(seconds: 3), label: 'Every 3 seconds'),
+            const _AutoplayDurationButton(duration: Duration(seconds: 5), label: 'Every 5 seconds'),
+            const _AutoplayDurationButton(duration: Duration(seconds: 10), label: 'Every 10 seconds'),
+            const _AutoplayDurationButton(duration: Duration(seconds: 15), label: 'Every 15 seconds'),
+            const _AutoplayDurationButton(duration: Duration(seconds: 30), label: 'Every 30 seconds'),
+            const _AutoplayDurationButton(duration: Duration(seconds: 60), label: 'Every minute'),
             const _PopupMenuDivider(),
             const _AutoplayLoopButton(),
           ],
@@ -342,10 +307,7 @@ class _LocalizationMenuButton extends StatelessWidget {
 }
 
 class _AutoplayDurationButton extends StatelessWidget {
-  const _AutoplayDurationButton({
-    required this.duration,
-    required this.label,
-  });
+  const _AutoplayDurationButton({required this.duration, required this.label});
 
   final Duration duration;
   final String label;
@@ -410,17 +372,10 @@ class _MenuSelectionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MenuItemButton(
       closeOnActivate: closeOnActivate,
-      leadingIcon: selected
-          ? const Icon(Icons.check_rounded)
-          : const SizedBox(width: 24),
+      leadingIcon: selected ? const Icon(Icons.check_rounded) : const SizedBox(width: 24),
       trailingIcon: const SizedBox(width: 24),
       onPressed: onPressed,
-      child: Text(
-        label,
-        style: TextStyle(
-          fontWeight: selected ? FontWeight.bold : FontWeight.normal,
-        ),
-      ),
+      child: Text(label, style: TextStyle(fontWeight: selected ? FontWeight.bold : FontWeight.normal)),
     );
   }
 }
@@ -479,22 +434,14 @@ class _FullscreenButton extends StatelessWidget {
       initialData: false,
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
         final isInFullscreen = snapshot.data ?? false;
-        final onPressed = isInFullscreen
-            ? controlsNotifier.leaveFullscreen
-            : controlsNotifier.enterFullscreen;
+        final onPressed = isInFullscreen ? controlsNotifier.leaveFullscreen : controlsNotifier.enterFullscreen;
 
         return ListenableBuilder(
           listenable: markerNotifier,
           builder: (context, _) => MenuItemButton(
-            leadingIcon: Icon(
-              isInFullscreen
-                  ? Icons.fullscreen_exit_rounded
-                  : Icons.fullscreen_rounded,
-            ),
+            leadingIcon: Icon(isInFullscreen ? Icons.fullscreen_exit_rounded : Icons.fullscreen_rounded),
             onPressed: !markerNotifier.enabled ? onPressed : null,
-            child: Text(
-              isInFullscreen ? 'Leave full screen' : 'Enter full screen',
-            ),
+            child: Text(isInFullscreen ? 'Leave full screen' : 'Enter full screen'),
           ),
         );
       },
@@ -539,11 +486,7 @@ class _OptionsMenuButton extends StatelessWidget {
 
     return MenuButtonTheme(
       data: MenuButtonThemeData(
-        style: ButtonStyle(
-          backgroundColor: WidgetStatePropertyAll(
-            Theme.of(context).colorScheme.surface,
-          ),
-        ),
+        style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(Theme.of(context).colorScheme.surface)),
       ),
       child: MenuAnchor(
         builder: (context, controller, child) => IconButton(
@@ -570,9 +513,6 @@ class _PopupMenuDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: Theme.of(context).colorScheme.surface,
-      child: const Divider(indent: 12),
-    );
+    return ColoredBox(color: Theme.of(context).colorScheme.surface, child: const Divider(indent: 12));
   }
 }

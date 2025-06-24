@@ -42,9 +42,7 @@ class _PresenterViewState extends State<PresenterView> {
           final scaffoldState = Scaffold.of(context);
 
           return FlutterDeckDrawerListener(
-            onDrawerToggle: () => scaffoldState.isDrawerOpen
-                ? scaffoldState.closeDrawer()
-                : scaffoldState.openDrawer(),
+            onDrawerToggle: () => scaffoldState.isDrawerOpen ? scaffoldState.closeDrawer() : scaffoldState.openDrawer(),
             child: FlutterDeckControls(
               child: Column(
                 children: [

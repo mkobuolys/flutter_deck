@@ -7,8 +7,7 @@ class FlutterDeckFullscreenManager {
   ///
   /// The [windowProxy] is required for getting and setting window properties
   /// from underlying platform.
-  FlutterDeckFullscreenManager(WindowProxyBase windowProxy)
-      : _windowProxy = windowProxy;
+  FlutterDeckFullscreenManager(WindowProxyBase windowProxy) : _windowProxy = windowProxy;
 
   final WindowProxyBase _windowProxy;
   bool _initialized = false;

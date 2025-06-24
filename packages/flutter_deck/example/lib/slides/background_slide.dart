@@ -9,13 +9,13 @@ const _speakerNotes = '''
 
 class BackgroundSlide extends FlutterDeckSlideWidget {
   const BackgroundSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/background',
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(title: 'Background'),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/background',
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Background'),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {

@@ -9,12 +9,7 @@ abstract class FlutterDeckTransitionBuilder {
   ///
   /// The method has the same signature as the [PageTransitionsBuilder] used by
   /// the [MaterialPageRoute].
-  Widget build(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child,
-  );
+  Widget build(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child);
 }
 
 /// A builder for a [FadeTransition].
@@ -23,12 +18,7 @@ class FlutterDeckFadeTransitionBuilder extends FlutterDeckTransitionBuilder {
   const FlutterDeckFadeTransitionBuilder();
 
   @override
-  Widget build(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child,
-  ) {
+  Widget build(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     return FadeTransition(opacity: animation, child: child);
   }
 }
@@ -39,12 +29,7 @@ class FlutterDeckScaleTransitionBuilder extends FlutterDeckTransitionBuilder {
   const FlutterDeckScaleTransitionBuilder();
 
   @override
-  Widget build(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child,
-  ) {
+  Widget build(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     return ScaleTransition(scale: animation, child: child);
   }
 }
@@ -55,18 +40,10 @@ class FlutterDeckSlideTransitionBuilder extends FlutterDeckTransitionBuilder {
   const FlutterDeckSlideTransitionBuilder();
 
   @override
-  Widget build(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child,
-  ) {
+  Widget build(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     return SlideTransition(
       position: animation.drive(
-        Tween<Offset>(
-          begin: const Offset(1, 0),
-          end: Offset.zero,
-        ).chain(CurveTween(curve: Curves.easeIn)),
+        Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero).chain(CurveTween(curve: Curves.easeIn)),
       ),
       child: child,
     );
@@ -74,18 +51,12 @@ class FlutterDeckSlideTransitionBuilder extends FlutterDeckTransitionBuilder {
 }
 
 /// A builder for a [RotationTransition].
-class FlutterDeckRotationTransitionBuilder
-    extends FlutterDeckTransitionBuilder {
+class FlutterDeckRotationTransitionBuilder extends FlutterDeckTransitionBuilder {
   /// Default constructor for [FlutterDeckRotationTransitionBuilder].
   const FlutterDeckRotationTransitionBuilder();
 
   @override
-  Widget build(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child,
-  ) {
+  Widget build(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     return RotationTransition(turns: animation, child: child);
   }
 }
@@ -98,12 +69,7 @@ class FlutterDeckNoTransitionBuilder extends FlutterDeckTransitionBuilder {
   const FlutterDeckNoTransitionBuilder();
 
   @override
-  Widget build(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child,
-  ) {
+  Widget build(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     return child;
   }
 }

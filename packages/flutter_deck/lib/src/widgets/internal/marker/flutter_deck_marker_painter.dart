@@ -7,10 +7,7 @@ class FlutterDeckMarkerPainter extends CustomPainter {
   /// Creates a [FlutterDeckMarkerPainter].
   ///
   /// The [configuration] and [paths] arguments must not be null.
-  const FlutterDeckMarkerPainter({
-    required this.configuration,
-    required this.paths,
-  });
+  const FlutterDeckMarkerPainter({required this.configuration, required this.paths});
 
   /// The configuration of the marker.
   final FlutterDeckMarkerConfiguration configuration;
@@ -34,6 +31,5 @@ class FlutterDeckMarkerPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(FlutterDeckMarkerPainter oldDelegate) =>
-      configuration != oldDelegate.configuration ||
-      !listEquals(paths, oldDelegate.paths);
+      configuration != oldDelegate.configuration || !listEquals(paths, oldDelegate.paths);
 }

@@ -44,26 +44,18 @@ class FlutterDeckSpeakerInfoWidgetThemeData {
     return FlutterDeckSpeakerInfoWidgetThemeData(
       descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
       nameTextStyle: nameTextStyle ?? this.nameTextStyle,
-      socialHandleTextStyle:
-          socialHandleTextStyle ?? this.socialHandleTextStyle,
+      socialHandleTextStyle: socialHandleTextStyle ?? this.socialHandleTextStyle,
     );
   }
 
   /// Merge the given [FlutterDeckSpeakerInfoWidgetThemeData] with this one.
-  FlutterDeckSpeakerInfoWidgetThemeData merge(
-    FlutterDeckSpeakerInfoWidgetThemeData? other,
-  ) {
+  FlutterDeckSpeakerInfoWidgetThemeData merge(FlutterDeckSpeakerInfoWidgetThemeData? other) {
     if (other == null) return this;
 
     return copyWith(
-      descriptionTextStyle:
-          descriptionTextStyle?.merge(other.descriptionTextStyle) ??
-              other.descriptionTextStyle,
-      nameTextStyle:
-          nameTextStyle?.merge(other.nameTextStyle) ?? other.nameTextStyle,
-      socialHandleTextStyle:
-          socialHandleTextStyle?.merge(other.socialHandleTextStyle) ??
-              other.socialHandleTextStyle,
+      descriptionTextStyle: descriptionTextStyle?.merge(other.descriptionTextStyle) ?? other.descriptionTextStyle,
+      nameTextStyle: nameTextStyle?.merge(other.nameTextStyle) ?? other.nameTextStyle,
+      socialHandleTextStyle: socialHandleTextStyle?.merge(other.socialHandleTextStyle) ?? other.socialHandleTextStyle,
     );
   }
 }
@@ -77,11 +69,7 @@ class FlutterDeckSpeakerInfoWidgetTheme extends InheritedTheme {
   /// Creates a theme to style [FlutterDeckSpeakerInfoWidget].
   ///
   /// The [data] argument must not be null.
-  const FlutterDeckSpeakerInfoWidgetTheme({
-    required this.data,
-    required super.child,
-    super.key,
-  });
+  const FlutterDeckSpeakerInfoWidgetTheme({required this.data, required super.child, super.key});
 
   /// The visual properties of [FlutterDeckSpeakerInfoWidget].
   final FlutterDeckSpeakerInfoWidgetThemeData data;
@@ -92,17 +80,14 @@ class FlutterDeckSpeakerInfoWidgetTheme extends InheritedTheme {
   ///
   /// The returned theme data will never be null.
   static FlutterDeckSpeakerInfoWidgetThemeData of(BuildContext context) {
-    final theme = context.dependOnInheritedWidgetOfExactType<
-        FlutterDeckSpeakerInfoWidgetTheme>();
+    final theme = context.dependOnInheritedWidgetOfExactType<FlutterDeckSpeakerInfoWidgetTheme>();
 
     return theme?.data ?? FlutterDeckTheme.of(context).speakerInfoWidgetTheme;
   }
 
   @override
-  bool updateShouldNotify(FlutterDeckSpeakerInfoWidgetTheme oldWidget) =>
-      data != oldWidget.data;
+  bool updateShouldNotify(FlutterDeckSpeakerInfoWidgetTheme oldWidget) => data != oldWidget.data;
 
   @override
-  Widget wrap(BuildContext context, Widget child) =>
-      FlutterDeckSpeakerInfoWidgetTheme(data: data, child: child);
+  Widget wrap(BuildContext context, Widget child) => FlutterDeckSpeakerInfoWidgetTheme(data: data, child: child);
 }

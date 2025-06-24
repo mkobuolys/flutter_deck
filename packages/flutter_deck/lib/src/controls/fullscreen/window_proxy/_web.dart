@@ -17,8 +17,7 @@ class WindowProxy implements WindowProxyBase {
   Future<bool> isInFullscreen() async => web.document.fullscreenElement != null;
 
   @override
-  Future<void> enterFullscreen() async =>
-      web.document.documentElement?.requestFullscreen();
+  Future<void> enterFullscreen() async => web.document.documentElement?.requestFullscreen();
 
   @override
   Future<void> leaveFullscreen() async => web.document.exitFullscreen();

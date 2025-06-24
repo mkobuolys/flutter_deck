@@ -1,6 +1,4 @@
-export '_stub.dart'
-    if (dart.library.io) '_io.dart'
-    if (dart.library.html) '_web.dart';
+export '_stub.dart' if (dart.library.io) '_io.dart' if (dart.library.html) '_web.dart';
 
 /// Thin proxy/wrapper around platform specific window API implementation
 abstract class WindowProxyBase {

@@ -25,8 +25,7 @@ class LocalizedShortcutLabeler {
 
   static LocalizedShortcutLabeler? _instance;
 
-  static final Map<LogicalKeyboardKey, String> _shortcutGraphicEquivalents =
-      <LogicalKeyboardKey, String>{
+  static final Map<LogicalKeyboardKey, String> _shortcutGraphicEquivalents = <LogicalKeyboardKey, String>{
     LogicalKeyboardKey.arrowLeft: '←',
     LogicalKeyboardKey.arrowRight: '→',
     LogicalKeyboardKey.arrowUp: '↑',
@@ -80,8 +79,7 @@ class LocalizedShortcutLabeler {
 
   // Caches the created shortcut key maps so that creating one of these isn't
   // expensive after the first time for each unique localizations object.
-  final Map<MaterialLocalizations, Map<LogicalKeyboardKey, String>>
-      _cachedShortcutKeys =
+  final Map<MaterialLocalizations, Map<LogicalKeyboardKey, String>> _cachedShortcutKeys =
       <MaterialLocalizations, Map<LogicalKeyboardKey, String>>{};
 
   /// Returns the label to be shown to the user in the UI when a
@@ -96,10 +94,7 @@ class LocalizedShortcutLabeler {
   ///
   /// The keys are joined by spaces on macOS and iOS, and by "+" on other
   /// platforms.
-  String getShortcutLabel(
-    MenuSerializableShortcut shortcut,
-    MaterialLocalizations localizations,
-  ) {
+  String getShortcutLabel(MenuSerializableShortcut shortcut, MaterialLocalizations localizations) {
     final serialized = shortcut.serializeForMenu();
     final String keySeparator;
     if (_usesSymbolicModifiers) {
@@ -115,46 +110,30 @@ class LocalizedShortcutLabeler {
       if (_usesSymbolicModifiers) {
         // macOS/iOS platform convention uses this ordering, with ⌘ always last.
         if (serialized.control!) {
-          modifiers.add(
-            _getModifierLabel(LogicalKeyboardKey.control, localizations),
-          );
+          modifiers.add(_getModifierLabel(LogicalKeyboardKey.control, localizations));
         }
         if (serialized.alt!) {
-          modifiers.add(
-            _getModifierLabel(LogicalKeyboardKey.alt, localizations),
-          );
+          modifiers.add(_getModifierLabel(LogicalKeyboardKey.alt, localizations));
         }
         if (serialized.shift!) {
-          modifiers.add(
-            _getModifierLabel(LogicalKeyboardKey.shift, localizations),
-          );
+          modifiers.add(_getModifierLabel(LogicalKeyboardKey.shift, localizations));
         }
         if (serialized.meta!) {
-          modifiers.add(
-            _getModifierLabel(LogicalKeyboardKey.meta, localizations),
-          );
+          modifiers.add(_getModifierLabel(LogicalKeyboardKey.meta, localizations));
         }
       } else {
         // These should be in this order, to match the LogicalKeySet version.
         if (serialized.alt!) {
-          modifiers.add(
-            _getModifierLabel(LogicalKeyboardKey.alt, localizations),
-          );
+          modifiers.add(_getModifierLabel(LogicalKeyboardKey.alt, localizations));
         }
         if (serialized.control!) {
-          modifiers.add(
-            _getModifierLabel(LogicalKeyboardKey.control, localizations),
-          );
+          modifiers.add(_getModifierLabel(LogicalKeyboardKey.control, localizations));
         }
         if (serialized.meta!) {
-          modifiers.add(
-            _getModifierLabel(LogicalKeyboardKey.meta, localizations),
-          );
+          modifiers.add(_getModifierLabel(LogicalKeyboardKey.meta, localizations));
         }
         if (serialized.shift!) {
-          modifiers.add(
-            _getModifierLabel(LogicalKeyboardKey.shift, localizations),
-          );
+          modifiers.add(_getModifierLabel(LogicalKeyboardKey.shift, localizations));
         }
       }
       String? shortcutTrigger;
@@ -165,21 +144,17 @@ class LocalizedShortcutLabeler {
         // Otherwise, look it up, and if we don't have a translation for it,
         // then fall back to the key label.
         shortcutTrigger = _getLocalizedName(trigger, localizations);
-        if (shortcutTrigger == null &&
-            logicalKeyId & LogicalKeyboardKey.planeMask == 0x0) {
+        if (shortcutTrigger == null && logicalKeyId & LogicalKeyboardKey.planeMask == 0x0) {
           // If the trigger is a Unicode-character-producing key, then use the
           // character.
-          shortcutTrigger =
-              String.fromCharCode(logicalKeyId & LogicalKeyboardKey.valueMask)
-                  .toUpperCase();
+          shortcutTrigger = String.fromCharCode(logicalKeyId & LogicalKeyboardKey.valueMask).toUpperCase();
         }
         // Fall back to the key label if all else fails.
         shortcutTrigger ??= trigger.keyLabel;
       }
       return <String>[
         ...modifiers,
-        if (shortcutTrigger != null && shortcutTrigger.isNotEmpty)
-          shortcutTrigger,
+        if (shortcutTrigger != null && shortcutTrigger.isNotEmpty) shortcutTrigger,
       ].join(keySeparator);
     } else if (serialized.character != null) {
       return serialized.character!;
@@ -193,10 +168,7 @@ class LocalizedShortcutLabeler {
 
   // Tries to look up the key in an internal table, and if it can't find it,
   // then fall back to the key's keyLabel.
-  String? _getLocalizedName(
-    LogicalKeyboardKey key,
-    MaterialLocalizations localizations,
-  ) {
+  String? _getLocalizedName(LogicalKeyboardKey key, MaterialLocalizations localizations) {
     // Since this is an expensive table to build, we cache it based on the
     // localization object. There's currently no way to clear the cache, but
     // it's unlikely that more than one or two will be cached for each run, and
@@ -231,14 +203,10 @@ class LocalizedShortcutLabeler {
       LogicalKeyboardKey.numpadDivide: localizations.keyboardKeyNumpadDivide,
       LogicalKeyboardKey.numpadEnter: localizations.keyboardKeyNumpadEnter,
       LogicalKeyboardKey.numpadEqual: localizations.keyboardKeyNumpadEqual,
-      LogicalKeyboardKey.numpadMultiply:
-          localizations.keyboardKeyNumpadMultiply,
-      LogicalKeyboardKey.numpadParenLeft:
-          localizations.keyboardKeyNumpadParenLeft,
-      LogicalKeyboardKey.numpadParenRight:
-          localizations.keyboardKeyNumpadParenRight,
-      LogicalKeyboardKey.numpadSubtract:
-          localizations.keyboardKeyNumpadSubtract,
+      LogicalKeyboardKey.numpadMultiply: localizations.keyboardKeyNumpadMultiply,
+      LogicalKeyboardKey.numpadParenLeft: localizations.keyboardKeyNumpadParenLeft,
+      LogicalKeyboardKey.numpadParenRight: localizations.keyboardKeyNumpadParenRight,
+      LogicalKeyboardKey.numpadSubtract: localizations.keyboardKeyNumpadSubtract,
       LogicalKeyboardKey.pageDown: localizations.keyboardKeyPageDown,
       LogicalKeyboardKey.pageUp: localizations.keyboardKeyPageUp,
       LogicalKeyboardKey.power: localizations.keyboardKeyPower,
@@ -251,14 +219,8 @@ class LocalizedShortcutLabeler {
     return _cachedShortcutKeys[localizations]![key];
   }
 
-  String _getModifierLabel(
-    LogicalKeyboardKey modifier,
-    MaterialLocalizations localizations,
-  ) {
-    assert(
-      _modifiers.contains(modifier),
-      '${modifier.keyLabel} is not a modifier key',
-    );
+  String _getModifierLabel(LogicalKeyboardKey modifier, MaterialLocalizations localizations) {
+    assert(_modifiers.contains(modifier), '${modifier.keyLabel} is not a modifier key');
     if (modifier == LogicalKeyboardKey.meta ||
         modifier == LogicalKeyboardKey.metaLeft ||
         modifier == LogicalKeyboardKey.metaRight) {

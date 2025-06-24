@@ -37,8 +37,7 @@ void main() {
         expect(proxy.initializeCallCount, 1);
       });
 
-      test('when already initialized then do not initialize it again',
-          () async {
+      test('when already initialized then do not initialize it again', () async {
         final tested = FlutterDeckFullscreenManager(proxy);
 
         await tested.isInFullscreen();
@@ -75,8 +74,7 @@ void main() {
         expect(proxy.initializeCallCount, 1);
       });
 
-      test('when already initialized then do not initialize it again',
-          () async {
+      test('when already initialized then do not initialize it again', () async {
         final tested = FlutterDeckFullscreenManager(proxy);
 
         await tested.enterFullscreen();
@@ -103,8 +101,7 @@ void main() {
         expect(proxy.initializeCallCount, 1);
       });
 
-      test('when already initialized then do not initialize it again',
-          () async {
+      test('when already initialized then do not initialize it again', () async {
         final tested = FlutterDeckFullscreenManager(proxy);
 
         await tested.leaveFullscreen();

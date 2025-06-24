@@ -9,26 +9,18 @@ import 'package:flutter_deck/src/flutter_deck_router.dart';
 /// and the current step.
 class FlutterDeckProgressIndicator extends StatefulWidget {
   /// Creates a progress indicator with a solid color and a background color.
-  const FlutterDeckProgressIndicator.solid({
-    Color? color,
-    Color? backgroundColor,
-  }) : this._(color: color, backgroundColor: backgroundColor);
+  const FlutterDeckProgressIndicator.solid({Color? color, Color? backgroundColor})
+    : this._(color: color, backgroundColor: backgroundColor);
 
   /// Creates a progress indicator with a gradient and a background color.
-  const FlutterDeckProgressIndicator.gradient({
-    required Gradient gradient,
-    Color? backgroundColor,
-  }) : this._(gradient: gradient, backgroundColor: backgroundColor);
+  const FlutterDeckProgressIndicator.gradient({required Gradient gradient, Color? backgroundColor})
+    : this._(gradient: gradient, backgroundColor: backgroundColor);
 
   /// A private constructor for the [FlutterDeckProgressIndicator] widget.
   ///
   /// This constructor is private because it should not be used directly.
   /// Instead, use one of the public constructors.
-  const FlutterDeckProgressIndicator._({
-    this.color,
-    this.gradient,
-    this.backgroundColor,
-  });
+  const FlutterDeckProgressIndicator._({this.color, this.gradient, this.backgroundColor});
 
   /// The progress indicator color.
   ///
@@ -46,12 +38,10 @@ class FlutterDeckProgressIndicator extends StatefulWidget {
   final Gradient? gradient;
 
   @override
-  State<FlutterDeckProgressIndicator> createState() =>
-      _FlutterDeckProgressIndicatorState();
+  State<FlutterDeckProgressIndicator> createState() => _FlutterDeckProgressIndicatorState();
 }
 
-class _FlutterDeckProgressIndicatorState
-    extends State<FlutterDeckProgressIndicator> {
+class _FlutterDeckProgressIndicatorState extends State<FlutterDeckProgressIndicator> {
   FlutterDeckRouter? _router;
   var _progress = 0.0;
 
@@ -77,9 +67,7 @@ class _FlutterDeckProgressIndicatorState
     if (_router == null) return;
 
     final totalSteps = _router!.slides.fold(0, _sumSteps);
-    final currentStep = _router!.slides
-        .sublist(0, context.flutterDeck.slideNumber - 1)
-        .fold(0, _sumSteps);
+    final currentStep = _router!.slides.sublist(0, context.flutterDeck.slideNumber - 1).fold(0, _sumSteps);
 
     setState(() {
       _progress = (currentStep + context.flutterDeck.stepNumber) / totalSteps;

@@ -8,14 +8,14 @@ const _speakerNotes = '''
 
 class ThemingSlide extends FlutterDeckSlideWidget {
   const ThemingSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/theming-slide',
-            title: 'Theming',
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(title: 'Theming'),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/theming-slide',
+          title: 'Theming',
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Theming'),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +32,7 @@ class ThemingSlide extends FlutterDeckSlideWidget {
         child: Text(
           'You can set the global theme for the whole deck by specifying '
           'lightTheme and darkTheme properties in the FlutterDeckApp widget.',
-          style: FlutterDeckTheme.of(context)
-              .textTheme
-              .bodyMedium
-              .copyWith(fontWeight: FontWeight.w500),
+          style: FlutterDeckTheme.of(context).textTheme.bodyMedium.copyWith(fontWeight: FontWeight.w500),
           textAlign: TextAlign.justify,
         ),
       ),
@@ -46,10 +43,7 @@ class ThemingSlide extends FlutterDeckSlideWidget {
           'merged with the global theme (only the properties you specify will '
           'be overridden).\n\nJust like in this slide. Not UX friendly, but '
           'you get the idea.',
-          style: FlutterDeckTheme.of(context)
-              .textTheme
-              .bodyMedium
-              .copyWith(fontWeight: FontWeight.w500),
+          style: FlutterDeckTheme.of(context).textTheme.bodyMedium.copyWith(fontWeight: FontWeight.w500),
           textAlign: TextAlign.justify,
         ),
       ),

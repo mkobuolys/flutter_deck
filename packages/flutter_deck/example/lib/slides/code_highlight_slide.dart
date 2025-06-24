@@ -9,22 +9,22 @@ const _speakerNotes = '''
 
 class CodeHighlightSlide extends FlutterDeckSlideWidget {
   const CodeHighlightSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/code-highlight',
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/code-highlight',
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => Center(
         child: FlutterDeckCodeHighlightTheme(
-          data: FlutterDeckCodeHighlightTheme.of(context).copyWith(
-            textStyle: FlutterDeckTheme.of(context).textTheme.bodySmall,
-          ),
+          data: FlutterDeckCodeHighlightTheme.of(
+            context,
+          ).copyWith(textStyle: FlutterDeckTheme.of(context).textTheme.bodySmall),
           child: const FlutterDeckCodeHighlight(
             code: '''
 import 'package:flutter/material.dart';

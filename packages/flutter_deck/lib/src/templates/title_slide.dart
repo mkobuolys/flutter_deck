@@ -63,33 +63,25 @@ class FlutterDeckTitleSlide extends StatelessWidget {
 
   Widget _buildFooter(BuildContext context) =>
       footerBuilder?.call(context) ??
-      FlutterDeckFooter.fromConfiguration(
-        configuration: context.flutterDeck.configuration.footer,
-      );
+      FlutterDeckFooter.fromConfiguration(configuration: context.flutterDeck.configuration.footer);
 
   Widget _buildHeader(BuildContext context) =>
       headerBuilder?.call(context) ??
-      FlutterDeckHeader.fromConfiguration(
-        configuration: context.flutterDeck.configuration.header,
-      );
+      FlutterDeckHeader.fromConfiguration(configuration: context.flutterDeck.configuration.header);
 
   Widget? _buildSpeakerInfo(BuildContext context) {
     if (speakerInfoBuilder != null) return speakerInfoBuilder!(context);
 
     final speakerInfo = context.flutterDeck.speakerInfo;
 
-    return speakerInfo != null
-        ? FlutterDeckSpeakerInfoWidget(speakerInfo: speakerInfo)
-        : null;
+    return speakerInfo != null ? FlutterDeckSpeakerInfoWidget(speakerInfo: speakerInfo) : null;
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = FlutterDeckTitleSlideTheme.of(context);
-    final FlutterDeckSlideConfiguration(
-      footer: footerConfiguration,
-      header: headerConfiguration,
-    ) = context.flutterDeck.configuration;
+    final FlutterDeckSlideConfiguration(footer: footerConfiguration, header: headerConfiguration) =
+        context.flutterDeck.configuration;
     final speakerInfo = _buildSpeakerInfo(context);
 
     return FlutterDeckSlideBase(
@@ -100,19 +92,12 @@ class FlutterDeckTitleSlide extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(
-              child: AutoSizeText(title, style: theme.titleTextStyle),
-            ),
+            Flexible(child: AutoSizeText(title, style: theme.titleTextStyle)),
             if (subtitle != null) ...[
               const SizedBox(height: 8),
-              Flexible(
-                child: AutoSizeText(subtitle!, style: theme.subtitleTextStyle),
-              ),
+              Flexible(child: AutoSizeText(subtitle!, style: theme.subtitleTextStyle)),
             ],
-            if (speakerInfo != null) ...[
-              const SizedBox(height: 64),
-              speakerInfo,
-            ],
+            if (speakerInfo != null) ...[const SizedBox(height: 64), speakerInfo],
           ],
         ),
       ),

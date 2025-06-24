@@ -50,8 +50,7 @@ class FlutterDeckFooterThemeData {
       slideNumberColor: slideNumberColor ?? this.slideNumberColor,
       slideNumberTextStyle: slideNumberTextStyle ?? this.slideNumberTextStyle,
       socialHandleColor: socialHandleColor ?? this.socialHandleColor,
-      socialHandleTextStyle:
-          socialHandleTextStyle ?? this.socialHandleTextStyle,
+      socialHandleTextStyle: socialHandleTextStyle ?? this.socialHandleTextStyle,
     );
   }
 
@@ -61,13 +60,9 @@ class FlutterDeckFooterThemeData {
 
     return copyWith(
       slideNumberColor: other.slideNumberColor,
-      slideNumberTextStyle:
-          slideNumberTextStyle?.merge(other.slideNumberTextStyle) ??
-              other.slideNumberTextStyle,
+      slideNumberTextStyle: slideNumberTextStyle?.merge(other.slideNumberTextStyle) ?? other.slideNumberTextStyle,
       socialHandleColor: other.socialHandleColor,
-      socialHandleTextStyle:
-          socialHandleTextStyle?.merge(other.socialHandleTextStyle) ??
-              other.socialHandleTextStyle,
+      socialHandleTextStyle: socialHandleTextStyle?.merge(other.socialHandleTextStyle) ?? other.socialHandleTextStyle,
     );
   }
 }
@@ -81,11 +76,7 @@ class FlutterDeckFooterTheme extends InheritedTheme {
   /// Creates a theme to style [FlutterDeckFooter].
   ///
   /// The [data] argument must not be null.
-  const FlutterDeckFooterTheme({
-    required this.data,
-    required super.child,
-    super.key,
-  });
+  const FlutterDeckFooterTheme({required this.data, required super.child, super.key});
 
   /// The visual properties of [FlutterDeckFooter].
   final FlutterDeckFooterThemeData data;
@@ -95,17 +86,14 @@ class FlutterDeckFooterTheme extends InheritedTheme {
   ///
   /// The returned theme data will never be null.
   static FlutterDeckFooterThemeData of(BuildContext context) {
-    final theme =
-        context.dependOnInheritedWidgetOfExactType<FlutterDeckFooterTheme>();
+    final theme = context.dependOnInheritedWidgetOfExactType<FlutterDeckFooterTheme>();
 
     return theme?.data ?? FlutterDeckTheme.of(context).footerTheme;
   }
 
   @override
-  bool updateShouldNotify(FlutterDeckFooterTheme oldWidget) =>
-      data != oldWidget.data;
+  bool updateShouldNotify(FlutterDeckFooterTheme oldWidget) => data != oldWidget.data;
 
   @override
-  Widget wrap(BuildContext context, Widget child) =>
-      FlutterDeckFooterTheme(data: data, child: child);
+  Widget wrap(BuildContext context, Widget child) => FlutterDeckFooterTheme(data: data, child: child);
 }

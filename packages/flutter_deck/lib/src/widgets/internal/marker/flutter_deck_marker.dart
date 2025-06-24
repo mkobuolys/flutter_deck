@@ -11,11 +11,7 @@ class FlutterDeckMarker extends StatelessWidget {
   /// Creates a [FlutterDeckMarker].
   ///
   /// The [notifier] and [child] arguments must not be null.
-  const FlutterDeckMarker({
-    required this.notifier,
-    required this.child,
-    super.key,
-  });
+  const FlutterDeckMarker({required this.notifier, required this.child, super.key});
 
   /// The notifier used to control the slide deck's marker.
   final FlutterDeckMarkerNotifier notifier;
@@ -44,24 +40,13 @@ class FlutterDeckMarker extends StatelessWidget {
             child!,
             if (notifier.enabled)
               GestureDetector(
-                onPanStart: (details) => _updatePath(
-                  context,
-                  details.globalPosition,
-                  paths.length,
-                ),
-                onPanUpdate: (details) => _updatePath(
-                  context,
-                  details.globalPosition,
-                  paths.length - 1,
-                ),
+                onPanStart: (details) => _updatePath(context, details.globalPosition, paths.length),
+                onPanUpdate: (details) => _updatePath(context, details.globalPosition, paths.length - 1),
                 child: RepaintBoundary(
                   child: ConstrainedBox(
                     constraints: const BoxConstraints.expand(),
                     child: CustomPaint(
-                      painter: FlutterDeckMarkerPainter(
-                        configuration: configuration,
-                        paths: paths,
-                      ),
+                      painter: FlutterDeckMarkerPainter(configuration: configuration, paths: paths),
                     ),
                   ),
                 ),

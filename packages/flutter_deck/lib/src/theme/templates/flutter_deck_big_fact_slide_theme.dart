@@ -19,10 +19,7 @@ import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 /// slide deck.
 class FlutterDeckBigFactSlideThemeData {
   /// Creates a theme to style [FlutterDeckBigFactSlide].
-  const FlutterDeckBigFactSlideThemeData({
-    this.titleTextStyle,
-    this.subtitleTextStyle,
-  });
+  const FlutterDeckBigFactSlideThemeData({this.titleTextStyle, this.subtitleTextStyle});
 
   /// Text style for the title of the slide.
   final TextStyle? titleTextStyle;
@@ -32,10 +29,7 @@ class FlutterDeckBigFactSlideThemeData {
 
   /// Creates a copy of this object with the given fields replaced with the new
   /// values.
-  FlutterDeckBigFactSlideThemeData copyWith({
-    TextStyle? titleTextStyle,
-    TextStyle? subtitleTextStyle,
-  }) {
+  FlutterDeckBigFactSlideThemeData copyWith({TextStyle? titleTextStyle, TextStyle? subtitleTextStyle}) {
     return FlutterDeckBigFactSlideThemeData(
       titleTextStyle: titleTextStyle ?? this.titleTextStyle,
       subtitleTextStyle: subtitleTextStyle ?? this.subtitleTextStyle,
@@ -43,16 +37,12 @@ class FlutterDeckBigFactSlideThemeData {
   }
 
   /// Merge the given [FlutterDeckBigFactSlideThemeData] with this one.
-  FlutterDeckBigFactSlideThemeData merge(
-    FlutterDeckBigFactSlideThemeData? other,
-  ) {
+  FlutterDeckBigFactSlideThemeData merge(FlutterDeckBigFactSlideThemeData? other) {
     if (other == null) return this;
 
     return copyWith(
-      titleTextStyle:
-          titleTextStyle?.merge(other.titleTextStyle) ?? other.titleTextStyle,
-      subtitleTextStyle: subtitleTextStyle?.merge(other.subtitleTextStyle) ??
-          other.subtitleTextStyle,
+      titleTextStyle: titleTextStyle?.merge(other.titleTextStyle) ?? other.titleTextStyle,
+      subtitleTextStyle: subtitleTextStyle?.merge(other.subtitleTextStyle) ?? other.subtitleTextStyle,
     );
   }
 }
@@ -66,11 +56,7 @@ class FlutterDeckBigFactSlideTheme extends InheritedTheme {
   /// Creates a theme to style [FlutterDeckBigFactSlide].
   ///
   /// The [data] argument must not be null.
-  const FlutterDeckBigFactSlideTheme({
-    required this.data,
-    required super.child,
-    super.key,
-  });
+  const FlutterDeckBigFactSlideTheme({required this.data, required super.child, super.key});
 
   /// The visual properties of [FlutterDeckBigFactSlide].
   final FlutterDeckBigFactSlideThemeData data;
@@ -83,17 +69,14 @@ class FlutterDeckBigFactSlideTheme extends InheritedTheme {
   ///
   /// The returned theme data will never be null.
   static FlutterDeckBigFactSlideThemeData of(BuildContext context) {
-    final theme = context
-        .dependOnInheritedWidgetOfExactType<FlutterDeckBigFactSlideTheme>();
+    final theme = context.dependOnInheritedWidgetOfExactType<FlutterDeckBigFactSlideTheme>();
 
     return theme?.data ?? FlutterDeckTheme.of(context).bigFactSlideTheme;
   }
 
   @override
-  bool updateShouldNotify(covariant FlutterDeckBigFactSlideTheme oldWidget) =>
-      data != oldWidget.data;
+  bool updateShouldNotify(covariant FlutterDeckBigFactSlideTheme oldWidget) => data != oldWidget.data;
 
   @override
-  Widget wrap(BuildContext context, Widget child) =>
-      FlutterDeckBigFactSlideTheme(data: data, child: child);
+  Widget wrap(BuildContext context, Widget child) => FlutterDeckBigFactSlideTheme(data: data, child: child);
 }

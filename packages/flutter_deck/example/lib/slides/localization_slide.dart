@@ -9,15 +9,13 @@ const _speakerNotes = '''
 
 class LocalizationSlide extends FlutterDeckSlideWidget {
   const LocalizationSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/localization',
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(
-              title: 'Slide deck localization',
-            ),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/localization',
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Slide deck localization'),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +26,9 @@ class LocalizationSlide extends FlutterDeckSlideWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              context.l10n.helloWorld,
-              style: FlutterDeckTheme.of(context).textTheme.display,
-            ),
+            Text(context.l10n.helloWorld, style: FlutterDeckTheme.of(context).textTheme.display),
             const SizedBox(height: 32),
-            Text(
-              'Current locale: $locale',
-              style: FlutterDeckTheme.of(context).textTheme.bodyLarge,
-            ),
+            Text('Current locale: $locale', style: FlutterDeckTheme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 32),
             Text(
               'It is possible to localize your slide deck using the same '

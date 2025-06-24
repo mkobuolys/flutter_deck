@@ -19,31 +19,22 @@ import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 /// slide deck.
 class FlutterDeckImageSlideThemeData {
   /// Creates a theme to style [FlutterDeckImageSlide].
-  const FlutterDeckImageSlideThemeData({
-    this.labelTextStyle,
-  });
+  const FlutterDeckImageSlideThemeData({this.labelTextStyle});
 
   /// Text style for the image label.
   final TextStyle? labelTextStyle;
 
   /// Creates a copy of this object with the given fields replaced with the new
   /// values.
-  FlutterDeckImageSlideThemeData copyWith({
-    TextStyle? labelTextStyle,
-  }) {
-    return FlutterDeckImageSlideThemeData(
-      labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-    );
+  FlutterDeckImageSlideThemeData copyWith({TextStyle? labelTextStyle}) {
+    return FlutterDeckImageSlideThemeData(labelTextStyle: labelTextStyle ?? this.labelTextStyle);
   }
 
   /// Merge the given [FlutterDeckImageSlideThemeData] with this one.
   FlutterDeckImageSlideThemeData merge(FlutterDeckImageSlideThemeData? other) {
     if (other == null) return this;
 
-    return copyWith(
-      labelTextStyle:
-          labelTextStyle?.merge(other.labelTextStyle) ?? other.labelTextStyle,
-    );
+    return copyWith(labelTextStyle: labelTextStyle?.merge(other.labelTextStyle) ?? other.labelTextStyle);
   }
 }
 
@@ -56,11 +47,7 @@ class FlutterDeckImageSlideTheme extends InheritedTheme {
   /// Creates a theme to style [FlutterDeckImageSlide].
   ///
   /// The [data] argument must not be null.
-  const FlutterDeckImageSlideTheme({
-    required this.data,
-    required super.child,
-    super.key,
-  });
+  const FlutterDeckImageSlideTheme({required this.data, required super.child, super.key});
 
   /// The visual properties of [FlutterDeckImageSlide].
   final FlutterDeckImageSlideThemeData data;
@@ -71,17 +58,14 @@ class FlutterDeckImageSlideTheme extends InheritedTheme {
   ///
   /// The returned theme data will never be null.
   static FlutterDeckImageSlideThemeData of(BuildContext context) {
-    final theme = context
-        .dependOnInheritedWidgetOfExactType<FlutterDeckImageSlideTheme>();
+    final theme = context.dependOnInheritedWidgetOfExactType<FlutterDeckImageSlideTheme>();
 
     return theme?.data ?? FlutterDeckTheme.of(context).imageSlideTheme;
   }
 
   @override
-  bool updateShouldNotify(FlutterDeckImageSlideTheme oldWidget) =>
-      data != oldWidget.data;
+  bool updateShouldNotify(FlutterDeckImageSlideTheme oldWidget) => data != oldWidget.data;
 
   @override
-  Widget wrap(BuildContext context, Widget child) =>
-      FlutterDeckImageSlideTheme(data: data, child: child);
+  Widget wrap(BuildContext context, Widget child) => FlutterDeckImageSlideTheme(data: data, child: child);
 }

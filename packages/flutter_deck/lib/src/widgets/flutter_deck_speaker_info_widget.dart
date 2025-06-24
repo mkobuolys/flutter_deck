@@ -14,10 +14,7 @@ class FlutterDeckSpeakerInfoWidget extends StatelessWidget {
   /// Creates a new speaker info widget.
   ///
   /// The [speakerInfo] argument must not be null.
-  const FlutterDeckSpeakerInfoWidget({
-    required this.speakerInfo,
-    super.key,
-  });
+  const FlutterDeckSpeakerInfoWidget({required this.speakerInfo, super.key});
 
   /// The speaker info to display.
   final FlutterDeckSpeakerInfo speakerInfo;
@@ -29,30 +26,14 @@ class FlutterDeckSpeakerInfoWidget extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(
-          speakerInfo.imagePath,
-          height: _imageHeight,
-          width: _imageHeight,
-        ),
+        Image.asset(speakerInfo.imagePath, height: _imageHeight, width: _imageHeight),
         const SizedBox(width: 32),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AutoSizeText(
-              speakerInfo.name,
-              style: theme.nameTextStyle,
-              maxLines: 1,
-            ),
-            AutoSizeText(
-              speakerInfo.description,
-              style: theme.descriptionTextStyle,
-              maxLines: 1,
-            ),
-            AutoSizeText(
-              speakerInfo.socialHandle,
-              style: theme.socialHandleTextStyle,
-              maxLines: 1,
-            ),
+            AutoSizeText(speakerInfo.name, style: theme.nameTextStyle, maxLines: 1),
+            AutoSizeText(speakerInfo.description, style: theme.descriptionTextStyle, maxLines: 1),
+            AutoSizeText(speakerInfo.socialHandle, style: theme.socialHandleTextStyle, maxLines: 1),
           ],
         ),
       ],

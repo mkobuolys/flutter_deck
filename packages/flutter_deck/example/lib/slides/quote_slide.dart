@@ -8,19 +8,18 @@ const _speakerNotes = '''
 
 class QuoteSlide extends FlutterDeckSlideWidget {
   const QuoteSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/quote',
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(
-              title: 'Quote slide template',
-            ),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/quote',
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Quote slide template'),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
-    const quote = '"If you really look closely, most overnight successes '
+    const quote =
+        '"If you really look closely, most overnight successes '
         'took a long time."';
     const attribution = '- Steve Jobs';
 
@@ -28,9 +27,7 @@ class QuoteSlide extends FlutterDeckSlideWidget {
       quote: quote,
       attribution: attribution,
       theme: FlutterDeckTheme.of(context).copyWith(
-        quoteSlideTheme: const FlutterDeckQuoteSlideThemeData(
-          quoteTextStyle: TextStyle(color: Colors.yellowAccent),
-        ),
+        quoteSlideTheme: const FlutterDeckQuoteSlideThemeData(quoteTextStyle: TextStyle(color: Colors.yellowAccent)),
       ),
     );
   }

@@ -43,29 +43,20 @@ class FlutterDeckBlankSlide extends StatelessWidget {
 
   Widget _buildFooter(BuildContext context) =>
       footerBuilder?.call(context) ??
-      FlutterDeckFooter.fromConfiguration(
-        configuration: context.flutterDeck.configuration.footer,
-      );
+      FlutterDeckFooter.fromConfiguration(configuration: context.flutterDeck.configuration.footer);
 
   Widget _buildHeader(BuildContext context) =>
       headerBuilder?.call(context) ??
-      FlutterDeckHeader.fromConfiguration(
-        configuration: context.flutterDeck.configuration.header,
-      );
+      FlutterDeckHeader.fromConfiguration(configuration: context.flutterDeck.configuration.header);
 
   @override
   Widget build(BuildContext context) {
-    final FlutterDeckSlideConfiguration(
-      footer: footerConfiguration,
-      header: headerConfiguration,
-    ) = context.flutterDeck.configuration;
+    final FlutterDeckSlideConfiguration(footer: footerConfiguration, header: headerConfiguration) =
+        context.flutterDeck.configuration;
 
     return FlutterDeckSlideBase(
       backgroundBuilder: backgroundBuilder,
-      contentBuilder: (context) => Padding(
-        padding: FlutterDeckLayout.slidePadding,
-        child: builder(context),
-      ),
+      contentBuilder: (context) => Padding(padding: FlutterDeckLayout.slidePadding, child: builder(context)),
       footerBuilder: footerConfiguration.showFooter ? _buildFooter : null,
       headerBuilder: headerConfiguration.showHeader ? _buildHeader : null,
     );

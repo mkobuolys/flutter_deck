@@ -37,10 +37,10 @@ class FlutterDeckCodeHighlight extends StatelessWidget {
     String? fileName,
     TextStyle? textStyle,
     super.key,
-  })  : _code = code,
-        _fileName = fileName,
-        _language = language,
-        _textStyle = textStyle;
+  }) : _code = code,
+       _fileName = fileName,
+       _language = language,
+       _textStyle = textStyle;
 
   final String _code;
   final String? _fileName;
@@ -50,7 +50,7 @@ class FlutterDeckCodeHighlight extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = FlutterDeckCodeHighlightTheme.of(context);
-    final textStyle = _textStyle == null || (_textStyle?.inherit ?? false)
+    final textStyle = _textStyle == null || _textStyle.inherit
         ? theme.textStyle?.merge(_textStyle) ?? _textStyle
         : _textStyle;
 
@@ -65,18 +65,13 @@ class FlutterDeckCodeHighlight extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (_fileName != null) ...[
-              Text(_fileName!, style: textStyle),
-              const SizedBox(height: 4),
-            ],
+            if (_fileName != null) ...[Text(_fileName, style: textStyle), const SizedBox(height: 4)],
             HighlightView(
               _code,
               language: _language,
               padding: const EdgeInsets.all(16),
               textStyle: textStyle,
-              theme: Theme.of(context).brightness == Brightness.dark
-                  ? vs2015Theme
-                  : defaultTheme,
+              theme: Theme.of(context).brightness == Brightness.dark ? vs2015Theme : defaultTheme,
             ),
           ],
         ),

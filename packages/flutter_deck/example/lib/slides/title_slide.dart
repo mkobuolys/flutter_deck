@@ -8,14 +8,14 @@ const _speakerNotes = '''
 
 class TitleSlide extends FlutterDeckSlideWidget {
   const TitleSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/intro',
-            title: 'Welcome to flutter_deck',
-            speakerNotes: _speakerNotes,
-            footer: FlutterDeckFooterConfiguration(showFooter: false),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/intro',
+          title: 'Welcome to flutter_deck',
+          speakerNotes: _speakerNotes,
+          footer: FlutterDeckFooterConfiguration(showFooter: false),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {

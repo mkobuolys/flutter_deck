@@ -8,15 +8,13 @@ const _speakerNotes = '''
 
 class BlankSlide extends FlutterDeckSlideWidget {
   const BlankSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/blank-slide',
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(
-              title: 'Blank slide template',
-            ),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/blank-slide',
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Blank slide template'),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {

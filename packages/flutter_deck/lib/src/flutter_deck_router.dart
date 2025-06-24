@@ -12,11 +12,7 @@ class FlutterDeckRouterSlide {
   /// Creates a slide route for the slide deck.
   ///
   /// [configuration], [route], and [widget] must not be null.
-  const FlutterDeckRouterSlide({
-    required this.configuration,
-    required this.route,
-    required this.widget,
-  });
+  const FlutterDeckRouterSlide({required this.configuration, required this.route, required this.widget});
 
   /// The configuration for the slide.
   final FlutterDeckSlideConfiguration configuration;
@@ -37,9 +33,7 @@ class FlutterDeckRouterSlide {
 /// current slide or step changes.
 class FlutterDeckRouter extends ChangeNotifier {
   /// Default constructor for [FlutterDeckRouter].
-  FlutterDeckRouter({
-    required this.slides,
-  });
+  FlutterDeckRouter({required this.slides});
 
   /// The slides to use in the slide deck.
   ///
@@ -54,8 +48,7 @@ class FlutterDeckRouter extends ChangeNotifier {
   late GoRouter _router;
 
   String? _getInitialRoute() {
-    final initialRoute =
-        slides.where((s) => s.configuration.initial).singleOrNull?.route;
+    final initialRoute = slides.where((s) => s.configuration.initial).singleOrNull?.route;
 
     if (!kIsWeb) return initialRoute;
 
@@ -78,25 +71,16 @@ class FlutterDeckRouter extends ChangeNotifier {
 
     final initialRoute = _getInitialRoute();
 
-    _initRouterData(
-      initialRoute: initialRoute,
-      isPresenterView: isPresenterView,
-    );
+    _initRouterData(initialRoute: initialRoute, isPresenterView: isPresenterView);
 
     return _router = GoRouter(
       routes: _isPresenterView
           ? [
               GoRoute(path: '/', redirect: (_, __) => _presenterViewRoute),
-              GoRoute(
-                path: _presenterViewRoute,
-                builder: (_, __) => const PresenterView(),
-              ),
+              GoRoute(path: _presenterViewRoute, builder: (_, __) => const PresenterView()),
             ]
           : [
-              GoRoute(
-                path: '/',
-                redirect: (_, __) => initialRoute ?? slides.first.route,
-              ),
+              GoRoute(path: '/', redirect: (_, __) => initialRoute ?? slides.first.route),
               for (final slide in slides)
                 GoRoute(
                   path: slide.route,
@@ -114,9 +98,7 @@ class FlutterDeckRouter extends ChangeNotifier {
   }
 
   void _initRouterData({String? initialRoute, bool? isPresenterView}) {
-    _currentSlideIndex = initialRoute != null
-        ? slides.indexWhere((s) => s.route == initialRoute)
-        : 0;
+    _currentSlideIndex = initialRoute != null ? slides.indexWhere((s) => s.route == initialRoute) : 0;
     _currentSlideStep = 1;
     _isPresenterView = false;
 
@@ -197,9 +179,7 @@ class FlutterDeckRouter extends ChangeNotifier {
   void goToStep(int stepNumber) {
     final steps = currentSlideConfiguration.steps;
 
-    if (stepNumber == _currentSlideStep ||
-        stepNumber < 1 ||
-        stepNumber > steps) {
+    if (stepNumber == _currentSlideStep || stepNumber < 1 || stepNumber > steps) {
       return;
     }
 
@@ -212,17 +192,14 @@ class FlutterDeckRouter extends ChangeNotifier {
 
     final location = Uri(
       path: slides[_currentSlideIndex].route,
-      queryParameters: _currentSlideStep > 1
-          ? {_queryParameterStep: '$_currentSlideStep'}
-          : null,
+      queryParameters: _currentSlideStep > 1 ? {_queryParameterStep: '$_currentSlideStep'} : null,
     ).toString();
 
     _router.go(location);
   }
 
   /// Returns the configuration for the current slide.
-  FlutterDeckSlideConfiguration get currentSlideConfiguration =>
-      slides[_currentSlideIndex].configuration;
+  FlutterDeckSlideConfiguration get currentSlideConfiguration => slides[_currentSlideIndex].configuration;
 
   /// Returns the index of the current slide.
   int get currentSlideIndex => _currentSlideIndex;
@@ -241,30 +218,22 @@ class FlutterDeckRouter extends ChangeNotifier {
     );
 
     final duplicatedRoutes = slides
-        .fold(
-          <String, List<String>>{},
-          (routesMap, slide) {
-            final route = slide.route;
+        .fold(<String, List<String>>{}, (routesMap, slide) {
+          final route = slide.route;
 
-            (routesMap[route] ??= []).add(route);
+          (routesMap[route] ??= []).add(route);
 
-            return routesMap;
-          },
-        )
+          return routesMap;
+        })
         .values
         .where((routes) => routes.length > 1)
         .expand((route) => route)
         .toSet()
         .join(', ');
 
-    assert(
-      duplicatedRoutes.isEmpty,
-      'Slide routes must be unique. Duplicate routes found: $duplicatedRoutes',
-    );
+    assert(duplicatedRoutes.isEmpty, 'Slide routes must be unique. Duplicate routes found: $duplicatedRoutes');
 
-    final initialSlides = slides
-        .where((slide) => slide.configuration.initial)
-        .map((slide) => slide.route);
+    final initialSlides = slides.where((slide) => slide.configuration.initial).map((slide) => slide.route);
 
     assert(
       initialSlides.length <= 1,

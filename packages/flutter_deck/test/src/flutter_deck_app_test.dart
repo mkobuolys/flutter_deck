@@ -7,13 +7,7 @@ void main() {
       test('should throw [AssertionError]', () {
         expect(
           () => FlutterDeckApp(slides: const []),
-          throwsA(
-            isA<AssertionError>().having(
-              (e) => e.message,
-              'message',
-              'You must provide at least one slide',
-            ),
-          ),
+          throwsA(isA<AssertionError>().having((e) => e.message, 'message', 'You must provide at least one slide')),
         );
       });
     });

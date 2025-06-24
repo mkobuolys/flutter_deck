@@ -1,3 +1,7 @@
+# NEXT
+
+- chore: bump to SDK v3.8.0
+
 # 0.1.2
 
 - chore: use a common analysis_options.yaml file

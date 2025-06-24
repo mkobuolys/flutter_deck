@@ -8,15 +8,13 @@ const _speakerNotes = '''
 
 class ImageSlide extends FlutterDeckSlideWidget {
   const ImageSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/image-slide',
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(
-              title: 'Image slide template',
-            ),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/image-slide',
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Image slide template'),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {

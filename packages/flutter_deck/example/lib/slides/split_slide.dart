@@ -8,15 +8,13 @@ const _speakerNotes = '''
 
 class SplitSlide extends FlutterDeckSlideWidget {
   const SplitSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/split-slide',
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(
-              title: 'Split slide template',
-            ),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/split-slide',
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Split slide template'),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {

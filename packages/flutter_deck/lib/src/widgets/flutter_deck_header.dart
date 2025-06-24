@@ -34,22 +34,15 @@ class FlutterDeckHeader extends StatelessWidget {
   ///
   /// If [maxWidth] is provided, the header will be constrained to that width.
   /// Otherwise, it will be constrained to the width of the slide.
-  const FlutterDeckHeader({
-    required this.title,
-    this.maxWidth,
-    super.key,
-  });
+  const FlutterDeckHeader({required this.title, this.maxWidth, super.key});
 
   /// Creates a widget that renders a header for a slide from a configuration.
   /// The configuration is used to determine the title of the slide.
   ///
   /// If [maxWidth] is provided, the header will be constrained to that width.
   /// Otherwise, it will be constrained to the width of the slide.
-  FlutterDeckHeader.fromConfiguration({
-    required FlutterDeckHeaderConfiguration configuration,
-    this.maxWidth,
-    super.key,
-  }) : title = configuration.title;
+  FlutterDeckHeader.fromConfiguration({required FlutterDeckHeaderConfiguration configuration, this.maxWidth, super.key})
+    : title = configuration.title;
 
   /// The title of the slide.
   final String title;

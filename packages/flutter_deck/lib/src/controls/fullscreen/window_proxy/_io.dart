@@ -9,8 +9,7 @@ class WindowProxy implements WindowProxyBase {
   Future<void> initialize() => windowManager.ensureInitialized();
 
   @override
-  bool canFullscreen() =>
-      Platform.isLinux || Platform.isWindows || Platform.isMacOS;
+  bool canFullscreen() => Platform.isLinux || Platform.isWindows || Platform.isMacOS;
 
   @override
   Future<bool> isInFullscreen() => windowManager.isFullScreen();
