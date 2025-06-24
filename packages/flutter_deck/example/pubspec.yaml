@@ -14,7 +14,7 @@ dependencies:
     sdk: flutter
   flutter_deck:
     path: ..
-  flutter_deck_web_client: ^0.3.0
+  flutter_deck_web_client: ^0.3.1
   flutter_localizations:
     sdk: flutter
   intl: ^0.20.2
