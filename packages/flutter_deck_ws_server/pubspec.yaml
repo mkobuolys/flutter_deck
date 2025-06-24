@@ -10,7 +10,7 @@ dependencies:
   broadcast_bloc: ^0.1.0-dev.2
   dart_frog: ^1.0.0
   dart_frog_web_socket: ^1.0.0
-  flutter_deck_client: ^0.1.2
+  flutter_deck_client: ^0.2.0
 
 dev_dependencies:
   test: ^1.25.8
