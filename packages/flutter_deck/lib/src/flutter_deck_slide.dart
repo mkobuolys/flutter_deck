@@ -424,12 +424,15 @@ class _SlideBody extends StatelessWidget {
       body = ColoredBox(
         color: Colors.black,
         child: Center(
-          child: FittedBox(
-            child: Container(
-              color: FlutterDeckTheme.of(context).slideTheme.backgroundColor,
-              height: slideSize.height,
-              width: slideSize.width,
-              child: body,
+          child: AspectRatio(
+            aspectRatio: slideSize.aspectRatio!,
+            child: FittedBox(
+              child: Container(
+                color: FlutterDeckTheme.of(context).slideTheme.backgroundColor,
+                height: slideSize.height,
+                width: slideSize.width,
+                child: body,
+              ),
             ),
           ),
         ),
