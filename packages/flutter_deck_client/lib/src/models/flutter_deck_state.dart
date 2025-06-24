@@ -23,20 +23,20 @@ class FlutterDeckState {
 
   /// Creates a new [FlutterDeckState] from a JSON object.
   FlutterDeckState.fromJson(Map<String, dynamic> json)
-      : locale = json['locale'] as String,
-        markerEnabled = json['markerEnabled'] as bool,
-        slideIndex = json['slideIndex'] as int,
-        slideStep = json['slideStep'] as int,
-        themeMode = json['themeMode'] as String;
+    : locale = json['locale'] as String,
+      markerEnabled = json['markerEnabled'] as bool,
+      slideIndex = json['slideIndex'] as int,
+      slideStep = json['slideStep'] as int,
+      themeMode = json['themeMode'] as String;
 
   /// Converts this [FlutterDeckState] to a JSON object.
   Map<String, dynamic> toJson() => {
-        'locale': locale,
-        'markerEnabled': markerEnabled,
-        'slideIndex': slideIndex,
-        'slideStep': slideStep,
-        'themeMode': themeMode,
-      };
+    'locale': locale,
+    'markerEnabled': markerEnabled,
+    'slideIndex': slideIndex,
+    'slideStep': slideStep,
+    'themeMode': themeMode,
+  };
 
   /// The locale of the presentation.
   final String locale;
@@ -54,13 +54,7 @@ class FlutterDeckState {
   final String themeMode;
 
   /// Creates a copy of this [FlutterDeckState] with the given parameters
-  FlutterDeckState copyWith({
-    String? locale,
-    bool? markerEnabled,
-    int? slideIndex,
-    int? slideStep,
-    String? themeMode,
-  }) {
+  FlutterDeckState copyWith({String? locale, bool? markerEnabled, int? slideIndex, int? slideStep, String? themeMode}) {
     return FlutterDeckState(
       locale: locale ?? this.locale,
       markerEnabled: markerEnabled ?? this.markerEnabled,
@@ -86,9 +80,5 @@ class FlutterDeckState {
   /// Overrides the hash code getter to return the hash code of this object.
   @override
   int get hashCode =>
-      locale.hashCode ^
-      markerEnabled.hashCode ^
-      slideIndex.hashCode ^
-      slideStep.hashCode ^
-      themeMode.hashCode;
+      locale.hashCode ^ markerEnabled.hashCode ^ slideIndex.hashCode ^ slideStep.hashCode ^ themeMode.hashCode;
 }

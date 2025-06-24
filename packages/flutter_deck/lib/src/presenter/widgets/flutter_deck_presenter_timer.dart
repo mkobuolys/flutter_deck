@@ -11,8 +11,7 @@ class FlutterDeckPresenterTimer extends StatefulWidget {
   const FlutterDeckPresenterTimer({super.key});
 
   @override
-  State<FlutterDeckPresenterTimer> createState() =>
-      _FlutterDeckPresenterTimerState();
+  State<FlutterDeckPresenterTimer> createState() => _FlutterDeckPresenterTimerState();
 }
 
 class _FlutterDeckPresenterTimerState extends State<FlutterDeckPresenterTimer> {
@@ -53,20 +52,11 @@ class _FlutterDeckPresenterTimerState extends State<FlutterDeckPresenterTimer> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text(
-            _formattedTimer,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          Text(_formattedTimer, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(width: 16),
           IconButton(
-            onPressed: () => setState(
-              _stopwatch.isRunning ? _stopwatch.stop : _stopwatch.start,
-            ),
-            icon: Icon(
-              _stopwatch.isRunning
-                  ? Icons.pause_rounded
-                  : Icons.play_arrow_rounded,
-            ),
+            onPressed: () => setState(_stopwatch.isRunning ? _stopwatch.stop : _stopwatch.start),
+            icon: Icon(_stopwatch.isRunning ? Icons.pause_rounded : Icons.play_arrow_rounded),
             tooltip: _stopwatch.isRunning ? 'Pause timer' : 'Resume timer',
           ),
           IconButton(

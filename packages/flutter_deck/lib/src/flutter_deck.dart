@@ -73,16 +73,16 @@ class FlutterDeck extends InheritedWidget {
     required FlutterDeckThemeNotifier themeNotifier,
     required super.child,
     super.key,
-  })  : _configuration = configuration,
-        _router = router,
-        _speakerInfo = speakerInfo,
-        _autoplayNotifier = autoplayNotifier,
-        _controlsNotifier = controlsNotifier,
-        _drawerNotifier = drawerNotifier,
-        _localizationNotifier = localizationNotifier,
-        _markerNotifier = markerNotifier,
-        _presenterController = presenterController,
-        _themeNotifier = themeNotifier;
+  }) : _configuration = configuration,
+       _router = router,
+       _speakerInfo = speakerInfo,
+       _autoplayNotifier = autoplayNotifier,
+       _controlsNotifier = controlsNotifier,
+       _drawerNotifier = drawerNotifier,
+       _localizationNotifier = localizationNotifier,
+       _markerNotifier = markerNotifier,
+       _presenterController = presenterController,
+       _themeNotifier = themeNotifier;
 
   final FlutterDeckConfiguration _configuration;
   final FlutterDeckRouter _router;
@@ -130,8 +130,7 @@ class FlutterDeck extends InheritedWidget {
   FlutterDeckSpeakerInfo? get speakerInfo => _speakerInfo;
 
   /// Returns the configuration for the current slide.
-  FlutterDeckSlideConfiguration get configuration =>
-      _router.currentSlideConfiguration;
+  FlutterDeckSlideConfiguration get configuration => _router.currentSlideConfiguration;
 
   /// Returns the global configuration for the slide deck.
   FlutterDeckConfiguration get globalConfiguration => _configuration;
@@ -146,15 +145,13 @@ class FlutterDeck extends InheritedWidget {
   FlutterDeckDrawerNotifier get drawerNotifier => _drawerNotifier;
 
   /// Returns the [FlutterDeckLocalizationNotifier] for the slide deck.
-  FlutterDeckLocalizationNotifier get localizationNotifier =>
-      _localizationNotifier;
+  FlutterDeckLocalizationNotifier get localizationNotifier => _localizationNotifier;
 
   /// Returns the [FlutterDeckMarkerNotifier] for the slide deck.
   FlutterDeckMarkerNotifier get markerNotifier => _markerNotifier;
 
   /// Returns the [FlutterDeckPresenterController] for the slide deck.
-  FlutterDeckPresenterController get presenterController =>
-      _presenterController;
+  FlutterDeckPresenterController get presenterController => _presenterController;
 
   /// Returns the [FlutterDeckThemeNotifier] for the slide deck.
   FlutterDeckThemeNotifier get themeNotifier => _themeNotifier;
@@ -163,8 +160,7 @@ class FlutterDeck extends InheritedWidget {
   ///
   /// See [BuildContext.dependOnInheritedWidgetOfExactType].
   static FlutterDeck of(BuildContext context) {
-    final flutterDeck =
-        context.dependOnInheritedWidgetOfExactType<FlutterDeck>();
+    final flutterDeck = context.dependOnInheritedWidgetOfExactType<FlutterDeck>();
 
     assert(flutterDeck != null, 'No FlutterDeck found in context');
 

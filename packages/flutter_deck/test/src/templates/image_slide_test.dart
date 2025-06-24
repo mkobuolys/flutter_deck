@@ -7,12 +7,7 @@ import '../../test_utils.dart';
 void main() {
   group('ImageSlide', () {
     testWidgets('should render all layout elements', (tester) async {
-      final slideTester = SlideTester(
-        tester: tester,
-        showHeader: true,
-        showFooter: true,
-        slide: const ImageSlide(),
-      );
+      final slideTester = SlideTester(tester: tester, showHeader: true, showFooter: true, slide: const ImageSlide());
 
       await slideTester.pumpSlide();
 
@@ -30,12 +25,7 @@ void main() {
     });
 
     testWidgets('should apply theming', (tester) async {
-      final slideTester = SlideTester(
-        tester: tester,
-        showHeader: false,
-        showFooter: false,
-        slide: const ImageSlide(),
-      );
+      final slideTester = SlideTester(tester: tester, showHeader: false, showFooter: false, slide: const ImageSlide());
 
       await slideTester.pumpSlide();
 
@@ -72,12 +62,7 @@ void main() {
 }
 
 class ImageSlide extends FlutterDeckSlideWidget {
-  const ImageSlide({super.key})
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/image-slide',
-          ),
-        );
+  const ImageSlide({super.key}) : super(configuration: const FlutterDeckSlideConfiguration(route: '/image-slide'));
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +70,7 @@ class ImageSlide extends FlutterDeckSlideWidget {
       imageBuilder: (context) => Image.asset('assets/header.png'),
       key: const Key('Image Key'),
       label: 'Here goes the label of the image',
-      backgroundBuilder: (context) => Container(
-        color: Colors.orange,
-        key: const Key('Container Key'),
-      ),
+      backgroundBuilder: (context) => Container(color: Colors.orange, key: const Key('Container Key')),
     );
   }
 }

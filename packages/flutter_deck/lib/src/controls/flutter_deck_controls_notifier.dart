@@ -12,9 +12,7 @@ const _defaultControlsVisibleDuration = Duration(seconds: 3);
 
 /// The [ChangeNotifier] used to control the slide deck and handle cursor and
 /// deck controls visibility.
-class FlutterDeckControlsNotifier
-    with ChangeNotifier
-    implements FlutterDeckFullscreenManager {
+class FlutterDeckControlsNotifier with ChangeNotifier implements FlutterDeckFullscreenManager {
   /// Creates a [FlutterDeckControlsNotifier].
   FlutterDeckControlsNotifier({
     required FlutterDeckAutoplayNotifier autoplayNotifier,
@@ -22,11 +20,11 @@ class FlutterDeckControlsNotifier
     required FlutterDeckMarkerNotifier markerNotifier,
     required FlutterDeckFullscreenManager fullscreenManager,
     required FlutterDeckRouter router,
-  })  : _autoplayNotifier = autoplayNotifier,
-        _drawerNotifier = drawerNotifier,
-        _markerNotifier = markerNotifier,
-        _fullscreenManager = fullscreenManager,
-        _router = router;
+  }) : _autoplayNotifier = autoplayNotifier,
+       _drawerNotifier = drawerNotifier,
+       _markerNotifier = markerNotifier,
+       _fullscreenManager = fullscreenManager,
+       _router = router;
 
   final FlutterDeckAutoplayNotifier _autoplayNotifier;
   final FlutterDeckDrawerNotifier _drawerNotifier;
@@ -89,11 +87,7 @@ class FlutterDeckControlsNotifier
     _markerNotifier.toggle();
 
     _disabledIntents = {
-      if (_markerNotifier.enabled) ...{
-        const GoNextIntent(),
-        const GoPreviousIntent(),
-        const ToggleDrawerIntent(),
-      },
+      if (_markerNotifier.enabled) ...{const GoNextIntent(), const GoPreviousIntent(), const ToggleDrawerIntent()},
     };
 
     showControls();
@@ -118,10 +112,7 @@ class FlutterDeckControlsNotifier
   void showControls() {
     _setControlsVisible(true);
 
-    _controlsVisibleTimer = Timer(
-      _controlsVisibleDuration,
-      () => _setControlsVisible(false),
-    );
+    _controlsVisibleTimer = Timer(_controlsVisibleDuration, () => _setControlsVisible(false));
   }
 
   void _setControlsVisible(bool visible) {
@@ -137,10 +128,9 @@ class FlutterDeckControlsNotifier
   ///
   /// The value toggles between 3 seconds and infinite (no auto-hide).
   void toggleControlsVisibleDuration() {
-    _controlsVisibleDuration =
-        _controlsVisibleDuration > _defaultControlsVisibleDuration
-            ? _defaultControlsVisibleDuration
-            : const Duration(days: 1); // Infinite enough for this use case...
+    _controlsVisibleDuration = _controlsVisibleDuration > _defaultControlsVisibleDuration
+        ? _defaultControlsVisibleDuration
+        : const Duration(days: 1); // Infinite enough for this use case...
   }
 
   /// Whether the given [intent] is disabled.

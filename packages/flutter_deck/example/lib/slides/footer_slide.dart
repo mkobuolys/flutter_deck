@@ -8,20 +8,18 @@ const _speakerNotes = '''
 
 class FooterSlide extends FlutterDeckSlideWidget {
   const FooterSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            footer: FlutterDeckFooterConfiguration(
-              showSlideNumbers: true,
-              showSocialHandle: true,
-              widget: _CustomFooter(),
-            ),
-            route: '/footer-slide',
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(
-              title: 'Custom footer slide',
-            ),
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          footer: FlutterDeckFooterConfiguration(
+            showSlideNumbers: true,
+            showSocialHandle: true,
+            widget: _CustomFooter(),
           ),
-        );
+          route: '/footer-slide',
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Custom footer slide'),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +43,7 @@ class _CustomFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Row(
-      children: [
-        Icon(Icons.home),
-        SizedBox(width: 8),
-        Text('This is a custom footer with icon and text'),
-      ],
+      children: [Icon(Icons.home), SizedBox(width: 8), Text('This is a custom footer with icon and text')],
     );
   }
 }

@@ -78,9 +78,7 @@ class FlutterDeckControlsListener extends StatelessWidget {
       child: ListenableBuilder(
         listenable: controlsNotifier,
         builder: (context, child) => MouseRegion(
-          cursor: controlsNotifier.controlsVisible
-              ? MouseCursor.defer
-              : SystemMouseCursors.none,
+          cursor: controlsNotifier.controlsVisible ? MouseCursor.defer : SystemMouseCursors.none,
           onHover: _onMouseHover,
           child: ListenableBuilder(
             listenable: markerNotifier,
@@ -91,11 +89,7 @@ class FlutterDeckControlsListener extends StatelessWidget {
                 return GestureDetector(onTap: _onTap, child: child);
               }
 
-              return GestureDetector(
-                onHorizontalDragEnd: _onHorizontalSwipe,
-                onTap: _onTap,
-                child: child,
-              );
+              return GestureDetector(onHorizontalDragEnd: _onHorizontalSwipe, onTap: _onTap, child: child);
             },
             child: child,
           ),

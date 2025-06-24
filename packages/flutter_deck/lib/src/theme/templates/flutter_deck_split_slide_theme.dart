@@ -76,11 +76,7 @@ class FlutterDeckSplitSlideTheme extends InheritedTheme {
   /// Creates a theme to style [FlutterDeckSplitSlide].
   ///
   /// The [data] argument must not be null.
-  const FlutterDeckSplitSlideTheme({
-    required this.data,
-    required super.child,
-    super.key,
-  });
+  const FlutterDeckSplitSlideTheme({required this.data, required super.child, super.key});
 
   /// The visual properties of [FlutterDeckSplitSlide].
   final FlutterDeckSplitSlideThemeData data;
@@ -91,17 +87,14 @@ class FlutterDeckSplitSlideTheme extends InheritedTheme {
   ///
   /// The returned theme data will never be null.
   static FlutterDeckSplitSlideThemeData of(BuildContext context) {
-    final theme = context
-        .dependOnInheritedWidgetOfExactType<FlutterDeckSplitSlideTheme>();
+    final theme = context.dependOnInheritedWidgetOfExactType<FlutterDeckSplitSlideTheme>();
 
     return theme?.data ?? FlutterDeckTheme.of(context).splitSlideTheme;
   }
 
   @override
-  bool updateShouldNotify(FlutterDeckSplitSlideTheme oldWidget) =>
-      data != oldWidget.data;
+  bool updateShouldNotify(FlutterDeckSplitSlideTheme oldWidget) => data != oldWidget.data;
 
   @override
-  Widget wrap(BuildContext context, Widget child) =>
-      FlutterDeckSplitSlideTheme(data: data, child: child);
+  Widget wrap(BuildContext context, Widget child) => FlutterDeckSplitSlideTheme(data: data, child: child);
 }

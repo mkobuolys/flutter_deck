@@ -9,15 +9,13 @@ const _speakerNotes = '''
 
 class MarkerSlide extends FlutterDeckSlideWidget {
   const MarkerSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/marker',
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(
-              title: 'Marker tool',
-            ),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/marker',
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Marker tool'),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +34,7 @@ class MarkerSlide extends FlutterDeckSlideWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
-            Expanded(
-              child: Image.asset('assets/dog_complete_drawing.jpeg'),
-            ),
+            Expanded(child: Image.asset('assets/dog_complete_drawing.jpeg')),
           ],
         ),
       ),

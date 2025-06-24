@@ -56,23 +56,17 @@ class FlutterDeckImageSlide extends StatelessWidget {
 
   Widget _buildFooter(BuildContext context) =>
       footerBuilder?.call(context) ??
-      FlutterDeckFooter.fromConfiguration(
-        configuration: context.flutterDeck.configuration.footer,
-      );
+      FlutterDeckFooter.fromConfiguration(configuration: context.flutterDeck.configuration.footer);
 
   Widget _buildHeader(BuildContext context) =>
       headerBuilder?.call(context) ??
-      FlutterDeckHeader.fromConfiguration(
-        configuration: context.flutterDeck.configuration.header,
-      );
+      FlutterDeckHeader.fromConfiguration(configuration: context.flutterDeck.configuration.header);
 
   @override
   Widget build(BuildContext context) {
     final theme = FlutterDeckImageSlideTheme.of(context);
-    final FlutterDeckSlideConfiguration(
-      footer: footerConfiguration,
-      header: headerConfiguration,
-    ) = context.flutterDeck.configuration;
+    final FlutterDeckSlideConfiguration(footer: footerConfiguration, header: headerConfiguration) =
+        context.flutterDeck.configuration;
 
     return FlutterDeckSlideBase(
       backgroundBuilder: backgroundBuilder,
@@ -80,13 +74,8 @@ class FlutterDeckImageSlide extends StatelessWidget {
         padding: FlutterDeckLayout.slidePadding,
         child: Column(
           children: [
-            Expanded(
-              child: Center(child: imageBuilder(context)),
-            ),
-            if (label != null) ...[
-              const SizedBox(height: 4),
-              Text(label!, style: theme.labelTextStyle),
-            ],
+            Expanded(child: Center(child: imageBuilder(context))),
+            if (label != null) ...[const SizedBox(height: 4), Text(label!, style: theme.labelTextStyle)],
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 # NEXT
 
 - feat: migrate to package:web
+- chore: bump to SDK v3.8.0 / Flutter v3.32.0
 
 # 0.19.0
 

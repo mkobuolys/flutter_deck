@@ -60,23 +60,17 @@ class FlutterDeckBigFactSlide extends StatelessWidget {
 
   Widget _buildFooter(BuildContext context) =>
       footerBuilder?.call(context) ??
-      FlutterDeckFooter.fromConfiguration(
-        configuration: context.flutterDeck.configuration.footer,
-      );
+      FlutterDeckFooter.fromConfiguration(configuration: context.flutterDeck.configuration.footer);
 
   Widget _buildHeader(BuildContext context) =>
       headerBuilder?.call(context) ??
-      FlutterDeckHeader.fromConfiguration(
-        configuration: context.flutterDeck.configuration.header,
-      );
+      FlutterDeckHeader.fromConfiguration(configuration: context.flutterDeck.configuration.header);
 
   @override
   Widget build(BuildContext context) {
     final theme = FlutterDeckBigFactSlideTheme.of(context);
-    final FlutterDeckSlideConfiguration(
-      footer: footerConfiguration,
-      header: headerConfiguration,
-    ) = context.flutterDeck.configuration;
+    final FlutterDeckSlideConfiguration(footer: footerConfiguration, header: headerConfiguration) =
+        context.flutterDeck.configuration;
 
     return FlutterDeckSlideBase(
       backgroundBuilder: backgroundBuilder,
@@ -87,12 +81,7 @@ class FlutterDeckBigFactSlide extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Flexible(
-                child: AutoSizeText(
-                  title,
-                  style: theme.titleTextStyle,
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                ),
+                child: AutoSizeText(title, style: theme.titleTextStyle, textAlign: TextAlign.center, maxLines: 1),
               ),
               if (subtitle != null) ...[
                 const SizedBox(height: 16),

@@ -9,11 +9,7 @@ class FlutterDeckDrawerListener extends StatefulWidget {
   /// Creates a [FlutterDeckDrawerListener].
   ///
   /// The [onDrawerToggle] callback and [child] arguments must not be null.
-  const FlutterDeckDrawerListener({
-    required this.onDrawerToggle,
-    required this.child,
-    super.key,
-  });
+  const FlutterDeckDrawerListener({required this.onDrawerToggle, required this.child, super.key});
 
   /// The callback that is called when the drawer should be toggled.
   final VoidCallback onDrawerToggle;
@@ -22,8 +18,7 @@ class FlutterDeckDrawerListener extends StatefulWidget {
   final Widget child;
 
   @override
-  State<FlutterDeckDrawerListener> createState() =>
-      _FlutterDeckDrawerListenerState();
+  State<FlutterDeckDrawerListener> createState() => _FlutterDeckDrawerListenerState();
 }
 
 class _FlutterDeckDrawerListenerState extends State<FlutterDeckDrawerListener> {
@@ -42,8 +37,7 @@ class _FlutterDeckDrawerListenerState extends State<FlutterDeckDrawerListener> {
 
     if (_notifier != null) return;
 
-    _notifier = context.flutterDeck.drawerNotifier
-      ..addListener(_onDrawerToggle);
+    _notifier = context.flutterDeck.drawerNotifier..addListener(_onDrawerToggle);
   }
 
   void _onDrawerToggle() {

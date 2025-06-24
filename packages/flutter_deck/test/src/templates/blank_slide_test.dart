@@ -7,12 +7,7 @@ import '../../test_utils.dart';
 void main() {
   group('BlankSlide', () {
     testWidgets('should render all layout elements', (tester) async {
-      final slideTester = SlideTester(
-        tester: tester,
-        showHeader: true,
-        showFooter: true,
-        slide: const BlankSlide(),
-      );
+      final slideTester = SlideTester(tester: tester, showHeader: true, showFooter: true, slide: const BlankSlide());
 
       await slideTester.pumpSlide();
 
@@ -28,12 +23,7 @@ void main() {
     });
 
     testWidgets('should apply theming', (tester) async {
-      final slideTester = SlideTester(
-        tester: tester,
-        showHeader: false,
-        showFooter: false,
-        slide: const BlankSlide(),
-      );
+      final slideTester = SlideTester(tester: tester, showHeader: false, showFooter: false, slide: const BlankSlide());
 
       await slideTester.pumpSlide();
 
@@ -70,22 +60,15 @@ void main() {
 }
 
 class BlankSlide extends FlutterDeckSlideWidget {
-  const BlankSlide({super.key})
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/blank-slide',
-          ),
-        );
+  const BlankSlide({super.key}) : super(configuration: const FlutterDeckSlideConfiguration(route: '/blank-slide'));
 
   @override
   Widget build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => const Text('Test Content'),
-      theme: FlutterDeckTheme.of(context).copyWith(
-        slideTheme: const FlutterDeckSlideThemeData(
-          backgroundColor: Colors.orange,
-        ),
-      ),
+      theme: FlutterDeckTheme.of(
+        context,
+      ).copyWith(slideTheme: const FlutterDeckSlideThemeData(backgroundColor: Colors.orange)),
       key: const Key('blankslide'),
     );
   }

@@ -6,9 +6,7 @@ import 'package:flutter_deck/src/flutter_deck_router.dart';
 /// The [ChangeNotifier] used to control the autoplay of the slide deck.
 class FlutterDeckAutoplayNotifier extends ChangeNotifier {
   /// Creates a [FlutterDeckAutoplayNotifier].
-  FlutterDeckAutoplayNotifier({
-    required FlutterDeckRouter router,
-  }) : _router = router;
+  FlutterDeckAutoplayNotifier({required FlutterDeckRouter router}) : _router = router;
 
   final FlutterDeckRouter _router;
 

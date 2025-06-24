@@ -9,25 +9,21 @@ const _speakerNotes = '''
 
 class StepsSlide extends FlutterDeckSlideWidget {
   const StepsSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/steps',
-            steps: 3,
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(title: 'Slide steps'),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/steps',
+          steps: 3,
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Slide steps'),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
     return FlutterDeckSlide.split(
       leftBuilder: (context) => FlutterDeckBulletList(
         useSteps: true,
-        items: const [
-          'This is a step',
-          'This is another step',
-          'This is a third step',
-        ],
+        items: const ['This is a step', 'This is another step', 'This is a third step'],
       ),
       rightBuilder: (context) => Center(
         child: Text(

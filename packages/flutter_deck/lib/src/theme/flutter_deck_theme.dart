@@ -19,50 +19,33 @@ const _flutterBlue = Color(0xff0553B1);
 /// its subtree.
 class FlutterDeckThemeData {
   /// Creates a theme to style a slide deck.
-  factory FlutterDeckThemeData({
-    Brightness? brightness,
-    ThemeData? theme,
-    FlutterDeckTextTheme? textTheme,
-  }) {
+  factory FlutterDeckThemeData({Brightness? brightness, ThemeData? theme, FlutterDeckTextTheme? textTheme}) {
     theme ??= ThemeData.from(
-      colorScheme: ColorScheme.fromSeed(
-        brightness: brightness ?? Brightness.light,
-        seedColor: _flutterBlue,
-      ),
+      colorScheme: ColorScheme.fromSeed(brightness: brightness ?? Brightness.light, seedColor: _flutterBlue),
       useMaterial3: true,
     );
-    textTheme ??= const FlutterDeckTextTheme().apply(
-      color: theme.colorScheme.onSurface,
-    );
+    textTheme ??= const FlutterDeckTextTheme().apply(color: theme.colorScheme.onSurface);
 
     return FlutterDeckThemeData.fromThemeAndText(theme, textTheme);
   }
 
   /// Creates a default light theme to style a slide deck.
-  factory FlutterDeckThemeData.light() =>
-      FlutterDeckThemeData(brightness: Brightness.light);
+  factory FlutterDeckThemeData.light() => FlutterDeckThemeData(brightness: Brightness.light);
 
   /// Creates a default dark theme to style a slide deck.
-  factory FlutterDeckThemeData.dark() =>
-      FlutterDeckThemeData(brightness: Brightness.dark);
+  factory FlutterDeckThemeData.dark() => FlutterDeckThemeData(brightness: Brightness.dark);
 
   /// Creates a theme to style a slide deck from a [ThemeData].
   factory FlutterDeckThemeData.fromTheme(ThemeData theme) {
     final defaultTheme = FlutterDeckThemeData(brightness: theme.brightness);
-    final customTheme = FlutterDeckThemeData.fromThemeAndText(
-      theme,
-      defaultTheme.textTheme,
-    );
+    final customTheme = FlutterDeckThemeData.fromThemeAndText(theme, defaultTheme.textTheme);
 
     return defaultTheme.merge(customTheme);
   }
 
   /// Creates a theme to style a slide deck from a [ThemeData] and a
   /// [FlutterDeckTextTheme].
-  factory FlutterDeckThemeData.fromThemeAndText(
-    ThemeData theme,
-    FlutterDeckTextTheme textTheme,
-  ) {
+  factory FlutterDeckThemeData.fromThemeAndText(ThemeData theme, FlutterDeckTextTheme textTheme) {
     final colorScheme = theme.colorScheme;
 
     return FlutterDeckThemeData._(
@@ -70,10 +53,7 @@ class FlutterDeckThemeData {
         titleTextStyle: textTheme.display,
         subtitleTextStyle: textTheme.subtitle,
       ),
-      bulletListTheme: FlutterDeckBulletListThemeData(
-        color: colorScheme.onSurface,
-        textStyle: textTheme.title,
-      ),
+      bulletListTheme: FlutterDeckBulletListThemeData(color: colorScheme.onSurface, textStyle: textTheme.title),
       codeHighlightTheme: FlutterDeckCodeHighlightThemeData(
         backgroundColor: colorScheme.surface,
         textStyle: textTheme.bodyMedium,
@@ -84,21 +64,13 @@ class FlutterDeckThemeData {
         socialHandleColor: colorScheme.onSurface,
         socialHandleTextStyle: textTheme.bodyMedium,
       ),
-      headerTheme: FlutterDeckHeaderThemeData(
-        color: colorScheme.onSurface,
-        textStyle: textTheme.header,
-      ),
-      imageSlideTheme: FlutterDeckImageSlideThemeData(
-        labelTextStyle: textTheme.bodySmall,
-      ),
+      headerTheme: FlutterDeckHeaderThemeData(color: colorScheme.onSurface, textStyle: textTheme.header),
+      imageSlideTheme: FlutterDeckImageSlideThemeData(labelTextStyle: textTheme.bodySmall),
       quoteSlideTheme: FlutterDeckQuoteSlideThemeData(
         attributionTextStyle: textTheme.subtitle,
         quoteTextStyle: textTheme.title.copyWith(fontStyle: FontStyle.italic),
       ),
-      slideTheme: FlutterDeckSlideThemeData(
-        backgroundColor: colorScheme.surface,
-        color: colorScheme.onSurface,
-      ),
+      slideTheme: FlutterDeckSlideThemeData(backgroundColor: colorScheme.surface, color: colorScheme.onSurface),
       speakerInfoWidgetTheme: FlutterDeckSpeakerInfoWidgetThemeData(
         descriptionTextStyle: textTheme.bodyMedium,
         nameTextStyle: textTheme.bodyLarge,
@@ -203,8 +175,7 @@ class FlutterDeckThemeData {
       imageSlideTheme: this.imageSlideTheme.merge(imageSlideTheme),
       quoteSlideTheme: this.quoteSlideTheme.merge(quoteSlideTheme),
       slideTheme: this.slideTheme.merge(slideTheme),
-      speakerInfoWidgetTheme:
-          this.speakerInfoWidgetTheme.merge(speakerInfoWidgetTheme),
+      speakerInfoWidgetTheme: this.speakerInfoWidgetTheme.merge(speakerInfoWidgetTheme),
       splitSlideTheme: this.splitSlideTheme.merge(splitSlideTheme),
       titleSlideTheme: this.titleSlideTheme.merge(titleSlideTheme),
       materialTheme: materialTheme,
@@ -225,8 +196,7 @@ class FlutterDeckThemeData {
       imageSlideTheme: imageSlideTheme.merge(other.imageSlideTheme),
       quoteSlideTheme: quoteSlideTheme.merge(other.quoteSlideTheme),
       slideTheme: slideTheme.merge(other.slideTheme),
-      speakerInfoWidgetTheme:
-          speakerInfoWidgetTheme.merge(other.speakerInfoWidgetTheme),
+      speakerInfoWidgetTheme: speakerInfoWidgetTheme.merge(other.speakerInfoWidgetTheme),
       splitSlideTheme: splitSlideTheme.merge(other.splitSlideTheme),
       titleSlideTheme: titleSlideTheme.merge(other.titleSlideTheme),
       textTheme: textTheme.merge(other.textTheme),
@@ -242,11 +212,7 @@ class FlutterDeckTheme extends InheritedWidget {
   /// Creates a theme to style a slide deck.
   ///
   /// The [data] argument must not be null.
-  const FlutterDeckTheme({
-    required this.data,
-    required super.child,
-    super.key,
-  });
+  const FlutterDeckTheme({required this.data, required super.child, super.key});
 
   /// The visual properties of a slide deck.
   final FlutterDeckThemeData data;
@@ -254,8 +220,7 @@ class FlutterDeckTheme extends InheritedWidget {
   /// Returns the [data] from the closest [FlutterDeckTheme] ancestor. If there
   /// is no ancestor, assertion error is thrown.
   static FlutterDeckThemeData of(BuildContext context) {
-    final theme =
-        context.dependOnInheritedWidgetOfExactType<FlutterDeckTheme>();
+    final theme = context.dependOnInheritedWidgetOfExactType<FlutterDeckTheme>();
 
     assert(theme != null, 'No FlutterDeckTheme found in context');
 

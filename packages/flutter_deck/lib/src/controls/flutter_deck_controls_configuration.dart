@@ -27,11 +27,11 @@ class FlutterDeckControlsConfiguration {
   /// Creates a configuration for the slide deck controls where they are
   /// disabled.
   const FlutterDeckControlsConfiguration.disabled()
-      : this(
-          presenterToolbarVisible: false,
-          gestures: const FlutterDeckGesturesConfiguration.disabled(),
-          shortcuts: const FlutterDeckShortcutsConfiguration.disabled(),
-        );
+    : this(
+        presenterToolbarVisible: false,
+        gestures: const FlutterDeckGesturesConfiguration.disabled(),
+        shortcuts: const FlutterDeckShortcutsConfiguration.disabled(),
+      );
 
   /// Whether the presenter toolbar is visible or not.
   final bool presenterToolbarVisible;
@@ -49,24 +49,16 @@ class FlutterDeckControlsConfiguration {
 /// gestures are enabled on all platforms.
 class FlutterDeckGesturesConfiguration {
   /// Creates a configuration for the slide deck control gestures.
-  const FlutterDeckGesturesConfiguration({
-    this.supportedPlatforms = const {...TargetPlatform.values},
-  });
+  const FlutterDeckGesturesConfiguration({this.supportedPlatforms = const {...TargetPlatform.values}});
 
   /// Creates a configuration for the slide deck control gestures where they are
   /// disabled.
-  const FlutterDeckGesturesConfiguration.disabled()
-      : this(supportedPlatforms: const {});
+  const FlutterDeckGesturesConfiguration.disabled() : this(supportedPlatforms: const {});
 
   /// Creates a configuration for the slide deck control gestures where they are
   /// enabled on mobile platforms only.
   const FlutterDeckGesturesConfiguration.mobileOnly()
-      : this(
-          supportedPlatforms: const {
-            TargetPlatform.android,
-            TargetPlatform.iOS,
-          },
-        );
+    : this(supportedPlatforms: const {TargetPlatform.android, TargetPlatform.iOS});
 
   /// The platforms where gestures are enabled.
   final Set<TargetPlatform> supportedPlatforms;
@@ -95,8 +87,7 @@ class FlutterDeckShortcutsConfiguration {
     this.nextSlide = const SingleActivator(LogicalKeyboardKey.arrowRight),
     this.previousSlide = const SingleActivator(LogicalKeyboardKey.arrowLeft),
     this.toggleMarker = const SingleActivator(LogicalKeyboardKey.keyM),
-    this.toggleNavigationDrawer =
-        const SingleActivator(LogicalKeyboardKey.period),
+    this.toggleNavigationDrawer = const SingleActivator(LogicalKeyboardKey.period),
   });
 
   /// Creates a configuration for the slide deck keyboard shortcuts where they

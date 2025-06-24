@@ -19,10 +19,7 @@ import 'package:flutter_deck/src/widgets/flutter_deck_code_highlight.dart';
 /// slide deck.
 class FlutterDeckCodeHighlightThemeData {
   /// Creates a theme to style [FlutterDeckCodeHighlight].
-  const FlutterDeckCodeHighlightThemeData({
-    this.backgroundColor,
-    this.textStyle,
-  });
+  const FlutterDeckCodeHighlightThemeData({this.backgroundColor, this.textStyle});
 
   /// Background color of the code highlighter.
   final Color? backgroundColor;
@@ -32,10 +29,7 @@ class FlutterDeckCodeHighlightThemeData {
 
   /// Creates a copy of this object with the given fields replaced with the new
   /// values.
-  FlutterDeckCodeHighlightThemeData copyWith({
-    Color? backgroundColor,
-    TextStyle? textStyle,
-  }) {
+  FlutterDeckCodeHighlightThemeData copyWith({Color? backgroundColor, TextStyle? textStyle}) {
     return FlutterDeckCodeHighlightThemeData(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       textStyle: textStyle ?? this.textStyle,
@@ -43,9 +37,7 @@ class FlutterDeckCodeHighlightThemeData {
   }
 
   /// Merge the given [FlutterDeckCodeHighlightThemeData] with this one.
-  FlutterDeckCodeHighlightThemeData merge(
-    FlutterDeckCodeHighlightThemeData? other,
-  ) {
+  FlutterDeckCodeHighlightThemeData merge(FlutterDeckCodeHighlightThemeData? other) {
     if (other == null) return this;
 
     return copyWith(
@@ -64,11 +56,7 @@ class FlutterDeckCodeHighlightTheme extends InheritedTheme {
   /// Creates a theme to style [FlutterDeckCodeHighlight].
   ///
   /// The [data] argument must not be null.
-  const FlutterDeckCodeHighlightTheme({
-    required this.data,
-    required super.child,
-    super.key,
-  });
+  const FlutterDeckCodeHighlightTheme({required this.data, required super.child, super.key});
 
   /// The visual properties of [FlutterDeckCodeHighlight].
   final FlutterDeckCodeHighlightThemeData data;
@@ -79,17 +67,14 @@ class FlutterDeckCodeHighlightTheme extends InheritedTheme {
   ///
   /// The returned theme data will never be null.
   static FlutterDeckCodeHighlightThemeData of(BuildContext context) {
-    final theme = context
-        .dependOnInheritedWidgetOfExactType<FlutterDeckCodeHighlightTheme>();
+    final theme = context.dependOnInheritedWidgetOfExactType<FlutterDeckCodeHighlightTheme>();
 
     return theme?.data ?? FlutterDeckTheme.of(context).codeHighlightTheme;
   }
 
   @override
-  bool updateShouldNotify(FlutterDeckCodeHighlightTheme oldWidget) =>
-      data != oldWidget.data;
+  bool updateShouldNotify(FlutterDeckCodeHighlightTheme oldWidget) => data != oldWidget.data;
 
   @override
-  Widget wrap(BuildContext context, Widget child) =>
-      FlutterDeckCodeHighlightTheme(data: data, child: child);
+  Widget wrap(BuildContext context, Widget child) => FlutterDeckCodeHighlightTheme(data: data, child: child);
 }

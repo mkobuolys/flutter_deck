@@ -11,8 +11,7 @@ class FlutterDeckSpeakerNotes extends StatefulWidget {
   const FlutterDeckSpeakerNotes({super.key});
 
   @override
-  State<FlutterDeckSpeakerNotes> createState() =>
-      _FlutterDeckSpeakerNotesState();
+  State<FlutterDeckSpeakerNotes> createState() => _FlutterDeckSpeakerNotesState();
 }
 
 class _FlutterDeckSpeakerNotesState extends State<FlutterDeckSpeakerNotes> {
@@ -45,14 +44,8 @@ class _FlutterDeckSpeakerNotesState extends State<FlutterDeckSpeakerNotes> {
                 children: [
                   Text('Notes: Slide ${currentSlideIndex + 1}'),
                   const Spacer(),
-                  IconButton(
-                    onPressed: _decreaseFontSize,
-                    icon: const Icon(Icons.remove_rounded),
-                  ),
-                  IconButton(
-                    onPressed: _increaseFontSize,
-                    icon: const Icon(Icons.add_rounded),
-                  ),
+                  IconButton(onPressed: _decreaseFontSize, icon: const Icon(Icons.remove_rounded)),
+                  IconButton(onPressed: _increaseFontSize, icon: const Icon(Icons.add_rounded)),
                 ],
               ),
             ),

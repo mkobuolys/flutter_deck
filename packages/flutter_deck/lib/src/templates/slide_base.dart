@@ -61,9 +61,7 @@ class FlutterDeckSlideBase extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (headerBuilder != null) headerBuilder!(context),
-            Expanded(
-              child: contentBuilder?.call(context) ?? const SizedBox.shrink(),
-            ),
+            Expanded(child: contentBuilder?.call(context) ?? const SizedBox.shrink()),
             if (footerBuilder != null) footerBuilder!(context),
           ],
         ),

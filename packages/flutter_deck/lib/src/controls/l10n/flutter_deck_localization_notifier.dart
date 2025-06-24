@@ -8,10 +8,7 @@ import 'package:flutter/widgets.dart';
 class FlutterDeckLocalizationNotifier extends ValueNotifier<Locale> {
   /// Creates a [FlutterDeckLocalizationNotifier] with the given [locale] and
   /// [supportedLocales].
-  FlutterDeckLocalizationNotifier({
-    required Locale locale,
-    required this.supportedLocales,
-  }) : super(locale);
+  FlutterDeckLocalizationNotifier({required Locale locale, required this.supportedLocales}) : super(locale);
 
   /// The list of supported locales.
   final Iterable<Locale> supportedLocales;

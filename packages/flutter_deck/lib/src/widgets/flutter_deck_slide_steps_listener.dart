@@ -4,10 +4,7 @@ import 'package:flutter_deck/src/flutter_deck_router.dart';
 
 /// A signature for a function that is called when the slide step changes. The
 /// function is passed the [BuildContext] and the [stepNumber] of the slide.
-typedef FlutterDeckSlideStepsWidgetListener = void Function(
-  BuildContext context,
-  int stepNumber,
-);
+typedef FlutterDeckSlideStepsWidgetListener = void Function(BuildContext context, int stepNumber);
 
 /// A widget that listens for changes to the slide step. The listener is called
 /// when the slide step changes.
@@ -19,11 +16,7 @@ class FlutterDeckSlideStepsListener extends StatefulWidget {
   /// Creates a widget that listens for changes to the slide step.
   ///
   /// The [listener] and [child] arguments must not be null.
-  const FlutterDeckSlideStepsListener({
-    required this.listener,
-    required this.child,
-    super.key,
-  });
+  const FlutterDeckSlideStepsListener({required this.listener, required this.child, super.key});
 
   /// The listener for the slide step.
   final FlutterDeckSlideStepsWidgetListener listener;
@@ -32,12 +25,10 @@ class FlutterDeckSlideStepsListener extends StatefulWidget {
   final Widget child;
 
   @override
-  State<FlutterDeckSlideStepsListener> createState() =>
-      _FlutterDeckSlideStepsListenerState();
+  State<FlutterDeckSlideStepsListener> createState() => _FlutterDeckSlideStepsListenerState();
 }
 
-class _FlutterDeckSlideStepsListenerState
-    extends State<FlutterDeckSlideStepsListener> {
+class _FlutterDeckSlideStepsListenerState extends State<FlutterDeckSlideStepsListener> {
   FlutterDeckRouter? _router;
   int? _slideNumber;
 

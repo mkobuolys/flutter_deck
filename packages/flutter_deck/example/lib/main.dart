@@ -35,19 +35,11 @@ class FlutterDeckExample extends StatelessWidget {
           ),
         ),
         // Set defaults for the footer.
-        footer: const FlutterDeckFooterConfiguration(
-          showSlideNumbers: true,
-          showSocialHandle: true,
-        ),
+        footer: const FlutterDeckFooterConfiguration(showSlideNumbers: true, showSocialHandle: true),
         // Set defaults for the header.
-        header: const FlutterDeckHeaderConfiguration(
-          showHeader: false,
-        ),
+        header: const FlutterDeckHeaderConfiguration(showHeader: false),
         // Override the default marker configuration.
-        marker: const FlutterDeckMarkerConfiguration(
-          color: Colors.cyan,
-          strokeWidth: 8,
-        ),
+        marker: const FlutterDeckMarkerConfiguration(color: Colors.cyan, strokeWidth: 8),
         // Show progress indicator with specifc gradient and background color.
         progressIndicator: const FlutterDeckProgressIndicator.gradient(
           gradient: LinearGradient(
@@ -67,20 +59,12 @@ class FlutterDeckExample extends StatelessWidget {
       ),
       // You can also define your own light...
       lightTheme: FlutterDeckThemeData.fromTheme(
-        ThemeData.from(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xFFB5FFFC),
-          ),
-          useMaterial3: true,
-        ),
+        ThemeData.from(colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFB5FFFC)), useMaterial3: true),
       ),
       // ...and dark themes.
       darkTheme: FlutterDeckThemeData.fromTheme(
         ThemeData.from(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xFF16222A),
-            brightness: Brightness.dark,
-          ),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF16222A), brightness: Brightness.dark),
           useMaterial3: true,
         ),
       ),
@@ -108,10 +92,7 @@ class FlutterDeckExample extends StatelessWidget {
           backgroundColor: Colors.blue,
           body: Builder(
             builder: (context) => Center(
-              child: Text(
-                'You can use any widget as a slide!',
-                style: FlutterDeckTheme.of(context).textTheme.title,
-              ),
+              child: Text('You can use any widget as a slide!', style: FlutterDeckTheme.of(context).textTheme.title),
             ),
           ),
         ),

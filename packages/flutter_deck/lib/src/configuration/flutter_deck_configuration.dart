@@ -126,11 +126,11 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
     FlutterDeckProgressIndicator? progressIndicator,
     bool? showProgress,
     FlutterDeckTransition? transition,
-  })  : _footerConfigurationOverride = footer,
-        _headerConfigurationOverride = header,
-        _progressIndicatorOverride = progressIndicator,
-        _showProgressOverride = showProgress,
-        _transitionOverride = transition;
+  }) : _footerConfigurationOverride = footer,
+       _headerConfigurationOverride = header,
+       _progressIndicatorOverride = progressIndicator,
+       _showProgressOverride = showProgress,
+       _transitionOverride = transition;
 
   /// Creates a configuration for a slide. This constructor is used internally
   /// to create a configuration when the global configuration is overridden.
@@ -146,11 +146,11 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
     super.progressIndicator,
     super.showProgress,
     super.transition,
-  })  : _footerConfigurationOverride = null,
-        _headerConfigurationOverride = null,
-        _progressIndicatorOverride = null,
-        _showProgressOverride = null,
-        _transitionOverride = null;
+  }) : _footerConfigurationOverride = null,
+       _headerConfigurationOverride = null,
+       _progressIndicatorOverride = null,
+       _showProgressOverride = null,
+       _transitionOverride = null;
 
   /// The route for the slide.
   final String route;
@@ -196,9 +196,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
 
   /// Merges the slide configuration with the global configuration. The slide
   /// configuration values take precedence.
-  FlutterDeckSlideConfiguration mergeWithGlobal(
-    FlutterDeckConfiguration configuration,
-  ) {
+  FlutterDeckSlideConfiguration mergeWithGlobal(FlutterDeckConfiguration configuration) {
     return FlutterDeckSlideConfiguration._(
       route: route,
       hidden: hidden,
@@ -208,8 +206,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
       title: title,
       footer: _footerConfigurationOverride ?? configuration.footer,
       header: _headerConfigurationOverride ?? configuration.header,
-      progressIndicator:
-          _progressIndicatorOverride ?? configuration.progressIndicator,
+      progressIndicator: _progressIndicatorOverride ?? configuration.progressIndicator,
       showProgress: _showProgressOverride ?? configuration.showProgress,
       transition: _transitionOverride ?? configuration.transition,
     );
@@ -272,13 +269,8 @@ class FlutterDeckFooterConfiguration {
 class FlutterDeckHeaderConfiguration {
   /// Creates a configuration for the slide deck header. By default, the header
   /// is shown. The title must not be empty.
-  const FlutterDeckHeaderConfiguration({
-    this.showHeader = true,
-    this.title = '',
-  }) : assert(
-          !showHeader || title != '',
-          'If showHeader is true, title must not be empty.',
-        );
+  const FlutterDeckHeaderConfiguration({this.showHeader = true, this.title = ''})
+    : assert(!showHeader || title != '', 'If showHeader is true, title must not be empty.');
 
   /// Whether to show the header or not.
   final bool showHeader;
@@ -291,10 +283,7 @@ class FlutterDeckHeaderConfiguration {
 class FlutterDeckMarkerConfiguration {
   /// Creates a configuration for the slide deck marker. By default, the marker
   /// is red with a stroke width of 5px.
-  const FlutterDeckMarkerConfiguration({
-    this.color = const Color(0xFFFF5252),
-    this.strokeWidth = 5.0,
-  });
+  const FlutterDeckMarkerConfiguration({this.color = const Color(0xFFFF5252), this.strokeWidth = 5.0});
 
   /// The color of the marker.
   final Color color;

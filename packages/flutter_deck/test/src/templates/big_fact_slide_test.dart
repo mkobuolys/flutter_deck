@@ -7,12 +7,7 @@ import '../../test_utils.dart';
 void main() {
   group('BigFactSlide', () {
     testWidgets('should render all layout elements', (tester) async {
-      final slideTester = SlideTester(
-        tester: tester,
-        showHeader: true,
-        showFooter: true,
-        slide: const BigFactSlide(),
-      );
+      final slideTester = SlideTester(tester: tester, showHeader: true, showFooter: true, slide: const BigFactSlide());
 
       await slideTester.pumpSlide();
 
@@ -75,12 +70,7 @@ void main() {
 }
 
 class BigFactSlide extends FlutterDeckSlideWidget {
-  const BigFactSlide({super.key})
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/big-fact',
-          ),
-        );
+  const BigFactSlide({super.key}) : super(configuration: const FlutterDeckSlideConfiguration(route: '/big-fact'));
 
   @override
   Widget build(BuildContext context) {
@@ -88,9 +78,7 @@ class BigFactSlide extends FlutterDeckSlideWidget {
       title: '100%',
       subtitle: 'The test coverage value',
       theme: FlutterDeckTheme.of(context).copyWith(
-        bigFactSlideTheme: const FlutterDeckBigFactSlideThemeData(
-          titleTextStyle: TextStyle(color: Colors.amber),
-        ),
+        bigFactSlideTheme: const FlutterDeckBigFactSlideThemeData(titleTextStyle: TextStyle(color: Colors.amber)),
       ),
       key: const Key('BigFactslide'),
     );

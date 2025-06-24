@@ -19,20 +19,16 @@ class FlutterDeckSlideSize {
   ///
   /// This constructor is private and should not be used directly. Instead, use
   /// one of the named constructors to define a slide size.
-  const FlutterDeckSlideSize._({
-    required this.height,
-    required this.width,
-  })  : assert(height == null || height > 0, 'height must be greater than 0'),
-        assert(width == null || width > 0, 'width must be greater than 0');
+  const FlutterDeckSlideSize._({required this.height, required this.width})
+    : assert(height == null || height > 0, 'height must be greater than 0'),
+      assert(width == null || width > 0, 'width must be greater than 0');
 
   /// Creates a custom slide size for the deck.
   ///
   /// [height] and [width] are the height and width of the slide and must be
   /// greater than 0.
-  const FlutterDeckSlideSize.custom({
-    required double height,
-    required double width,
-  }) : this._(height: height, width: width);
+  const FlutterDeckSlideSize.custom({required double height, required double width})
+    : this._(height: height, width: width);
 
   /// Creates a slide size from an aspect ratio and a resolution.
   ///
@@ -57,9 +53,7 @@ class FlutterDeckSlideSize {
   ///
   /// This is useful if you want to use the deck in a responsive layout. This
   /// is the default slide size of the deck.
-  const FlutterDeckSlideSize.responsive()
-      : height = null,
-        width = null;
+  const FlutterDeckSlideSize.responsive() : height = null, width = null;
 
   /// The height of the slide.
   final double? height;
@@ -137,8 +131,7 @@ class FlutterDeckResolution {
   ///
   /// This constructor is private and should not be used directly. Instead, use
   /// one of the named constructors to define a resolution.
-  const FlutterDeckResolution._(this._width)
-      : assert(_width > 0, 'width must be greater than 0');
+  const FlutterDeckResolution._(this._width) : assert(_width > 0, 'width must be greater than 0');
 
   /// Creates a resolution from a custom width.
   ///

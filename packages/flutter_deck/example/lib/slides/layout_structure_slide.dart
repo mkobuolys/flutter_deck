@@ -7,20 +7,18 @@ const _speakerNotes = '''
 
 class LayoutStructureSlide extends FlutterDeckSlideWidget {
   const LayoutStructureSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/layout-structure',
-            speakerNotes: _speakerNotes,
-            title: 'Layout structure',
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/layout-structure',
+          speakerNotes: _speakerNotes,
+          title: 'Layout structure',
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
     return FlutterDeckSlide.template(
-      backgroundBuilder: (context) => FlutterDeckBackground.solid(
-        Theme.of(context).colorScheme.surface,
-      ),
+      backgroundBuilder: (context) => FlutterDeckBackground.solid(Theme.of(context).colorScheme.surface),
       contentBuilder: (context) => Center(
         child: Text(
           'Content goes here...\n\nThis is how the default slide layout '
@@ -40,10 +38,7 @@ class LayoutStructureSlide extends FlutterDeckSlideWidget {
             child: Center(
               child: Text(
                 'Footer goes here...',
-                style: FlutterDeckTheme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    .copyWith(color: colorScheme.onSecondary),
+                style: FlutterDeckTheme.of(context).textTheme.bodyMedium.copyWith(color: colorScheme.onSecondary),
               ),
             ),
           ),
@@ -59,10 +54,7 @@ class LayoutStructureSlide extends FlutterDeckSlideWidget {
             child: Center(
               child: Text(
                 'Header goes here...',
-                style: FlutterDeckTheme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    .copyWith(color: colorScheme.onPrimary),
+                style: FlutterDeckTheme.of(context).textTheme.bodyMedium.copyWith(color: colorScheme.onPrimary),
               ),
             ),
           ),

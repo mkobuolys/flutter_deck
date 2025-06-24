@@ -121,12 +121,7 @@ class _FlutterDeckBulletListState extends State<FlutterDeckBulletList> {
 }
 
 class _BulletList extends StatelessWidget {
-  const _BulletList({
-    required this.items,
-    required this.autoSizeGroup,
-    this.bulletPointWidget,
-    this.stepNumber,
-  });
+  const _BulletList({required this.items, required this.autoSizeGroup, this.bulletPointWidget, this.stepNumber});
 
   final List<String> items;
   final AutoSizeGroup autoSizeGroup;
@@ -146,8 +141,7 @@ class _BulletList extends StatelessWidget {
               child: _BulletListItem(
                 group: autoSizeGroup,
                 text: items[i],
-                visible: stepNumber == null ||
-                    stepNumber != null && i + 1 <= stepNumber!,
+                visible: stepNumber == null || stepNumber != null && i + 1 <= stepNumber!,
                 bulletPointWidget: bulletPointWidget,
               ),
             ),
@@ -158,12 +152,7 @@ class _BulletList extends StatelessWidget {
 }
 
 class _BulletListItem extends StatelessWidget {
-  const _BulletListItem({
-    required this.group,
-    required this.text,
-    required this.visible,
-    this.bulletPointWidget,
-  });
+  const _BulletListItem({required this.group, required this.text, required this.visible, this.bulletPointWidget});
 
   final AutoSizeGroup group;
   final String text;
@@ -179,9 +168,7 @@ class _BulletListItem extends StatelessWidget {
         children: [
           bulletPointWidget ?? _AutoSizeText('\u2022', group: group),
           const SizedBox(width: 8),
-          Expanded(
-            child: _AutoSizeText(text, group: group),
-          ),
+          Expanded(child: _AutoSizeText(text, group: group)),
         ],
       ),
     );
@@ -189,10 +176,7 @@ class _BulletListItem extends StatelessWidget {
 }
 
 class _AutoSizeText extends StatelessWidget {
-  const _AutoSizeText(
-    this.text, {
-    required this.group,
-  });
+  const _AutoSizeText(this.text, {required this.group});
 
   final AutoSizeGroup group;
   final String text;

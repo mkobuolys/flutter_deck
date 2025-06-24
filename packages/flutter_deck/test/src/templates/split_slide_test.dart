@@ -7,24 +7,15 @@ import '../../test_utils.dart';
 void main() {
   group('SplitSlide', () {
     testWidgets('should render all layout elements', (tester) async {
-      final slideTester = SlideTester(
-        tester: tester,
-        showHeader: true,
-        showFooter: true,
-        slide: const SplitSlide(),
-      );
+      final slideTester = SlideTester(tester: tester, showHeader: true, showFooter: true, slide: const SplitSlide());
 
       await slideTester.pumpSlide();
 
       final titleFinder = find.text('Slide');
       final slideNumberFinder = find.text('1');
       final socialHandleFinder = find.text('@flutter_deck');
-      final leftFinder = find.text(
-        'Here goes the LEFT section content of the slide',
-      );
-      final rightFinder = find.text(
-        'Here goes the RIGHT section content of the slide',
-      );
+      final leftFinder = find.text('Here goes the LEFT section content of the slide');
+      final rightFinder = find.text('Here goes the RIGHT section content of the slide');
 
       expect(leftFinder, findsOneWidget);
       expect(rightFinder, findsOneWidget);
@@ -34,30 +25,17 @@ void main() {
     });
 
     testWidgets('should apply theming', (tester) async {
-      final slideTester = SlideTester(
-        tester: tester,
-        showHeader: false,
-        showFooter: false,
-        slide: const SplitSlide(),
-      );
+      final slideTester = SlideTester(tester: tester, showHeader: false, showFooter: false, slide: const SplitSlide());
 
       await slideTester.pumpSlide();
 
-      final leftFinder = find.text(
-        'Here goes the LEFT section content of the slide',
-      );
+      final leftFinder = find.text('Here goes the LEFT section content of the slide');
       final leftText = tester.widget(leftFinder) as Text;
-      final leftStyleTheme = FlutterDeckTheme.of(
-        tester.element(leftFinder),
-      ).textTheme.bodyMedium;
+      final leftStyleTheme = FlutterDeckTheme.of(tester.element(leftFinder)).textTheme.bodyMedium;
 
-      final rightFinder = find.text(
-        'Here goes the RIGHT section content of the slide',
-      );
+      final rightFinder = find.text('Here goes the RIGHT section content of the slide');
       final rightText = tester.widget(rightFinder) as Text;
-      final rightStyleTheme = FlutterDeckTheme.of(
-        tester.element(rightFinder),
-      ).textTheme.bodyMedium;
+      final rightStyleTheme = FlutterDeckTheme.of(tester.element(rightFinder)).textTheme.bodyMedium;
 
       expect(leftText.style, leftStyleTheme);
       expect(rightText.style, rightStyleTheme);
@@ -87,12 +65,7 @@ void main() {
 }
 
 class SplitSlide extends FlutterDeckSlideWidget {
-  const SplitSlide({super.key})
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/split-slide',
-          ),
-        );
+  const SplitSlide({super.key}) : super(configuration: const FlutterDeckSlideConfiguration(route: '/split-slide'));
 
   @override
   Widget build(BuildContext context) {

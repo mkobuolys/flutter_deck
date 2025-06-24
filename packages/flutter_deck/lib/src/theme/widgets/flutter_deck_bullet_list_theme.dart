@@ -19,10 +19,7 @@ import 'package:flutter_deck/src/widgets/flutter_deck_bullet_list.dart';
 /// slide deck.
 class FlutterDeckBulletListThemeData {
   /// Creates a theme to style [FlutterDeckBulletList].
-  const FlutterDeckBulletListThemeData({
-    this.color,
-    this.textStyle,
-  });
+  const FlutterDeckBulletListThemeData({this.color, this.textStyle});
 
   /// Text color of the bullet list.
   final Color? color;
@@ -32,24 +29,15 @@ class FlutterDeckBulletListThemeData {
 
   /// Creates a copy of this object with the given fields replaced with the new
   /// values.
-  FlutterDeckBulletListThemeData copyWith({
-    Color? color,
-    TextStyle? textStyle,
-  }) {
-    return FlutterDeckBulletListThemeData(
-      color: color ?? this.color,
-      textStyle: textStyle ?? this.textStyle,
-    );
+  FlutterDeckBulletListThemeData copyWith({Color? color, TextStyle? textStyle}) {
+    return FlutterDeckBulletListThemeData(color: color ?? this.color, textStyle: textStyle ?? this.textStyle);
   }
 
   /// Merge the given [FlutterDeckBulletListThemeData] with this one.
   FlutterDeckBulletListThemeData merge(FlutterDeckBulletListThemeData? other) {
     if (other == null) return this;
 
-    return copyWith(
-      color: other.color,
-      textStyle: textStyle?.merge(other.textStyle) ?? other.textStyle,
-    );
+    return copyWith(color: other.color, textStyle: textStyle?.merge(other.textStyle) ?? other.textStyle);
   }
 }
 
@@ -62,11 +50,7 @@ class FlutterDeckBulletListTheme extends InheritedTheme {
   /// Creates a theme to style [FlutterDeckBulletList].
   ///
   /// The [data] argument must not be null.
-  const FlutterDeckBulletListTheme({
-    required this.data,
-    required super.child,
-    super.key,
-  });
+  const FlutterDeckBulletListTheme({required this.data, required super.child, super.key});
 
   /// The visual properties of [FlutterDeckBulletList].
   final FlutterDeckBulletListThemeData data;
@@ -77,17 +61,14 @@ class FlutterDeckBulletListTheme extends InheritedTheme {
   ///
   /// The returned theme data will never be null.
   static FlutterDeckBulletListThemeData of(BuildContext context) {
-    final theme = context
-        .dependOnInheritedWidgetOfExactType<FlutterDeckBulletListTheme>();
+    final theme = context.dependOnInheritedWidgetOfExactType<FlutterDeckBulletListTheme>();
 
     return theme?.data ?? FlutterDeckTheme.of(context).bulletListTheme;
   }
 
   @override
-  bool updateShouldNotify(FlutterDeckBulletListTheme oldWidget) =>
-      data != oldWidget.data;
+  bool updateShouldNotify(FlutterDeckBulletListTheme oldWidget) => data != oldWidget.data;
 
   @override
-  Widget wrap(BuildContext context, Widget child) =>
-      FlutterDeckBulletListTheme(data: data, child: child);
+  Widget wrap(BuildContext context, Widget child) => FlutterDeckBulletListTheme(data: data, child: child);
 }

@@ -4,10 +4,7 @@ import 'package:flutter_deck/src/flutter_deck_router.dart';
 
 /// A signature for a function that builds a widget for a slide step. The
 /// function is passed the [BuildContext] and the [stepNumber] of the slide.
-typedef FlutterDeckSlideStepsWidgetBuilder = Widget Function(
-  BuildContext context,
-  int stepNumber,
-);
+typedef FlutterDeckSlideStepsWidgetBuilder = Widget Function(BuildContext context, int stepNumber);
 
 /// A widget that builds a widget for a slide step. The widget is rebuilt when
 /// the slide step changes.
@@ -19,21 +16,16 @@ class FlutterDeckSlideStepsBuilder extends StatefulWidget {
   /// Creates a widget that builds a widget for a slide step.
   ///
   /// The [builder] argument must not be null.
-  const FlutterDeckSlideStepsBuilder({
-    required this.builder,
-    super.key,
-  });
+  const FlutterDeckSlideStepsBuilder({required this.builder, super.key});
 
   /// The widget builder for the slide step.
   final FlutterDeckSlideStepsWidgetBuilder builder;
 
   @override
-  State<FlutterDeckSlideStepsBuilder> createState() =>
-      _FlutterDeckSlideStepsBuilderState();
+  State<FlutterDeckSlideStepsBuilder> createState() => _FlutterDeckSlideStepsBuilderState();
 }
 
-class _FlutterDeckSlideStepsBuilderState
-    extends State<FlutterDeckSlideStepsBuilder> {
+class _FlutterDeckSlideStepsBuilderState extends State<FlutterDeckSlideStepsBuilder> {
   FlutterDeckRouter? _router;
   int? _stepNumber;
   int? _slideNumber;

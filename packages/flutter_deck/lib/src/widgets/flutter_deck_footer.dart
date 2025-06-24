@@ -40,22 +40,15 @@ class FlutterDeckFooter extends StatelessWidget {
   /// will be rendered instead.
   ///
   /// if [widget] is not null, it will be rendered. By default, it is null.
-  const FlutterDeckFooter({
-    this.showSlideNumber = false,
-    this.showSocialHandle = false,
-    this.widget,
-    super.key,
-  });
+  const FlutterDeckFooter({this.showSlideNumber = false, this.showSocialHandle = false, this.widget, super.key});
 
   /// Creates a widget that renders a footer for a slide from a configuration.
   /// The configuration is used to determine whether to show the slide number,
   /// the social handle or a custom widget.
-  FlutterDeckFooter.fromConfiguration({
-    required FlutterDeckFooterConfiguration configuration,
-    super.key,
-  })  : showSlideNumber = configuration.showSlideNumbers,
-        showSocialHandle = configuration.showSocialHandle,
-        widget = configuration.widget;
+  FlutterDeckFooter.fromConfiguration({required FlutterDeckFooterConfiguration configuration, super.key})
+    : showSlideNumber = configuration.showSlideNumbers,
+      showSocialHandle = configuration.showSocialHandle,
+      widget = configuration.widget;
 
   /// Whether to show the slide number in the footer.
   final bool showSlideNumber;
@@ -77,17 +70,11 @@ class FlutterDeckFooter extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (widget case final Widget widget)
-            DefaultTextStyle(
-              style: FlutterDeckTheme.of(context).textTheme.bodySmall,
-              child: widget,
-            )
+            DefaultTextStyle(style: FlutterDeckTheme.of(context).textTheme.bodySmall, child: widget)
           else if (showSocialHandle)
             Text(
               context.flutterDeck.speakerInfo?.socialHandle ?? '',
-              style: theme.socialHandleTextStyle?.copyWith(
-                color: theme.socialHandleColor,
-                fontWeight: FontWeight.bold,
-              ),
+              style: theme.socialHandleTextStyle?.copyWith(color: theme.socialHandleColor, fontWeight: FontWeight.bold),
             )
           else
             const SizedBox.shrink(),

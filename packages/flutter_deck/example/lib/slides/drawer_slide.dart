@@ -9,13 +9,13 @@ const _speakerNotes = '''
 
 class DrawerSlide extends FlutterDeckSlideWidget {
   const DrawerSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/drawer',
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(title: 'Navigation drawer'),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/drawer',
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Navigation drawer'),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {

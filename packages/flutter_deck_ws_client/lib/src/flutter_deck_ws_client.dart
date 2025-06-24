@@ -12,9 +12,7 @@ import 'package:web_socket_client/web_socket_client.dart';
 /// it receives a state update.
 class FlutterDeckWsClient implements FlutterDeckClient {
   /// Creates a new [FlutterDeckWsClient].
-  FlutterDeckWsClient({
-    required this.uri,
-  });
+  FlutterDeckWsClient({required this.uri});
 
   /// The URI of the WebSocket server.
   final Uri uri;
@@ -27,9 +25,7 @@ class FlutterDeckWsClient implements FlutterDeckClient {
 
     if (state == null) return;
 
-    _ws.connection
-        .firstWhere((connectionState) => connectionState is Connected)
-        .then((_) => updateState(state));
+    _ws.connection.firstWhere((connectionState) => connectionState is Connected).then((_) => updateState(state));
   }
 
   @override
@@ -38,8 +34,7 @@ class FlutterDeckWsClient implements FlutterDeckClient {
   }
 
   @override
-  Stream<FlutterDeckState> get flutterDeckStateStream =>
-      _ws.messages.cast<String>().map(_toFlutterDeckState);
+  Stream<FlutterDeckState> get flutterDeckStateStream => _ws.messages.cast<String>().map(_toFlutterDeckState);
 
   @override
   void updateState(FlutterDeckState state) => _ws.send(jsonEncode(state));

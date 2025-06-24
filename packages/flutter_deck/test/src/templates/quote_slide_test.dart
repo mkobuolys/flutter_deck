@@ -11,12 +11,7 @@ const _key = Key('QuoteSlide');
 void main() {
   group('QuoteSlide', () {
     testWidgets('should render all layout elements', (tester) async {
-      final slideTester = SlideTester(
-        tester: tester,
-        showHeader: true,
-        showFooter: true,
-        slide: const QuoteSlide(),
-      );
+      final slideTester = SlideTester(tester: tester, showHeader: true, showFooter: true, slide: const QuoteSlide());
 
       await slideTester.pumpSlide();
 
@@ -34,12 +29,7 @@ void main() {
     });
 
     testWidgets('should apply theming', (tester) async {
-      final slideTester = SlideTester(
-        tester: tester,
-        showHeader: false,
-        showFooter: false,
-        slide: const QuoteSlide(),
-      );
+      final slideTester = SlideTester(tester: tester, showHeader: false, showFooter: false, slide: const QuoteSlide());
 
       await slideTester.pumpSlide();
 
@@ -79,12 +69,7 @@ void main() {
 }
 
 class QuoteSlide extends FlutterDeckSlideWidget {
-  const QuoteSlide({super.key})
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/quote',
-          ),
-        );
+  const QuoteSlide({super.key}) : super(configuration: const FlutterDeckSlideConfiguration(route: '/quote'));
 
   @override
   Widget build(BuildContext context) {
@@ -92,9 +77,7 @@ class QuoteSlide extends FlutterDeckSlideWidget {
       quote: _quote,
       attribution: _attribution,
       theme: FlutterDeckTheme.of(context).copyWith(
-        quoteSlideTheme: const FlutterDeckQuoteSlideThemeData(
-          quoteTextStyle: TextStyle(color: Colors.yellowAccent),
-        ),
+        quoteSlideTheme: const FlutterDeckQuoteSlideThemeData(quoteTextStyle: TextStyle(color: Colors.yellowAccent)),
       ),
       key: _key,
     );

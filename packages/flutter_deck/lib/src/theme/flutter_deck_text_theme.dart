@@ -4,34 +4,13 @@ import 'package:flutter/widgets.dart';
 class FlutterDeckTextTheme {
   /// Creates a theme to style text in a slide deck.
   const FlutterDeckTextTheme({
-    this.display = const TextStyle(
-      fontSize: 103,
-      fontWeight: FontWeight.bold,
-    ),
-    this.header = const TextStyle(
-      fontSize: 57,
-      fontWeight: FontWeight.w400,
-    ),
-    this.title = const TextStyle(
-      fontSize: 54,
-      fontWeight: FontWeight.w400,
-    ),
-    this.subtitle = const TextStyle(
-      fontSize: 42,
-      fontWeight: FontWeight.w400,
-    ),
-    this.bodyLarge = const TextStyle(
-      fontSize: 28,
-      fontWeight: FontWeight.w400,
-    ),
-    this.bodyMedium = const TextStyle(
-      fontSize: 22,
-      fontWeight: FontWeight.w400,
-    ),
-    this.bodySmall = const TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-    ),
+    this.display = const TextStyle(fontSize: 103, fontWeight: FontWeight.bold),
+    this.header = const TextStyle(fontSize: 57, fontWeight: FontWeight.w400),
+    this.title = const TextStyle(fontSize: 54, fontWeight: FontWeight.w400),
+    this.subtitle = const TextStyle(fontSize: 42, fontWeight: FontWeight.w400),
+    this.bodyLarge = const TextStyle(fontSize: 28, fontWeight: FontWeight.w400),
+    this.bodyMedium = const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+    this.bodySmall = const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
   });
 
   /// Text style of the display.
@@ -80,16 +59,15 @@ class FlutterDeckTextTheme {
     TextStyle? bodyMedium,
     TextStyle? bodySmall,
     TextStyle? footnote,
-  }) =>
-      FlutterDeckTextTheme(
-        display: display ?? this.display,
-        header: header ?? this.header,
-        title: title ?? this.title,
-        subtitle: subtitle ?? this.subtitle,
-        bodyLarge: bodyLarge ?? this.bodyLarge,
-        bodyMedium: bodyMedium ?? this.bodyMedium,
-        bodySmall: bodySmall ?? this.bodySmall,
-      );
+  }) => FlutterDeckTextTheme(
+    display: display ?? this.display,
+    header: header ?? this.header,
+    title: title ?? this.title,
+    subtitle: subtitle ?? this.subtitle,
+    bodyLarge: bodyLarge ?? this.bodyLarge,
+    bodyMedium: bodyMedium ?? this.bodyMedium,
+    bodySmall: bodySmall ?? this.bodySmall,
+  );
 
   /// Merge the given [FlutterDeckTextTheme] with this one.
   FlutterDeckTextTheme merge(FlutterDeckTextTheme? other) {

@@ -12,13 +12,10 @@ import 'package:flutter/material.dart';
 /// used as a background for flutter deck slide.
 class FlutterDeckBackground extends StatelessWidget {
   /// Creates a custom background.
-  const FlutterDeckBackground.custom({
-    required Widget child,
-  }) : this._(child: child);
+  const FlutterDeckBackground.custom({required Widget child}) : this._(child: child);
 
   /// Creates a background with a gradient.
-  const FlutterDeckBackground.gradient(Gradient gradient)
-      : this._(gradient: gradient);
+  const FlutterDeckBackground.gradient(Gradient gradient) : this._(gradient: gradient);
 
   /// Creates a background with an image.
   const FlutterDeckBackground.image(Image image) : this._(image: image);
@@ -33,12 +30,7 @@ class FlutterDeckBackground extends StatelessWidget {
   ///
   /// This constructor is private because it should not be used directly.
   /// Instead, use one of the public constructors.
-  const FlutterDeckBackground._({
-    this.child,
-    this.color,
-    this.gradient,
-    this.image,
-  });
+  const FlutterDeckBackground._({this.child, this.color, this.gradient, this.image});
 
   /// The background widget.
   ///

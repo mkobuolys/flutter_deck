@@ -1,3 +1,7 @@
+# NEXT
+
+- chore: bump to SDK 3.8.0
+
 # 0.2.0
 
 - **BREAKING**: update `web` dependency to `^1.1.1`

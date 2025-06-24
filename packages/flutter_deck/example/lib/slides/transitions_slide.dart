@@ -8,28 +8,20 @@ const _speakerNotes = '''
 
 class TransitionsSlide extends FlutterDeckSlideWidget {
   const TransitionsSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/transitions',
-            speakerNotes: _speakerNotes,
-            header: FlutterDeckHeaderConfiguration(title: 'Slide transitions'),
-            transition: FlutterDeckTransition.rotation(),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/transitions',
+          speakerNotes: _speakerNotes,
+          header: FlutterDeckHeaderConfiguration(title: 'Slide transitions'),
+          transition: FlutterDeckTransition.rotation(),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
     return FlutterDeckSlide.split(
-      leftBuilder: (context) => FlutterDeckBulletList(
-        items: const [
-          'None (default)',
-          'Fade',
-          'Scale',
-          'Slide',
-          'Rotation',
-          'Custom',
-        ],
-      ),
+      leftBuilder: (context) =>
+          FlutterDeckBulletList(items: const ['None (default)', 'Fade', 'Scale', 'Slide', 'Rotation', 'Custom']),
       rightBuilder: (context) => Center(
         child: Text(
           'flutter_deck comes with a few built-in transitions. You can also '

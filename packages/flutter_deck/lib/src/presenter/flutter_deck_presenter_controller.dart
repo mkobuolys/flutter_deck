@@ -29,12 +29,12 @@ class FlutterDeckPresenterController {
     required FlutterDeckThemeNotifier themeNotifier,
     required FlutterDeckRouter router,
     FlutterDeckClient? client,
-  })  : _controlsNotifier = controlsNotifier,
-        _localizationNotifier = localizationNotifier,
-        _markerNotifier = markerNotifier,
-        _themeNotifier = themeNotifier,
-        _router = router,
-        _client = client;
+  }) : _controlsNotifier = controlsNotifier,
+       _localizationNotifier = localizationNotifier,
+       _markerNotifier = markerNotifier,
+       _themeNotifier = themeNotifier,
+       _router = router,
+       _client = client;
 
   final FlutterDeckControlsNotifier _controlsNotifier;
   final FlutterDeckLocalizationNotifier _localizationNotifier;
@@ -53,16 +53,14 @@ class FlutterDeckPresenterController {
     _initState();
 
     if (_stateSubscription != null) {
-      if (!_router.isPresenterView) _client?.updateState(_state);
+      if (!_router.isPresenterView) _client.updateState(_state);
 
       return;
     }
 
-    _client?.init(!_router.isPresenterView ? _state : null);
+    _client.init(!_router.isPresenterView ? _state : null);
 
-    _stateSubscription = _client?.flutterDeckStateStream.listen(
-      _onStateChanged,
-    );
+    _stateSubscription = _client.flutterDeckStateStream.listen(_onStateChanged);
     _localizationNotifier.addListener(_onLocalizationChanged);
     _markerNotifier.addListener(_onMarkerStateChanged);
     _themeNotifier.addListener(_onThemeChanged);
@@ -88,24 +86,14 @@ class FlutterDeckPresenterController {
     _router.removeListener(_onRouteChanged);
   }
 
-  void _onRouteChanged() => _notify(
-        _state.copyWith(
-          slideIndex: _router.currentSlideIndex,
-          slideStep: _router.currentStep,
-        ),
-      );
+  void _onRouteChanged() =>
+      _notify(_state.copyWith(slideIndex: _router.currentSlideIndex, slideStep: _router.currentStep));
 
-  void _onLocalizationChanged() => _notify(
-        _state.copyWith(locale: _localizationNotifier.value.toLanguageTag()),
-      );
+  void _onLocalizationChanged() => _notify(_state.copyWith(locale: _localizationNotifier.value.toLanguageTag()));
 
-  void _onMarkerStateChanged() => _notify(
-        _state.copyWith(markerEnabled: _markerNotifier.enabled),
-      );
+  void _onMarkerStateChanged() => _notify(_state.copyWith(markerEnabled: _markerNotifier.enabled));
 
-  void _onThemeChanged() => _notify(
-        _state.copyWith(themeMode: _themeNotifier.value.name),
-      );
+  void _onThemeChanged() => _notify(_state.copyWith(themeMode: _themeNotifier.value.name));
 
   void _notify(FlutterDeckState state) {
     if (_state == state) return;
@@ -125,9 +113,7 @@ class FlutterDeckPresenterController {
     }
 
     if (state.locale != _state.locale) {
-      _localizationNotifier.update(
-        Locale.fromSubtags(languageCode: state.locale),
-      );
+      _localizationNotifier.update(Locale.fromSubtags(languageCode: state.locale));
     }
 
     if (state.markerEnabled != _state.markerEnabled) {
