@@ -1,3 +1,7 @@
+# NEXT
+
+- feat: migrate to package:web
+
 # 0.19.0
 
 - feat: allow setting the initial slide in the `FlutterDeckSlideConfiguration`
