@@ -1,4 +1,4 @@
-# NEXT
+# 0.3.0
 
 - chore: bump to SDK 3.8.0
 
