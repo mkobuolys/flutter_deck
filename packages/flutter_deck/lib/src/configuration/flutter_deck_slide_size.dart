@@ -61,6 +61,9 @@ class FlutterDeckSlideSize {
   /// The width of the slide.
   final double? width;
 
+  /// Returns the aspect ratio of the slide.
+  double? get aspectRatio => !isResponsive ? width! / height! : null;
+
   /// Returns whether the slide size is responsive.
   bool get isResponsive => height == null && width == null;
 }

@@ -1,5 +1,6 @@
 # NEXT
 
+- fix: scale slide content beyond the specified slide size
 - feat: migrate to package:web
 - chore: bump to SDK v3.8.0 / Flutter v3.32.0
 
