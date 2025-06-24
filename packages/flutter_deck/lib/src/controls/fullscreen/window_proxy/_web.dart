@@ -1,8 +1,7 @@
 // This file is conditionally included when compiling to web.
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
 
 import 'package:flutter_deck/src/controls/fullscreen/window_proxy/window_proxy.dart';
+import 'package:web/web.dart' as web;
 
 /// The web implementation of [WindowProxyBase].
 class WindowProxy implements WindowProxyBase {
@@ -15,13 +14,12 @@ class WindowProxy implements WindowProxyBase {
   bool canFullscreen() => true;
 
   @override
-  Future<bool> isInFullscreen() async =>
-      html.window.document.fullscreenElement != null;
+  Future<bool> isInFullscreen() async => web.document.fullscreenElement != null;
 
   @override
   Future<void> enterFullscreen() async =>
-      html.window.document.documentElement?.requestFullscreen();
+      web.document.documentElement?.requestFullscreen();
 
   @override
-  Future<void> leaveFullscreen() async => html.window.document.exitFullscreen();
+  Future<void> leaveFullscreen() async => web.document.exitFullscreen();
 }
