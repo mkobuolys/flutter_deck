@@ -1,4 +1,4 @@
-# NEXT
+# 0.20.0
 
 - fix: scale slide content beyond the specified slide size
 - feat: migrate to package:web
