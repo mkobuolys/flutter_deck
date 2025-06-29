@@ -1,3 +1,7 @@
+# 0.3.0
+
+- chore: bump `flutter_deck_client` to v0.3.0
+
 # 0.2.1
 
 - chore: bump `flutter_deck_client` to v0.2.0

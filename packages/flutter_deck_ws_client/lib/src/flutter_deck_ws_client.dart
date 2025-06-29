@@ -34,6 +34,11 @@ class FlutterDeckWsClient implements FlutterDeckClient {
   }
 
   @override
+  void openPresenterView() {
+    // Ignored in WebSocket implementation.
+  }
+
+  @override
   Stream<FlutterDeckState> get flutterDeckStateStream => _ws.messages.cast<String>().map(_toFlutterDeckState);
 
   @override
