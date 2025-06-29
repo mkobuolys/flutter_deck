@@ -1,3 +1,7 @@
+# 0.3.0
+
+- feat: add `openPresenterView` method
+
 # 0.2.0
 
 - chore: bump to SDK v3.8.0
