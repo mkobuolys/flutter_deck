@@ -15,5 +15,8 @@ class FlutterDeckWebClient implements FlutterDeckClient {
   void dispose() {}
 
   @override
+  void openPresenterView() {}
+
+  @override
   void updateState(FlutterDeckState state) {}
 }
