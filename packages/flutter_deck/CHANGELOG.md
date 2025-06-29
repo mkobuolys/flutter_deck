@@ -1,6 +1,9 @@
 # 0.21.0
 
 - feat: bump `flutter_deck_client` version to v0.3.0
+  - **BREAKING**: `flutter_deck` does not open the presenter view for Web anymore. Since the `openPresenterView()` method is added to the `flutter_deck_client`, the client is responsible for opening the presenter view now.
+    - **Migration**: if you were using the `flutter_deck_web_client` before, update the package dependency to v0.4.0.
+    - **Migration**: if you were using any other implementation of the `flutter_deck_client`, make sure it uses the v0.3.0 of the package and implements the `openPresenterView()` method.
 
 # 0.20.0
 
