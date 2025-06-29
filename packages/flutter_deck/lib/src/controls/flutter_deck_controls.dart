@@ -1,11 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/controls/actions/actions.dart';
 import 'package:flutter_deck/src/controls/localized_shortcut_labeler.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 /// A widget that allows the user to control the slide deck.
 ///
@@ -411,10 +409,9 @@ class _PresenterViewButton extends StatelessWidget {
 
     return MenuItemButton(
       leadingIcon: const Icon(Icons.forum_rounded),
-      onPressed: () {
-        presenterController.init();
-        launchUrl(Uri.parse('#/presenter-view'));
-      },
+      onPressed: () => presenterController
+        ..init()
+        ..open(),
       child: const Text('Open presenter view'),
     );
   }
@@ -478,11 +475,9 @@ class _OptionsMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final flutterDeck = context.flutterDeck;
-    final router = flutterDeck.router;
-    final controlsNotifier = flutterDeck.controlsNotifier;
+    final FlutterDeck(:controlsNotifier, :localizationNotifier, :presenterController, :router) = context.flutterDeck;
     final canFullscreen = controlsNotifier.canFullscreen();
-    final supportedLocales = flutterDeck.localizationNotifier.supportedLocales;
+    final supportedLocales = localizationNotifier.supportedLocales;
 
     return MenuButtonTheme(
       data: MenuButtonThemeData(
@@ -501,7 +496,7 @@ class _OptionsMenuButton extends StatelessWidget {
           const _PopupMenuDivider(),
           const _AutoplayMenuButton(),
           if (supportedLocales.length > 1) const _LocalizationMenuButton(),
-          if (kIsWeb && !router.isPresenterView) const _PresenterViewButton(),
+          if (presenterController.available && !router.isPresenterView) const _PresenterViewButton(),
         ],
       ),
     );

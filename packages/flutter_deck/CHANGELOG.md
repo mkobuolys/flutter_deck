@@ -1,3 +1,7 @@
+# 0.21.0
+
+- feat: bump `flutter_deck_client` version to v0.3.0
+
 # 0.20.0
 
 - fix: scale slide content beyond the specified slide size
