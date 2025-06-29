@@ -17,6 +17,12 @@ abstract interface class FlutterDeckClient {
   /// This method should be called when the client is no longer needed.
   void dispose();
 
+  /// Opens the presenter view.
+  ///
+  /// This method is called from the presentation view to open the presenter
+  /// view.
+  void openPresenterView();
+
   /// Updates the client state with the given [state].
   ///
   /// This method is called by both the presentation and the presenter view to
