@@ -21,7 +21,16 @@ import 'package:flutter_deck_client/flutter_deck_client.dart';
 /// The controller is responsible for initializing the [FlutterDeckClient] and
 /// disposing of it when the presenter view is disposed.
 class FlutterDeckPresenterController {
+  /// Creates a new [FlutterDeckPresenterController] with the given
+  /// dependencies.
   ///
+  /// The [controlsNotifier], [localizationNotifier], [markerNotifier],
+  /// [themeNotifier], and [router] are required dependencies that are used to
+  /// manage the state of the presentation.
+  ///
+  /// The [client] is an optional dependency that can be used to provide a
+  /// custom implementation of the [FlutterDeckClient]. If not provided, this controller
+  /// will not be able to communicate with a remote presenter view.
   FlutterDeckPresenterController({
     required FlutterDeckControlsNotifier controlsNotifier,
     required FlutterDeckLocalizationNotifier localizationNotifier,
@@ -46,7 +55,7 @@ class FlutterDeckPresenterController {
   late FlutterDeckState _state;
   StreamSubscription<FlutterDeckState>? _stateSubscription;
 
-  ///
+  /// Initializes the presenter controller and sets up the initial state.
   void init() {
     if (_client == null) return;
 
@@ -76,7 +85,7 @@ class FlutterDeckPresenterController {
     );
   }
 
-  ///
+  /// Disposes the controller and cleans up resources.
   void dispose() {
     _stateSubscription?.cancel();
     _client?.dispose();
@@ -85,6 +94,12 @@ class FlutterDeckPresenterController {
     _themeNotifier.removeListener(_onThemeChanged);
     _router.removeListener(_onRouteChanged);
   }
+
+  /// Returns whether the presenter view is available.
+  bool get available => _client != null;
+
+  /// Opens the presenter view.
+  void open() => _client?.openPresenterView();
 
   void _onRouteChanged() =>
       _notify(_state.copyWith(slideIndex: _router.currentSlideIndex, slideStep: _router.currentStep));
