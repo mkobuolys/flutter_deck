@@ -75,6 +75,7 @@ class FlutterDeckApp extends StatefulWidget {
     this.localizationsDelegates,
     this.supportedLocales = const <Locale>[_defaultLocale],
     bool? isPresenterView,
+    this.navigatorObservers,
     super.key,
   }) : assert(slides.length > 0, 'You must provide at least one slide'),
        assert(isPresenterView == null || client != null, 'You must provide a client when providing isPresenterView'),
@@ -146,6 +147,9 @@ class FlutterDeckApp extends StatefulWidget {
   /// automatically determine if it should run as a presenter view based on the
   /// URL.
   final bool? isPresenterView;
+
+  /// An optional list of [NavigatorObserver]s that will be added to the router.
+  final List<NavigatorObserver>? navigatorObservers;
 
   @override
   State<FlutterDeckApp> createState() => _FlutterDeckAppState();
@@ -230,7 +234,10 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
     final slides = widget.slides.where(_filterHidden).indexed.map(_buildRouterSlide).toList();
 
     _flutterDeckRouter = FlutterDeckRouter(slides: slides);
-    _router = _flutterDeckRouter.build(isPresenterView: widget.isPresenterView);
+    _router = _flutterDeckRouter.build(
+      isPresenterView: widget.isPresenterView,
+      navigatorObservers: widget.navigatorObservers,
+    );
   }
 
   @override
