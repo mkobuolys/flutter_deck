@@ -66,7 +66,7 @@ class FlutterDeckRouter extends ChangeNotifier {
   /// run in presenter view mode or not. If not provided, the deck will run in
   /// presenter view mode if the app is running on the web and the route is
   /// `/presenter-view`.
-  GoRouter build({bool? isPresenterView}) {
+  GoRouter build({bool? isPresenterView, List<NavigatorObserver>? navigatorObservers}) {
     _validateRoutes();
 
     final initialRoute = _getInitialRoute();
@@ -74,6 +74,7 @@ class FlutterDeckRouter extends ChangeNotifier {
     _initRouterData(initialRoute: initialRoute, isPresenterView: isPresenterView);
 
     return _router = GoRouter(
+      observers: navigatorObservers,
       routes: _isPresenterView
           ? [
               GoRoute(path: '/', redirect: (_, __) => _presenterViewRoute),
