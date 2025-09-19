@@ -247,7 +247,7 @@ class FlutterDeckRouter extends ChangeNotifier {
   ///
   /// This method can be used to dynamically change the slides of the deck during
   /// presentation or debugging.
-  /// 
+  ///
   /// If the new list of slides is the same as the current list, nothing happens.
   /// When list is updated, the current slide and step are reset to the first slide and step.
   void updateSlides(List<FlutterDeckRouterSlide> newSlides) {

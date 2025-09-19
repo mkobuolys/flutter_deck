@@ -207,11 +207,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
     super.didUpdateWidget(oldWidget);
 
     if (!listEquals(oldWidget.slides, widget.slides)) {
-      final slides = widget.slides
-          .where(_filterHidden)
-          .indexed
-          .map(_buildRouterSlide)
-          .toList();
+      final slides = widget.slides.where(_filterHidden).indexed.map(_buildRouterSlide).toList();
       _flutterDeckRouter.updateSlides(slides);
       _router = _flutterDeckRouter.build(
         isPresenterView: widget.isPresenterView,
