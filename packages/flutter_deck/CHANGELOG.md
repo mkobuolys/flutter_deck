@@ -1,3 +1,8 @@
+# 0.22.0
+
+- feat: allow adding custom `NavigatorObservers` to `FlutterDeckApp`
+- fix: rebuild router when the `slides` list changes
+
 # 0.21.0
 
 - feat: bump `flutter_deck_client` version to v0.3.0
