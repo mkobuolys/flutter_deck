@@ -2,6 +2,7 @@
 
 - feat: allow adding custom `NavigatorObservers` to `FlutterDeckApp`
 - fix: rebuild router when the `slides` list changes
+- chore: update project dependencies
 
 # 0.21.0
 
