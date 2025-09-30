@@ -94,5 +94,10 @@ The following presentations were created with `flutter_deck`:
 - English
 - [Tsuyoshi Chujo](https://x.com/tsuyoshi_chujo)
 
+[DIY In-App Locale Editor with Slang](https://vishna.github.io/dyi_in_app_locale_editor)
+
+- English
+- [Łukasz Wiśniewski](https://www.linkedin.com/in/lukaszwisniewski)
+
 [mangirdas_kazlauskas_link]: https://x.com/mkobuolys
 
