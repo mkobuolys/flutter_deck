@@ -475,9 +475,11 @@ class _OptionsMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FlutterDeck(:controlsNotifier, :localizationNotifier, :presenterController, :router) = context.flutterDeck;
+    final FlutterDeck(:controlsNotifier, :localizationNotifier, :presenterController, :router, :globalConfiguration) =
+        context.flutterDeck;
     final canFullscreen = controlsNotifier.canFullscreen();
     final supportedLocales = localizationNotifier.supportedLocales;
+    final menuItems = globalConfiguration.controls.menuItems;
 
     return MenuButtonTheme(
       data: MenuButtonThemeData(
@@ -490,6 +492,8 @@ class _OptionsMenuButton extends StatelessWidget {
           onPressed: controller.isOpen ? controller.close : controller.open,
         ),
         menuChildren: [
+          ...menuItems,
+          if (menuItems.isNotEmpty) const _PopupMenuDivider(),
           const _ThemeButton(),
           const _MarkerButton(),
           if (canFullscreen) const _FullscreenButton(),

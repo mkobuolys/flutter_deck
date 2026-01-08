@@ -8,6 +8,8 @@ import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
 import 'package:flutter_deck/src/presenter/presenter.dart';
+import 'package:flutter_deck/src/renderers/flutter_slide_image_renderer.dart';
+import 'package:flutter_deck/src/renderers/flutter_slide_renderer.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
@@ -53,6 +55,9 @@ class FlutterDeckApp extends StatefulWidget {
   /// as a presenter view. If this argument is provided, the [client] argument
   /// must also be provided.
   ///
+  /// The [slideRenderer] argument can be used to provide a custom renderer for
+  /// the slides. By default, the [FlutterSlideImageRenderer] is used.
+  ///
   /// See also:
   ///
   /// * [FlutterDeckSlide], which represents a single slide.
@@ -76,6 +81,7 @@ class FlutterDeckApp extends StatefulWidget {
     this.supportedLocales = const <Locale>[_defaultLocale],
     bool? isPresenterView,
     this.navigatorObservers,
+    this.slideRenderer = const FlutterSlideImageRenderer(),
     super.key,
   }) : assert(slides.length > 0, 'You must provide at least one slide'),
        assert(isPresenterView == null || client != null, 'You must provide a client when providing isPresenterView'),
@@ -96,6 +102,9 @@ class FlutterDeckApp extends StatefulWidget {
   /// * [FlutterDeckSlideConfiguration], which can be used to override the
   ///  global configuration for a specific slide.
   final FlutterDeckConfiguration configuration;
+
+  /// The renderer to use for rendering the slides.
+  final FlutterSlideRenderer slideRenderer;
 
   /// The slides to use in the slide deck.
   ///
@@ -153,6 +162,55 @@ class FlutterDeckApp extends StatefulWidget {
 
   @override
   State<FlutterDeckApp> createState() => _FlutterDeckAppState();
+
+  /// Returns the [FlutterDeckApp] instance from the given context.
+  static FlutterDeckApp of(BuildContext context) {
+    final app = maybeOf(context);
+
+    assert(app != null, 'No FlutterDeckApp found in context');
+
+    return app!;
+  }
+
+  /// Returns the [FlutterDeckApp] instance from the given context, or null if
+  /// not found.
+  static FlutterDeckApp? maybeOf(BuildContext context) {
+    return context.findAncestorWidgetOfExactType<FlutterDeckApp>();
+  }
+
+  /// Creates a copy of this [FlutterDeckApp] but with the given fields replaced
+  /// with the new values.
+  FlutterDeckApp copyWith({
+    List<Widget>? slides,
+    FlutterDeckClient? client,
+    FlutterDeckConfiguration? configuration,
+    FlutterDeckSpeakerInfo? speakerInfo,
+    FlutterDeckThemeData? lightTheme,
+    FlutterDeckThemeData? darkTheme,
+    ThemeMode? themeMode,
+    Locale? locale,
+    Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates,
+    Iterable<Locale>? supportedLocales,
+    bool? isPresenterView,
+    List<NavigatorObserver>? navigatorObservers,
+    FlutterSlideRenderer? slideRenderer,
+  }) {
+    return FlutterDeckApp(
+      slides: slides ?? this.slides,
+      client: client ?? this.client,
+      configuration: configuration ?? this.configuration,
+      speakerInfo: speakerInfo ?? this.speakerInfo,
+      lightTheme: lightTheme ?? this.lightTheme,
+      darkTheme: darkTheme ?? this.darkTheme,
+      themeMode: themeMode ?? this.themeMode,
+      locale: locale ?? this.locale,
+      localizationsDelegates: localizationsDelegates ?? this.localizationsDelegates,
+      supportedLocales: supportedLocales ?? this.supportedLocales,
+      isPresenterView: isPresenterView ?? this.isPresenterView,
+      navigatorObservers: navigatorObservers ?? this.navigatorObservers,
+      slideRenderer: slideRenderer ?? this.slideRenderer,
+    );
+  }
 }
 
 class _FlutterDeckAppState extends State<FlutterDeckApp> {
@@ -166,6 +224,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
   late FlutterDeckMarkerNotifier _markerNotifier;
   late FlutterDeckPresenterController _presenterController;
   late FlutterDeckThemeNotifier _themeNotifier;
+  late FlutterSlideRenderer _slideRenderer;
 
   @override
   void initState() {
@@ -196,6 +255,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
       themeNotifier: _themeNotifier,
       router: _flutterDeckRouter,
     );
+    _slideRenderer = widget.slideRenderer;
 
     if (widget.client != null && !(widget.isPresenterView ?? true)) {
       _presenterController.init();
@@ -280,6 +340,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
               markerNotifier: _markerNotifier,
               presenterController: _presenterController,
               themeNotifier: _themeNotifier,
+              slideRenderer: _slideRenderer,
               child: FlutterDeckControlsListener(
                 controlsNotifier: _controlsNotifier,
                 markerNotifier: _markerNotifier,

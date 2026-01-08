@@ -78,12 +78,11 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   /// This constructor is private and should not be used directly. Instead, use
   /// one of the named constructors to create a new slide.
   const FlutterDeckSlide._({
-    required WidgetBuilder builder,
+    required this.builder,
     required FlutterDeckThemeData? theme,
     super.configuration,
     super.key,
-  }) : _builder = builder,
-       _theme = theme;
+  }) : _theme = theme;
 
   /// Creates a new big fact slide.
   ///
@@ -364,7 +363,8 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
          key: key,
        );
 
-  final WidgetBuilder _builder;
+  /// Widget builder that will be used to build the slide.
+  final WidgetBuilder builder;
 
   final FlutterDeckThemeData? _theme;
 
@@ -393,7 +393,7 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
               child: Scaffold(
                 drawer: const FlutterDeckDrawer(),
                 drawerEnableOpenDragGesture: false,
-                body: _SlideBody(child: _builder(context)),
+                body: _SlideBody(child: builder(context)),
               ),
             ),
           ),
