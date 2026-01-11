@@ -101,3 +101,7 @@ The following presentations were created with `flutter_deck`:
 
 [mangirdas_kazlauskas_link]: https://x.com/mkobuolys
 
+[From Method Channels to Native Interop](https://github.com/orestesgaolin/native_interop_presentation/tree/main/slides) - custom syntax highlighter with reveal.js-like line highlights, terminal auto-type, native interop
+
+- English
+- [Dominik Roszkowski](https://roszkowski.dev)
