@@ -22,6 +22,7 @@ class FlutterDeckControlsConfiguration {
     this.presenterToolbarVisible = true,
     this.gestures = const FlutterDeckGesturesConfiguration.mobileOnly(),
     this.shortcuts = const FlutterDeckShortcutsConfiguration(),
+    this.menuItems = const [],
   });
 
   /// Creates a configuration for the slide deck controls where they are
@@ -31,6 +32,7 @@ class FlutterDeckControlsConfiguration {
         presenterToolbarVisible: false,
         gestures: const FlutterDeckGesturesConfiguration.disabled(),
         shortcuts: const FlutterDeckShortcutsConfiguration.disabled(),
+        menuItems: const [],
       );
 
   /// Whether the presenter toolbar is visible or not.
@@ -41,6 +43,9 @@ class FlutterDeckControlsConfiguration {
 
   /// The configuration for the slide deck keyboard shortcuts.
   final FlutterDeckShortcutsConfiguration shortcuts;
+
+  /// Custom menu items to show in the controls menu.
+  final List<Widget> menuItems;
 }
 
 /// The configuration for the slide deck control gestures.
