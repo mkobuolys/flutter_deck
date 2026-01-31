@@ -49,3 +49,6 @@ mason-lock.json
 
 # dart_frog related
 .dart_frog
+
+# Agent related
+.agent
