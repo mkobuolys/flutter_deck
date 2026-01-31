@@ -3,7 +3,19 @@ import 'package:flutter_deck/src/controls/actions/actions.dart';
 import 'package:flutter_deck/src/controls/localized_shortcut_labeler.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
+import 'package:flutter_deck/src/plugins/plugins.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
+
+/// A builder for menu items.
+///
+/// This is used by plugins to add custom menu items to the controls.
+///
+/// The [icon] is optional and can be used to add an icon to the menu item.
+///
+/// See also:
+/// * [FlutterDeckPlugin.buildControls], which uses this builder to add custom menu items to the controls.
+typedef FlutterDeckPluginMenuItemBuilder =
+    Widget Function(BuildContext context, {required String label, required VoidCallback? onPressed, Widget? icon});
 
 /// A widget that allows the user to control the slide deck.
 ///
@@ -475,7 +487,8 @@ class _OptionsMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FlutterDeck(:controlsNotifier, :localizationNotifier, :presenterController, :router) = context.flutterDeck;
+    final FlutterDeck(:controlsNotifier, :localizationNotifier, :plugins, :presenterController, :router) =
+        context.flutterDeck;
     final canFullscreen = controlsNotifier.canFullscreen();
     final supportedLocales = localizationNotifier.supportedLocales;
 
@@ -494,6 +507,13 @@ class _OptionsMenuButton extends StatelessWidget {
           const _MarkerButton(),
           if (canFullscreen) const _FullscreenButton(),
           const _PopupMenuDivider(),
+          for (final plugin in plugins)
+            ...plugin.buildControls(
+              context,
+              (context, {required label, required onPressed, icon}) =>
+                  MenuItemButton(leadingIcon: icon, onPressed: onPressed, child: Text(label)),
+            ),
+          if (plugins.isNotEmpty) const _PopupMenuDivider(),
           const _AutoplayMenuButton(),
           if (supportedLocales.length > 1) const _LocalizationMenuButton(),
           if (presenterController.available && !router.isPresenterView) const _PresenterViewButton(),

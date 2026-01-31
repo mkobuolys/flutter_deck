@@ -4,6 +4,7 @@ import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck_app.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
+import 'package:flutter_deck/src/plugins/plugins.dart';
 import 'package:flutter_deck/src/presenter/presenter.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
@@ -62,6 +63,8 @@ class FlutterDeck {
   ///
   /// The [themeNotifier] is required and is used to control the slide deck's
   /// theme.
+  ///
+  /// The [plugins] is required and is used to add plugins to the slide deck.
   const FlutterDeck({
     required FlutterDeckConfiguration configuration,
     required FlutterDeckRouter router,
@@ -73,6 +76,7 @@ class FlutterDeck {
     required FlutterDeckMarkerNotifier markerNotifier,
     required FlutterDeckPresenterController presenterController,
     required FlutterDeckThemeNotifier themeNotifier,
+    required List<FlutterDeckPlugin> plugins,
   }) : _configuration = configuration,
        _router = router,
        _speakerInfo = speakerInfo,
@@ -82,7 +86,8 @@ class FlutterDeck {
        _localizationNotifier = localizationNotifier,
        _markerNotifier = markerNotifier,
        _presenterController = presenterController,
-       _themeNotifier = themeNotifier;
+       _themeNotifier = themeNotifier,
+       _plugins = plugins;
 
   final FlutterDeckConfiguration _configuration;
   final FlutterDeckRouter _router;
@@ -94,6 +99,7 @@ class FlutterDeck {
   final FlutterDeckMarkerNotifier _markerNotifier;
   final FlutterDeckPresenterController _presenterController;
   final FlutterDeckThemeNotifier _themeNotifier;
+  final List<FlutterDeckPlugin> _plugins;
 
   /// Returns the [FlutterDeckRouter] for the slide deck.
   FlutterDeckRouter get router => _router;
@@ -155,6 +161,12 @@ class FlutterDeck {
 
   /// Returns the [FlutterDeckThemeNotifier] for the slide deck.
   FlutterDeckThemeNotifier get themeNotifier => _themeNotifier;
+
+  /// Returns the list of plugins for the slide deck.
+  List<FlutterDeckPlugin> get plugins => _plugins;
+
+  /// Returns the plugin of type [T] for the slide deck.
+  T? maybeGetPlugin<T extends FlutterDeckPlugin>() => _plugins.whereType<T>().firstOrNull;
 
   /// Wraps the given [child] widget with the [FlutterDeckProvider].
   Widget wrap(BuildContext context, {required Widget child}) {

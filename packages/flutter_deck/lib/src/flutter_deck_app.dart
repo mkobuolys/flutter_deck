@@ -49,6 +49,8 @@ class FlutterDeckApp extends StatefulWidget {
   /// as a presenter view. If this argument is provided, the [client] argument
   /// must also be provided.
   ///
+  /// The [plugins] argument provides a list of plugins to use in the slide deck.
+  ///
   /// See also:
   ///
   /// * [FlutterDeckSlide], which represents a single slide.
@@ -59,6 +61,7 @@ class FlutterDeckApp extends StatefulWidget {
   /// * [FlutterDeckThemeData], which represents a theme for the slide deck.
   /// * [FlutterDeckSpeakerInfo], which represents information about the
   /// speaker.
+  /// * [FlutterDeckPlugin], which represents a plugin for the slide deck.
   const FlutterDeckApp({
     required this.slides,
     this.client,
@@ -207,6 +210,8 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
       _presenterController.init();
     }
 
+    final plugins = widget.plugins;
+
     _flutterDeck = FlutterDeck(
       configuration: widget.configuration,
       router: _flutterDeckRouter,
@@ -218,9 +223,10 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
       markerNotifier: _markerNotifier,
       presenterController: _presenterController,
       themeNotifier: _themeNotifier,
+      plugins: plugins,
     );
 
-    for (final plugin in widget.plugins) {
+    for (final plugin in plugins) {
       plugin.init(_flutterDeck);
     }
   }
@@ -296,14 +302,19 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
           return MaterialApp.router(
             routerConfig: _router,
             theme: theme.materialTheme,
-            builder: (context, child) => _flutterDeck.wrap(
-              context,
-              child: FlutterDeckControlsListener(
+            builder: (context, child) {
+              Widget wrappedChild = FlutterDeckControlsListener(
                 controlsNotifier: _controlsNotifier,
                 markerNotifier: _markerNotifier,
                 child: FlutterDeckTheme(data: theme, child: child!),
-              ),
-            ),
+              );
+
+              for (final plugin in widget.plugins) {
+                wrappedChild = plugin.wrap(context, wrappedChild);
+              }
+
+              return _flutterDeck.wrap(context, child: wrappedChild);
+            },
             debugShowCheckedModeBanner: false,
             locale: locale,
             localizationsDelegates: widget.localizationsDelegates,
