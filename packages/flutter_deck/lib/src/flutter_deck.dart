@@ -1,9 +1,13 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
+import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
 import 'package:flutter_deck/src/presenter/presenter.dart';
+import 'package:flutter_deck/src/renderers/flutter_slide_renderer.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 
@@ -60,6 +64,8 @@ class FlutterDeck extends InheritedWidget {
   ///
   /// The [themeNotifier] is required and is used to control the slide deck's
   /// theme.
+  ///
+  /// The [slideRenderer] is required and is used to render the slides.
   const FlutterDeck({
     required FlutterDeckConfiguration configuration,
     required FlutterDeckRouter router,
@@ -71,6 +77,8 @@ class FlutterDeck extends InheritedWidget {
     required FlutterDeckMarkerNotifier markerNotifier,
     required FlutterDeckPresenterController presenterController,
     required FlutterDeckThemeNotifier themeNotifier,
+    required FlutterSlideRenderer slideRenderer,
+    int? stepNumber,
     required super.child,
     super.key,
   }) : _configuration = configuration,
@@ -82,7 +90,9 @@ class FlutterDeck extends InheritedWidget {
        _localizationNotifier = localizationNotifier,
        _markerNotifier = markerNotifier,
        _presenterController = presenterController,
-       _themeNotifier = themeNotifier;
+       _themeNotifier = themeNotifier,
+       _slideRenderer = slideRenderer,
+       _stepNumber = stepNumber;
 
   final FlutterDeckConfiguration _configuration;
   final FlutterDeckRouter _router;
@@ -94,6 +104,8 @@ class FlutterDeck extends InheritedWidget {
   final FlutterDeckMarkerNotifier _markerNotifier;
   final FlutterDeckPresenterController _presenterController;
   final FlutterDeckThemeNotifier _themeNotifier;
+  final FlutterSlideRenderer _slideRenderer;
+  final int? _stepNumber;
 
   /// Returns the [FlutterDeckRouter] for the slide deck.
   FlutterDeckRouter get router => _router;
@@ -124,13 +136,19 @@ class FlutterDeck extends InheritedWidget {
   int get slideNumber => _router.currentSlideIndex + 1;
 
   /// Returns the current step number.
-  int get stepNumber => _router.currentStep;
+  int get stepNumber => _stepNumber ?? _router.currentStep;
 
   /// Returns the speaker info.
   FlutterDeckSpeakerInfo? get speakerInfo => _speakerInfo;
 
   /// Returns the configuration for the current slide.
-  FlutterDeckSlideConfiguration get configuration => _router.currentSlideConfiguration;
+  FlutterDeckSlideConfiguration get configuration {
+    if (_configuration is FlutterDeckSlideConfiguration) {
+      return _configuration;
+    }
+
+    return _router.currentSlideConfiguration;
+  }
 
   /// Returns the global configuration for the slide deck.
   FlutterDeckConfiguration get globalConfiguration => _configuration;
@@ -165,6 +183,63 @@ class FlutterDeck extends InheritedWidget {
     assert(flutterDeck != null, 'No FlutterDeck found in context');
 
     return flutterDeck!;
+  }
+
+  /// Creates a copy of this [FlutterDeck] but with the given fields replaced with
+  /// the new values.
+  FlutterDeck copyWith({
+    FlutterDeckConfiguration? configuration,
+    FlutterDeckRouter? router,
+    FlutterDeckSpeakerInfo? speakerInfo,
+    FlutterDeckAutoplayNotifier? autoplayNotifier,
+    FlutterDeckControlsNotifier? controlsNotifier,
+    FlutterDeckDrawerNotifier? drawerNotifier,
+    FlutterDeckLocalizationNotifier? localizationNotifier,
+    FlutterDeckMarkerNotifier? markerNotifier,
+    FlutterDeckPresenterController? presenterController,
+    FlutterDeckThemeNotifier? themeNotifier,
+    FlutterSlideRenderer? slideRenderer,
+    int? stepNumber,
+    Widget? child,
+  }) {
+    return FlutterDeck(
+      configuration: configuration ?? _configuration,
+      router: router ?? _router,
+      speakerInfo: speakerInfo ?? _speakerInfo,
+      autoplayNotifier: autoplayNotifier ?? _autoplayNotifier,
+      controlsNotifier: controlsNotifier ?? _controlsNotifier,
+      drawerNotifier: drawerNotifier ?? _drawerNotifier,
+      localizationNotifier: localizationNotifier ?? _localizationNotifier,
+      markerNotifier: markerNotifier ?? _markerNotifier,
+      presenterController: presenterController ?? _presenterController,
+      themeNotifier: themeNotifier ?? _themeNotifier,
+      slideRenderer: slideRenderer ?? _slideRenderer,
+      stepNumber: stepNumber ?? _stepNumber,
+      child: child ?? super.child,
+    );
+  }
+
+  /// Exports a specific [slide] using the provided [configuration].
+  ///
+  /// The [configuration] is optional and is used to override the default
+  /// configuration.
+  ///
+  /// The [stepNumber] is optional and is used to override the current step.
+  Future<Uint8List> exportSlide(
+    BuildContext context,
+    Widget slide, {
+    FlutterDeckConfiguration? configuration,
+    int? stepNumber,
+  }) {
+    var slideConfig = configuration ?? globalConfiguration;
+
+    if (slide is FlutterDeckSlideWidget && slide.configuration != null) {
+      slideConfig = slide.configuration!.mergeWithGlobal(slideConfig);
+    } else if (slide is FlutterDeckSlide && slide.configuration != null) {
+      slideConfig = slide.configuration!.mergeWithGlobal(slideConfig);
+    }
+
+    return _slideRenderer.render(context, slide, copyWith(configuration: slideConfig, stepNumber: stepNumber ?? 1));
   }
 
   @override
