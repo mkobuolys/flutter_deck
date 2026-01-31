@@ -3,19 +3,7 @@ import 'package:flutter_deck/src/controls/actions/actions.dart';
 import 'package:flutter_deck/src/controls/localized_shortcut_labeler.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
-import 'package:flutter_deck/src/plugins/plugins.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
-
-/// A builder for menu items.
-///
-/// This is used by plugins to add custom menu items to the controls.
-///
-/// The [icon] is optional and can be used to add an icon to the menu item.
-///
-/// See also:
-/// * [FlutterDeckPlugin.buildControls], which uses this builder to add custom menu items to the controls.
-typedef FlutterDeckPluginMenuItemBuilder =
-    Widget Function(BuildContext context, {required String label, required VoidCallback? onPressed, Widget? icon});
 
 /// A widget that allows the user to control the slide deck.
 ///

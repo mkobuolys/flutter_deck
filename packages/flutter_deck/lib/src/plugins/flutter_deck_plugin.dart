@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_deck/src/controls/controls.dart' show FlutterDeckPluginMenuItemBuilder;
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_app.dart';
 
@@ -10,6 +9,9 @@ import 'package:flutter_deck/src/flutter_deck_app.dart';
 /// See also:
 /// * [FlutterDeckApp.plugins], which is used to register plugins.
 abstract class FlutterDeckPlugin {
+  /// Creates a [FlutterDeckPlugin].
+  const FlutterDeckPlugin();
+
   /// Initializes the plugin.
   ///
   /// This method is called once when the [FlutterDeck] is created.
@@ -34,3 +36,14 @@ abstract class FlutterDeckPlugin {
   /// to inject providers or other widgets into the tree.
   Widget wrap(BuildContext context, Widget child) => child;
 }
+
+/// A builder for menu items.
+///
+/// This is used by plugins to add custom menu items to the controls.
+///
+/// The [icon] is optional and can be used to add an icon to the menu item.
+///
+/// See also:
+/// * [FlutterDeckPlugin.buildControls], which uses this builder to add custom menu items to the controls.
+typedef FlutterDeckPluginMenuItemBuilder =
+    Widget Function(BuildContext context, {required String label, required VoidCallback? onPressed, Widget? icon});
