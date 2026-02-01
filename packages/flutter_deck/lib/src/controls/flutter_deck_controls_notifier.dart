@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/src/controls/actions/actions.dart';
-import 'package:flutter_deck/src/controls/autoplay/autoplay.dart';
 import 'package:flutter_deck/src/controls/fullscreen/fullscreen.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/widgets/internal/drawer/drawer.dart';
@@ -15,18 +14,15 @@ const _defaultControlsVisibleDuration = Duration(seconds: 3);
 class FlutterDeckControlsNotifier with ChangeNotifier implements FlutterDeckFullscreenManager {
   /// Creates a [FlutterDeckControlsNotifier].
   FlutterDeckControlsNotifier({
-    required FlutterDeckAutoplayNotifier autoplayNotifier,
     required FlutterDeckDrawerNotifier drawerNotifier,
     required FlutterDeckMarkerNotifier markerNotifier,
     required FlutterDeckFullscreenManager fullscreenManager,
     required FlutterDeckRouter router,
-  }) : _autoplayNotifier = autoplayNotifier,
-       _drawerNotifier = drawerNotifier,
+  }) : _drawerNotifier = drawerNotifier,
        _markerNotifier = markerNotifier,
        _fullscreenManager = fullscreenManager,
        _router = router;
 
-  final FlutterDeckAutoplayNotifier _autoplayNotifier;
   final FlutterDeckDrawerNotifier _drawerNotifier;
   final FlutterDeckMarkerNotifier _markerNotifier;
   final FlutterDeckFullscreenManager _fullscreenManager;
@@ -43,35 +39,30 @@ class FlutterDeckControlsNotifier with ChangeNotifier implements FlutterDeckFull
 
   /// Go to the next slide.
   void next() {
-    _autoplayNotifier.pause();
     _router.next();
     notifyListeners();
   }
 
   /// Go to the previous slide.
   void previous() {
-    _autoplayNotifier.pause();
     _router.previous();
     notifyListeners();
   }
 
   /// Go to the slide with the given [slideNumber].
   void goToSlide(int slideNumber) {
-    _autoplayNotifier.pause();
     _router.goToSlide(slideNumber);
     notifyListeners();
   }
 
   /// Go to the slide step with the given [stepNumber].
   void goToStep(int stepNumber) {
-    _autoplayNotifier.pause();
     _router.goToStep(stepNumber);
     notifyListeners();
   }
 
   /// Toggle the navigation drawer.
   void toggleDrawer() {
-    _autoplayNotifier.pause();
     _drawerNotifier.toggle();
     notifyListeners();
   }
@@ -83,7 +74,6 @@ class FlutterDeckControlsNotifier with ChangeNotifier implements FlutterDeckFull
   /// * [GoPreviousIntent]
   /// * [ToggleDrawerIntent]
   void toggleMarker() {
-    _autoplayNotifier.pause();
     _markerNotifier.toggle();
 
     _disabledIntents = {

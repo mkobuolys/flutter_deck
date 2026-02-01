@@ -167,7 +167,6 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
   late FlutterDeckRouter _flutterDeckRouter;
   late GoRouter _router;
 
-  late FlutterDeckAutoplayNotifier _autoplayNotifier;
   late FlutterDeckControlsNotifier _controlsNotifier;
   late FlutterDeckDrawerNotifier _drawerNotifier;
   late FlutterDeckLocalizationNotifier _localizationNotifier;
@@ -182,11 +181,9 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
 
     _buildRouter();
 
-    _autoplayNotifier = FlutterDeckAutoplayNotifier(router: _flutterDeckRouter);
     _drawerNotifier = FlutterDeckDrawerNotifier();
     _markerNotifier = FlutterDeckMarkerNotifier();
     _controlsNotifier = FlutterDeckControlsNotifier(
-      autoplayNotifier: _autoplayNotifier,
       drawerNotifier: _drawerNotifier,
       markerNotifier: _markerNotifier,
       fullscreenManager: FlutterDeckFullscreenManager(WindowProxy()),
@@ -216,7 +213,6 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
       configuration: widget.configuration,
       router: _flutterDeckRouter,
       speakerInfo: widget.speakerInfo,
-      autoplayNotifier: _autoplayNotifier,
       controlsNotifier: _controlsNotifier,
       drawerNotifier: _drawerNotifier,
       localizationNotifier: _localizationNotifier,

@@ -43,7 +43,16 @@ abstract class FlutterDeckPlugin {
 ///
 /// The [icon] is optional and can be used to add an icon to the menu item.
 ///
+/// The [closeOnActivate] parameter is optional and can be used to close the
+/// menu after the menu item is activated. The default value is true.
+///
 /// See also:
 /// * [FlutterDeckPlugin.buildControls], which uses this builder to add custom menu items to the controls.
 typedef FlutterDeckPluginMenuItemBuilder =
-    Widget Function(BuildContext context, {required String label, required VoidCallback? onPressed, Widget? icon});
+    Widget Function(
+      BuildContext context, {
+      required String label,
+      required VoidCallback? onPressed,
+      Widget? icon,
+      bool? closeOnActivate,
+    });
