@@ -207,8 +207,6 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
       _presenterController.init();
     }
 
-    final plugins = widget.plugins;
-
     _flutterDeck = FlutterDeck(
       configuration: widget.configuration,
       router: _flutterDeckRouter,
@@ -219,10 +217,10 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
       markerNotifier: _markerNotifier,
       presenterController: _presenterController,
       themeNotifier: _themeNotifier,
-      plugins: plugins,
+      plugins: widget.plugins,
     );
 
-    for (final plugin in plugins) {
+    for (final plugin in _flutterDeck.plugins) {
       plugin.init(_flutterDeck);
     }
   }
@@ -244,7 +242,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
 
   @override
   void dispose() {
-    for (final plugin in widget.plugins) {
+    for (final plugin in _flutterDeck.plugins) {
       plugin.dispose();
     }
 
@@ -305,7 +303,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
                 child: FlutterDeckTheme(data: theme, child: child!),
               );
 
-              for (final plugin in widget.plugins) {
+              for (final plugin in _flutterDeck.plugins) {
                 wrappedChild = plugin.wrap(context, wrappedChild);
               }
 
