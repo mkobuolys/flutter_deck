@@ -15,6 +15,6 @@
     }
   ],
   "useGitignore": true,
-  "words": ["flutter_deck", "Mangirdas", "Kazlauskas", "subclassing"],
+  "words": ["flutter_deck", "Mangirdas", "Kazlauskas", "subclassing", "autoplay"],
   "ignorePaths": ["**/doc/website/source/showcase.md"]
 }
