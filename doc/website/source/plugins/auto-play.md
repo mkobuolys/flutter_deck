@@ -1,6 +1,6 @@
 ---
 title: Auto-Play
-navOrder: 2
+navOrder: 3
 ---
 
 The auto-play feature allows you to automatically navigate through the slide deck. It can be used to create a presentation that runs on its own. The auto-play feature is available in the presenter toolbar.
