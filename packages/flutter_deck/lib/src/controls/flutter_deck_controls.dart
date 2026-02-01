@@ -237,47 +237,6 @@ class _MarkerControls extends StatelessWidget {
   }
 }
 
-class _AutoplayMenuButton extends StatelessWidget {
-  const _AutoplayMenuButton();
-
-  @override
-  Widget build(BuildContext context) {
-    final flutterDeck = context.flutterDeck;
-    final autoplayNotifier = flutterDeck.autoplayNotifier;
-    final markerNotifier = flutterDeck.markerNotifier;
-
-    return ListenableBuilder(
-      listenable: markerNotifier,
-      builder: (context, _) => SubmenuButton(
-        leadingIcon: const Icon(Icons.play_arrow_rounded),
-        menuChildren: [
-          if (!markerNotifier.enabled) ...[
-            MenuItemButton(
-              leadingIcon: autoplayNotifier.isPlaying
-                  ? const Icon(Icons.pause_rounded)
-                  : const Icon(Icons.play_arrow_rounded),
-              onPressed: autoplayNotifier.isPlaying ? autoplayNotifier.pause : autoplayNotifier.play,
-              child: Text(autoplayNotifier.isPlaying ? 'Pause' : 'Play'),
-            ),
-            const _PopupMenuDivider(),
-            const _AutoplayDurationButton(duration: Duration(seconds: 1), label: 'Every second'),
-            const _AutoplayDurationButton(duration: Duration(seconds: 2), label: 'Every 2 seconds'),
-            const _AutoplayDurationButton(duration: Duration(seconds: 3), label: 'Every 3 seconds'),
-            const _AutoplayDurationButton(duration: Duration(seconds: 5), label: 'Every 5 seconds'),
-            const _AutoplayDurationButton(duration: Duration(seconds: 10), label: 'Every 10 seconds'),
-            const _AutoplayDurationButton(duration: Duration(seconds: 15), label: 'Every 15 seconds'),
-            const _AutoplayDurationButton(duration: Duration(seconds: 30), label: 'Every 30 seconds'),
-            const _AutoplayDurationButton(duration: Duration(seconds: 60), label: 'Every minute'),
-            const _PopupMenuDivider(),
-            const _AutoplayLoopButton(),
-          ],
-        ],
-        child: const Text('Auto-play'),
-      ),
-    );
-  }
-}
-
 class _LocalizationMenuButton extends StatelessWidget {
   const _LocalizationMenuButton();
 
@@ -304,72 +263,16 @@ class _LocalizationMenuButton extends StatelessWidget {
   }
 }
 
-class _AutoplayDurationButton extends StatelessWidget {
-  const _AutoplayDurationButton({required this.duration, required this.label});
-
-  final Duration duration;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    final autoplayNotifier = context.flutterDeck.autoplayNotifier;
-
-    return ListenableBuilder(
-      listenable: autoplayNotifier,
-      builder: (context, _) {
-        final autoplayDuration = autoplayNotifier.autoplayDuration;
-
-        return _MenuSelectionButton(
-          selected: autoplayDuration == duration,
-          label: label,
-          closeOnActivate: false,
-          onPressed: () => autoplayNotifier.updateAutoplayDuration(duration),
-        );
-      },
-    );
-  }
-}
-
-class _AutoplayLoopButton extends StatelessWidget {
-  const _AutoplayLoopButton();
-
-  @override
-  Widget build(BuildContext context) {
-    final autoplayNotifier = context.flutterDeck.autoplayNotifier;
-
-    return ListenableBuilder(
-      listenable: autoplayNotifier,
-      builder: (context, _) {
-        final isLooping = autoplayNotifier.isLooping;
-
-        return _MenuSelectionButton(
-          selected: isLooping,
-          label: 'Loop',
-          closeOnActivate: false,
-          onPressed: autoplayNotifier.toggleLooping,
-        );
-      },
-    );
-  }
-}
-
 class _MenuSelectionButton extends StatelessWidget {
-  const _MenuSelectionButton({
-    required this.label,
-    required this.selected,
-    required this.onPressed,
-    this.closeOnActivate = true,
-  });
+  const _MenuSelectionButton({required this.label, required this.selected, required this.onPressed});
 
   final String label;
   final bool selected;
-  final bool closeOnActivate;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return MenuItemButton(
-      closeOnActivate: closeOnActivate,
       leadingIcon: selected ? const Icon(Icons.check_rounded) : const SizedBox(width: 24),
       trailingIcon: const SizedBox(width: 24),
       onPressed: onPressed,
@@ -475,7 +378,8 @@ class _OptionsMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FlutterDeck(:controlsNotifier, :localizationNotifier, :presenterController, :router) = context.flutterDeck;
+    final FlutterDeck(:controlsNotifier, :localizationNotifier, :plugins, :presenterController, :router) =
+        context.flutterDeck;
     final canFullscreen = controlsNotifier.canFullscreen();
     final supportedLocales = localizationNotifier.supportedLocales;
 
@@ -494,7 +398,17 @@ class _OptionsMenuButton extends StatelessWidget {
           const _MarkerButton(),
           if (canFullscreen) const _FullscreenButton(),
           const _PopupMenuDivider(),
-          const _AutoplayMenuButton(),
+          for (final plugin in plugins)
+            ...plugin.buildControls(
+              context,
+              (context, {required label, required onPressed, icon, closeOnActivate}) => MenuItemButton(
+                leadingIcon: icon,
+                onPressed: onPressed,
+                closeOnActivate: closeOnActivate ?? true,
+                child: Text(label),
+              ),
+            ),
+          if (plugins.isNotEmpty) const _PopupMenuDivider(),
           if (supportedLocales.length > 1) const _LocalizationMenuButton(),
           if (presenterController.available && !router.isPresenterView) const _PresenterViewButton(),
         ],

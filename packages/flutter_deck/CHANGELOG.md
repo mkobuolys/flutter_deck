@@ -1,3 +1,8 @@
+# NEXT
+
+- feat: add plugins support
+  - **BREAKING**: auto-play feature has been removed by default. To enable it, use the `FlutterDeckAutoplayPlugin`.
+
 # 0.22.0
 
 - feat: allow adding custom `NavigatorObservers` to `FlutterDeckApp`

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
+import 'package:flutter_deck/src/flutter_deck_app.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
+import 'package:flutter_deck/src/plugins/plugins.dart';
 import 'package:flutter_deck/src/presenter/presenter.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
@@ -19,7 +21,7 @@ import 'package:flutter_deck/src/widgets/internal/internal.dart';
 /// * Control the slide deck's theme.
 ///
 /// The [FlutterDeck] is available in the widget tree and can be accessed using
-/// the [FlutterDeck.of] method or the `flutterDeck` extension on
+/// the [FlutterDeckProvider.of] method or the `flutterDeck` extension on
 /// [BuildContext].
 ///
 /// See also:
@@ -35,7 +37,8 @@ import 'package:flutter_deck/src/widgets/internal/internal.dart';
 /// marker.
 /// * [FlutterDeckThemeNotifier], which is used to control the slide deck's
 /// theme.
-class FlutterDeck extends InheritedWidget {
+@immutable
+class FlutterDeck {
   /// Default constructor for [FlutterDeck].
   ///
   /// The [configuration] is required and is used to configure the slide deck.
@@ -43,9 +46,6 @@ class FlutterDeck extends InheritedWidget {
   /// The [router] is required and is used to navigate between slides.
   ///
   /// The [speakerInfo] is optional and is used to access the speaker info.
-  ///
-  /// The [autoplayNotifier] is required and is used to control the slide deck's
-  /// autoplay feature.
   ///
   /// The [controlsNotifier] is required and is used to control the slide deck.
   ///
@@ -60,40 +60,40 @@ class FlutterDeck extends InheritedWidget {
   ///
   /// The [themeNotifier] is required and is used to control the slide deck's
   /// theme.
+  ///
+  /// The [plugins] is required and is used to add plugins to the slide deck.
   const FlutterDeck({
     required FlutterDeckConfiguration configuration,
     required FlutterDeckRouter router,
     required FlutterDeckSpeakerInfo? speakerInfo,
-    required FlutterDeckAutoplayNotifier autoplayNotifier,
     required FlutterDeckControlsNotifier controlsNotifier,
     required FlutterDeckDrawerNotifier drawerNotifier,
     required FlutterDeckLocalizationNotifier localizationNotifier,
     required FlutterDeckMarkerNotifier markerNotifier,
     required FlutterDeckPresenterController presenterController,
     required FlutterDeckThemeNotifier themeNotifier,
-    required super.child,
-    super.key,
+    required List<FlutterDeckPlugin> plugins,
   }) : _configuration = configuration,
        _router = router,
        _speakerInfo = speakerInfo,
-       _autoplayNotifier = autoplayNotifier,
        _controlsNotifier = controlsNotifier,
        _drawerNotifier = drawerNotifier,
        _localizationNotifier = localizationNotifier,
        _markerNotifier = markerNotifier,
        _presenterController = presenterController,
-       _themeNotifier = themeNotifier;
+       _themeNotifier = themeNotifier,
+       _plugins = plugins;
 
   final FlutterDeckConfiguration _configuration;
   final FlutterDeckRouter _router;
   final FlutterDeckSpeakerInfo? _speakerInfo;
-  final FlutterDeckAutoplayNotifier _autoplayNotifier;
   final FlutterDeckControlsNotifier _controlsNotifier;
   final FlutterDeckDrawerNotifier _drawerNotifier;
   final FlutterDeckLocalizationNotifier _localizationNotifier;
   final FlutterDeckMarkerNotifier _markerNotifier;
   final FlutterDeckPresenterController _presenterController;
   final FlutterDeckThemeNotifier _themeNotifier;
+  final List<FlutterDeckPlugin> _plugins;
 
   /// Returns the [FlutterDeckRouter] for the slide deck.
   FlutterDeckRouter get router => _router;
@@ -135,9 +135,6 @@ class FlutterDeck extends InheritedWidget {
   /// Returns the global configuration for the slide deck.
   FlutterDeckConfiguration get globalConfiguration => _configuration;
 
-  /// Returns the [FlutterDeckAutoplayNotifier] for the slide deck.
-  FlutterDeckAutoplayNotifier get autoplayNotifier => _autoplayNotifier;
-
   /// Returns the [FlutterDeckControlsNotifier] for the slide deck.
   FlutterDeckControlsNotifier get controlsNotifier => _controlsNotifier;
 
@@ -156,26 +153,73 @@ class FlutterDeck extends InheritedWidget {
   /// Returns the [FlutterDeckThemeNotifier] for the slide deck.
   FlutterDeckThemeNotifier get themeNotifier => _themeNotifier;
 
+  /// Returns the list of plugins for the slide deck.
+  List<FlutterDeckPlugin> get plugins => _plugins;
+
+  /// Returns the plugin of type [T] for the slide deck.
+  T? maybeGetPlugin<T extends FlutterDeckPlugin>() => _plugins.whereType<T>().firstOrNull;
+
+  /// Wraps the given [child] widget with the [FlutterDeckProvider].
+  Widget wrap(BuildContext context, {required Widget child}) {
+    return FlutterDeckProvider(flutterDeck: this, child: child);
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FlutterDeck &&
+          runtimeType == other.runtimeType &&
+          _configuration == other._configuration &&
+          _router == other._router &&
+          _speakerInfo == other._speakerInfo &&
+          _controlsNotifier == other._controlsNotifier &&
+          _drawerNotifier == other._drawerNotifier &&
+          _markerNotifier == other._markerNotifier &&
+          _themeNotifier == other._themeNotifier;
+
+  @override
+  int get hashCode =>
+      _configuration.hashCode ^
+      _router.hashCode ^
+      _speakerInfo.hashCode ^
+      _controlsNotifier.hashCode ^
+      _drawerNotifier.hashCode ^
+      _markerNotifier.hashCode ^
+      _themeNotifier.hashCode;
+}
+
+/// Provides the [FlutterDeck] to the widget tree.
+///
+/// This widget is used to provide the [FlutterDeck] to the widget tree.
+/// It is recommended to use the [FlutterDeckApp] as the root widget of your
+/// app, as it will automatically create a [FlutterDeckProvider].
+///
+/// See also:
+///
+/// * [FlutterDeck], which is the main widget of a slide deck.
+/// * [FlutterDeckApp], which is the entry point to the slide deck.
+class FlutterDeckProvider extends InheritedWidget {
+  /// Creates a new [FlutterDeckProvider].
+  ///
+  /// The [flutterDeck] argument must not be null.
+  const FlutterDeckProvider({required this.flutterDeck, required super.child, super.key});
+
+  /// The [FlutterDeck] to provide to the widget tree.
+  final FlutterDeck flutterDeck;
+
   /// Find the current [FlutterDeck] in the widget tree.
   ///
   /// See [BuildContext.dependOnInheritedWidgetOfExactType].
   static FlutterDeck of(BuildContext context) {
-    final flutterDeck = context.dependOnInheritedWidgetOfExactType<FlutterDeck>();
+    final flutterDeckProvider = context.dependOnInheritedWidgetOfExactType<FlutterDeckProvider>();
 
-    assert(flutterDeck != null, 'No FlutterDeck found in context');
+    assert(flutterDeckProvider != null, 'No FlutterDeckProvider found in context');
 
-    return flutterDeck!;
+    return flutterDeckProvider!.flutterDeck;
   }
 
   @override
-  bool updateShouldNotify(FlutterDeck oldWidget) =>
-      _configuration != oldWidget._configuration ||
-      _router != oldWidget._router ||
-      _speakerInfo != oldWidget._speakerInfo ||
-      _controlsNotifier != oldWidget._controlsNotifier ||
-      _drawerNotifier != oldWidget._drawerNotifier ||
-      _markerNotifier != oldWidget._markerNotifier ||
-      _themeNotifier != oldWidget._themeNotifier;
+  bool updateShouldNotify(FlutterDeckProvider oldWidget) => flutterDeck != oldWidget.flutterDeck;
 }
 
 /// An extension on [BuildContext] that simplifies accessing the [FlutterDeck]
@@ -183,6 +227,6 @@ class FlutterDeck extends InheritedWidget {
 extension FlutterDeckX on BuildContext {
   /// Returns the [FlutterDeck] from the widget tree.
   ///
-  /// See [FlutterDeck.of].
-  FlutterDeck get flutterDeck => FlutterDeck.of(this);
+  /// See [FlutterDeckProvider.of].
+  FlutterDeck get flutterDeck => FlutterDeckProvider.of(this);
 }

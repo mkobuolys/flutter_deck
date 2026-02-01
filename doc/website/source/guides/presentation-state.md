@@ -10,7 +10,7 @@ The slide deck state is managed by the `FlutterDeck` widget. This widget is resp
 Widget build(BuildContext context) {
   // Retrieve the FlutterDeck instance from the context.
   // Or by using the extension method: context.flutterDeck
-  final flutterDeck = FlutterDeck.of(context);
+  final flutterDeck = FlutterDeckProvider.of(context);
 
   // Retrieve the FlutterDeckRouter instance for this slide deck.
   final router = flutterDeck.router;

@@ -68,6 +68,8 @@ class FlutterDeckExample extends StatelessWidget {
           useMaterial3: true,
         ),
       ),
+      // Add custom functionality using plugins.
+      plugins: [FlutterDeckAutoplayPlugin()],
       // Presentation is build automatically from the list of slides.
       slides: [
         const TitleSlide(),
