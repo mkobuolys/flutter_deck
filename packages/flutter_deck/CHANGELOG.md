@@ -1,3 +1,7 @@
+# NEXT
+
+- feat: add plugins support
+
 # 0.22.0
 
 - feat: allow adding custom `NavigatorObservers` to `FlutterDeckApp`
