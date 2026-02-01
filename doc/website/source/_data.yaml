@@ -50,3 +50,7 @@ navigation:
     - title: Playback
       tag: playback
       sortBy: navOrder
+
+    - title: Plugins
+      tag: plugins
+      sortBy: navOrder
