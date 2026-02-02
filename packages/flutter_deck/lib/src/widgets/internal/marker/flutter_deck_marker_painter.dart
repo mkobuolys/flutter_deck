@@ -7,13 +7,20 @@ class FlutterDeckMarkerPainter extends CustomPainter {
   /// Creates a [FlutterDeckMarkerPainter].
   ///
   /// The [configuration] and [paths] arguments must not be null.
-  const FlutterDeckMarkerPainter({required this.configuration, required this.paths});
+  const FlutterDeckMarkerPainter({
+    required this.configuration,
+    required this.paths,
+    this.version = 0,
+  });
 
   /// The configuration of the marker.
   final FlutterDeckMarkerConfiguration configuration;
 
   /// The paths drawn on the slide.
   final List<List<Offset>> paths;
+
+  /// The version of the paths.
+  final int version;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -31,5 +38,7 @@ class FlutterDeckMarkerPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(FlutterDeckMarkerPainter oldDelegate) =>
-      configuration != oldDelegate.configuration || !listEquals(paths, oldDelegate.paths);
+      configuration != oldDelegate.configuration ||
+      version != oldDelegate.version ||
+      !listEquals(paths, oldDelegate.paths);
 }
