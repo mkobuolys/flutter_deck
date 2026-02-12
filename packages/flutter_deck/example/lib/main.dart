@@ -264,15 +264,7 @@ class FlutterDeckPptxExportPlugin extends FlutterDeckPlugin {
   }
 
   Future<Uint8List> _exportSlide(BuildContext context, {required Widget slide, required int stepNumber}) {
-    var configuration = context.flutterDeck.globalConfiguration;
-
-    if (slide is FlutterDeckSlideWidget && slide.configuration != null) {
-      configuration = slide.configuration!.mergeWithGlobal(configuration);
-    } else if (slide is FlutterDeckSlide && slide.configuration != null) {
-      configuration = slide.configuration!.mergeWithGlobal(configuration);
-    }
-
-    configuration = configuration.copyWith(
+    var configuration = context.flutterDeck.globalConfiguration.copyWith(
       controls: const FlutterDeckControlsConfiguration.disabled(),
       slideSize: FlutterDeckSlideSize.fromAspectRatio(
         aspectRatio: const FlutterDeckAspectRatio.ratio16x9(),
@@ -280,6 +272,12 @@ class FlutterDeckPptxExportPlugin extends FlutterDeckPlugin {
       ),
       showProgress: false,
     );
+
+    if (slide is FlutterDeckSlideWidget && slide.configuration != null) {
+      configuration = slide.configuration!.mergeWithGlobal(configuration);
+    } else if (slide is FlutterDeckSlide && slide.configuration != null) {
+      configuration = slide.configuration!.mergeWithGlobal(configuration);
+    }
 
     return _slideImageRenderer.render(context, slide, configuration: configuration, stepNumber: stepNumber);
   }

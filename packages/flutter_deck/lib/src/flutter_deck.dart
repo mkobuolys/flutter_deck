@@ -208,9 +208,12 @@ class FlutterDeck {
           _router == other._router &&
           _speakerInfo == other._speakerInfo &&
           _controlsNotifier == other._controlsNotifier &&
-          _drawerNotifier == other._drawerNotifier &&
+          _localizationNotifier == other._localizationNotifier &&
           _markerNotifier == other._markerNotifier &&
-          _themeNotifier == other._themeNotifier;
+          _drawerNotifier == other._drawerNotifier &&
+          _themeNotifier == other._themeNotifier &&
+          _plugins == other._plugins &&
+          _stepNumber == other._stepNumber;
 
   @override
   int get hashCode =>
@@ -218,9 +221,12 @@ class FlutterDeck {
       _router.hashCode ^
       _speakerInfo.hashCode ^
       _controlsNotifier.hashCode ^
-      _drawerNotifier.hashCode ^
+      _localizationNotifier.hashCode ^
       _markerNotifier.hashCode ^
-      _themeNotifier.hashCode;
+      _drawerNotifier.hashCode ^
+      _themeNotifier.hashCode ^
+      _plugins.hashCode ^
+      _stepNumber.hashCode;
 }
 
 /// Provides the [FlutterDeck] to the widget tree.
