@@ -85,6 +85,32 @@ class FlutterDeckConfiguration {
   ///
   /// The default transition is [FlutterDeckTransition.none].
   final FlutterDeckTransition transition;
+
+  /// Creates a copy of this configuration with the given fields replaced by
+  /// the new values.
+  FlutterDeckConfiguration copyWith({
+    FlutterDeckBackgroundConfiguration? background,
+    FlutterDeckControlsConfiguration? controls,
+    FlutterDeckFooterConfiguration? footer,
+    FlutterDeckHeaderConfiguration? header,
+    FlutterDeckMarkerConfiguration? marker,
+    FlutterDeckProgressIndicator? progressIndicator,
+    bool? showProgress,
+    FlutterDeckSlideSize? slideSize,
+    FlutterDeckTransition? transition,
+  }) {
+    return FlutterDeckConfiguration(
+      background: background ?? this.background,
+      controls: controls ?? this.controls,
+      footer: footer ?? this.footer,
+      header: header ?? this.header,
+      marker: marker ?? this.marker,
+      progressIndicator: progressIndicator ?? this.progressIndicator,
+      showProgress: showProgress ?? this.showProgress,
+      slideSize: slideSize ?? this.slideSize,
+      transition: transition ?? this.transition,
+    );
+  }
 }
 
 /// The configuration for a slide.

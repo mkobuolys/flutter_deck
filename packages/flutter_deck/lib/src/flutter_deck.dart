@@ -73,6 +73,7 @@ class FlutterDeck {
     required FlutterDeckPresenterController presenterController,
     required FlutterDeckThemeNotifier themeNotifier,
     required List<FlutterDeckPlugin> plugins,
+    int? stepNumber,
   }) : _configuration = configuration,
        _router = router,
        _speakerInfo = speakerInfo,
@@ -82,7 +83,8 @@ class FlutterDeck {
        _markerNotifier = markerNotifier,
        _presenterController = presenterController,
        _themeNotifier = themeNotifier,
-       _plugins = plugins;
+       _plugins = plugins,
+       _stepNumber = stepNumber;
 
   final FlutterDeckConfiguration _configuration;
   final FlutterDeckRouter _router;
@@ -94,6 +96,8 @@ class FlutterDeck {
   final FlutterDeckPresenterController _presenterController;
   final FlutterDeckThemeNotifier _themeNotifier;
   final List<FlutterDeckPlugin> _plugins;
+
+  final int? _stepNumber;
 
   /// Returns the [FlutterDeckRouter] for the slide deck.
   FlutterDeckRouter get router => _router;
@@ -124,13 +128,14 @@ class FlutterDeck {
   int get slideNumber => _router.currentSlideIndex + 1;
 
   /// Returns the current step number.
-  int get stepNumber => _router.currentStep;
+  int get stepNumber => _stepNumber ?? _router.currentStep;
 
   /// Returns the speaker info.
   FlutterDeckSpeakerInfo? get speakerInfo => _speakerInfo;
 
   /// Returns the configuration for the current slide.
-  FlutterDeckSlideConfiguration get configuration => _router.currentSlideConfiguration;
+  FlutterDeckSlideConfiguration get configuration =>
+      _configuration is FlutterDeckSlideConfiguration ? _configuration : _router.currentSlideConfiguration;
 
   /// Returns the global configuration for the slide deck.
   FlutterDeckConfiguration get globalConfiguration => _configuration;
@@ -162,6 +167,36 @@ class FlutterDeck {
   /// Wraps the given [child] widget with the [FlutterDeckProvider].
   Widget wrap(BuildContext context, {required Widget child}) {
     return FlutterDeckProvider(flutterDeck: this, child: child);
+  }
+
+  /// Creates a copy of this [FlutterDeck] but with the given fields replaced with
+  /// the new values.
+  FlutterDeck copyWith({
+    FlutterDeckConfiguration? configuration,
+    FlutterDeckRouter? router,
+    FlutterDeckSpeakerInfo? speakerInfo,
+    FlutterDeckControlsNotifier? controlsNotifier,
+    FlutterDeckDrawerNotifier? drawerNotifier,
+    FlutterDeckLocalizationNotifier? localizationNotifier,
+    FlutterDeckMarkerNotifier? markerNotifier,
+    FlutterDeckPresenterController? presenterController,
+    FlutterDeckThemeNotifier? themeNotifier,
+    List<FlutterDeckPlugin>? plugins,
+    int? stepNumber,
+  }) {
+    return FlutterDeck(
+      configuration: configuration ?? _configuration,
+      router: router ?? _router,
+      speakerInfo: speakerInfo ?? _speakerInfo,
+      controlsNotifier: controlsNotifier ?? _controlsNotifier,
+      drawerNotifier: drawerNotifier ?? _drawerNotifier,
+      localizationNotifier: localizationNotifier ?? _localizationNotifier,
+      markerNotifier: markerNotifier ?? _markerNotifier,
+      presenterController: presenterController ?? _presenterController,
+      themeNotifier: themeNotifier ?? _themeNotifier,
+      plugins: plugins ?? _plugins,
+      stepNumber: stepNumber ?? _stepNumber,
+    );
   }
 
   @override
