@@ -199,13 +199,15 @@ class FlutterDeckPptxExportPlugin extends FlutterDeckPlugin {
     final fs = MemoryFileSystem();
     final pres = await open_xml.Presentation.create(fs);
 
-    if (context.mounted) {
-      await precacheImage(const AssetImage('assets/header.png'), context);
-      // ignore: use_build_context_synchronously
-      await precacheImage(const AssetImage('assets/flutter_logo.png'), context);
-      // ignore: use_build_context_synchronously
-      await precacheImage(const AssetImage('assets/dog_complete_drawing.jpeg'), context);
+    if (!context.mounted) {
+      throw Exception('No context available after initialising a new presentation');
     }
+
+    await Future.wait([
+      precacheImage(const AssetImage('assets/header.png'), context),
+      precacheImage(const AssetImage('assets/flutter_logo.png'), context),
+      precacheImage(const AssetImage('assets/dog_complete_drawing.jpeg'), context),
+    ]);
 
     pres.setAspectRatio(open_xml.PresentationAspectRatio.widescreen_16_9);
 
@@ -220,12 +222,11 @@ class FlutterDeckPptxExportPlugin extends FlutterDeckPlugin {
         onProgress((i + 1) / slides.length);
         debugPrint('Exporting Slide $i, Step $step');
 
-        final bytes = await _exportSlide(
-          // ignore: use_build_context_synchronously
-          context,
-          slide: slide.widget,
-          stepNumber: step,
-        );
+        if (!context.mounted) {
+          throw Exception('No context available at slide $i, step $step');
+        }
+
+        final bytes = await _slideImageRenderer.render(context, slide.widget, stepNumber: step);
 
         final fileName = 'slide_${(slideIndex++).toString().padLeft(5, '0')}.png';
 
@@ -262,9 +263,16 @@ class FlutterDeckPptxExportPlugin extends FlutterDeckPlugin {
 
     debugPrint('Presentation exported as PPTX');
   }
+}
 
-  Future<Uint8List> _exportSlide(BuildContext context, {required Widget slide, required int stepNumber}) {
-    var configuration = context.flutterDeck.globalConfiguration.copyWith(
+class FlutterSlideImageRenderer {
+  /// Creates a [FlutterSlideImageRenderer].
+  const FlutterSlideImageRenderer({required FlutterDeck flutterDeck}) : _flutterDeck = flutterDeck;
+
+  final FlutterDeck _flutterDeck;
+
+  Future<Uint8List> render(BuildContext context, Widget slide, {required int stepNumber}) async {
+    var configuration = _flutterDeck.globalConfiguration.copyWith(
       controls: const FlutterDeckControlsConfiguration.disabled(),
       slideSize: FlutterDeckSlideSize.fromAspectRatio(
         aspectRatio: const FlutterDeckAspectRatio.ratio16x9(),
@@ -279,22 +287,6 @@ class FlutterDeckPptxExportPlugin extends FlutterDeckPlugin {
       configuration = slide.configuration!.mergeWithGlobal(configuration);
     }
 
-    return _slideImageRenderer.render(context, slide, configuration: configuration, stepNumber: stepNumber);
-  }
-}
-
-class FlutterSlideImageRenderer {
-  /// Creates a [FlutterSlideImageRenderer].
-  const FlutterSlideImageRenderer({required FlutterDeck flutterDeck}) : _flutterDeck = flutterDeck;
-
-  final FlutterDeck _flutterDeck;
-
-  Future<Uint8List> render(
-    BuildContext context,
-    Widget slide, {
-    required FlutterDeckConfiguration configuration,
-    required int stepNumber,
-  }) async {
     final view = View.of(context);
     final slideSize = configuration.slideSize;
     final devicePixelRatio = view.devicePixelRatio;
@@ -316,8 +308,6 @@ class FlutterSlideImageRenderer {
           .wrap(
             context,
             child: MaterialApp(
-              // ignore: deprecated_member_use
-              useInheritedMediaQuery: true,
               debugShowCheckedModeBanner: false,
               theme: Theme.of(context),
               localizationsDelegates: AppLocalizations.localizationsDelegates,
