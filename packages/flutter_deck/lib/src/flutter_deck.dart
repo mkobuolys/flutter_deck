@@ -198,35 +198,6 @@ class FlutterDeck {
       stepNumber: stepNumber ?? _stepNumber,
     );
   }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FlutterDeck &&
-          runtimeType == other.runtimeType &&
-          _configuration == other._configuration &&
-          _router == other._router &&
-          _speakerInfo == other._speakerInfo &&
-          _controlsNotifier == other._controlsNotifier &&
-          _localizationNotifier == other._localizationNotifier &&
-          _markerNotifier == other._markerNotifier &&
-          _drawerNotifier == other._drawerNotifier &&
-          _themeNotifier == other._themeNotifier &&
-          _plugins == other._plugins &&
-          _stepNumber == other._stepNumber;
-
-  @override
-  int get hashCode =>
-      _configuration.hashCode ^
-      _router.hashCode ^
-      _speakerInfo.hashCode ^
-      _controlsNotifier.hashCode ^
-      _localizationNotifier.hashCode ^
-      _markerNotifier.hashCode ^
-      _drawerNotifier.hashCode ^
-      _themeNotifier.hashCode ^
-      _plugins.hashCode ^
-      _stepNumber.hashCode;
 }
 
 /// Provides the [FlutterDeck] to the widget tree.
