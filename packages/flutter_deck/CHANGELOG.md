@@ -1,4 +1,4 @@
-# NEXT
+# 0.23.0
 
 - feat: add plugins support
   - **BREAKING**: auto-play feature has been removed by default. To enable it, use the `FlutterDeckAutoplayPlugin`.
