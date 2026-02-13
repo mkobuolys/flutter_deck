@@ -2,6 +2,7 @@
 
 - feat: add plugins support
   - **BREAKING**: auto-play feature has been removed by default. To enable it, use the `FlutterDeckAutoplayPlugin`.
+- feat: add `copyWith` method to `FlutterDeck` and `FlutterDeckConfiguration`
 
 # 0.22.0
 
@@ -102,9 +103,7 @@
 # 0.10.1
 
 - refactor: rework flutter deck controls
-
   - **BREAKING**: the `enabled` and `shortcutsEnabled` properties have been removed
-
     - **Migration**: to disable all controls, instead of:
 
       ```
@@ -148,7 +147,6 @@
   - feat: support key combinations for shortcuts
 
   - **BREAKING**: `nextKey`, `previousKey`, `openDrawerKey` and `toggleMarkerKey` were renamed and moved to the `FlutterDeckShortcutsConfiguration` class
-
     - `nextKey` -> `nextSlide`
     - `previousKey` -> `previousSlide`
     - `openDrawerKey` -> `toggleNavigationDrawer`
@@ -181,7 +179,6 @@
       ```
 
 - feat: add support for key combinations for shortcuts
-
   - Instead of passing a `LogicalKeyboardKey`, pass a `SingleActivator`. It enables you not only to specify a single key, but also its modifiers:
 
     ```
@@ -253,7 +250,6 @@
 # 0.4.0
 
 - **BREAKING**: refactor: rework the way how a new slide is created
-
   - **Migration**: every slide must extend the `FlutterDeckSlideWidget` and override the `build` method:
 
     ```
@@ -577,7 +573,6 @@
     ```
 
 - **BREAKING**: `lightTheme` and `darkTheme` are now of type `FlutterDeckThemeData` instead of `ThemeData`
-
   - **Migration**: if you have used custom `lightTheme` or `darkTheme`, wrap them with `FlutterDeckThemeData.fromTheme` constructor:
 
     ```
@@ -610,7 +605,6 @@
 # 0.2.0
 
 - **BREAKING**: feat: updated `background` method signature for the `FlutterDeckSlideBase`
-
   - **Migration**: update the `background` method signature in your code from:
 
     ```

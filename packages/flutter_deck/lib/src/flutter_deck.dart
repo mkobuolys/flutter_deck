@@ -61,6 +61,12 @@ class FlutterDeck {
   /// The [themeNotifier] is required and is used to control the slide deck's
   /// theme.
   ///
+  /// The [localizationsDelegates] is optional and is used to provide
+  /// [LocalizationsDelegate]s for the slide deck.
+  ///
+  /// The [supportedLocales] is used to provide the locales that the slide
+  /// deck supports.
+  ///
   /// The [plugins] is required and is used to add plugins to the slide deck.
   const FlutterDeck({
     required FlutterDeckConfiguration configuration,
@@ -75,7 +81,6 @@ class FlutterDeck {
     required Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates,
     required Iterable<Locale> supportedLocales,
     required List<FlutterDeckPlugin> plugins,
-
     int? stepNumber,
   }) : _configuration = configuration,
        _router = router,
