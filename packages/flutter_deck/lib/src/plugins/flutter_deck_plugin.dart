@@ -15,12 +15,12 @@ abstract class FlutterDeckPlugin {
   /// Initializes the plugin.
   ///
   /// This method is called once when the [FlutterDeck] is created.
-  void init(FlutterDeck flutterDeck);
+  void init(FlutterDeck flutterDeck) {}
 
   /// Disposes the plugin.
   ///
   /// This method is called once when the [FlutterDeck] is disposed.
-  void dispose();
+  void dispose() {}
 
   /// Builds the controls for the plugin.
   ///
