@@ -10,7 +10,7 @@ import 'package:flutter_deck/src/widgets/internal/internal.dart';
 import 'package:flutter_deck_client/flutter_deck_client.dart';
 import 'package:go_router/go_router.dart';
 
-const _defaultLocale = Locale('en');
+const _defaultLocale = Locale('en', 'US');
 
 /// The main widget of a slide deck.
 ///
@@ -217,6 +217,8 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
       markerNotifier: _markerNotifier,
       presenterController: _presenterController,
       themeNotifier: _themeNotifier,
+      localizationsDelegates: widget.localizationsDelegates,
+      supportedLocales: widget.supportedLocales,
       plugins: widget.plugins,
     );
 

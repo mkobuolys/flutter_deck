@@ -72,7 +72,10 @@ class FlutterDeck {
     required FlutterDeckMarkerNotifier markerNotifier,
     required FlutterDeckPresenterController presenterController,
     required FlutterDeckThemeNotifier themeNotifier,
+    required Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates,
+    required Iterable<Locale> supportedLocales,
     required List<FlutterDeckPlugin> plugins,
+
     int? stepNumber,
   }) : _configuration = configuration,
        _router = router,
@@ -83,6 +86,8 @@ class FlutterDeck {
        _markerNotifier = markerNotifier,
        _presenterController = presenterController,
        _themeNotifier = themeNotifier,
+       _localizationsDelegates = localizationsDelegates,
+       _supportedLocales = supportedLocales,
        _plugins = plugins,
        _stepNumber = stepNumber;
 
@@ -95,6 +100,8 @@ class FlutterDeck {
   final FlutterDeckMarkerNotifier _markerNotifier;
   final FlutterDeckPresenterController _presenterController;
   final FlutterDeckThemeNotifier _themeNotifier;
+  final Iterable<LocalizationsDelegate<dynamic>>? _localizationsDelegates;
+  final Iterable<Locale> _supportedLocales;
   final List<FlutterDeckPlugin> _plugins;
 
   final int? _stepNumber;
@@ -158,6 +165,12 @@ class FlutterDeck {
   /// Returns the [FlutterDeckThemeNotifier] for the slide deck.
   FlutterDeckThemeNotifier get themeNotifier => _themeNotifier;
 
+  /// The delegates for this app's [Localizations] widget.
+  Iterable<LocalizationsDelegate<dynamic>>? get localizationsDelegates => _localizationsDelegates;
+
+  /// The list of locales that this app has been localized for.
+  Iterable<Locale> get supportedLocales => _supportedLocales;
+
   /// Returns the list of plugins for the slide deck.
   List<FlutterDeckPlugin> get plugins => _plugins;
 
@@ -182,6 +195,8 @@ class FlutterDeck {
     FlutterDeckPresenterController? presenterController,
     FlutterDeckThemeNotifier? themeNotifier,
     List<FlutterDeckPlugin>? plugins,
+    Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates,
+    Iterable<Locale>? supportedLocales,
     int? stepNumber,
   }) {
     return FlutterDeck(
@@ -195,6 +210,8 @@ class FlutterDeck {
       presenterController: presenterController ?? _presenterController,
       themeNotifier: themeNotifier ?? _themeNotifier,
       plugins: plugins ?? _plugins,
+      localizationsDelegates: localizationsDelegates ?? _localizationsDelegates,
+      supportedLocales: supportedLocales ?? _supportedLocales,
       stepNumber: stepNumber ?? _stepNumber,
     );
   }
