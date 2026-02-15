@@ -1,3 +1,7 @@
+# NEXT
+
+- chore: update go_router to v17.1.0
+
 # 0.23.0+2
 
 - chore: fix `flutter_deck` dependency loop
