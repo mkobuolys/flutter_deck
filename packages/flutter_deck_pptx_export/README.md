@@ -6,6 +6,23 @@ This package implements the `FlutterDeckPptxExportPlugin`, which allows you to e
 
 It works by taking a screenshot of each slide and step and saving them as images in the PPTX file. Note that the exported PPTX file will not contain any interactive elements or animations.
 
+## Setup
+
+This package uses the [file_saver](https://pub.dev/packages/file_saver) package to save the exported PPTX file. Depending on the platform you are targeting, you may need to perform some additional setup.
+
+### macOS
+
+You need to add the following entitlement to your `macos/Runner/DebugProfile.entitlements` and `macos/Runner/Release.entitlements` files:
+
+```xml
+<key>com.apple.security.files.user-selected.read-write</key>
+<true/>
+```
+
+### Android & iOS
+
+Usually, no additional setup is required for basic usage. However, if you encounter any issues, please refer to the [file_saver](https://pub.dev/packages/file_saver) documentation for up-to-date setup instructions.
+
 ## Usage
 
 To use this package, add `flutter_deck_pptx_export` as a dependency in your `pubspec.yaml` file.
