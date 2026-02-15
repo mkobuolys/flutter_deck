@@ -60,3 +60,7 @@ FlutterDeckApp(
 The plugin will add a new menu item to the controls menu that allows you to export the presentation.
 
 > **Note:** The plugin uses `localizationsDelegates` and `supportedLocales` from the `FlutterDeckApp` to render the slides correctly during the export process. Ensure these are configured in your `FlutterDeckApp` if your slides use localization.
+
+## Credits
+
+Thanks to [Rody Davis](https://github.com/rodydavis) for the initial code. His package [open_xml](https://pub.dev/packages/open_xml) laid the foundation for the implementation of the PPTX export functionality.
