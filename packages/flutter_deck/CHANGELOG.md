@@ -1,3 +1,7 @@
+# 0.23.0+1
+
+- docs: use flutter_deck_pptx_export package in the example
+
 # 0.23.0
 
 - feat: add plugins support
