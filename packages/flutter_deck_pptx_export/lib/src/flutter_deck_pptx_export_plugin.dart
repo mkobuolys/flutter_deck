@@ -1,5 +1,6 @@
 import 'package:file/memory.dart';
 import 'package:file_saver/file_saver.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck_pptx_export/src/flutter_slide_image_renderer.dart';
@@ -57,7 +58,14 @@ class FlutterDeckPptxExportPlugin extends FlutterDeckPlugin {
     );
 
     try {
-      await _exportPptx(navigator.overlay!.context, onProgress: (progress) => progressNotifier.value = progress);
+      await Future.delayed(const Duration(seconds: 1));
+      final overlayContext = navigator.overlay?.context;
+
+      if (overlayContext == null || !overlayContext.mounted) {
+        throw Exception('No overlay context available');
+      }
+
+      await _exportPptx(overlayContext, onProgress: (progress) => progressNotifier.value = progress);
 
       messenger
         ..hideCurrentSnackBar()
@@ -125,9 +133,12 @@ class FlutterDeckPptxExportPlugin extends FlutterDeckPlugin {
     final pptxBytes = await pptxFile.readAsBytes();
     await pres.close(); // Clean up resources
 
-    await FileSaver.instance.saveAs(
+    final saveFn = kIsWeb ? FileSaver.instance.saveFile : FileSaver.instance.saveAs;
+
+    await saveFn(
       name: 'flutter_deck_presentation.pptx',
       fileExtension: 'pptx',
+      includeExtension: false,
       bytes: pptxBytes,
       mimeType: MimeType.microsoftPresentation,
     );
