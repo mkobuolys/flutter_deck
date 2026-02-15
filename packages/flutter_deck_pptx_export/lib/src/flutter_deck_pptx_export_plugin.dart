@@ -62,8 +62,7 @@ class FlutterDeckPptxExportPlugin extends FlutterDeckPlugin {
       messenger
         ..hideCurrentSnackBar()
         ..showSnackBar(const SnackBar(content: Text('Exported presentation as PPTX!')));
-    } catch (e, t) {
-      debugPrint('Failed to export presentation: $e\n$t');
+    } catch (e) {
       messenger
         ..hideCurrentSnackBar()
         ..showSnackBar(SnackBar(content: Text('Failed to export presentation: $e')));
@@ -92,7 +91,6 @@ class FlutterDeckPptxExportPlugin extends FlutterDeckPlugin {
 
       for (var step = 1; step <= steps; step++) {
         onProgress((i + 1) / slides.length);
-        debugPrint('Exporting Slide $i, Step $step');
 
         if (!context.mounted) {
           throw Exception('No context available at slide $i, step $step');
@@ -127,12 +125,11 @@ class FlutterDeckPptxExportPlugin extends FlutterDeckPlugin {
     final pptxBytes = await pptxFile.readAsBytes();
     await pres.close(); // Clean up resources
 
-    await FileSaver.instance.saveFile(
+    await FileSaver.instance.saveAs(
       name: 'flutter_deck_presentation.pptx',
+      fileExtension: 'pptx',
       bytes: pptxBytes,
       mimeType: MimeType.microsoftPresentation,
     );
-
-    debugPrint('Presentation exported as PPTX');
   }
 }

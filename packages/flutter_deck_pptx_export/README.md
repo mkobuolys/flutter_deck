@@ -12,14 +12,25 @@ This package uses the [file_saver](https://pub.dev/packages/file_saver) package 
 
 ### macOS
 
-You need to add the following entitlement to your `macos/Runner/DebugProfile.entitlements` and `macos/Runner/Release.entitlements` files:
+Add the following entitlement to your `macos/Runner/DebugProfile.entitlements` and `macos/Runner/Release.entitlements` files:
 
 ```xml
 <key>com.apple.security.files.user-selected.read-write</key>
 <true/>
 ```
 
-### Android & iOS
+### iOS
+
+Add the following keys to `ios/Runner/info.plist`:
+
+```xml
+<key>LSSupportsOpeningDocumentsInPlace</key>
+<true/>
+<key>UIFileSharingEnabled</key>
+<true/>
+```
+
+### Other platforms
 
 Usually, no additional setup is required for basic usage. However, if you encounter any issues, please refer to the [file_saver](https://pub.dev/packages/file_saver) documentation for up-to-date setup instructions.
 
