@@ -46,7 +46,11 @@ class FlutterDeckMarker extends StatelessWidget {
                   child: ConstrainedBox(
                     constraints: const BoxConstraints.expand(),
                     child: CustomPaint(
-                      painter: FlutterDeckMarkerPainter(configuration: configuration, paths: paths),
+                      painter: FlutterDeckMarkerPainter(
+                        configuration: configuration,
+                        paths: paths,
+                        version: notifier.version,
+                      ),
                     ),
                   ),
                 ),

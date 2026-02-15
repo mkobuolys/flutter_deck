@@ -1,5 +1,6 @@
 # NEXT
 
+- feat: optimize `FlutterDeckMarkerPainter` performance
 - chore: update go_router to v17.1.0
 
 # 0.23.0+2
