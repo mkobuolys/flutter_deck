@@ -10,10 +10,14 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.2
+  file: ^7.0.1
+  file_saver: ^0.3.1
   flutter:
     sdk: flutter
   flutter_deck:
     path: ..
+  flutter_deck_pptx_export:
+    path: ../../flutter_deck_pptx_export
   flutter_deck_web_client: ^0.4.0
   flutter_localizations:
     sdk: flutter
