@@ -13,7 +13,10 @@ class FlutterSlideImageRenderer {
   final FlutterDeck _flutterDeck;
 
   /// Renders a [FlutterDeckSlide] as an image.
-  Future<Uint8List> render(BuildContext context, Widget slide, {required int stepNumber}) async {
+  ///
+  /// The [scale] parameter can be used to adjust the quality of the image.
+  /// Defaults to 1.0.
+  Future<Uint8List> render(BuildContext context, Widget slide, {required int stepNumber, double scale = 1.0}) async {
     var configuration = _flutterDeck.globalConfiguration.copyWith(
       controls: const FlutterDeckControlsConfiguration.disabled(),
       slideSize: FlutterDeckSlideSize.fromAspectRatio(aspectRatio: const FlutterDeckAspectRatio.ratio16x9()),
@@ -56,7 +59,7 @@ class FlutterSlideImageRenderer {
           ),
     );
 
-    final image = await _captureSlide(slideWidget, view, logicalSize, physicalSize, devicePixelRatio);
+    final image = await _captureSlide(slideWidget, view, logicalSize, physicalSize, devicePixelRatio * scale);
 
     if (image != null) {
       final data = await image.toByteData(format: ui.ImageByteFormat.png);

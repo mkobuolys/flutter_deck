@@ -1,7 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
+import 'package:flutter_deck/src/renderers/renderers.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 
 /// Renders the preview of the current and next slide.
@@ -70,19 +73,6 @@ class _SlidePreview extends StatelessWidget {
     return next ? 'Next: $slideInfo' : 'Current: $slideInfo';
   }
 
-  String _getSlideTitle(FlutterDeckRouterSlide slide) {
-    final configuration = slide.configuration;
-    final title = configuration.title;
-
-    if (title != null) return title;
-
-    final header = configuration.header;
-
-    if (header.showHeader) return header.title;
-
-    return configuration.route;
-  }
-
   @override
   Widget build(BuildContext context) {
     final flutterDeck = context.flutterDeck;
@@ -109,20 +99,106 @@ class _SlidePreview extends StatelessWidget {
                       ),
                     ),
                   )
-                : Container(
-                    color: Theme.of(context).colorScheme.secondary,
-                    padding: const EdgeInsets.all(16),
-                    child: Center(
-                      child: _SlideTitle(
-                        autoSizeGroup: autoSizeGroup,
-                        color: Theme.of(context).colorScheme.onSecondary,
-                        title: _getSlideTitle(slides[index]),
-                      ),
-                    ),
+                : _SlideContent(
+                    flutterDeck: flutterDeck,
+                    slide: slides[index],
+                    step: step,
+                    autoSizeGroup: autoSizeGroup,
                   ),
           ),
         ),
       ],
+    );
+  }
+}
+
+class _SlideContent extends StatefulWidget {
+  const _SlideContent({
+    required this.flutterDeck,
+    required this.slide,
+    required this.step,
+    required this.autoSizeGroup,
+  });
+
+  final FlutterDeck flutterDeck;
+  final FlutterDeckRouterSlide slide;
+  final int? step;
+  final AutoSizeGroup autoSizeGroup;
+
+  @override
+  State<_SlideContent> createState() => _SlideContentState();
+}
+
+class _SlideContentState extends State<_SlideContent> {
+  late final FlutterSlideImageRenderer _renderer;
+  Future<Uint8List>? _imageFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _renderer = FlutterSlideImageRenderer(flutterDeck: widget.flutterDeck);
+    _renderSlide();
+  }
+
+  @override
+  void didUpdateWidget(covariant _SlideContent oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.slide != oldWidget.slide || widget.step != oldWidget.step) {
+      _renderSlide();
+    }
+  }
+
+  void _renderSlide() => setState(() {
+    _imageFuture = _renderer.render(context, widget.slide.widget, stepNumber: widget.step ?? 1, scale: 0.2);
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<Uint8List>(
+      future: _imageFuture,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return _SlidePreviewPlaceholder(slide: widget.slide, autoSizeGroup: widget.autoSizeGroup);
+        }
+
+        return Image.memory(snapshot.data!, fit: BoxFit.contain, gaplessPlayback: true);
+      },
+    );
+  }
+}
+
+class _SlidePreviewPlaceholder extends StatelessWidget {
+  const _SlidePreviewPlaceholder({required this.slide, required this.autoSizeGroup});
+
+  final FlutterDeckRouterSlide slide;
+  final AutoSizeGroup autoSizeGroup;
+
+  String _getSlideTitle(FlutterDeckRouterSlide slide) {
+    final configuration = slide.configuration;
+    final title = configuration.title;
+
+    if (title != null) return title;
+
+    final header = configuration.header;
+
+    if (header.showHeader) return header.title;
+
+    return configuration.route;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).colorScheme.secondary,
+      padding: const EdgeInsets.all(16),
+      child: Center(
+        child: _SlideTitle(
+          autoSizeGroup: autoSizeGroup,
+          color: Theme.of(context).colorScheme.onSecondary,
+          title: _getSlideTitle(slide),
+        ),
+      ),
     );
   }
 }
