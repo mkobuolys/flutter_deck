@@ -85,6 +85,32 @@ class FlutterDeckConfiguration {
   ///
   /// The default transition is [FlutterDeckTransition.none].
   final FlutterDeckTransition transition;
+
+  /// Creates a copy of this configuration with the given fields replaced by
+  /// the new values.
+  FlutterDeckConfiguration copyWith({
+    FlutterDeckBackgroundConfiguration? background,
+    FlutterDeckControlsConfiguration? controls,
+    FlutterDeckFooterConfiguration? footer,
+    FlutterDeckHeaderConfiguration? header,
+    FlutterDeckMarkerConfiguration? marker,
+    FlutterDeckProgressIndicator? progressIndicator,
+    bool? showProgress,
+    FlutterDeckSlideSize? slideSize,
+    FlutterDeckTransition? transition,
+  }) {
+    return FlutterDeckConfiguration(
+      background: background ?? this.background,
+      controls: controls ?? this.controls,
+      footer: footer ?? this.footer,
+      header: header ?? this.header,
+      marker: marker ?? this.marker,
+      progressIndicator: progressIndicator ?? this.progressIndicator,
+      showProgress: showProgress ?? this.showProgress,
+      slideSize: slideSize ?? this.slideSize,
+      transition: transition ?? this.transition,
+    );
+  }
 }
 
 /// The configuration for a slide.
@@ -141,10 +167,13 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
     this.speakerNotes = '',
     this.steps = 1,
     this.title,
+    super.background,
+    super.controls,
     super.footer,
     super.header,
     super.progressIndicator,
     super.showProgress,
+    super.slideSize,
     super.transition,
   }) : _footerConfigurationOverride = null,
        _headerConfigurationOverride = null,
@@ -204,10 +233,13 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
       speakerNotes: speakerNotes,
       steps: steps,
       title: title,
+      background: configuration.background,
+      controls: configuration.controls,
       footer: _footerConfigurationOverride ?? configuration.footer,
       header: _headerConfigurationOverride ?? configuration.header,
       progressIndicator: _progressIndicatorOverride ?? configuration.progressIndicator,
       showProgress: _showProgressOverride ?? configuration.showProgress,
+      slideSize: configuration.slideSize,
       transition: _transitionOverride ?? configuration.transition,
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck_example/l10n/l10n.dart';
 import 'package:flutter_deck_example/slides/slides.dart';
+import 'package:flutter_deck_pptx_export/flutter_deck_pptx_export.dart';
 import 'package:flutter_deck_web_client/flutter_deck_web_client.dart';
 
 void main() {
@@ -69,7 +70,7 @@ class FlutterDeckExample extends StatelessWidget {
         ),
       ),
       // Add custom functionality using plugins.
-      plugins: [FlutterDeckAutoplayPlugin()],
+      plugins: [FlutterDeckAutoplayPlugin(), FlutterDeckPptxExportPlugin()],
       // Presentation is build automatically from the list of slides.
       slides: [
         const TitleSlide(),

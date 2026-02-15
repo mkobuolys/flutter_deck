@@ -1,6 +1,6 @@
 name: flutter_deck
 description: A lightweight, customizable, and easy-to-use framework to create presentations in Flutter.
-version: 0.22.0
+version: 0.23.0+2
 homepage: https://github.com/mkobuolys/flutter_deck
 repository: https://github.com/mkobuolys/flutter_deck/tree/main/packages/flutter_deck
 issue_tracker: https://github.com/mkobuolys/flutter_deck/issues
@@ -24,7 +24,7 @@ dependencies:
     sdk: flutter
   flutter_deck_client: ^0.3.0
   flutter_highlight: ^0.7.0
-  go_router: ^16.2.1
+  go_router: ^17.1.0
   web: ^1.1.1
   window_manager: ^0.5.1
 

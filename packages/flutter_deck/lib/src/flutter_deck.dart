@@ -61,6 +61,12 @@ class FlutterDeck {
   /// The [themeNotifier] is required and is used to control the slide deck's
   /// theme.
   ///
+  /// The [localizationsDelegates] is optional and is used to provide
+  /// [LocalizationsDelegate]s for the slide deck.
+  ///
+  /// The [supportedLocales] is used to provide the locales that the slide
+  /// deck supports.
+  ///
   /// The [plugins] is required and is used to add plugins to the slide deck.
   const FlutterDeck({
     required FlutterDeckConfiguration configuration,
@@ -72,7 +78,10 @@ class FlutterDeck {
     required FlutterDeckMarkerNotifier markerNotifier,
     required FlutterDeckPresenterController presenterController,
     required FlutterDeckThemeNotifier themeNotifier,
+    required Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates,
+    required Iterable<Locale> supportedLocales,
     required List<FlutterDeckPlugin> plugins,
+    int? stepNumber,
   }) : _configuration = configuration,
        _router = router,
        _speakerInfo = speakerInfo,
@@ -82,7 +91,10 @@ class FlutterDeck {
        _markerNotifier = markerNotifier,
        _presenterController = presenterController,
        _themeNotifier = themeNotifier,
-       _plugins = plugins;
+       _localizationsDelegates = localizationsDelegates,
+       _supportedLocales = supportedLocales,
+       _plugins = plugins,
+       _stepNumber = stepNumber;
 
   final FlutterDeckConfiguration _configuration;
   final FlutterDeckRouter _router;
@@ -93,7 +105,11 @@ class FlutterDeck {
   final FlutterDeckMarkerNotifier _markerNotifier;
   final FlutterDeckPresenterController _presenterController;
   final FlutterDeckThemeNotifier _themeNotifier;
+  final Iterable<LocalizationsDelegate<dynamic>>? _localizationsDelegates;
+  final Iterable<Locale> _supportedLocales;
   final List<FlutterDeckPlugin> _plugins;
+
+  final int? _stepNumber;
 
   /// Returns the [FlutterDeckRouter] for the slide deck.
   FlutterDeckRouter get router => _router;
@@ -124,13 +140,14 @@ class FlutterDeck {
   int get slideNumber => _router.currentSlideIndex + 1;
 
   /// Returns the current step number.
-  int get stepNumber => _router.currentStep;
+  int get stepNumber => _stepNumber ?? _router.currentStep;
 
   /// Returns the speaker info.
   FlutterDeckSpeakerInfo? get speakerInfo => _speakerInfo;
 
   /// Returns the configuration for the current slide.
-  FlutterDeckSlideConfiguration get configuration => _router.currentSlideConfiguration;
+  FlutterDeckSlideConfiguration get configuration =>
+      _configuration is FlutterDeckSlideConfiguration ? _configuration : _router.currentSlideConfiguration;
 
   /// Returns the global configuration for the slide deck.
   FlutterDeckConfiguration get globalConfiguration => _configuration;
@@ -153,6 +170,12 @@ class FlutterDeck {
   /// Returns the [FlutterDeckThemeNotifier] for the slide deck.
   FlutterDeckThemeNotifier get themeNotifier => _themeNotifier;
 
+  /// The delegates for this app's [Localizations] widget.
+  Iterable<LocalizationsDelegate<dynamic>>? get localizationsDelegates => _localizationsDelegates;
+
+  /// The list of locales that this app has been localized for.
+  Iterable<Locale> get supportedLocales => _supportedLocales;
+
   /// Returns the list of plugins for the slide deck.
   List<FlutterDeckPlugin> get plugins => _plugins;
 
@@ -164,28 +187,39 @@ class FlutterDeck {
     return FlutterDeckProvider(flutterDeck: this, child: child);
   }
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FlutterDeck &&
-          runtimeType == other.runtimeType &&
-          _configuration == other._configuration &&
-          _router == other._router &&
-          _speakerInfo == other._speakerInfo &&
-          _controlsNotifier == other._controlsNotifier &&
-          _drawerNotifier == other._drawerNotifier &&
-          _markerNotifier == other._markerNotifier &&
-          _themeNotifier == other._themeNotifier;
-
-  @override
-  int get hashCode =>
-      _configuration.hashCode ^
-      _router.hashCode ^
-      _speakerInfo.hashCode ^
-      _controlsNotifier.hashCode ^
-      _drawerNotifier.hashCode ^
-      _markerNotifier.hashCode ^
-      _themeNotifier.hashCode;
+  /// Creates a copy of this [FlutterDeck] but with the given fields replaced with
+  /// the new values.
+  FlutterDeck copyWith({
+    FlutterDeckConfiguration? configuration,
+    FlutterDeckRouter? router,
+    FlutterDeckSpeakerInfo? speakerInfo,
+    FlutterDeckControlsNotifier? controlsNotifier,
+    FlutterDeckDrawerNotifier? drawerNotifier,
+    FlutterDeckLocalizationNotifier? localizationNotifier,
+    FlutterDeckMarkerNotifier? markerNotifier,
+    FlutterDeckPresenterController? presenterController,
+    FlutterDeckThemeNotifier? themeNotifier,
+    List<FlutterDeckPlugin>? plugins,
+    Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates,
+    Iterable<Locale>? supportedLocales,
+    int? stepNumber,
+  }) {
+    return FlutterDeck(
+      configuration: configuration ?? _configuration,
+      router: router ?? _router,
+      speakerInfo: speakerInfo ?? _speakerInfo,
+      controlsNotifier: controlsNotifier ?? _controlsNotifier,
+      drawerNotifier: drawerNotifier ?? _drawerNotifier,
+      localizationNotifier: localizationNotifier ?? _localizationNotifier,
+      markerNotifier: markerNotifier ?? _markerNotifier,
+      presenterController: presenterController ?? _presenterController,
+      themeNotifier: themeNotifier ?? _themeNotifier,
+      plugins: plugins ?? _plugins,
+      localizationsDelegates: localizationsDelegates ?? _localizationsDelegates,
+      supportedLocales: supportedLocales ?? _supportedLocales,
+      stepNumber: stepNumber ?? _stepNumber,
+    );
+  }
 }
 
 /// Provides the [FlutterDeck] to the widget tree.
