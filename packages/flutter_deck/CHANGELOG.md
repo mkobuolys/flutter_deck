@@ -1,6 +1,10 @@
+# 0.23.0+2
+
+- chore: fix `flutter_deck` dependency loop
+
 # 0.23.0+1
 
-- docs: use flutter_deck_pptx_export package in the example
+- docs: use `flutter_deck_pptx_export` package in the example
 
 # 0.23.0
 
