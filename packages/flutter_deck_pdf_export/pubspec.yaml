@@ -1,6 +1,6 @@
 name: flutter_deck_pdf_export
 description: A flutter_deck plugin to export presentations to PDF format.
-version: 0.1.0
+version: 0.1.0+1
 homepage: https://github.com/mkobuolys/flutter_deck
 repository: https://github.com/mkobuolys/flutter_deck/tree/main/packages/flutter_deck_pdf_export
 issue_tracker: https://github.com/mkobuolys/flutter_deck/issues
