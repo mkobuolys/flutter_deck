@@ -1,3 +1,7 @@
+# 0.3.0
+
+- chore: update the dependency on `flutter_deck` to `^0.25.0`
+
 # 0.2.0
 
 - refactor: remove the `FlutterSlideImageRenderer` class
