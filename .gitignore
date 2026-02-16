@@ -42,6 +42,7 @@ app.*.map.json
 
 # Test related
 coverage
+*.mocks.dart
 
 # Mason
 mason-lock.json
