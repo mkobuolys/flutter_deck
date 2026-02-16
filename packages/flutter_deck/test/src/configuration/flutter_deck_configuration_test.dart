@@ -8,13 +8,19 @@ void main() {
   group('FlutterDeckConfiguration', () {
     test('should have correct default values', () {
       const configuration = FlutterDeckConfiguration();
+      const progressIndicator = FlutterDeckProgressIndicator.solid();
 
       expect(configuration.background, const FlutterDeckBackgroundConfiguration());
       expect(configuration.controls, const FlutterDeckControlsConfiguration());
       expect(configuration.footer, const FlutterDeckFooterConfiguration(showFooter: false));
       expect(configuration.header, const FlutterDeckHeaderConfiguration(showHeader: false));
       expect(configuration.marker, const FlutterDeckMarkerConfiguration());
-      expect(configuration.progressIndicator, const FlutterDeckProgressIndicator.solid());
+      expect(
+        configuration.progressIndicator,
+        isA<FlutterDeckProgressIndicator>()
+            .having((pi) => pi.color, 'color', progressIndicator.color)
+            .having((pi) => pi.backgroundColor, 'backgroundColor', progressIndicator.backgroundColor),
+      );
       expect(configuration.showProgress, true);
       expect(configuration.slideSize, const FlutterDeckSlideSize.responsive());
       expect(configuration.transition, const FlutterDeckTransition.none());
