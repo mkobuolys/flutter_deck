@@ -10,11 +10,11 @@ class FlutterDeckPptxExportPlugin extends FlutterDeckPlugin {
   /// Creates a [FlutterDeckPptxExportPlugin].
   FlutterDeckPptxExportPlugin();
 
-  late final FlutterSlideImageRenderer _slideImageRenderer;
+  late final FlutterDeckSlideImageRenderer _slideImageRenderer;
 
   @override
   void init(FlutterDeck flutterDeck) {
-    _slideImageRenderer = FlutterSlideImageRenderer(flutterDeck: flutterDeck);
+    _slideImageRenderer = FlutterDeckSlideImageRenderer(flutterDeck: flutterDeck);
   }
 
   @override

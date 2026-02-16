@@ -6,9 +6,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 /// A renderer that captures [FlutterDeckSlide]s as images.
-class FlutterSlideImageRenderer {
-  /// Creates a [FlutterSlideImageRenderer].
-  const FlutterSlideImageRenderer({required FlutterDeck flutterDeck}) : _flutterDeck = flutterDeck;
+class FlutterDeckSlideImageRenderer {
+  /// Creates a [FlutterDeckSlideImageRenderer].
+  const FlutterDeckSlideImageRenderer({required FlutterDeck flutterDeck}) : _flutterDeck = flutterDeck;
 
   final FlutterDeck _flutterDeck;
 

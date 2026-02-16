@@ -130,14 +130,14 @@ class _SlideContent extends StatefulWidget {
 }
 
 class _SlideContentState extends State<_SlideContent> {
-  late final FlutterSlideImageRenderer _renderer;
+  late final FlutterDeckSlideImageRenderer _renderer;
   Future<Uint8List>? _imageFuture;
 
   @override
   void initState() {
     super.initState();
 
-    _renderer = FlutterSlideImageRenderer(flutterDeck: widget.flutterDeck);
+    _renderer = FlutterDeckSlideImageRenderer(flutterDeck: widget.flutterDeck);
   }
 
   @override

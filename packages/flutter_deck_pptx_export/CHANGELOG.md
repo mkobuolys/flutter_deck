@@ -1,8 +1,8 @@
 # 0.2.0
 
 - refactor: remove the `FlutterSlideImageRenderer` class
-  - **BREAKING**: the `FlutterSlideImageRenderer` was moved to the `flutter_deck` package. Thus, importing it from this package will no longer work.
-    - **Migration**: import `FlutterSlideImageRenderer` from `package:flutter_deck/flutter_deck.dart` instead.
+  - **BREAKING**: the `FlutterSlideImageRenderer` was moved to the `flutter_deck` package and renamed to `FlutterDeckSlideImageRenderer`. Thus, importing it from this package will no longer work.
+    - **Migration**: import `FlutterDeckSlideImageRenderer` from `package:flutter_deck/flutter_deck.dart` instead.
 
 # 0.1.0+1
 
