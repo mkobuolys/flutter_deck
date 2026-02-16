@@ -157,7 +157,13 @@ class _SlideContentState extends State<_SlideContent> {
   }
 
   void _renderSlide() => setState(() {
-    _imageFuture = _renderer.render(context, widget.slide.widget, stepNumber: widget.step ?? 1, scale: 0.2);
+    _imageFuture = _renderer.render(
+      context,
+      widget.slide.widget,
+      stepNumber: widget.step ?? 1,
+      scale: 0.2,
+      loadingDelay: const Duration(milliseconds: 300),
+    );
   });
 
   @override
