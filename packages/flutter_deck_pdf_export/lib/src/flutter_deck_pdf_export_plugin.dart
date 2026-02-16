@@ -104,7 +104,12 @@ class FlutterDeckPdfExportPlugin extends FlutterDeckPlugin {
             ? view.physicalSize / view.devicePixelRatio
             : Size(slideSize.width!, slideSize.height!);
 
-        final bytes = await _slideImageRenderer.render(context, slide.widget, stepNumber: step);
+        final bytes = await _slideImageRenderer.render(
+          context,
+          slide.widget,
+          stepNumber: step,
+          loadingDelay: const Duration(milliseconds: 300), // Wait for assets to load
+        );
         final image = pw.MemoryImage(bytes);
 
         pdf.addPage(
