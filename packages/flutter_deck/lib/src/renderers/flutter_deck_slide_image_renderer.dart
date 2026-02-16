@@ -6,14 +6,26 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 /// A renderer that captures [FlutterDeckSlide]s as images.
-class FlutterSlideImageRenderer {
-  /// Creates a [FlutterSlideImageRenderer].
-  const FlutterSlideImageRenderer({required FlutterDeck flutterDeck}) : _flutterDeck = flutterDeck;
+class FlutterDeckSlideImageRenderer {
+  /// Creates a [FlutterDeckSlideImageRenderer].
+  const FlutterDeckSlideImageRenderer({required FlutterDeck flutterDeck}) : _flutterDeck = flutterDeck;
 
   final FlutterDeck _flutterDeck;
 
   /// Renders a [FlutterDeckSlide] as an image.
-  Future<Uint8List> render(BuildContext context, Widget slide, {required int stepNumber}) async {
+  ///
+  /// The [scale] parameter can be used to adjust the quality of the image.
+  /// Defaults to 1.0.
+  ///
+  /// The [loadingDelay] parameter can be used to wait for assets to load
+  /// before capturing the slide. Defaults to [Duration.zero].
+  Future<Uint8List> render(
+    BuildContext context,
+    Widget slide, {
+    required int stepNumber,
+    double scale = 1.0,
+    Duration loadingDelay = Duration.zero,
+  }) async {
     var configuration = _flutterDeck.globalConfiguration.copyWith(
       controls: const FlutterDeckControlsConfiguration.disabled(),
       slideSize: FlutterDeckSlideSize.fromAspectRatio(aspectRatio: const FlutterDeckAspectRatio.ratio16x9()),
@@ -56,7 +68,14 @@ class FlutterSlideImageRenderer {
           ),
     );
 
-    final image = await _captureSlide(slideWidget, view, logicalSize, physicalSize, devicePixelRatio);
+    final image = await _captureSlide(
+      slideWidget,
+      view,
+      logicalSize,
+      physicalSize,
+      devicePixelRatio * scale,
+      loadingDelay,
+    );
 
     if (image != null) {
       final data = await image.toByteData(format: ui.ImageByteFormat.png);
@@ -75,6 +94,7 @@ class FlutterSlideImageRenderer {
     Size logicalSize,
     Size physicalSize,
     double devicePixelRatio,
+    Duration loadingDelay,
   ) async {
     final renderView = RenderView(
       view: view,
@@ -101,14 +121,16 @@ class FlutterSlideImageRenderer {
     final element = renderViewWithBoundary.attachToRenderTree(buildOwner);
 
     try {
-      buildOwner
-        ..buildScope(element)
-        ..finalizeTree();
+      await Future<void>.delayed(loadingDelay, () {
+        buildOwner
+          ..buildScope(element)
+          ..finalizeTree();
 
-      pipelineOwner
-        ..flushLayout()
-        ..flushCompositingBits()
-        ..flushPaint();
+        pipelineOwner
+          ..flushLayout()
+          ..flushCompositingBits()
+          ..flushPaint();
+      });
 
       renderView.compositeFrame();
 

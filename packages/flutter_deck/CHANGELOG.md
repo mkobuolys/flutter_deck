@@ -1,3 +1,8 @@
+# 0.25.0
+
+- feat: add `FlutterDeckSlideImageRenderer`
+- feat: show the slide image in the presenter view
+
 # 0.24.0
 
 - feat: optimize `FlutterDeckMarkerPainter` performance

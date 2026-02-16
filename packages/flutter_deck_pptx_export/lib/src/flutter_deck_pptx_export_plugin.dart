@@ -3,7 +3,6 @@ import 'package:file_saver/file_saver.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
-import 'package:flutter_deck_pptx_export/src/flutter_slide_image_renderer.dart';
 import 'package:open_xml/open_xml.dart' as open_xml;
 
 /// A [FlutterDeckPlugin] that exports the presentation as a PPTX file.
@@ -11,11 +10,11 @@ class FlutterDeckPptxExportPlugin extends FlutterDeckPlugin {
   /// Creates a [FlutterDeckPptxExportPlugin].
   FlutterDeckPptxExportPlugin();
 
-  late final FlutterSlideImageRenderer _slideImageRenderer;
+  late final FlutterDeckSlideImageRenderer _slideImageRenderer;
 
   @override
   void init(FlutterDeck flutterDeck) {
-    _slideImageRenderer = FlutterSlideImageRenderer(flutterDeck: flutterDeck);
+    _slideImageRenderer = FlutterDeckSlideImageRenderer(flutterDeck: flutterDeck);
   }
 
   @override
