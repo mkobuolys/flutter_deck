@@ -136,7 +136,14 @@ class _SlideContentState extends State<_SlideContent> {
   @override
   void initState() {
     super.initState();
+
     _renderer = FlutterSlideImageRenderer(flutterDeck: widget.flutterDeck);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
     _renderSlide();
   }
 
@@ -144,9 +151,9 @@ class _SlideContentState extends State<_SlideContent> {
   void didUpdateWidget(covariant _SlideContent oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.slide != oldWidget.slide || widget.step != oldWidget.step) {
-      _renderSlide();
-    }
+    if (widget.slide == oldWidget.slide && widget.step == oldWidget.step) return;
+
+    _renderSlide();
   }
 
   void _renderSlide() => setState(() {
