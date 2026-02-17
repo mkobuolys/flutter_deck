@@ -1,4 +1,4 @@
-# NEXT
+# 0.26.0
 
 - feat: add image preloading
 - test: add tests
