@@ -1,12 +1,18 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 
+/// A function that pre-caches an image.
+typedef ImagePrecacher = Future<void> Function(ImageProvider provider, BuildContext context);
+
 /// A class that handles pre-caching of images for the slide deck.
 class FlutterDeckImagePreloader {
   /// Creates a [FlutterDeckImagePreloader].
-  FlutterDeckImagePreloader({required FlutterDeckRouter router}) : _router = router;
+  FlutterDeckImagePreloader({required FlutterDeckRouter router, ImagePrecacher? imagePrecacher})
+    : _router = router,
+      _imagePrecacher = imagePrecacher ?? precacheImage;
 
   final FlutterDeckRouter _router;
+  final ImagePrecacher _imagePrecacher;
   final Set<String> _cachedImages = {};
 
   /// Disposes the preloader.
@@ -46,9 +52,9 @@ class FlutterDeckImagePreloader {
 
   void _precacheImage(String image) {
     if (image.startsWith('http') || image.startsWith('https')) {
-      precacheImage(NetworkImage(image), _router.navigatorKey.currentContext!);
+      _imagePrecacher(NetworkImage(image), _router.navigatorKey.currentContext!);
     } else {
-      precacheImage(AssetImage(image), _router.navigatorKey.currentContext!);
+      _imagePrecacher(AssetImage(image), _router.navigatorKey.currentContext!);
     }
   }
 }
