@@ -1,7 +1,7 @@
 name: flutter_deck_example
 description: An example presentation created using flutter_deck.
 publish_to: "none"
-
+resolution: workspace
 version: 1.0.0+1
 
 environment:
