@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/controls/fullscreen/window_proxy/window_proxy.dart';
+import 'package:flutter_deck/src/flutter_deck_image_preloader.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/presenter/presenter.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
@@ -169,10 +170,12 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
 
   late FlutterDeckControlsNotifier _controlsNotifier;
   late FlutterDeckDrawerNotifier _drawerNotifier;
+  late FlutterDeckImagePreloader _imagePreloader;
   late FlutterDeckLocalizationNotifier _localizationNotifier;
   late FlutterDeckMarkerNotifier _markerNotifier;
   late FlutterDeckPresenterController _presenterController;
   late FlutterDeckThemeNotifier _themeNotifier;
+
   late FlutterDeck _flutterDeck;
 
   @override
@@ -182,6 +185,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
     _buildRouter();
 
     _drawerNotifier = FlutterDeckDrawerNotifier();
+    _imagePreloader = FlutterDeckImagePreloader(router: _flutterDeckRouter)..init();
     _markerNotifier = FlutterDeckMarkerNotifier();
     _controlsNotifier = FlutterDeckControlsNotifier(
       drawerNotifier: _drawerNotifier,
@@ -249,6 +253,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
     }
 
     _presenterController.dispose();
+    _imagePreloader.dispose();
 
     super.dispose();
   }

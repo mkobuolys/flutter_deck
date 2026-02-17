@@ -7,6 +7,7 @@ environment:
 
 workspace:
   - packages/flutter_deck
+  - packages/flutter_deck/example
   - packages/flutter_deck_client
   - packages/flutter_deck_pdf_export
   - packages/flutter_deck_pptx_export

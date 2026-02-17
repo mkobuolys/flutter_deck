@@ -1,5 +1,6 @@
 # NEXT
 
+- feat: add image preloading
 - test: add tests
 
 # 0.25.0
