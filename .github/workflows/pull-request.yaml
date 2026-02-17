@@ -43,6 +43,9 @@ jobs:
       - name: Melos bootstrap
         run: melos bootstrap
 
+      - name: Run Melos generate
+        run: melos run generate
+
       - name: Run Melos analyze
         run: melos run analyze
 
@@ -68,6 +71,9 @@ jobs:
 
       - name: Melos bootstrap
         run: melos bootstrap
+
+      - name: Run Melos generate
+        run: melos run generate
 
       - name: Run Melos test
         run: melos run test

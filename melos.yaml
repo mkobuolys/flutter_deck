@@ -8,5 +8,9 @@ scripts:
     exec: dart analyze .
   format:
     exec: dart format --set-exit-if-changed .
+  generate:
+    exec: dart run build_runner build --delete-conflicting-outputs
+    packageFilters:
+      scope: flutter_deck
   test:
     exec: flutter test
