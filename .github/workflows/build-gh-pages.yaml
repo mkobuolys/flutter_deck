@@ -23,9 +23,6 @@ jobs:
         with:
           channel: stable
 
-      - name: Clear pub cache
-        run: flutter pub cache clean -f
-
       - name: Install dependencies
         run: flutter pub get
 
@@ -57,9 +54,6 @@ jobs:
 
       - name: Setup Dart
         uses: dart-lang/setup-dart@v1
-
-      - name: Clear pub cache
-        run: dart pub cache clean -f
 
       - name: Install dependencies
         run: dart pub get
