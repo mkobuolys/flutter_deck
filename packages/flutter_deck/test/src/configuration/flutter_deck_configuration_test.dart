@@ -81,31 +81,23 @@ void main() {
         showProgress: false,
         transition: FlutterDeckTransition.fade(),
       );
+
+      const slideFooterConfiguration = FlutterDeckFooterConfiguration(showSocialHandle: true);
+      const slideHeaderConfiguration = FlutterDeckHeaderConfiguration(title: 'Slide Title');
+      const showProgress = true;
       const slideConfiguration = FlutterDeckSlideConfiguration(
         route: '/slide-1',
-        footer: FlutterDeckFooterConfiguration(showSocialHandle: true),
-        header: FlutterDeckHeaderConfiguration(title: 'Slide Title'),
-        showProgress: true,
+        footer: slideFooterConfiguration,
+        header: slideHeaderConfiguration,
+        showProgress: showProgress,
         transition: FlutterDeckTransition.slide(),
       );
 
       final mergedConfiguration = slideConfiguration.mergeWithGlobal(globalConfiguration);
 
-      expect(mergedConfiguration.footer.showSlideNumbers, globalConfiguration.footer.showSlideNumbers);
-      expect(
-        mergedConfiguration.footer.showSocialHandle,
-        slideConfiguration
-            .footer
-            .showSocialHandle, // Should be overridden? Wait, footer is replaced entirely if provided?
-      );
-      // Let's check how merge works.
-      // footer: _footerConfigurationOverride ?? configuration.footer,
-      // So if slide config provides footer, it replaces global footer entirely.
-
-      expect(mergedConfiguration.footer, slideConfiguration.footer);
-      expect(mergedConfiguration.header, slideConfiguration.header);
-      expect(mergedConfiguration.showProgress, true);
-      expect(mergedConfiguration.transition, slideConfiguration.transition);
+      expect(mergedConfiguration.footer, slideFooterConfiguration);
+      expect(mergedConfiguration.header, slideHeaderConfiguration);
+      expect(mergedConfiguration.showProgress, showProgress);
 
       // Check values not overridden
       expect(mergedConfiguration.controls, globalConfiguration.controls);

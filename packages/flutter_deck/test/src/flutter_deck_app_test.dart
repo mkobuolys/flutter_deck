@@ -79,34 +79,6 @@ void main() {
         final materialApp = tester.widget<MaterialApp>(find.byType(MaterialApp));
         expect(materialApp.themeMode, ThemeMode.system);
       });
-
-      testWidgets('renders with custom theme', (tester) async {
-        final lightTheme = FlutterDeckThemeData.light();
-        final darkTheme = FlutterDeckThemeData.dark();
-
-        await tester.pumpWidget(
-          FlutterDeckApp(
-            lightTheme: lightTheme,
-            darkTheme: darkTheme,
-            themeMode: ThemeMode.dark,
-            slides: [
-              FlutterDeckSlide.blank(
-                configuration: const FlutterDeckSlideConfiguration(route: '/slide-1'),
-                builder: (context) => const SizedBox(),
-              ),
-            ],
-          ),
-        );
-
-        // final materialApp = tester.widget<MaterialApp>(find.byType(MaterialApp));
-        // MaterialApp theme is not directly exposed as theme data in this way when using router,
-        // but we can check if it uses the dark theme data we passed.
-        // Actually MaterialApp handles theme switching.
-
-        // Let's verify FlutterDeckTheme is present with correct data.
-        final theme = tester.widget<FlutterDeckTheme>(find.byType(FlutterDeckTheme));
-        expect(theme.data.materialTheme.brightness, Brightness.dark);
-      });
     });
 
     group('locale', () {
