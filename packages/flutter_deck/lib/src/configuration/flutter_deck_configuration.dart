@@ -129,6 +129,9 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   /// [initial] defines whether the slide is the initial slide or not. The
   /// default is false.
   ///
+  /// [preloadImages] is a set of image URLs or asset paths to preload for the
+  /// slide. The images will be preloaded before the slide is shown.
+  ///
   /// [speakerNotes] are the speaker notes for the slide. The default is an
   /// empty string.
   ///
@@ -144,6 +147,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
     required this.route,
     this.hidden = false,
     this.initial = false,
+    this.preloadImages = const {},
     this.speakerNotes = '',
     this.steps = 1,
     this.title,
@@ -164,6 +168,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
     required this.route,
     this.hidden = false,
     this.initial = false,
+    this.preloadImages = const {},
     this.speakerNotes = '',
     this.steps = 1,
     this.title,
@@ -217,6 +222,14 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
   /// The number of steps in the slide.
   final int steps;
 
+  /// The images to preload for the slide.
+  ///
+  /// These could be image URLs or asset paths. The images will be preloaded
+  /// before the slide is shown.
+  ///
+  /// The default is an empty set.
+  final Set<String> preloadImages;
+
   final FlutterDeckFooterConfiguration? _footerConfigurationOverride;
   final FlutterDeckHeaderConfiguration? _headerConfigurationOverride;
   final FlutterDeckProgressIndicator? _progressIndicatorOverride;
@@ -230,6 +243,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
       route: route,
       hidden: hidden,
       initial: initial,
+      preloadImages: preloadImages,
       speakerNotes: speakerNotes,
       steps: steps,
       title: title,

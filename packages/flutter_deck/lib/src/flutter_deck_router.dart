@@ -117,6 +117,9 @@ class FlutterDeckRouter extends ChangeNotifier {
     _currentSlideStep = stepNumber != null ? int.tryParse(stepNumber) ?? 1 : 1;
   }
 
+  /// Returns the [GlobalKey] for the [Navigator] of the slide deck.
+  GlobalKey<NavigatorState> get navigatorKey => _router.routerDelegate.navigatorKey;
+
   /// Go to the next slide or step.
   ///
   /// If the current step is the last step, the next slide is displayed.
