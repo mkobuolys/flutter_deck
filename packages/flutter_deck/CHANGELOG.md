@@ -1,3 +1,7 @@
+# NEXT
+
+- test: add tests
+
 # 0.25.0
 
 - feat: add `FlutterDeckSlideImageRenderer`
