@@ -29,8 +29,6 @@ void main() {
 
       expect(configuration.supportedPlatforms.length, TargetPlatform.values.length);
       expect(configuration.enabled, true);
-      // This expectation assumes the test runs on a supported platform.
-      // Unit tests usually run on the host platform.
     });
 
     test('disabled factory should create disabled configuration', () {

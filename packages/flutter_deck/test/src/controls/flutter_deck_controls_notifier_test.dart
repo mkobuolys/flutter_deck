@@ -112,8 +112,6 @@ void main() {
     });
 
     test('showControls() should hide controls after duration', () async {
-      // We can't easily wait for timer in unit test without FakeAsync, but standard flutter_test uses FakeAsync zone.
-      // The default duration is 3 seconds.
       fakeAsync((async) {
         notifier.showControls();
         expect(notifier.controlsVisible, true);
