@@ -26,6 +26,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+dependency_overrides:
+  archive: 4.0.7
+
 flutter:
   generate: true
   uses-material-design: true
