@@ -1,7 +1,35 @@
 name: flutter_deck_workspace
+repository: https://github.com/mkobuolys/flutter_deck
+publish_to: none
 
 environment:
   sdk: ">=3.8.0 <4.0.0"
 
+workspace:
+  - packages/flutter_deck
+  - packages/flutter_deck_client
+  - packages/flutter_deck_pdf_export
+  - packages/flutter_deck_pptx_export
+  - packages/flutter_deck_web_client
+  - packages/flutter_deck_ws_client
+
 dev_dependencies:
-  melos: ^6.3.3
+  melos: ^7.4.0
+
+melos:
+  scripts:
+    analyze:
+      run: melos exec dart analyze .
+      description: Run `dart analyze` for all packages.
+
+    format:
+      run: melos exec dart format --set-exit-if-changed .
+      description: Run `dart format` for all packages.
+
+    generate:
+      run: melos exec -c 1 --depends-on build_runner -- dart run build_runner build
+      description: Run `build_runner build` for packages with build_runner dependency.
+
+    test:
+      run: melos exec flutter test
+      description: Run `flutter test` for all packages.

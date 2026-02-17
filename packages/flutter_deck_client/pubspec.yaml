@@ -1,6 +1,7 @@
 name: flutter_deck_client
 description: A common client interface and models for the flutter_deck package.
 version: 0.3.0
+resolution: workspace
 homepage: https://github.com/mkobuolys/flutter_deck
 repository: https://github.com/mkobuolys/flutter_deck/tree/main/packages/flutter_deck_client
 issue_tracker: https://github.com/mkobuolys/flutter_deck/issues
