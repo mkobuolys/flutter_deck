@@ -23,8 +23,14 @@ jobs:
         with:
           channel: stable
 
-      - name: Install dependencies
-        run: flutter pub get
+      - name: Setup Melos
+        run: dart pub global activate melos
+
+      - name: Melos bootstrap
+        run: melos bootstrap
+
+      - name: Run Melos generate
+        run: melos run generate
 
       - name: Replace index.html
         run: mv web/gh_pages.index.html web/index.html
