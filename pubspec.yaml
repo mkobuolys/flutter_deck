@@ -20,7 +20,7 @@ dev_dependencies:
 melos:
   scripts:
     analyze:
-      run: melos exec --ignore="*example*" dart analyze .
+      run: melos exec dart analyze .
       description: Run `dart analyze` for all packages.
 
     format:
