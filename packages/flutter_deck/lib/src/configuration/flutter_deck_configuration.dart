@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_deck/src/configuration/flutter_deck_slide_size.dart';
+import 'package:flutter_deck/src/configuration/flutter_deck_template_override_configuration.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck_slide.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
@@ -24,6 +25,7 @@ class FlutterDeckConfiguration {
     this.progressIndicator = const FlutterDeckProgressIndicator.solid(),
     this.showProgress = true,
     this.slideSize = const FlutterDeckSlideSize.responsive(),
+    this.templateOverrides = const FlutterDeckTemplateOverrideConfiguration(),
     this.transition = const FlutterDeckTransition.none(),
   });
 
@@ -81,6 +83,11 @@ class FlutterDeckConfiguration {
   /// This configuration cannot be overridden by the slide configuration.
   final FlutterDeckSlideSize slideSize;
 
+  /// The configuration for the slide deck template overrides.
+  ///
+  /// This configuration cannot be overridden by the slide configuration.
+  final FlutterDeckTemplateOverrideConfiguration templateOverrides;
+
   /// The transition to use when navigating between slides.
   ///
   /// The default transition is [FlutterDeckTransition.none].
@@ -97,6 +104,7 @@ class FlutterDeckConfiguration {
     FlutterDeckProgressIndicator? progressIndicator,
     bool? showProgress,
     FlutterDeckSlideSize? slideSize,
+    FlutterDeckTemplateOverrideConfiguration? templateOverrides,
     FlutterDeckTransition? transition,
   }) {
     return FlutterDeckConfiguration(
@@ -108,6 +116,7 @@ class FlutterDeckConfiguration {
       progressIndicator: progressIndicator ?? this.progressIndicator,
       showProgress: showProgress ?? this.showProgress,
       slideSize: slideSize ?? this.slideSize,
+      templateOverrides: templateOverrides ?? this.templateOverrides,
       transition: transition ?? this.transition,
     );
   }
@@ -179,6 +188,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
     super.progressIndicator,
     super.showProgress,
     super.slideSize,
+    super.templateOverrides,
     super.transition,
   }) : _footerConfigurationOverride = null,
        _headerConfigurationOverride = null,
@@ -254,6 +264,7 @@ class FlutterDeckSlideConfiguration extends FlutterDeckConfiguration {
       progressIndicator: _progressIndicatorOverride ?? configuration.progressIndicator,
       showProgress: _showProgressOverride ?? configuration.showProgress,
       slideSize: configuration.slideSize,
+      templateOverrides: configuration.templateOverrides,
       transition: _transitionOverride ?? configuration.transition,
     );
   }

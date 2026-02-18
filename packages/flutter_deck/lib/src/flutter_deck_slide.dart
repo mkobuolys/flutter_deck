@@ -113,14 +113,31 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     Key? key,
   }) : this._(
          configuration: configuration,
-         builder: (context) => FlutterDeckBigFactSlide(
-           title: title,
-           subtitle: subtitle,
-           backgroundBuilder: backgroundBuilder,
-           footerBuilder: footerBuilder,
-           headerBuilder: headerBuilder,
-           subtitleMaxLines: subtitleMaxLines,
-         ),
+         builder: (context) {
+           final configuration = context.flutterDeck.configuration;
+           final bigFactSlideBuilder = configuration.templateOverrides.bigFactSlideBuilder;
+
+           if (bigFactSlideBuilder != null) {
+             return bigFactSlideBuilder(
+               context,
+               title,
+               subtitle,
+               backgroundBuilder,
+               footerBuilder,
+               headerBuilder,
+               subtitleMaxLines,
+             );
+           }
+
+           return FlutterDeckBigFactSlide(
+             title: title,
+             subtitle: subtitle,
+             backgroundBuilder: backgroundBuilder,
+             footerBuilder: footerBuilder,
+             headerBuilder: headerBuilder,
+             subtitleMaxLines: subtitleMaxLines,
+           );
+         },
          theme: theme,
          key: key,
        );
@@ -147,12 +164,21 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     Key? key,
   }) : this._(
          configuration: configuration,
-         builder: (context) => FlutterDeckBlankSlide(
-           builder: builder,
-           backgroundBuilder: backgroundBuilder,
-           footerBuilder: footerBuilder,
-           headerBuilder: headerBuilder,
-         ),
+         builder: (context) {
+           final configuration = context.flutterDeck.configuration;
+           final blankSlideBuilder = configuration.templateOverrides.blankSlideBuilder;
+
+           if (blankSlideBuilder != null) {
+             return blankSlideBuilder(context, builder, backgroundBuilder, footerBuilder, headerBuilder);
+           }
+
+           return FlutterDeckBlankSlide(
+             builder: builder,
+             backgroundBuilder: backgroundBuilder,
+             footerBuilder: footerBuilder,
+             headerBuilder: headerBuilder,
+           );
+         },
          theme: theme,
          key: key,
        );
@@ -201,13 +227,22 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     Key? key,
   }) : this._(
          configuration: configuration,
-         builder: (context) => FlutterDeckImageSlide(
-           imageBuilder: imageBuilder,
-           label: label,
-           backgroundBuilder: backgroundBuilder,
-           footerBuilder: footerBuilder,
-           headerBuilder: headerBuilder,
-         ),
+         builder: (context) {
+           final configuration = context.flutterDeck.configuration;
+           final imageSlideBuilder = configuration.templateOverrides.imageSlideBuilder;
+
+           if (imageSlideBuilder != null) {
+             return imageSlideBuilder(context, imageBuilder, label, backgroundBuilder, footerBuilder, headerBuilder);
+           }
+
+           return FlutterDeckImageSlide(
+             imageBuilder: imageBuilder,
+             label: label,
+             backgroundBuilder: backgroundBuilder,
+             footerBuilder: footerBuilder,
+             headerBuilder: headerBuilder,
+           );
+         },
          theme: theme,
          key: key,
        );
@@ -240,14 +275,31 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     Key? key,
   }) : this._(
          configuration: configuration,
-         builder: (context) => FlutterDeckQuoteSlide(
-           quote: quote,
-           attribution: attribution,
-           quoteMaxLines: quoteMaxLines,
-           backgroundBuilder: backgroundBuilder,
-           footerBuilder: footerBuilder,
-           headerBuilder: headerBuilder,
-         ),
+         builder: (context) {
+           final configuration = context.flutterDeck.configuration;
+           final quoteSlideBuilder = configuration.templateOverrides.quoteSlideBuilder;
+
+           if (quoteSlideBuilder != null) {
+             return quoteSlideBuilder(
+               context,
+               quote,
+               attribution,
+               quoteMaxLines,
+               backgroundBuilder,
+               footerBuilder,
+               headerBuilder,
+             );
+           }
+
+           return FlutterDeckQuoteSlide(
+             quote: quote,
+             attribution: attribution,
+             quoteMaxLines: quoteMaxLines,
+             backgroundBuilder: backgroundBuilder,
+             footerBuilder: footerBuilder,
+             headerBuilder: headerBuilder,
+           );
+         },
          theme: theme,
          key: key,
        );
@@ -282,14 +334,31 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     Key? key,
   }) : this._(
          configuration: configuration,
-         builder: (context) => FlutterDeckSplitSlide(
-           leftBuilder: leftBuilder,
-           rightBuilder: rightBuilder,
-           backgroundBuilder: backgroundBuilder,
-           footerBuilder: footerBuilder,
-           headerBuilder: headerBuilder,
-           splitRatio: splitRatio,
-         ),
+         builder: (context) {
+           final configuration = context.flutterDeck.configuration;
+           final splitSlideBuilder = configuration.templateOverrides.splitSlideBuilder;
+
+           if (splitSlideBuilder != null) {
+             return splitSlideBuilder(
+               context,
+               leftBuilder,
+               rightBuilder,
+               backgroundBuilder,
+               footerBuilder,
+               headerBuilder,
+               splitRatio,
+             );
+           }
+
+           return FlutterDeckSplitSlide(
+             leftBuilder: leftBuilder,
+             rightBuilder: rightBuilder,
+             backgroundBuilder: backgroundBuilder,
+             footerBuilder: footerBuilder,
+             headerBuilder: headerBuilder,
+             splitRatio: splitRatio,
+           );
+         },
          theme: theme,
          key: key,
        );
@@ -315,12 +384,21 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     Key? key,
   }) : this._(
          configuration: configuration,
-         builder: (context) => FlutterDeckSlideBase(
-           backgroundBuilder: backgroundBuilder,
-           contentBuilder: contentBuilder,
-           footerBuilder: footerBuilder,
-           headerBuilder: headerBuilder,
-         ),
+         builder: (context) {
+           final configuration = context.flutterDeck.configuration;
+           final templateSlideBuilder = configuration.templateOverrides.templateSlideBuilder;
+
+           if (templateSlideBuilder != null) {
+             return templateSlideBuilder(context, backgroundBuilder, contentBuilder, footerBuilder, headerBuilder);
+           }
+
+           return FlutterDeckSlideBase(
+             backgroundBuilder: backgroundBuilder,
+             contentBuilder: contentBuilder,
+             footerBuilder: footerBuilder,
+             headerBuilder: headerBuilder,
+           );
+         },
          theme: theme,
          key: key,
        );
@@ -352,14 +430,31 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
     Key? key,
   }) : this._(
          configuration: configuration,
-         builder: (context) => FlutterDeckTitleSlide(
-           title: title,
-           subtitle: subtitle,
-           backgroundBuilder: backgroundBuilder,
-           footerBuilder: footerBuilder,
-           headerBuilder: headerBuilder,
-           speakerInfoBuilder: speakerInfoBuilder,
-         ),
+         builder: (context) {
+           final configuration = context.flutterDeck.configuration;
+           final titleSlideBuilder = configuration.templateOverrides.titleSlideBuilder;
+
+           if (titleSlideBuilder != null) {
+             return titleSlideBuilder(
+               context,
+               title,
+               subtitle,
+               backgroundBuilder,
+               footerBuilder,
+               headerBuilder,
+               speakerInfoBuilder,
+             );
+           }
+
+           return FlutterDeckTitleSlide(
+             title: title,
+             subtitle: subtitle,
+             backgroundBuilder: backgroundBuilder,
+             footerBuilder: footerBuilder,
+             headerBuilder: headerBuilder,
+             speakerInfoBuilder: speakerInfoBuilder,
+           );
+         },
          theme: theme,
          key: key,
        );
