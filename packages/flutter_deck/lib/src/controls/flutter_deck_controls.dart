@@ -383,6 +383,22 @@ class _OptionsMenuButton extends StatelessWidget {
     final canFullscreen = controlsNotifier.canFullscreen();
     final supportedLocales = localizationNotifier.supportedLocales;
 
+    final additionalMenuItems = [
+      for (final plugin in plugins)
+        ...plugin.buildControls(
+          context,
+          (context, {required label, required onPressed, icon, closeOnActivate}) => MenuItemButton(
+            leadingIcon: icon,
+            onPressed: onPressed,
+            closeOnActivate: closeOnActivate ?? true,
+            child: Text(label),
+          ),
+        ),
+      if (plugins.isNotEmpty) const _PopupMenuDivider(),
+      if (supportedLocales.length > 1) const _LocalizationMenuButton(),
+      if (presenterController.available && !router.isPresenterView) const _PresenterViewButton(),
+    ];
+
     return MenuButtonTheme(
       data: MenuButtonThemeData(
         style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(Theme.of(context).colorScheme.surface)),
@@ -397,20 +413,8 @@ class _OptionsMenuButton extends StatelessWidget {
           const _ThemeButton(),
           const _MarkerButton(),
           if (canFullscreen) const _FullscreenButton(),
-          const _PopupMenuDivider(),
-          for (final plugin in plugins)
-            ...plugin.buildControls(
-              context,
-              (context, {required label, required onPressed, icon, closeOnActivate}) => MenuItemButton(
-                leadingIcon: icon,
-                onPressed: onPressed,
-                closeOnActivate: closeOnActivate ?? true,
-                child: Text(label),
-              ),
-            ),
-          if (plugins.isNotEmpty) const _PopupMenuDivider(),
-          if (supportedLocales.length > 1) const _LocalizationMenuButton(),
-          if (presenterController.available && !router.isPresenterView) const _PresenterViewButton(),
+          if (additionalMenuItems.isNotEmpty) const _PopupMenuDivider(),
+          ...additionalMenuItems,
         ],
       ),
     );
