@@ -218,5 +218,178 @@ void main() {
         expect((slide as FlutterDeckSlide).configuration, configuration);
       });
     });
+
+    group('templateOverrides', () {
+      setUp(() {
+        final mockRouter = MockFlutterDeckRouter();
+        final overrideConfiguration = FlutterDeckTemplateOverrideConfiguration(
+          bigFactSlideBuilder: (_, _, _, _, _, _, _) => const Text('Overridden Big Fact'),
+          blankSlideBuilder: (_, _, _, _, _) => const Text('Overridden Blank'),
+          imageSlideBuilder: (_, _, _, _, _, _) => const Text('Overridden Image'),
+          quoteSlideBuilder: (_, _, _, _, _, _, _) => const Text('Overridden Quote'),
+          splitSlideBuilder: (_, _, _, _, _, _, _) => const Text('Overridden Split'),
+          templateSlideBuilder: (_, _, _, _, _) => const Text('Overridden Template'),
+          titleSlideBuilder: (_, _, _, _, _, _, _) => const Text('Overridden Title'),
+        );
+        final globalConfiguration = FlutterDeckConfiguration(templateOverrides: overrideConfiguration);
+        const slideConfiguration = FlutterDeckSlideConfiguration(route: '/slide-1');
+        final mergedConfiguration = slideConfiguration.mergeWithGlobal(globalConfiguration);
+
+        when(mockRouter.currentSlideConfiguration).thenReturn(mergedConfiguration);
+        when(mockRouter.slides).thenReturn([
+          const FlutterDeckRouterSlide(
+            configuration: FlutterDeckSlideConfiguration(route: '/slide-1', title: 'Slide 1'),
+            route: '/slide-1',
+            widget: SizedBox(),
+          ),
+        ]);
+        when(mockRouter.currentSlideIndex).thenReturn(0);
+
+        flutterDeck = FlutterDeck(
+          configuration: globalConfiguration,
+          router: mockRouter,
+          speakerInfo: null,
+          controlsNotifier: MockFlutterDeckControlsNotifier(),
+          drawerNotifier: MockFlutterDeckDrawerNotifier(),
+          localizationNotifier: MockFlutterDeckLocalizationNotifier(),
+          markerNotifier: MockFlutterDeckMarkerNotifier(),
+          presenterController: MockFlutterDeckPresenterController(),
+          themeNotifier: MockFlutterDeckThemeNotifier(),
+          localizationsDelegates: const [],
+          supportedLocales: const [Locale('en')],
+          plugins: const [],
+          stepNumber: 1,
+        );
+      });
+
+      testWidgets('bigFact constructor should use override', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: FlutterDeckProvider(
+              flutterDeck: flutterDeck,
+              child: FlutterDeckTheme(
+                data: FlutterDeckThemeData.light(),
+                child: FlutterDeckSlide.bigFact(title: 'Big Fact', theme: FlutterDeckThemeData.light()),
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('Overridden Big Fact'), findsOneWidget);
+        expect(find.byType(FlutterDeckBigFactSlide), findsNothing);
+      });
+
+      testWidgets('blank constructor should use override', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: FlutterDeckProvider(
+              flutterDeck: flutterDeck,
+              child: FlutterDeckTheme(
+                data: FlutterDeckThemeData.light(),
+                child: FlutterDeckSlide.blank(
+                  builder: (context) => const SizedBox(),
+                  theme: FlutterDeckThemeData.light(),
+                ),
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('Overridden Blank'), findsOneWidget);
+        expect(find.byType(FlutterDeckBlankSlide), findsNothing);
+      });
+
+      testWidgets('image constructor should use override', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: FlutterDeckProvider(
+              flutterDeck: flutterDeck,
+              child: FlutterDeckTheme(
+                data: FlutterDeckThemeData.light(),
+                child: FlutterDeckSlide.image(
+                  imageBuilder: (context) => Image.memory(kTransparentImage),
+                  theme: FlutterDeckThemeData.light(),
+                ),
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('Overridden Image'), findsOneWidget);
+        expect(find.byType(FlutterDeckImageSlide), findsNothing);
+      });
+
+      testWidgets('quote constructor should use override', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: FlutterDeckProvider(
+              flutterDeck: flutterDeck,
+              child: FlutterDeckTheme(
+                data: FlutterDeckThemeData.light(),
+                child: FlutterDeckSlide.quote(quote: 'Quote', theme: FlutterDeckThemeData.light()),
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('Overridden Quote'), findsOneWidget);
+        expect(find.byType(FlutterDeckQuoteSlide), findsNothing);
+      });
+
+      testWidgets('split constructor should use override', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: FlutterDeckProvider(
+              flutterDeck: flutterDeck,
+              child: FlutterDeckTheme(
+                data: FlutterDeckThemeData.light(),
+                child: FlutterDeckSlide.split(
+                  leftBuilder: (context) => const SizedBox(),
+                  rightBuilder: (context) => const SizedBox(),
+                  theme: FlutterDeckThemeData.light(),
+                ),
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('Overridden Split'), findsOneWidget);
+        expect(find.byType(FlutterDeckSplitSlide), findsNothing);
+      });
+
+      testWidgets('template constructor should use override', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: FlutterDeckProvider(
+              flutterDeck: flutterDeck,
+              child: FlutterDeckTheme(
+                data: FlutterDeckThemeData.light(),
+                child: FlutterDeckSlide.template(theme: FlutterDeckThemeData.light()),
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('Overridden Template'), findsOneWidget);
+        expect(find.byType(FlutterDeckSlideBase), findsNothing);
+      });
+
+      testWidgets('title constructor should use override', (tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: FlutterDeckProvider(
+              flutterDeck: flutterDeck,
+              child: FlutterDeckTheme(
+                data: FlutterDeckThemeData.light(),
+                child: FlutterDeckSlide.title(title: 'Title', theme: FlutterDeckThemeData.light()),
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('Overridden Title'), findsOneWidget);
+        expect(find.byType(FlutterDeckTitleSlide), findsNothing);
+      });
+    });
   });
 }
