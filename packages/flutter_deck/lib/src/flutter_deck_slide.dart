@@ -114,7 +114,8 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   }) : this._(
          configuration: configuration,
          builder: (context) {
-           final bigFactSlideBuilder = context.flutterDeck.configuration.templateOverrides.bigFactSlideBuilder;
+           final configuration = context.flutterDeck.configuration;
+           final bigFactSlideBuilder = configuration.templateOverrides.bigFactSlideBuilder;
 
            if (bigFactSlideBuilder != null) {
              return bigFactSlideBuilder(
@@ -164,7 +165,8 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   }) : this._(
          configuration: configuration,
          builder: (context) {
-           final blankSlideBuilder = context.flutterDeck.configuration.templateOverrides.blankSlideBuilder;
+           final configuration = context.flutterDeck.configuration;
+           final blankSlideBuilder = configuration.templateOverrides.blankSlideBuilder;
 
            if (blankSlideBuilder != null) {
              return blankSlideBuilder(context, builder, backgroundBuilder, footerBuilder, headerBuilder);
@@ -226,7 +228,8 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   }) : this._(
          configuration: configuration,
          builder: (context) {
-           final imageSlideBuilder = context.flutterDeck.configuration.templateOverrides.imageSlideBuilder;
+           final configuration = context.flutterDeck.configuration;
+           final imageSlideBuilder = configuration.templateOverrides.imageSlideBuilder;
 
            if (imageSlideBuilder != null) {
              return imageSlideBuilder(context, imageBuilder, label, backgroundBuilder, footerBuilder, headerBuilder);
@@ -273,7 +276,8 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   }) : this._(
          configuration: configuration,
          builder: (context) {
-           final quoteSlideBuilder = context.flutterDeck.configuration.templateOverrides.quoteSlideBuilder;
+           final configuration = context.flutterDeck.configuration;
+           final quoteSlideBuilder = configuration.templateOverrides.quoteSlideBuilder;
 
            if (quoteSlideBuilder != null) {
              return quoteSlideBuilder(
@@ -331,7 +335,8 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   }) : this._(
          configuration: configuration,
          builder: (context) {
-           final splitSlideBuilder = context.flutterDeck.configuration.templateOverrides.splitSlideBuilder;
+           final configuration = context.flutterDeck.configuration;
+           final splitSlideBuilder = configuration.templateOverrides.splitSlideBuilder;
 
            if (splitSlideBuilder != null) {
              return splitSlideBuilder(
@@ -380,7 +385,8 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   }) : this._(
          configuration: configuration,
          builder: (context) {
-           final templateSlideBuilder = context.flutterDeck.configuration.templateOverrides.templateSlideBuilder;
+           final configuration = context.flutterDeck.configuration;
+           final templateSlideBuilder = configuration.templateOverrides.templateSlideBuilder;
 
            if (templateSlideBuilder != null) {
              return templateSlideBuilder(context, backgroundBuilder, contentBuilder, footerBuilder, headerBuilder);
@@ -425,7 +431,8 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   }) : this._(
          configuration: configuration,
          builder: (context) {
-           final titleSlideBuilder = context.flutterDeck.configuration.templateOverrides.titleSlideBuilder;
+           final configuration = context.flutterDeck.configuration;
+           final titleSlideBuilder = configuration.templateOverrides.titleSlideBuilder;
 
            if (titleSlideBuilder != null) {
              return titleSlideBuilder(
