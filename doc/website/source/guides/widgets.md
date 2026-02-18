@@ -92,3 +92,61 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
 ```
 
 ![FlutterDeckCodeHighlight](https://github.com/mkobuolys/flutter_deck/blob/main/images/code_highlighting.png?raw=true)
+
+### FlutterDeckBackground
+
+A widget that renders the background of the slide. This widget is used internally by the slide templates, but you can also use it to create a custom slide with a standard background.
+
+```dart
+FlutterDeckBackground(
+  child: const Center(
+    child: Text('Custom background'),
+  ),
+)
+```
+
+### FlutterDeckFooter
+
+A widget that renders the footer of the slide. This widget is used internally by the slide templates, but you can also use it to create a custom slide with a standard footer.
+
+```dart
+FlutterDeckFooter(
+  showSlideNumber: true,
+  showSocialHandle: true,
+)
+```
+
+### FlutterDeckHeader
+
+A widget that renders the header of the slide. This widget is used internally by the slide templates, but you can also use it to create a custom slide with a standard header.
+
+```dart
+FlutterDeckHeader(
+  title: 'Custom Header',
+)
+```
+
+### FlutterDeckProgressIndicator
+
+A widget that renders the progress indicator of the slide. This widget is used internally by the slide templates, but you can also use it to create a custom slide with a standard progress indicator.
+
+```dart
+FlutterDeckProgressIndicator(
+  value: 0.5,
+)
+```
+
+### FlutterDeckSpeakerInfoWidget
+
+A widget that renders the speaker info. This widget is used internally by the title slide template, but you can also use it to create a custom slide with speaker info.
+
+```dart
+FlutterDeckSpeakerInfoWidget(
+  speakerInfo: const FlutterDeckSpeakerInfo(
+    name: 'John Doe',
+    description: 'CEO of flutter_deck',
+    socialHandle: '@john_doe',
+    imagePath: 'assets/me.png',
+  ),
+)
+```

@@ -3,7 +3,11 @@ title: Title slide
 navOrder: 1
 ---
 
-To create a title slide, use the `FlutterDeckSlide.title` constructor. It is responsible for rendering the default header and footer of the slide deck, and placing the title and subtitle in the correct places. Also, if the `FlutterDeckSpeakerInfo` is set, it will render the speaker info below the title and subtitle.
+To create a title slide, use the `FlutterDeckSlide.title` constructor. It is responsible for rendering the default header and footer of the slide deck, and placing the title and subtitle in the correct places. Also, if the `FlutterDeckSpeakerInfo` is set, it will render the speaker info below the title and subtitle using the `FlutterDeckSpeakerInfoWidget`.
+
+You can also customize the speaker info by providing a `speakerInfoBuilder` or by overriding the global `titleSlideBuilder` (see [Template Overrides](/guides/template-overrides)).
+
+To learn more about the `FlutterDeckSpeakerInfoWidget`, check the [Widgets](/guides/widgets/#flutterdeckspeakerinfowidget) guide.
 
 ```dart
 class TitleSlide extends FlutterDeckSlideWidget {

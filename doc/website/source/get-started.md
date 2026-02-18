@@ -98,6 +98,35 @@ FlutterDeckApp(
 );
 ```
 
+## Slide Size
+
+By default, the slides are responsive and will resize to fit the available space. However, you can also specify a custom slide size, or create a slide size from an aspect ratio and a resolution.
+
+To use a responsive slide size (default):
+
+```dart
+FlutterDeckApp(
+  configuration: const FlutterDeckConfiguration(
+    slideSize: FlutterDeckSlideSize.responsive(),
+  ),
+  <...>
+);
+```
+
+To use a fixed slide size defined by an aspect ratio and a resolution:
+
+```dart
+FlutterDeckApp(
+  configuration: const FlutterDeckConfiguration(
+    slideSize: FlutterDeckSlideSize.fromAspectRatio(
+      aspectRatio: const FlutterDeckAspectRatio.ratio16x9(),
+      resolution: const FlutterDeckResolution.fhd(),
+    ),
+  ),
+  <...>
+);
+```
+
 Use any colors you like:
 
 ```dart
