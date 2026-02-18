@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_deck/src/templates/templates.dart';
 
 /// A signature for a function that builds a big fact slide.
 typedef FlutterDeckBigFactSlideBuilder =
@@ -54,15 +55,7 @@ typedef FlutterDeckSplitSlideBuilder =
       WidgetBuilder? backgroundBuilder,
       WidgetBuilder? footerBuilder,
       WidgetBuilder? headerBuilder,
-      // SplitSlideRatio is not exported in configuration.dart so we use dynamic
-      // or we need to export it from configuration.dart.
-      // Checking existing code, SplitSlideRatio is consistent.
-      // We should import it or use dynamic. Given it's in templates/split_slide.dart,
-      // we cannot easily import it without circular dependency if configuration imports templates.
-      // HOWEVER, configuration.dart IMPORTS templates.dart (line 5).
-      // content: import 'package:flutter_deck/src/templates/templates.dart';
-      // So we can use SplitSlideRatio if we import templates here.
-      dynamic splitRatio,
+      SplitSlideRatio? splitRatio,
     );
 
 /// A signature for a function that builds a template slide.
