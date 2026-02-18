@@ -1,3 +1,7 @@
+# NEXT
+
+fix: redundant menu item divider
+
 # 0.26.0
 
 - feat: add image preloading
