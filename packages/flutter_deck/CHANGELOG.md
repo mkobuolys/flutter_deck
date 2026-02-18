@@ -1,6 +1,7 @@
 # NEXT
 
-fix: redundant menu item divider
+- feat: add slide template overrides
+- fix: redundant menu item divider
 
 # 0.26.0
 
