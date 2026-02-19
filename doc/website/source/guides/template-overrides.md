@@ -11,69 +11,43 @@ To achieve this, you can provide a `FlutterDeckTemplateOverrideConfiguration` to
 
 To override a slide template, you need to provide a builder function for the specific template in the `FlutterDeckTemplateOverrideConfiguration`. The builder function will be called whenever the corresponding slide template is used.
 
-```dart
-FlutterDeckApp(
-  configuration: FlutterDeckConfiguration(
-    templateOverrides: FlutterDeckTemplateOverrideConfiguration(
-      titleSlideBuilder: (context, title, subtitle, backgroundBuilder, footerBuilder, headerBuilder, speakerInfoBuilder) {
-        return TitleSlide(
-          title: title,
-          subtitle: subtitle,
-          backgroundBuilder: backgroundBuilder,
-          footerBuilder: footerBuilder,
-          headerBuilder: headerBuilder,
-          speakerInfoBuilder: speakerInfoBuilder,
-        );
-      },
-    ),
-  ),
-  <...>
-);
-```
-
 The builder function receives all the necessary parameters to build the slide. You can use these parameters to build your custom slide.
+
+Ideally, you should use the `FlutterDeckSlideBase` widget as the root of your custom slide template. This widget is responsible for placing the header, footer, and content of the slide in the correct places. Also, it is responsible for displaying the background of the slide.
 
 ## Example
 
-Here is an example of how to override the title slide template to display the title and subtitle in a column with a custom background color:
+Here is an example of how to override the title slide template to change the layout:
 
 ```dart
 class CustomTitleSlide extends StatelessWidget {
-  const CustomTitleSlide({
-    required this.title,
-    this.subtitle,
-    super.key,
-  });
+  const CustomTitleSlide({required this.title, required this.subtitle, super.key});
 
   final String title;
   final String? subtitle;
 
   @override
   Widget build(BuildContext context) {
-    return FlutterDeckSlide.custom(
-      builder: (context) => Scaffold(
-        backgroundColor: Colors.blue,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+    return FlutterDeckSlideBase(
+      contentBuilder: (context) => Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(fontSize: 96, fontWeight: FontWeight.bold),
+            ),
+            if (subtitle != null)
               Text(
-                title,
-                style: FlutterDeckTheme.of(context).textTheme.title.copyWith(
-                  color: Colors.white,
-                ),
+                subtitle!,
+                style: const TextStyle(fontSize: 80, height: 1),
               ),
-              if (subtitle != null) ...[
-                const SizedBox(height: 16),
-                Text(
-                  subtitle!,
-                  style: FlutterDeckTheme.of(context).textTheme.subtitle.copyWith(
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ],
-          ),
+            const SizedBox(height: 64),
+            FlutterDeckSpeakerInfoWidget(
+              speakerInfo: context.flutterDeck.speakerInfo!,
+            ),
+          ],
         ),
       ),
     );
