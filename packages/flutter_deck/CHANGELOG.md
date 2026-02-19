@@ -2,6 +2,7 @@
 
 - feat: add slide template overrides
 - fix: redundant menu item divider
+- docs: add template overrides guide
 
 # 0.26.0
 
