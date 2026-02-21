@@ -68,12 +68,16 @@ void main() {
       expect(configuration.previousSlide, const {SingleActivator(LogicalKeyboardKey.arrowLeft)});
       expect(configuration.toggleMarker, const {SingleActivator(LogicalKeyboardKey.keyM)});
       expect(configuration.toggleNavigationDrawer, const {SingleActivator(LogicalKeyboardKey.period)});
+      expect(configuration.customShortcuts, isEmpty);
+      expect(configuration.customActions, isEmpty);
     });
 
     test('disabled factory should create disabled configuration', () {
       const configuration = FlutterDeckShortcutsConfiguration.disabled();
 
       expect(configuration.enabled, false);
+      expect(configuration.customShortcuts, isEmpty);
+      expect(configuration.customActions, isEmpty);
     });
   });
 }

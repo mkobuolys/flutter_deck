@@ -100,6 +100,17 @@ class FlutterDeckControlsListener extends StatelessWidget {
 
     final shortcuts = controls.shortcuts;
 
+    assert(
+      shortcuts.customShortcuts.keys.every(
+        (activator) =>
+            !shortcuts.nextSlide.contains(activator) &&
+            !shortcuts.previousSlide.contains(activator) &&
+            !shortcuts.toggleMarker.contains(activator) &&
+            !shortcuts.toggleNavigationDrawer.contains(activator),
+      ),
+      'Custom shortcuts must not clash with default shortcuts.',
+    );
+
     if (controls.presenterToolbarVisible || shortcuts.enabled) {
       widget = Actions(
         actions: <Type, Action<Intent>>{
@@ -107,6 +118,7 @@ class FlutterDeckControlsListener extends StatelessWidget {
           GoPreviousIntent: GoPreviousAction(controlsNotifier),
           ToggleDrawerIntent: ToggleDrawerAction(controlsNotifier),
           ToggleMarkerIntent: ToggleMarkerAction(controlsNotifier),
+          ...shortcuts.customActions,
         },
         child: widget,
       );
@@ -118,6 +130,7 @@ class FlutterDeckControlsListener extends StatelessWidget {
             for (final activator in shortcuts.previousSlide) activator: const GoPreviousIntent(),
             for (final activator in shortcuts.toggleMarker) activator: const ToggleMarkerIntent(),
             for (final activator in shortcuts.toggleNavigationDrawer) activator: const ToggleDrawerIntent(),
+            ...shortcuts.customShortcuts,
           },
           child: widget,
         );

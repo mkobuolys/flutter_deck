@@ -172,5 +172,109 @@ void main() {
 
       verify(mockControlsNotifier.previous()).called(1);
     });
+
+    testWidgets('should allow custom shortcut and action', (tester) async {
+      var invoked = false;
+      BuildContext? actionContext;
+
+      final customFlutterDeck = FlutterDeck(
+        configuration: FlutterDeckConfiguration(
+          controls: FlutterDeckControlsConfiguration(
+            shortcuts: FlutterDeckShortcutsConfiguration(
+              customShortcuts: const {SingleActivator(LogicalKeyboardKey.keyA): _MockIntent()},
+              customActions: {
+                _MockIntent: _MockAction((context) {
+                  invoked = true;
+                  actionContext = context;
+                }),
+              },
+            ),
+          ),
+        ),
+        router: MockFlutterDeckRouter(),
+        speakerInfo: null,
+        controlsNotifier: mockControlsNotifier,
+        drawerNotifier: MockFlutterDeckDrawerNotifier(),
+        localizationNotifier: MockFlutterDeckLocalizationNotifier(),
+        markerNotifier: mockMarkerNotifier,
+        presenterController: MockFlutterDeckPresenterController(),
+        themeNotifier: MockFlutterDeckThemeNotifier(),
+        localizationsDelegates: const [],
+        supportedLocales: const [Locale('en')],
+        plugins: const [],
+      );
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: FlutterDeckProvider(
+            flutterDeck: customFlutterDeck,
+            child: FlutterDeckControlsListener(
+              controlsNotifier: mockControlsNotifier,
+              markerNotifier: mockMarkerNotifier,
+              child: const SizedBox(),
+            ),
+          ),
+        ),
+      );
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyA);
+
+      expect(invoked, isTrue);
+      expect(actionContext?.flutterDeck, customFlutterDeck);
+    });
+
+    testWidgets('should assert when custom shortcuts clash with defaults', (tester) async {
+      final customFlutterDeck = FlutterDeck(
+        configuration: const FlutterDeckConfiguration(
+          controls: FlutterDeckControlsConfiguration(
+            shortcuts: FlutterDeckShortcutsConfiguration(
+              customShortcuts: {SingleActivator(LogicalKeyboardKey.arrowRight): _MockIntent()},
+            ),
+          ),
+        ),
+        router: MockFlutterDeckRouter(),
+        speakerInfo: null,
+        controlsNotifier: mockControlsNotifier,
+        drawerNotifier: MockFlutterDeckDrawerNotifier(),
+        localizationNotifier: MockFlutterDeckLocalizationNotifier(),
+        markerNotifier: mockMarkerNotifier,
+        presenterController: MockFlutterDeckPresenterController(),
+        themeNotifier: MockFlutterDeckThemeNotifier(),
+        localizationsDelegates: const [],
+        supportedLocales: const [Locale('en')],
+        plugins: const [],
+      );
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: FlutterDeckProvider(
+            flutterDeck: customFlutterDeck,
+            child: FlutterDeckControlsListener(
+              controlsNotifier: mockControlsNotifier,
+              markerNotifier: mockMarkerNotifier,
+              child: const SizedBox(),
+            ),
+          ),
+        ),
+      );
+
+      expect(tester.takeException(), isAssertionError);
+    });
   });
+}
+
+class _MockIntent extends Intent {
+  const _MockIntent();
+}
+
+class _MockAction extends ContextAction<_MockIntent> {
+  _MockAction(this.onInvoke);
+
+  final void Function(BuildContext) onInvoke;
+
+  @override
+  Object? invoke(_MockIntent intent, [BuildContext? context]) {
+    onInvoke(context!);
+    return null;
+  }
 }
