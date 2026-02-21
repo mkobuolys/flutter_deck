@@ -38,6 +38,7 @@ class FlutterDeckExample extends StatelessWidget {
             ),
           ),
         ),
+        // Update controls and add custom shortcuts.
         controls: const FlutterDeckControlsConfiguration(
           shortcuts: FlutterDeckShortcutsConfiguration(customShortcuts: [SkipSlideShortcut()]),
         ),
