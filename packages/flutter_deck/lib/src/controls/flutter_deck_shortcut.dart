@@ -5,19 +5,19 @@ import 'package:flutter_deck/src/flutter_deck.dart';
 ///
 /// This configuration is used to map a key combination to an [Intent] and an
 /// [Action].
-class FlutterDeckShortcut {
+abstract class FlutterDeckShortcut<T extends Intent> {
   /// Creates a shortcut for the slide deck.
-  const FlutterDeckShortcut({required this.activator, required this.intent, required this.action});
+  const FlutterDeckShortcut();
 
   /// The key combination that will trigger the shortcut.
-  final ShortcutActivator activator;
+  ShortcutActivator get activator;
 
   /// The intent that will be invoked when the shortcut is triggered.
-  final Intent intent;
+  T get intent;
 
   /// The action that will be invoked when the intent is triggered.
   ///
   /// To access [FlutterDeck] via this action, you can use a [ContextAction]
   /// instead of a regular [Action].
-  final Action<Intent> action;
+  Action<T> get action;
 }

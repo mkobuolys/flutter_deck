@@ -182,10 +182,8 @@ void main() {
           controls: FlutterDeckControlsConfiguration(
             shortcuts: FlutterDeckShortcutsConfiguration(
               customShortcuts: [
-                FlutterDeckShortcut(
-                  activator: const SingleActivator(LogicalKeyboardKey.keyA),
-                  intent: const _MockIntent(),
-                  action: _MockAction((context) {
+                _MockShortcut(
+                  _MockAction((context) {
                     invoked = true;
                     actionContext = context;
                   }),
@@ -230,15 +228,7 @@ void main() {
       final customFlutterDeck = FlutterDeck(
         configuration: FlutterDeckConfiguration(
           controls: FlutterDeckControlsConfiguration(
-            shortcuts: FlutterDeckShortcutsConfiguration(
-              customShortcuts: [
-                FlutterDeckShortcut(
-                  activator: const SingleActivator(LogicalKeyboardKey.arrowRight),
-                  intent: const _MockIntent(),
-                  action: _MockAction((_) {}),
-                ),
-              ],
-            ),
+            shortcuts: FlutterDeckShortcutsConfiguration(customShortcuts: [_MockClashingShortcut(_MockAction((_) {}))]),
           ),
         ),
         router: MockFlutterDeckRouter(),
@@ -286,4 +276,30 @@ class _MockAction extends ContextAction<_MockIntent> {
     onInvoke(context!);
     return null;
   }
+}
+
+class _MockShortcut extends FlutterDeckShortcut<_MockIntent> {
+  const _MockShortcut(this.action);
+
+  @override
+  ShortcutActivator get activator => const SingleActivator(LogicalKeyboardKey.keyA);
+
+  @override
+  _MockIntent get intent => const _MockIntent();
+
+  @override
+  final Action<_MockIntent> action;
+}
+
+class _MockClashingShortcut extends FlutterDeckShortcut<_MockIntent> {
+  const _MockClashingShortcut(this.action);
+
+  @override
+  ShortcutActivator get activator => const SingleActivator(LogicalKeyboardKey.arrowRight);
+
+  @override
+  _MockIntent get intent => const _MockIntent();
+
+  @override
+  final Action<_MockIntent> action;
 }

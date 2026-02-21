@@ -9,11 +9,11 @@ Flutter Deck allows you to define custom shortcuts to control your presentation 
 
 ## Defining Custom Shortcuts
 
-To add custom shortcuts, you need to configure the `FlutterDeckShortcutsConfiguration` when setting up your `FlutterDeckApp`. This configuration requires a list of `FlutterDeckShortcut` objects, which bind a `ShortcutActivator`, an `Intent`, and an `Action`.
+To add custom shortcuts, you need to configure the `FlutterDeckShortcutsConfiguration` when setting up your `FlutterDeckApp`. This configuration requires a list of custom shortcuts that extend the abstract `FlutterDeckShortcut` class. This class binds a `ShortcutActivator` (like a key press), an `Intent`, and an `Action` together.
 
 ### Example: Skip to the Next Topic
 
-Imagine you have a long presentation and want a quick way to skip ahead 5 slides. You can accomplish this by creating a custom intent, a corresponding action, and then bundling them into a `FlutterDeckShortcut`.
+Imagine you have a long presentation and want a quick way to skip ahead 5 slides. You can accomplish this by creating a custom intent and a corresponding action. Then, implement the `FlutterDeckShortcut` interface to bundle them.
 
 ```dart
 class SkipTopicIntent extends Intent {
@@ -31,17 +31,27 @@ class SkipTopicAction extends ContextAction<SkipTopicIntent> {
   }
 }
 
+class SkipTopicShortcut extends FlutterDeckShortcut<SkipTopicIntent> {
+  const SkipTopicShortcut();
+
+  @override
+  ShortcutActivator get activator =>
+      const SingleActivator(LogicalKeyboardKey.keyS, control: true);
+
+  @override
+  SkipTopicIntent get intent => const SkipTopicIntent();
+
+  @override
+  Action<SkipTopicIntent> get action => SkipTopicAction();
+}
+
 // In your FlutterDeckApp configuration:
 FlutterDeckApp(
   configuration: const FlutterDeckConfiguration(
     controls: FlutterDeckControlsConfiguration(
       shortcuts: FlutterDeckShortcutsConfiguration(
         customShortcuts: [
-          FlutterDeckShortcut(
-            activator: SingleActivator(LogicalKeyboardKey.keyS, control: true),
-            intent: SkipTopicIntent(),
-            action: SkipTopicAction(),
-          ),
+          SkipTopicShortcut(),
         ],
       ),
     ),
