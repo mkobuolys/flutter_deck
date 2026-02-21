@@ -3,74 +3,68 @@ title: Custom shortcuts
 navOrder: 10
 ---
 
-# Custom Shortcuts
+# Custom shortcuts
 
-Flutter Deck allows you to define custom shortcuts to control your presentation using the keyboard. By default, it includes shortcuts for navigating between slides, toggling the marker, and opening the navigation drawer. You can add your own shortcuts to trigger specific actions.
+It is possible to define custom shortcuts to control your presentation using the keyboard. By default, it includes shortcuts for navigating between slides, toggling the marker, and opening the navigation drawer. You can add your own shortcuts to trigger specific actions.
 
-## Defining Custom Shortcuts
+## Defining custom shortcuts
 
 To add custom shortcuts, you need to configure the `FlutterDeckShortcutsConfiguration` when setting up your `FlutterDeckApp`. This configuration requires a list of custom shortcuts that extend the abstract `FlutterDeckShortcut` class. This class binds a `ShortcutActivator` (like a key press), an `Intent`, and an `Action` together.
 
-### Example: Skip to the Next Topic
+### Example: Skip to the next slide
 
-Imagine you have a long presentation and want a quick way to skip ahead 5 slides. You can accomplish this by creating a custom intent and a corresponding action. Then, implement the `FlutterDeckShortcut` interface to bundle them.
+In flutter_deck, slides can have multiple steps. This example shows how to add a custom shortcut to skip to the next slide, ignoring the steps.
 
 ```dart
-class SkipTopicIntent extends Intent {
-  const SkipTopicIntent();
+class SkipSlideIntent extends Intent {
+  const SkipSlideIntent();
 }
 
-class SkipTopicAction extends ContextAction<SkipTopicIntent> {
+class SkipSlideAction extends ContextAction<SkipSlideIntent> {
   @override
-  Object? invoke(SkipTopicIntent intent, BuildContext context) {
-    // Jump ahead 5 slides
-    for (var i = 0; i < 5; i++) {
-        context.flutterDeck.next();
-    }
+  Object? invoke(SkipSlideIntent intent, [BuildContext? context]) {
+    if (context == null) return null;
+
+    final currentSlide = context.flutterDeck.router.currentSlideIndex + 1;
+
+    context.flutterDeck.router.goToSlide(currentSlide + 1);
+
     return null;
   }
 }
 
-class SkipTopicShortcut extends FlutterDeckShortcut<SkipTopicIntent> {
-  const SkipTopicShortcut();
+class SkipSlideShortcut extends FlutterDeckShortcut<SkipSlideIntent> {
+  const SkipSlideShortcut();
 
   @override
-  ShortcutActivator get activator =>
-      const SingleActivator(LogicalKeyboardKey.keyS, control: true);
+  ShortcutActivator get activator => const SingleActivator(LogicalKeyboardKey.keyS, control: true);
 
   @override
-  SkipTopicIntent get intent => const SkipTopicIntent();
+  SkipSlideIntent get intent => const SkipSlideIntent();
 
   @override
-  Action<SkipTopicIntent> get action => SkipTopicAction();
+  Action<SkipSlideIntent> get action => SkipSlideAction();
 }
+```
 
-// In your FlutterDeckApp configuration:
+Then, add the shortcut to your presentation:
+
+```dart
 FlutterDeckApp(
   configuration: const FlutterDeckConfiguration(
     controls: FlutterDeckControlsConfiguration(
       shortcuts: FlutterDeckShortcutsConfiguration(
         customShortcuts: [
-          SkipTopicShortcut(),
+          SkipSlideShortcut(),
         ],
       ),
     ),
   ),
-  // ... other app setup
 )
 ```
 
-In this example, pressing `Ctrl + S` triggers the `SkipTopicIntent`. The `SkipTopicAction`, extending `ContextAction`, gains access to the `BuildContext` allowing it to call `context.flutterDeck.next()` repeatedly. If the shortcut doesn't require context, you can simply extend `Action`.
+In this example, pressing `Ctrl + S` triggers the `SkipSlideIntent`. The `SkipSlideAction`, extending `ContextAction`, gains access to the `BuildContext` allowing it to call `context.flutterDeck.router.goToSlide()` to skip to the next slide. If the shortcut doesn't require context, you can simply extend `Action`.
 
-## Avoiding Shortcut Clashes
+## Avoiding shortcut clashes
 
-Flutter Deck automatically checks if your custom shortcuts clash with the default ones (like the arrow keys for navigation or 'M' for the marker). If a clash is detected, it will throw an `AssertionError` during development, explicitly stating which shortcut key is causing the problem.
-
-For instance, trying to assign a custom action to the right arrow key will trigger the following error:
-
-```text
-Shortcuts must not clash with each other. Multiple actions are mapped to the "LogicalKeySet(LogicalKeyboardKey#00115(keyId: "0x100000015", keyLabel: "Arrow Right", debugName: "Arrow Right"))" shortcut.
-```
-
-> [!NOTE]
-> Custom shortcuts cannot use the same key combinations as the default shortcuts (`nextSlide`, `previousSlide`, `toggleMarker`, `toggleNavigationDrawer`). Doing so will result in an assertion error. Defaults can be removed or disabled via their respective fields if you need to reuse their key combinations.
+The flutter_deck framework automatically checks if your custom shortcuts clash with any of the default shortcuts or any other custom shortcuts. If a clash is detected, it will throw an `AssertionError` during development, explicitly stating which shortcut key is causing the problem.

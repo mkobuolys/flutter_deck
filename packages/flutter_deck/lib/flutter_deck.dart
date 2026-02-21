@@ -2,6 +2,7 @@
 library;
 
 export 'src/configuration/configuration.dart';
+export 'src/controls/flutter_deck_shortcut.dart';
 export 'src/flutter_deck.dart';
 export 'src/flutter_deck_app.dart';
 export 'src/flutter_deck_slide.dart';
