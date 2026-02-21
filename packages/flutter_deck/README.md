@@ -91,18 +91,22 @@ FlutterDeckApp(
       gestures: FlutterDeckGesturesConfiguration.mobileOnly(),
       shortcuts: FlutterDeckShortcutsConfiguration(
         enabled: true,
-        nextSlide: SingleActivator(LogicalKeyboardKey.arrowRight),
-        previousSlide: SingleActivator(LogicalKeyboardKey.arrowLeft),
-        toggleMarker: SingleActivator(
-          LogicalKeyboardKey.keyM,
-          control: true,
-          meta: true,
-        ),
-        toggleNavigationDrawer: SingleActivator(
-          LogicalKeyboardKey.period,
-          control: true,
-          meta: true,
-        ),
+        nextSlide: const {SingleActivator(LogicalKeyboardKey.arrowRight)},
+        previousSlide: const {SingleActivator(LogicalKeyboardKey.arrowLeft)},
+        toggleMarker: const {
+          SingleActivator(
+            LogicalKeyboardKey.keyM,
+            control: true,
+            meta: true,
+          ),
+        },
+        toggleNavigationDrawer: const {
+          SingleActivator(
+            LogicalKeyboardKey.period,
+            control: true,
+            meta: true,
+          ),
+        },
       ),
     ),
     footer: const FlutterDeckFooterConfiguration(

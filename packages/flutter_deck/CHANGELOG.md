@@ -1,3 +1,35 @@
+# NEXT
+
+- feat: allow defining multiple key combinations for a single shortcut
+  - **BREAKING**: `nextSlide`, `previousSlide`, `toggleMarker` and `toggleNavigationDrawer` properties in the `FlutterDeckShortcutsConfiguration` class now accept a `Set<ShortcutActivator>` instead of a `SingleActivator`
+    - **Migration**: instead of:
+
+      ```dart
+      FlutterDeckControlsConfiguration(
+        shortcuts: FlutterDeckShortcutsConfiguration(
+          nextSlide: SingleActivator(LogicalKeyboardKey.arrowRight),
+          previousSlide: SingleActivator(LogicalKeyboardKey.arrowLeft),
+          toggleMarker: SingleActivator(LogicalKeyboardKey.keyM),
+          toggleNavigationDrawer: SingleActivator(LogicalKeyboardKey.period),
+        ),
+        <...>,
+      )
+      ```
+
+      use:
+
+      ```dart
+      FlutterDeckControlsConfiguration(
+        shortcuts: FlutterDeckShortcutsConfiguration(
+          nextSlide: {SingleActivator(LogicalKeyboardKey.arrowRight)},
+          previousSlide: {SingleActivator(LogicalKeyboardKey.arrowLeft)},
+          toggleMarker: {SingleActivator(LogicalKeyboardKey.keyM)},
+          toggleNavigationDrawer: {SingleActivator(LogicalKeyboardKey.period)},
+        ),
+        <...>,
+      )
+      ```
+
 # 0.27.0
 
 - feat: add slide template overrides
