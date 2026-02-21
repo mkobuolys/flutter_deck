@@ -15,6 +15,8 @@ import 'package:flutter_deck/src/widgets/internal/internal.dart';
 /// * `toggleMarker` - Toggle the slide deck's marker.
 /// * `toggleNavigationDrawer` - Toggle the navigation drawer.
 ///
+/// Also, custom shortcuts and actions can be defined by the user.
+///
 /// Cursor visibility is also handled by this widget. The cursor will be hidden
 /// after 3 seconds of inactivity.
 ///
@@ -125,7 +127,7 @@ class FlutterDeckControlsListener extends StatelessWidget {
           GoPreviousIntent: GoPreviousAction(controlsNotifier),
           ToggleDrawerIntent: ToggleDrawerAction(controlsNotifier),
           ToggleMarkerIntent: ToggleMarkerAction(controlsNotifier),
-          for (final shortcut in shortcuts.customShortcuts) shortcut.intent.runtimeType: shortcut.action,
+          for (final shortcut in shortcuts.customShortcuts) shortcut.intentType: shortcut.action,
         },
         child: widget,
       );

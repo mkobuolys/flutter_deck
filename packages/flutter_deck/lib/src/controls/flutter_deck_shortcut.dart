@@ -20,4 +20,11 @@ abstract class FlutterDeckShortcut<T extends Intent> {
   /// To access [FlutterDeck] via this action, you can use a [ContextAction]
   /// instead of a regular [Action].
   Action<T> get action;
+
+  /// The type of the intent that will be invoked when the shortcut is
+  /// triggered.
+  ///
+  /// This is used to map the intent type to the action in the controls
+  /// listener. Do not override this, it relies on the generic type [T].
+  Type get intentType => T;
 }
