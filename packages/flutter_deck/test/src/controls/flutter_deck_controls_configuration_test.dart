@@ -64,10 +64,10 @@ void main() {
       const configuration = FlutterDeckShortcutsConfiguration();
 
       expect(configuration.enabled, true);
-      expect(configuration.nextSlide, const SingleActivator(LogicalKeyboardKey.arrowRight));
-      expect(configuration.previousSlide, const SingleActivator(LogicalKeyboardKey.arrowLeft));
-      expect(configuration.toggleMarker, const SingleActivator(LogicalKeyboardKey.keyM));
-      expect(configuration.toggleNavigationDrawer, const SingleActivator(LogicalKeyboardKey.period));
+      expect(configuration.nextSlide, const {SingleActivator(LogicalKeyboardKey.arrowRight)});
+      expect(configuration.previousSlide, const {SingleActivator(LogicalKeyboardKey.arrowLeft)});
+      expect(configuration.toggleMarker, const {SingleActivator(LogicalKeyboardKey.keyM)});
+      expect(configuration.toggleNavigationDrawer, const {SingleActivator(LogicalKeyboardKey.period)});
     });
 
     test('disabled factory should create disabled configuration', () {
