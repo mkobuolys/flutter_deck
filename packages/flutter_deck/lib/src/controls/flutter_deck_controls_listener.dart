@@ -100,16 +100,23 @@ class FlutterDeckControlsListener extends StatelessWidget {
 
     final shortcuts = controls.shortcuts;
 
-    assert(
-      shortcuts.customShortcuts.keys.every(
-        (activator) =>
-            !shortcuts.nextSlide.contains(activator) &&
-            !shortcuts.previousSlide.contains(activator) &&
-            !shortcuts.toggleMarker.contains(activator) &&
-            !shortcuts.toggleNavigationDrawer.contains(activator),
-      ),
-      'Custom shortcuts must not clash with default shortcuts.',
-    );
+    final allShortcuts = [
+      ...shortcuts.nextSlide,
+      ...shortcuts.previousSlide,
+      ...shortcuts.toggleMarker,
+      ...shortcuts.toggleNavigationDrawer,
+      ...shortcuts.customShortcuts.keys,
+    ];
+
+    final seen = <ShortcutActivator>{};
+
+    for (final shortcut in allShortcuts) {
+      assert(
+        seen.add(shortcut),
+        'Shortcuts must not clash with each other. '
+        'Multiple actions are mapped to the "$shortcut" shortcut.',
+      );
+    }
 
     if (controls.presenterToolbarVisible || shortcuts.enabled) {
       widget = Actions(
