@@ -181,13 +181,16 @@ void main() {
         configuration: FlutterDeckConfiguration(
           controls: FlutterDeckControlsConfiguration(
             shortcuts: FlutterDeckShortcutsConfiguration(
-              customShortcuts: const {SingleActivator(LogicalKeyboardKey.keyA): _MockIntent()},
-              customActions: {
-                _MockIntent: _MockAction((context) {
-                  invoked = true;
-                  actionContext = context;
-                }),
-              },
+              customShortcuts: [
+                FlutterDeckShortcut(
+                  activator: const SingleActivator(LogicalKeyboardKey.keyA),
+                  intent: const _MockIntent(),
+                  action: _MockAction((context) {
+                    invoked = true;
+                    actionContext = context;
+                  }),
+                ),
+              ],
             ),
           ),
         ),
@@ -225,10 +228,16 @@ void main() {
 
     testWidgets('should assert when custom shortcuts clash with defaults', (tester) async {
       final customFlutterDeck = FlutterDeck(
-        configuration: const FlutterDeckConfiguration(
+        configuration: FlutterDeckConfiguration(
           controls: FlutterDeckControlsConfiguration(
             shortcuts: FlutterDeckShortcutsConfiguration(
-              customShortcuts: {SingleActivator(LogicalKeyboardKey.arrowRight): _MockIntent()},
+              customShortcuts: [
+                FlutterDeckShortcut(
+                  activator: const SingleActivator(LogicalKeyboardKey.arrowRight),
+                  intent: const _MockIntent(),
+                  action: _MockAction((_) {}),
+                ),
+              ],
             ),
           ),
         ),

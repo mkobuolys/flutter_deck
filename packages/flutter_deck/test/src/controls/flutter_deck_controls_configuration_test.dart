@@ -69,7 +69,6 @@ void main() {
       expect(configuration.toggleMarker, const {SingleActivator(LogicalKeyboardKey.keyM)});
       expect(configuration.toggleNavigationDrawer, const {SingleActivator(LogicalKeyboardKey.period)});
       expect(configuration.customShortcuts, isEmpty);
-      expect(configuration.customActions, isEmpty);
     });
 
     test('disabled factory should create disabled configuration', () {
@@ -77,7 +76,6 @@ void main() {
 
       expect(configuration.enabled, false);
       expect(configuration.customShortcuts, isEmpty);
-      expect(configuration.customActions, isEmpty);
     });
   });
 }

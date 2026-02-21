@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_deck/src/flutter_deck.dart';
+import 'package:flutter_deck/src/controls/flutter_deck_shortcut.dart';
 
 /// The configuration for the slide deck controls.
 class FlutterDeckControlsConfiguration {
@@ -19,6 +19,8 @@ class FlutterDeckControlsConfiguration {
   /// - [SingleActivator] for more information on how to define a key
   /// combination.
   /// - [LogicalKeyboardKey] for a list of all available keys.
+  /// - [FlutterDeckShortcut] for more information on how to define a
+  /// custom shortcut.
   const FlutterDeckControlsConfiguration({
     this.presenterToolbarVisible = true,
     this.gestures = const FlutterDeckGesturesConfiguration.mobileOnly(),
@@ -83,14 +85,15 @@ class FlutterDeckShortcutsConfiguration {
   /// - [SingleActivator] for more information on how to define a key
   /// combination.
   /// - [LogicalKeyboardKey] for a list of all available keys.
+  /// - [FlutterDeckShortcut] for more information on how to define a
+  /// custom shortcut.
   const FlutterDeckShortcutsConfiguration({
     this.enabled = true,
     this.nextSlide = const {SingleActivator(LogicalKeyboardKey.arrowRight)},
     this.previousSlide = const {SingleActivator(LogicalKeyboardKey.arrowLeft)},
     this.toggleMarker = const {SingleActivator(LogicalKeyboardKey.keyM)},
     this.toggleNavigationDrawer = const {SingleActivator(LogicalKeyboardKey.period)},
-    this.customShortcuts = const {},
-    this.customActions = const {},
+    this.customShortcuts = const [],
   });
 
   /// Creates a configuration for the slide deck keyboard shortcuts where they
@@ -114,34 +117,7 @@ class FlutterDeckShortcutsConfiguration {
 
   /// Custom shortcuts for the slide deck.
   ///
-  /// This can be used to add custom shortcuts to the slide deck. The
-  /// [ShortcutActivator] is the key combination that will trigger the
-  /// shortcut, and the [Intent] is the intent that will be invoked when
-  /// the shortcut is triggered.
-  ///
-  /// To handle the intent, provide a corresponding [Action] in the
-  /// [FlutterDeckShortcutsConfiguration.customActions] map.
-  final Map<ShortcutActivator, Intent> customShortcuts;
-
-  /// Custom actions for the slide deck.
-  ///
-  /// This can be used to add custom actions to the slide deck. The
-  /// [Type] is the type of the [Intent] that the action will handle, and
-  /// the [Action] is the action that will be invoked when the intent is
-  /// triggered.
-  ///
-  /// To access the [FlutterDeck] via these action intents, you can use a
-  /// [ContextAction] instead of a regular [Action]. For example:
-  ///
-  /// ```dart
-  /// class MyCustomAction extends ContextAction<MyCustomIntent> {
-  ///   @override
-  ///   Object? invoke(MyCustomIntent intent, BuildContext context) {
-  ///     final flutterDeck = context.flutterDeck;
-  ///     // Do something with the flutter_deck instance...
-  ///     return null;
-  ///   }
-  /// }
-  /// ```
-  final Map<Type, Action<Intent>> customActions;
+  /// This can be used to add custom shortcuts and their corresponding actions
+  /// to the slide deck.
+  final List<FlutterDeckShortcut> customShortcuts;
 }
