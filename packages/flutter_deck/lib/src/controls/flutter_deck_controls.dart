@@ -101,10 +101,7 @@ class _PreviousButton extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.previousSlide
-        .whereType<MenuSerializableShortcut>()
-        .map((s) => LocalizedShortcutLabeler.instance.getShortcutLabel(s, MaterialLocalizations.of(context)))
-        .join(' / ');
+    final shortcut = shortcuts.previousSlide.toShortcutString(context);
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -133,10 +130,7 @@ class _NextButton extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.nextSlide
-        .whereType<MenuSerializableShortcut>()
-        .map((s) => LocalizedShortcutLabeler.instance.getShortcutLabel(s, MaterialLocalizations.of(context)))
-        .join(' / ');
+    final shortcut = shortcuts.nextSlide.toShortcutString(context);
 
     return ListenableBuilder(
       listenable: controlsNotifier,
@@ -168,10 +162,7 @@ class _SlideNumberButton extends StatelessWidget {
     final controlsNotifier = flutterDeck.controlsNotifier;
     final router = flutterDeck.router;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.toggleNavigationDrawer
-        .whereType<MenuSerializableShortcut>()
-        .map((s) => LocalizedShortcutLabeler.instance.getShortcutLabel(s, MaterialLocalizations.of(context)))
-        .join(' / ');
+    final shortcut = shortcuts.toggleNavigationDrawer.toShortcutString(context);
 
     return ListenableBuilder(
       listenable: router,
@@ -208,10 +199,7 @@ class _MarkerControls extends StatelessWidget {
     final controlsNotifier = flutterDeck.controlsNotifier;
     final markerNotifier = flutterDeck.markerNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.toggleMarker
-        .whereType<MenuSerializableShortcut>()
-        .map((s) => LocalizedShortcutLabeler.instance.getShortcutLabel(s, MaterialLocalizations.of(context)))
-        .join(' / ');
+    final shortcut = shortcuts.toggleMarker.toShortcutString(context);
 
     return ListenableBuilder(
       listenable: markerNotifier,
@@ -289,10 +277,7 @@ class _MarkerButton extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
-    final shortcut = shortcuts.toggleMarker
-        .whereType<MenuSerializableShortcut>()
-        .map((s) => LocalizedShortcutLabeler.instance.getShortcutLabel(s, MaterialLocalizations.of(context)))
-        .join(' / ');
+    final shortcut = shortcuts.toggleMarker.toShortcutString(context);
 
     return MenuItemButton(
       leadingIcon: const Icon(Icons.edit_rounded),
@@ -427,5 +412,13 @@ class _PopupMenuDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ColoredBox(color: Theme.of(context).colorScheme.surface, child: const Divider(indent: 12));
+  }
+}
+
+extension _IterableShortcutActivatorX on Iterable<ShortcutActivator> {
+  String toShortcutString(BuildContext context) {
+    return whereType<MenuSerializableShortcut>()
+        .map((s) => LocalizedShortcutLabeler.instance.getShortcutLabel(s, MaterialLocalizations.of(context)))
+        .join(' / ');
   }
 }
