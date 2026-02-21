@@ -63,7 +63,7 @@ FlutterDeckApp(
 )
 ```
 
-In this example, pressing `Ctrl + S` triggers the `SkipSlideIntent`. The `SkipSlideAction`, extending `ContextAction`, gains access to the `BuildContext` allowing it to call `context.flutterDeck.router.goToSlide()` to skip to the next slide. If the shortcut doesn't require context, you can simply extend `Action`.
+In this example, pressing `Alt + →` triggers the `SkipSlideIntent`. The `SkipSlideAction`, extending `ContextAction`, gains access to the `BuildContext` allowing it to call `context.flutterDeck.router.goToSlide()` to skip to the next slide. If the shortcut doesn't require context, you can simply extend `Action`.
 
 ## Avoiding shortcut clashes
 
