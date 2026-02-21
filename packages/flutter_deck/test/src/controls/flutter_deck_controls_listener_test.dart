@@ -282,7 +282,7 @@ class _MockShortcut extends FlutterDeckShortcut<_MockIntent> {
   const _MockShortcut(this.action);
 
   @override
-  ShortcutActivator get activator => const SingleActivator(LogicalKeyboardKey.keyA);
+  Set<ShortcutActivator> get activators => const {SingleActivator(LogicalKeyboardKey.keyA)};
 
   @override
   _MockIntent get intent => const _MockIntent();
@@ -295,7 +295,7 @@ class _MockClashingShortcut extends FlutterDeckShortcut<_MockIntent> {
   const _MockClashingShortcut(this.action);
 
   @override
-  ShortcutActivator get activator => const SingleActivator(LogicalKeyboardKey.arrowRight);
+  Set<ShortcutActivator> get activators => const {SingleActivator(LogicalKeyboardKey.arrowRight)};
 
   @override
   _MockIntent get intent => const _MockIntent();

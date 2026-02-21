@@ -9,8 +9,8 @@ abstract class FlutterDeckShortcut<T extends Intent> {
   /// Creates a shortcut for the slide deck.
   const FlutterDeckShortcut();
 
-  /// The key combination that will trigger the shortcut.
-  ShortcutActivator get activator;
+  /// The key combinations that will trigger the shortcut.
+  Set<ShortcutActivator> get activators;
 
   /// The intent that will be invoked when the shortcut is triggered.
   T get intent;

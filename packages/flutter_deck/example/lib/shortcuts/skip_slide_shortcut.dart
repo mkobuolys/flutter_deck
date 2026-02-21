@@ -23,7 +23,7 @@ class SkipSlideShortcut extends FlutterDeckShortcut<SkipSlideIntent> {
   const SkipSlideShortcut();
 
   @override
-  ShortcutActivator get activator => const SingleActivator(LogicalKeyboardKey.arrowRight, alt: true);
+  Set<ShortcutActivator> get activators => const {SingleActivator(LogicalKeyboardKey.arrowRight, alt: true)};
 
   @override
   SkipSlideIntent get intent => const SkipSlideIntent();

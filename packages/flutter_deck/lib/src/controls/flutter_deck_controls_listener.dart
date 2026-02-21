@@ -107,7 +107,7 @@ class FlutterDeckControlsListener extends StatelessWidget {
       ...shortcuts.previousSlide,
       ...shortcuts.toggleMarker,
       ...shortcuts.toggleNavigationDrawer,
-      ...shortcuts.customShortcuts.map((e) => e.activator),
+      for (final shortcut in shortcuts.customShortcuts) ...shortcut.activators,
     ];
 
     final seen = <ShortcutActivator>{};
@@ -139,7 +139,8 @@ class FlutterDeckControlsListener extends StatelessWidget {
             for (final activator in shortcuts.previousSlide) activator: const GoPreviousIntent(),
             for (final activator in shortcuts.toggleMarker) activator: const ToggleMarkerIntent(),
             for (final activator in shortcuts.toggleNavigationDrawer) activator: const ToggleDrawerIntent(),
-            for (final shortcut in shortcuts.customShortcuts) shortcut.activator: shortcut.intent,
+            for (final shortcut in shortcuts.customShortcuts)
+              for (final activator in shortcut.activators) activator: shortcut.intent,
           },
           child: widget,
         );

@@ -9,7 +9,7 @@ It is possible to define custom shortcuts to control your presentation using the
 
 ## Defining custom shortcuts
 
-To add custom shortcuts, you need to configure the `FlutterDeckShortcutsConfiguration` when setting up your `FlutterDeckApp`. This configuration requires a list of custom shortcuts that extend the abstract `FlutterDeckShortcut` class. This class binds a `ShortcutActivator` (like a key press), an `Intent`, and an `Action` together.
+To add custom shortcuts, you need to configure the `FlutterDeckShortcutsConfiguration` when setting up your `FlutterDeckApp`. This configuration requires a list of custom shortcuts that extend the abstract `FlutterDeckShortcut` class. This class binds `ShortcutActivator`s (like key presses), an `Intent`, and an `Action` together.
 
 ### Example: Skip to the next slide
 
@@ -37,7 +37,7 @@ class SkipSlideShortcut extends FlutterDeckShortcut<SkipSlideIntent> {
   const SkipSlideShortcut();
 
   @override
-  ShortcutActivator get activator => const SingleActivator(LogicalKeyboardKey.arrowRight, alt: true);
+  Set<ShortcutActivator> get activators => const {SingleActivator(LogicalKeyboardKey.arrowRight, alt: true)};
 
   @override
   SkipSlideIntent get intent => const SkipSlideIntent();
