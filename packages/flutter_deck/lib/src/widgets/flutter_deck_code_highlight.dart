@@ -399,15 +399,17 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
         color: codeTheme.backgroundColor,
         borderRadius: const BorderRadius.all(Radius.circular(16)),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (widget.fileName != null) ...[Text(widget.fileName!, style: textStyle), const SizedBox(height: 8)],
-            content,
-          ],
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (widget.fileName != null) ...[Text(widget.fileName!, style: textStyle), const SizedBox(height: 8)],
+              content,
+            ],
+          ),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const _speakerNotes = '''
 - Use FlutterDeckCodeHighlight widget to highlight code.
@@ -94,7 +95,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
             return FlutterDeckCodeHighlightTheme(
               data: FlutterDeckCodeHighlightTheme.of(
                 context,
-              ).copyWith(textStyle: FlutterDeckTheme.of(context).textTheme.bodyMedium),
+              ).copyWith(textStyle: GoogleFonts.googleSansCode(fontSize: 26)),
               child: FlutterDeckCodeHighlight(
                 code: codeCode,
                 fileName: 'code_highlight_slide.dart',
