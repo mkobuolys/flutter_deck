@@ -168,7 +168,7 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
       if (widget.highlightedLines.isEmpty) {
         content = coloredCode;
       } else {
-        final numLines = animatedCode.split(r'\n').length;
+        final numLines = animatedCode.split('\n').length;
         final fadedColoredCode = Text.rich(highlightedText, style: defaultTextStyle);
 
         content = Stack(
