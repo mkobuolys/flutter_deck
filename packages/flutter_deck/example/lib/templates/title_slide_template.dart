@@ -11,15 +11,18 @@ class TitleSlideTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlutterDeckSlideBase(
       contentBuilder: (context) => Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(title, style: const TextStyle(fontSize: 96, fontWeight: FontWeight.bold)),
-            if (subtitle != null) Text(subtitle!, style: const TextStyle(fontSize: 80, height: 1)),
-            const SizedBox(height: 64),
-            FlutterDeckSpeakerInfoWidget(speakerInfo: context.flutterDeck.speakerInfo!),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(64),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(title, style: const TextStyle(fontSize: 96, fontWeight: FontWeight.bold)),
+              if (subtitle != null) Text(subtitle!, style: const TextStyle(fontSize: 80, height: 1)),
+              const SizedBox(height: 64),
+              FlutterDeckSpeakerInfoWidget(speakerInfo: context.flutterDeck.speakerInfo!),
+            ],
+          ),
         ),
       ),
     );

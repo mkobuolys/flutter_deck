@@ -18,10 +18,8 @@ class QuoteSlide extends FlutterDeckSlideWidget {
 
   @override
   Widget build(BuildContext context) {
-    const quote =
-        '"If you really look closely, most overnight successes '
-        'took a long time."';
-    const attribution = '- Steve Jobs';
+    const quote = '"I used to hate making slides. Now I just write Flutter code!"';
+    const attribution = '- Every Flutter developer ever';
 
     return FlutterDeckSlide.quote(
       quote: quote,

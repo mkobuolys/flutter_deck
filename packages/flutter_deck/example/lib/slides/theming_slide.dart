@@ -30,20 +30,18 @@ class ThemingSlide extends FlutterDeckSlideWidget {
       ),
       leftBuilder: (context) => Center(
         child: Text(
-          'You can set the global theme for the whole deck by specifying '
-          'lightTheme and darkTheme properties in the FlutterDeckApp widget.',
-          style: FlutterDeckTheme.of(context).textTheme.bodyMedium.copyWith(fontWeight: FontWeight.w500),
+          'Global themes are great...\n\nThey keep your presentation looking '
+          'consistent and professional.',
+          style: FlutterDeckTheme.of(context).textTheme.title,
           textAlign: TextAlign.justify,
         ),
       ),
       rightBuilder: (context) => Center(
         child: Text(
-          'You can also override the theme for a single slide by specifying '
-          'the theme property in the FlutterDeckSlide widget. It will be '
-          'merged with the global theme (only the properties you specify will '
-          'be overridden).\n\nJust like in this slide. Not UX friendly, but '
-          'you get the idea.',
-          style: FlutterDeckTheme.of(context).textTheme.bodyMedium.copyWith(fontWeight: FontWeight.w500),
+          '...but slide-level themes let you break the rules!\n\n'
+          'Just like this slide. It might not be UX friendly, but it proves '
+          'a point.',
+          style: FlutterDeckTheme.of(context).textTheme.title,
           textAlign: TextAlign.justify,
         ),
       ),

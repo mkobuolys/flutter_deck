@@ -37,11 +37,10 @@ class BackgroundSlide extends FlutterDeckSlideWidget {
       },
       builder: (context) => Center(
         child: Text(
-          'It is possible to define a global background for the light and dark '
-          'themes separately. The background could be a solid color, gradient, '
-          'image or any custom widget. Of course, you can override it later '
-          'for each slide, too.',
-          style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
+          "Gradients make everything 10x more premium. It's a proven fact.\n\n"
+          'But if you prefer solid colors, images, or even custom widgets, '
+          'flutter_deck has you covered.',
+          style: FlutterDeckTheme.of(context).textTheme.title,
           textAlign: TextAlign.center,
         ),
       ),

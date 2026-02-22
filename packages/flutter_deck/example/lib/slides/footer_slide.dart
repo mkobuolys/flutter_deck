@@ -26,10 +26,9 @@ class FooterSlide extends FlutterDeckSlideWidget {
     return FlutterDeckSlide.blank(
       builder: (context) => Center(
         child: Text(
-          'This showcases the usage of a custom footer widget using a row '
-          'of multiple widgets for the footer (this also overrides the social '
-          'handle).',
-          style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
+          'A polished footer makes everything look professional.\n\n'
+          'Slide numbers, social handles, or fully custom widgets? Easy.',
+          style: FlutterDeckTheme.of(context).textTheme.title,
           textAlign: TextAlign.center,
         ),
       ),

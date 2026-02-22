@@ -101,13 +101,13 @@ class FlutterDeckExample extends StatelessWidget {
         const TransitionsSlide(),
         const StepsSlide(),
         const CodeHighlightSlide(),
+        const PresenterSlide(),
+        const PluginsSlide(),
         // You can use any widget as a slide.
-        Scaffold(
-          backgroundColor: Colors.blue,
-          body: Builder(
-            builder: (context) => Center(
-              child: Text('You can use any widget as a slide!', style: FlutterDeckTheme.of(context).textTheme.title),
-            ),
+        const _CounterSlideWidget().withSlideConfiguration(
+          const FlutterDeckSlideConfiguration(
+            route: '/custom-widget-as-slide',
+            title: 'Using custom widgets as slides',
           ),
         ),
         // You can use the FlutterDeckSlide widgets without subclassing them.
@@ -115,11 +115,11 @@ class FlutterDeckExample extends StatelessWidget {
           configuration: const FlutterDeckSlideConfiguration(
             route: '/end',
             title: 'Thank you!',
-            speakerNotes: '- Use flutter_deck to create your own slides.',
+            speakerNotes: '- Please consider using flutter_deck for your next Flutter presentation.',
             footer: FlutterDeckFooterConfiguration(showFooter: false),
           ),
           title: 'Thank you! 👋',
-          subtitle: "Now it's your turn to use flutter_deck!",
+          subtitle: 'Please consider using flutter_deck for your next Flutter presentation.',
         ),
       ],
       // Do not forget to introduce yourself!
@@ -132,6 +132,38 @@ class FlutterDeckExample extends StatelessWidget {
       locale: const Locale('en'),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+    );
+  }
+}
+
+class _CounterSlideWidget extends StatefulWidget {
+  const _CounterSlideWidget();
+
+  @override
+  State<_CounterSlideWidget> createState() => _CounterSlideWidgetState();
+}
+
+class _CounterSlideWidgetState extends State<_CounterSlideWidget> {
+  var _count = 0;
+
+  void _increment() => setState(() => _count++);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('You can use any widget as a slide!', style: FlutterDeckTheme.of(context).textTheme.title),
+            const SizedBox(height: 32),
+            Transform.scale(
+              scale: 2,
+              child: FilledButton(onPressed: _increment, child: Text('Click counter: $_count')),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

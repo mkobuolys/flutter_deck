@@ -24,11 +24,11 @@ class TransitionsSlide extends FlutterDeckSlideWidget {
           FlutterDeckBulletList(items: const ['None (default)', 'Fade', 'Scale', 'Slide', 'Rotation', 'Custom']),
       rightBuilder: (context) => Center(
         child: Text(
-          'flutter_deck comes with a few built-in transitions. You can also '
-          'create your own.\n\nYou can set the transition for the whole deck '
-          'or for individual slides.\n\nAs you saw, this slide uses a '
+          'Smooth operators.\n\n'
+          'flutter_deck comes with a few built-in transitions, but you can also '
+          'create your own.\n\nAs you saw, this slide uses a '
           '"Rotation" transition 😵‍💫',
-          style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
+          style: FlutterDeckTheme.of(context).textTheme.title,
         ),
       ),
     );

@@ -24,13 +24,11 @@ class MarkerSlide extends FlutterDeckSlideWidget {
         child: Column(
           children: [
             Text(
-              'If you want to highlight something, you can use the marker '
-              'tool. The tool is available in the options menu in the deck '
-              'controls, or press "M" on your keyboard. The keyboard binding '
-              'can be overridden in the configuration.\n\nYou can also update '
-              'the marker color and stroke width in the global configuration.'
-              '\n\nTry out the tool by drawing a face for this good boi!',
-              style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
+              'Draw on the screen!\n'
+              'Because sometimes you just need to circle things.\n'
+              'Press "M" to use the marker tool. Try drawing a face for this '
+              'good boi!',
+              style: FlutterDeckTheme.of(context).textTheme.title,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),

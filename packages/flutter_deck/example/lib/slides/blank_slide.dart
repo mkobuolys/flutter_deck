@@ -21,9 +21,10 @@ class BlankSlide extends FlutterDeckSlideWidget {
     return FlutterDeckSlide.blank(
       builder: (context) => Center(
         child: Text(
-          'Based on the configuration, this template renders a header and a '
-          'footer.\nThe remaining space is free for your imagination.',
-          style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
+          'The canvas is yours 🎨\n\n'
+          'With a blank slide, your imagination is the limit.\n'
+          "It's just a Flutter widget, go wild!",
+          style: FlutterDeckTheme.of(context).textTheme.title,
           textAlign: TextAlign.center,
         ),
       ),
