@@ -1,6 +1,3 @@
-import 'dart:math' show min;
-
-import 'package:diff_match_patch/diff_match_patch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:syntax_highlight/syntax_highlight.dart';
@@ -8,8 +5,8 @@ import 'package:syntax_highlight/syntax_highlight.dart';
 const _dimmedCodeOpacity = 0.3;
 const _dimCodeDuration = Duration(milliseconds: 500);
 
-/// This widget provides syntax highlighting for many languages and animated code
-/// transitions.
+/// This widget provides syntax highlighting for many languages and line
+/// highlighting transitions.
 ///
 /// To customize the style of the widget, use [FlutterDeckCodeHighlightTheme].
 ///
@@ -40,23 +37,17 @@ class FlutterDeckCodeHighlight extends StatefulWidget {
   ///
   /// Provide [highlightedLines] via 0-indexed line numbers to emphasize certain
   /// lines while dimming the rest.
-  ///
-  /// When [code] changes from one frame to another, the widget will animate
-  /// the transition as if the user were typing the changes.
   const FlutterDeckCodeHighlight({
     required this.code,
     this.language = 'dart',
     this.fileName,
     this.textStyle,
     this.highlightedLines = const [],
-    this.maxAnimationDuration = const Duration(milliseconds: 2000),
-    this.keystrokeDuration = const Duration(milliseconds: 50),
     this.animateHighlightedLines = true,
     super.key,
   });
 
-  /// The code to display. When this changes, it triggers an animation from the
-  /// old code snippet.
+  /// The code to display.
   final String code;
 
   /// The language to use for syntax highlighting. Defaults to 'dart'.
@@ -72,12 +63,6 @@ class FlutterDeckCodeHighlight extends StatefulWidget {
   /// The zero-indexed lines to highlight. Remaining lines will be dimmed.
   final List<int> highlightedLines;
 
-  /// Maximum duration of the typing animation. Defaults to 2 seconds.
-  final Duration maxAnimationDuration;
-
-  /// Duration of each keystroke animation. Defaults to 50 milliseconds.
-  final Duration keystrokeDuration;
-
   /// Whether to animate the dimming of non-highlighted lines. Defaults to true.
   final bool animateHighlightedLines;
 
@@ -85,27 +70,15 @@ class FlutterDeckCodeHighlight extends StatefulWidget {
   State<FlutterDeckCodeHighlight> createState() => _FlutterDeckCodeHighlightState();
 }
 
-class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> with TickerProviderStateMixin {
-  late AnimationController _typingController;
+class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> with SingleTickerProviderStateMixin {
   late AnimationController _highlightController;
 
   Highlighter? _highlighter;
-  String? _animateFromCode;
-  List<Diff>? _diff;
-  int _numOperations = 0;
 
   @override
   void initState() {
     super.initState();
     _initHighlighter();
-
-    _typingController = AnimationController(vsync: this, value: 0);
-    _typingController.addListener(() {
-      setState(() {});
-      if (_typingController.isCompleted && widget.animateHighlightedLines && widget.highlightedLines.isNotEmpty) {
-        _highlightController.animateTo(_dimmedCodeOpacity, duration: const Duration(milliseconds: 500));
-      }
-    });
 
     _highlightController = AnimationController(vsync: this, value: 1);
     _highlightController.addListener(() {
@@ -131,10 +104,7 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
       _initHighlighter();
     }
 
-    if (oldWidget.code != widget.code) {
-      _animateFromCode = oldWidget.code;
-      _startAnimations();
-    } else if (oldWidget.highlightedLines != widget.highlightedLines) {
+    if (oldWidget.highlightedLines != widget.highlightedLines || oldWidget.code != widget.code) {
       _highlightController.value = 1.0;
       if (widget.highlightedLines.isNotEmpty) {
         if (widget.animateHighlightedLines) {
@@ -169,89 +139,10 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
     });
   }
 
-  void _startAnimations() {
-    // If we're inside a slide step, we might want to check the SlideConfig
-    // But since `didUpdateWidget` triggered this, the slide is active.
-    if (_animateFromCode != null) {
-      var numOperations = 0;
-      _diff = DiffMatchPatch().diff(_animateFromCode!, widget.code);
-      for (final d in _diff!) {
-        if (d.operation == DIFF_DELETE) {
-          numOperations += 1;
-        } else if (d.operation == DIFF_INSERT) {
-          numOperations += d.text.length;
-        }
-      }
-      _numOperations = numOperations;
-      var totalMs = numOperations * widget.keystrokeDuration.inMilliseconds;
-      totalMs = min(totalMs, widget.maxAnimationDuration.inMilliseconds);
-
-      final duration = Duration(milliseconds: totalMs);
-      _typingController.value = 0.0;
-      _highlightController.value = 1.0;
-      _typingController.animateTo(1, duration: duration);
-    }
-  }
-
   @override
   void dispose() {
-    _typingController.dispose();
     _highlightController.dispose();
     super.dispose();
-  }
-
-  String _getAnimatedCode(int frame) {
-    if (_diff == null) return widget.code;
-
-    final clampedFrame = frame.clamp(0, _numOperations - 1);
-
-    var operationCount = 0;
-    var diffIdx = 0;
-    var characterIdx = 0;
-    var animatedCode = '';
-    var containsNewline = false;
-
-    while (operationCount < clampedFrame) {
-      final diff = _diff![diffIdx];
-
-      if (diff.operation == DIFF_EQUAL) {
-        animatedCode += diff.text;
-        diffIdx += 1;
-      } else if (diff.operation == DIFF_DELETE) {
-        diffIdx += 1;
-        operationCount += 1;
-      } else {
-        animatedCode += diff.text.substring(characterIdx, characterIdx + 1);
-        if (diff.text.contains(r'\n')) {
-          containsNewline = true;
-        }
-
-        characterIdx += 1;
-        operationCount += 1;
-        if (characterIdx == diff.text.length) {
-          diffIdx += 1;
-          characterIdx = 0;
-          containsNewline = false;
-        }
-      }
-    }
-
-    if (containsNewline) {
-      animatedCode += r'\n';
-    }
-
-    // Add remaining old code.
-    while (diffIdx < _diff!.length) {
-      final diff = _diff![diffIdx];
-      if (diff.operation == DIFF_EQUAL) {
-        animatedCode += diff.text;
-      } else if (diff.operation == DIFF_DELETE) {
-        animatedCode += diff.text;
-      }
-      diffIdx += 1;
-    }
-
-    return animatedCode;
   }
 
   @override
@@ -264,14 +155,7 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
     // Default text style for measuring layout and line heights
     final defaultTextStyle = textStyle ?? FlutterDeckTheme.of(context).textTheme.bodyMedium;
 
-    String animatedCode;
-    if (_typingController.isAnimating && _animateFromCode != null && _diff != null) {
-      animatedCode = _getAnimatedCode((_typingController.value * _numOperations).floor());
-    } else if (_animateFromCode != null && _typingController.value == 0.0) {
-      animatedCode = _animateFromCode!;
-    } else {
-      animatedCode = widget.code;
-    }
+    final animatedCode = widget.code;
 
     Widget content;
     if (_highlighter == null) {
