@@ -1,5 +1,9 @@
 # NEXT
 
+- feat: rework `FlutterDeckCodeHighlight` widget
+  - Replaced `flutter_highlight` with `syntax_highlight` to use TextMate grammars.
+  - Added line highlighting feature via the `highlightedLines` property.
+  - Added exact code-piece cross-fading when updating the code dynamically with `diff_match_patch`.
 - feat: add `FlutterDeckShortcut` to define custom shortcuts and actions
 - feat: allow defining multiple key combinations for a single shortcut
   - **BREAKING**: `nextSlide`, `previousSlide`, `toggleMarker` and `toggleNavigationDrawer` properties in the `FlutterDeckShortcutsConfiguration` class now accept a `Set<ShortcutActivator>` instead of a `SingleActivator`

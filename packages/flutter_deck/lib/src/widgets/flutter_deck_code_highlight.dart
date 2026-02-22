@@ -11,8 +11,8 @@ class _Token {
 
 const _dimmedCodeOpacity = 0.3;
 
-/// This widget provides syntax highlighting for many languages and line
-/// highlighting transitions.
+/// This widget provides syntax highlighting for many languages and animated
+/// line and code highlighting transitions.
 ///
 /// To customize the style of the widget, use [FlutterDeckCodeHighlightTheme].
 ///
