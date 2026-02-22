@@ -24,7 +24,10 @@ class FlutterDeckThemeData {
       colorScheme: ColorScheme.fromSeed(brightness: brightness ?? Brightness.light, seedColor: _flutterBlue),
       useMaterial3: true,
     );
-    textTheme ??= const FlutterDeckTextTheme().apply(color: theme.colorScheme.onSurface);
+    textTheme ??= const FlutterDeckTextTheme().apply(
+      color: theme.colorScheme.onSurface,
+      fontFamily: theme.textTheme.bodyMedium?.fontFamily,
+    );
 
     return FlutterDeckThemeData.fromThemeAndText(theme, textTheme);
   }
@@ -38,7 +41,11 @@ class FlutterDeckThemeData {
   /// Creates a theme to style a slide deck from a [ThemeData].
   factory FlutterDeckThemeData.fromTheme(ThemeData theme) {
     final defaultTheme = FlutterDeckThemeData(brightness: theme.brightness);
-    final customTheme = FlutterDeckThemeData.fromThemeAndText(theme, defaultTheme.textTheme);
+    final textTheme = defaultTheme.textTheme.apply(
+      color: theme.colorScheme.onSurface,
+      fontFamily: theme.textTheme.bodyMedium?.fontFamily,
+    );
+    final customTheme = FlutterDeckThemeData.fromThemeAndText(theme, textTheme);
 
     return defaultTheme.merge(customTheme);
   }

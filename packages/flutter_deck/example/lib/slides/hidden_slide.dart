@@ -16,8 +16,10 @@ class HiddenSlide extends FlutterDeckSlideWidget {
     return FlutterDeckSlide.blank(
       builder: (context) => Center(
         child: Text(
-          "This slide is hidden. Oh, but you can't see it...",
-          style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
+          'Shhh... this slide is a secret! 🤫\n\n'
+          "Oh, but you can't see it...",
+          style: FlutterDeckTheme.of(context).textTheme.title,
+          textAlign: TextAlign.center,
         ),
       ),
     );

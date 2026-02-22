@@ -27,12 +27,11 @@ class StepsSlide extends FlutterDeckSlideWidget {
       ),
       rightBuilder: (context) => Center(
         child: Text(
-          '"Steps" is a feature that allows you to navigate through a slide, '
-          'well, step by step.\n\nYou can access the current step from any '
-          'widget. This way, you can reveal or hide content, run animations, '
-          'etc.\n\nFlutterDeckBulletList widget (the one on the left) supports '
-          'steps out of the box.',
-          style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
+          'Step. By. Step.\n\nBuilding up ideas piece by piece keeps your '
+          'audience engaged.\n\nFlutterDeckBulletList supports '
+          'steps out of the box, or use the current step to animate any custom '
+          'widget.',
+          style: FlutterDeckTheme.of(context).textTheme.title,
         ),
       ),
     );

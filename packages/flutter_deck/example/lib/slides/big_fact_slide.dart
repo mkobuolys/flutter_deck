@@ -18,14 +18,9 @@ class BigFactSlide extends FlutterDeckSlideWidget {
 
   @override
   Widget build(BuildContext context) {
-    const title = '100%';
-    const subtitle =
-        'The test coverage value that flutter_deck will probably '
-        'never achieve';
-
     return FlutterDeckSlide.bigFact(
-      title: title,
-      subtitle: subtitle,
+      title: '100% Flutter',
+      subtitle: 'Built from the ground up to leverage the framework you love.',
       theme: FlutterDeckTheme.of(context).copyWith(
         bigFactSlideTheme: const FlutterDeckBigFactSlideThemeData(titleTextStyle: TextStyle(color: Colors.amber)),
       ),

@@ -9,6 +9,8 @@ export 'image_slide.dart';
 export 'layout_structure_slide.dart';
 export 'localization_slide.dart';
 export 'marker_slide.dart';
+export 'plugins_slide.dart';
+export 'presenter_slide.dart';
 export 'quote_slide.dart';
 export 'split_slide.dart';
 export 'steps_slide.dart';

@@ -86,15 +86,15 @@ class FlutterDeckTextTheme {
 
   /// Creates a copy of this object replacing or altering the specified
   /// properties.
-  FlutterDeckTextTheme apply({Color? color}) {
+  FlutterDeckTextTheme apply({String? fontFamily, Color? color}) {
     return copyWith(
-      display: display.apply(color: color),
-      header: header.apply(color: color),
-      title: title.apply(color: color),
-      subtitle: subtitle.apply(color: color),
-      bodyLarge: bodyLarge.apply(color: color),
-      bodyMedium: bodyMedium.apply(color: color),
-      bodySmall: bodySmall.apply(color: color),
+      display: display.apply(fontFamily: fontFamily, color: color),
+      header: header.apply(fontFamily: fontFamily, color: color),
+      title: title.apply(fontFamily: fontFamily, color: color),
+      subtitle: subtitle.apply(fontFamily: fontFamily, color: color),
+      bodyLarge: bodyLarge.apply(fontFamily: fontFamily, color: color),
+      bodyMedium: bodyMedium.apply(fontFamily: fontFamily, color: color),
+      bodySmall: bodySmall.apply(fontFamily: fontFamily, color: color),
     );
   }
 }

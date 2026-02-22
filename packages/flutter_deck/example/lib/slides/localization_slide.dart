@@ -31,11 +31,10 @@ class LocalizationSlide extends FlutterDeckSlideWidget {
             Text('Current locale: $locale', style: FlutterDeckTheme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 32),
             Text(
-              'It is possible to localize your slide deck using the same '
-              'approach as any other Flutter app.\nUse deck controls to change '
-              'the locale and see the text change without restarting your '
-              'presentation!',
-              style: FlutterDeckTheme.of(context).textTheme.bodyMedium,
+              'Hola, Bonjour, Hello!\n\n'
+              'Built-in UI localization means your presentation speaks '
+              "everyone's language.",
+              style: FlutterDeckTheme.of(context).textTheme.title,
               textAlign: TextAlign.center,
             ),
           ],

@@ -22,7 +22,7 @@ class ImageSlide extends FlutterDeckSlideWidget {
   Widget build(BuildContext context) {
     return FlutterDeckSlide.image(
       imageBuilder: (context) => Image.asset(_imageName),
-      label: 'You can also add a small label here (if you want) 👀',
+      label: 'A picture is worth 1000 lines of code 📸',
     );
   }
 }

@@ -35,6 +35,8 @@
       )
       ```
 
+- docs: update example
+
 # 0.27.0
 
 - feat: add slide template overrides

@@ -13,7 +13,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
         configuration: const FlutterDeckSlideConfiguration(
           route: '/code-highlight',
           speakerNotes: _speakerNotes,
-          header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
+          header: FlutterDeckHeaderConfiguration(title: 'Your code, beautifully highlighted.'),
           steps: 3,
         ),
       );
@@ -94,7 +94,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
             return FlutterDeckCodeHighlightTheme(
               data: FlutterDeckCodeHighlightTheme.of(
                 context,
-              ).copyWith(textStyle: FlutterDeckTheme.of(context).textTheme.bodySmall),
+              ).copyWith(textStyle: FlutterDeckTheme.of(context).textTheme.bodyMedium),
               child: FlutterDeckCodeHighlight(
                 code: codeCode,
                 fileName: 'code_highlight_slide.dart',
