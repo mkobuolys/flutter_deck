@@ -1,6 +1,6 @@
 name: flutter_deck_pptx_export
 description: A flutter_deck plugin to export presentations to PPTX format.
-version: 0.3.1
+version: 0.4.0
 resolution: workspace
 homepage: https://github.com/mkobuolys/flutter_deck
 repository: https://github.com/mkobuolys/flutter_deck/tree/main/packages/flutter_deck_pptx_export
@@ -23,7 +23,7 @@ dependencies:
   file_saver: ^0.3.1
   flutter:
     sdk: flutter
-  flutter_deck: ^0.27.0
+  flutter_deck: ^0.28.0
   open_xml: ^0.2.0
 
 dev_dependencies:

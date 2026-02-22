@@ -1,4 +1,4 @@
-# NEXT
+# 0.28.0
 
 - feat: rework `FlutterDeckCodeHighlight` widget
   - Replaced `flutter_highlight` with `syntax_highlight` to use TextMate grammars.
@@ -35,6 +35,8 @@
       )
       ```
 
+- fix: scrollable code in `FlutterDeckCodeHighlight` widget
+  - **BREAKING**: if you were wrapping `FlutterDeckCodeHighlight` in a scrollable view like `SingleChildScrollView` to avoid overflow, you should remove it now
 - docs: update example
 
 # 0.27.0
