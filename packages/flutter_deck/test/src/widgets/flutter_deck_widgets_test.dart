@@ -72,7 +72,11 @@ void main() {
         ),
       );
 
-      expect(find.byType(DecoratedBox), findsWidgets);
+      expect(find.text('void main() {}'), findsOneWidget);
+
+      await tester.pumpAndSettle();
+
+      expect(find.byType(RichText), findsWidgets);
     });
   });
 
