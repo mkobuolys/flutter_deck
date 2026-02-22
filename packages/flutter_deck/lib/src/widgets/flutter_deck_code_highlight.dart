@@ -44,8 +44,12 @@ class FlutterDeckCodeHighlight extends StatefulWidget {
   /// Provide [highlightedLines] via 0-indexed line numbers to emphasize certain
   /// lines while dimming the rest.
   ///
-  /// The [codeTransitionDuration] controls the duration of the animation when
+  /// The [animateCodeUpdate] controls whether to animate the code update.
+  ///
+  /// The [codeUpdateDuration] controls the duration of the animation when
   /// the code changes.
+  ///
+  /// The [animateHighlightedLines] controls whether to animate the highlighted lines.
   ///
   /// The [highlightDuration] controls the duration of the animation when the
   /// highlighted lines change.
@@ -54,7 +58,8 @@ class FlutterDeckCodeHighlight extends StatefulWidget {
     this.language = 'dart',
     this.fileName,
     this.textStyle,
-    this.codeTransitionDuration = const Duration(milliseconds: 300),
+    this.animateCodeUpdate = true,
+    this.codeUpdateDuration = const Duration(milliseconds: 300),
     this.highlightedLines = const [],
     this.animateHighlightedLines = true,
     this.highlightDuration = const Duration(milliseconds: 500),
@@ -80,8 +85,11 @@ class FlutterDeckCodeHighlight extends StatefulWidget {
   /// Whether to animate the dimming of non-highlighted lines. Defaults to true.
   final bool animateHighlightedLines;
 
-  /// The duration of the code transition animation. Defaults to 300ms.
-  final Duration codeTransitionDuration;
+  /// Whether to animate the code update. Defaults to true.
+  final bool animateCodeUpdate;
+
+  /// The duration of the code update animation. Defaults to 300ms.
+  final Duration codeUpdateDuration;
 
   /// The duration of the highlight animation. Defaults to 500ms.
   final Duration highlightDuration;
@@ -105,7 +113,7 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
     super.initState();
     _initHighlighter();
 
-    _transitionController = AnimationController(vsync: this, duration: widget.codeTransitionDuration);
+    _transitionController = AnimationController(vsync: this, duration: widget.codeUpdateDuration);
     _highlightController = AnimationController(vsync: this, value: 1);
 
     _transitionController.addListener(() {
@@ -141,7 +149,11 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
       DiffMatchPatch().diffCleanupSemantic(_diff!);
 
       _updateTokens();
-      _transitionController.forward(from: 0);
+      if (widget.animateCodeUpdate) {
+        _transitionController.forward(from: 0);
+      } else {
+        _transitionController.value = 1.0;
+      }
     }
 
     if (oldWidget.highlightedLines != widget.highlightedLines) {
