@@ -7,6 +7,7 @@ import 'package:flutter_deck_example/templates/templates.dart';
 import 'package:flutter_deck_pdf_export/flutter_deck_pdf_export.dart';
 import 'package:flutter_deck_pptx_export/flutter_deck_pptx_export.dart';
 import 'package:flutter_deck_web_client/flutter_deck_web_client.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const FlutterDeckExample());
@@ -27,14 +28,14 @@ class FlutterDeckExample extends StatelessWidget {
             LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [Color(0xFFFFDEE9), Color(0xFFB5FFFC)],
+              colors: [Color(0xFFFEE140), Color(0xFFFA709A)], // Lemon Yellow to Hot Pink
             ),
           ),
           dark: FlutterDeckBackground.gradient(
             LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [Color(0xFF16222A), Color(0xFF3A6073)],
+              colors: [Color(0xFF000428), Color(0xFF004E92)], // Midnight Blue to Ocean Blue
             ),
           ),
         ),
@@ -47,13 +48,13 @@ class FlutterDeckExample extends StatelessWidget {
         // Set defaults for the header.
         header: const FlutterDeckHeaderConfiguration(showHeader: false),
         // Override the default marker configuration.
-        marker: const FlutterDeckMarkerConfiguration(color: Colors.cyan, strokeWidth: 8),
+        marker: const FlutterDeckMarkerConfiguration(color: Color(0xFF00E5FF), strokeWidth: 8), // Electric Cyan marker
         // Show progress indicator with specifc gradient and background color.
         progressIndicator: const FlutterDeckProgressIndicator.gradient(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Colors.pink, Colors.purple],
+            colors: [Color(0xFF00E5FF), Color(0xFFFA709A)], // Cyan to Hot Pink
           ),
           backgroundColor: Colors.black,
         ),
@@ -71,14 +72,17 @@ class FlutterDeckExample extends StatelessWidget {
       ),
       // You can also define your own light...
       lightTheme: FlutterDeckThemeData.fromTheme(
-        ThemeData.from(colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFB5FFFC)), useMaterial3: true),
+        ThemeData.from(
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFFF3366)),
+          useMaterial3: true,
+        ).copyWith(textTheme: GoogleFonts.outfitTextTheme()),
       ),
       // ...and dark themes.
       darkTheme: FlutterDeckThemeData.fromTheme(
         ThemeData.from(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF16222A), brightness: Brightness.dark),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF00E5FF), brightness: Brightness.dark),
           useMaterial3: true,
-        ),
+        ).copyWith(textTheme: GoogleFonts.outfitTextTheme(ThemeData.dark().textTheme)),
       ),
       // Add custom functionality using plugins.
       plugins: [FlutterDeckAutoplayPlugin(), FlutterDeckPptxExportPlugin(), FlutterDeckPdfExportPlugin()],
