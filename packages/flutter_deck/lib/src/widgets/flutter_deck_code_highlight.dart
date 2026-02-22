@@ -1,6 +1,13 @@
+import 'package:diff_match_patch/diff_match_patch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:syntax_highlight/syntax_highlight.dart';
+
+class _Token {
+  const _Token(this.char, this.style);
+  final String char;
+  final TextStyle? style;
+}
 
 const _dimmedCodeOpacity = 0.3;
 const _dimCodeDuration = Duration(milliseconds: 500);
@@ -70,17 +77,28 @@ class FlutterDeckCodeHighlight extends StatefulWidget {
   State<FlutterDeckCodeHighlight> createState() => _FlutterDeckCodeHighlightState();
 }
 
-class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> with SingleTickerProviderStateMixin {
+class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> with TickerProviderStateMixin {
   late AnimationController _highlightController;
+  late AnimationController _transitionController;
 
   Highlighter? _highlighter;
+  String? _animateFromCode;
+  List<Diff>? _diff;
+  List<_Token> _oldTokens = [];
+  List<_Token> _newTokens = [];
 
   @override
   void initState() {
     super.initState();
     _initHighlighter();
 
+    _transitionController = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
     _highlightController = AnimationController(vsync: this, value: 1);
+
+    _transitionController.addListener(() {
+      setState(() {});
+    });
+
     _highlightController.addListener(() {
       setState(() {});
     });
@@ -104,7 +122,16 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
       _initHighlighter();
     }
 
-    if (oldWidget.highlightedLines != widget.highlightedLines || oldWidget.code != widget.code) {
+    if (oldWidget.code != widget.code) {
+      _animateFromCode = oldWidget.code;
+      _diff = DiffMatchPatch().diff(_animateFromCode!, widget.code);
+      DiffMatchPatch().diffCleanupSemantic(_diff!);
+
+      _updateTokens();
+      _transitionController.forward(from: 0);
+    }
+
+    if (oldWidget.highlightedLines != widget.highlightedLines) {
       _highlightController.value = 1.0;
       if (widget.highlightedLines.isNotEmpty) {
         if (widget.animateHighlightedLines) {
@@ -119,7 +146,6 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Re-initialize theme if brightness changes
     _initHighlighter();
   }
 
@@ -136,13 +162,161 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
 
     setState(() {
       _highlighter = Highlighter(language: widget.language, theme: theme);
+      _updateTokens();
     });
+  }
+
+  void _updateTokens() {
+    if (_highlighter == null) return;
+
+    if (_animateFromCode != null) {
+      final oldSpan = _highlighter!.highlight(_animateFromCode!);
+      _oldTokens = _getTokens(oldSpan);
+    }
+
+    final newSpan = _highlighter!.highlight(widget.code);
+    _newTokens = _getTokens(newSpan);
+  }
+
+  List<_Token> _getTokens(TextSpan span) {
+    final tokens = <_Token>[];
+    void visit(InlineSpan s, TextStyle? parentStyle) {
+      final style = s.style == null
+          ? parentStyle
+          : s.style!.inherit
+          ? parentStyle?.merge(s.style) ?? s.style
+          : s.style;
+      if (s is TextSpan) {
+        if (s.text != null) {
+          for (var i = 0; i < s.text!.length; i++) {
+            tokens.add(_Token(s.text![i], style));
+          }
+        }
+        if (s.children != null) {
+          for (final child in s.children!) {
+            visit(child, style);
+          }
+        }
+      }
+    }
+
+    visit(span, null);
+    return tokens;
   }
 
   @override
   void dispose() {
     _highlightController.dispose();
+    _transitionController.dispose();
     super.dispose();
+  }
+
+  List<InlineSpan> _buildAnimatedSpans(TextStyle defaultTextStyle) {
+    if (_diff == null || _transitionController.value == 1.0) {
+      return _buildStaticSpans(_newTokens, defaultTextStyle);
+    }
+
+    final spans = <InlineSpan>[];
+    var oldIdx = 0;
+    var newIdx = 0;
+    final t = _transitionController.value;
+
+    InlineSpan buildTransitionSpan(List<_Token> tokens, double factor) {
+      return WidgetSpan(
+        alignment: PlaceholderAlignment.baseline,
+        baseline: TextBaseline.alphabetic,
+        child: ClipRect(
+          child: Align(
+            alignment: Alignment.centerLeft,
+            widthFactor: factor,
+            child: Opacity(
+              opacity: factor,
+              child: Text.rich(TextSpan(children: _buildStaticSpans(tokens, defaultTextStyle))),
+            ),
+          ),
+        ),
+      );
+    }
+
+    for (final diff in _diff!) {
+      if (diff.operation == DIFF_EQUAL) {
+        final length = diff.text.length;
+        final chunk = _newTokens.sublist(newIdx, newIdx + length);
+        spans.addAll(_buildStaticSpans(chunk, defaultTextStyle));
+        oldIdx += length;
+        newIdx += length;
+      } else if (diff.operation == DIFF_INSERT) {
+        final length = diff.text.length;
+        final chunk = _newTokens.sublist(newIdx, newIdx + length);
+
+        final currentLineTokens = <_Token>[];
+        for (final token in chunk) {
+          if (token.char == '\n') {
+            if (currentLineTokens.isNotEmpty) {
+              spans.add(buildTransitionSpan(currentLineTokens, t));
+              currentLineTokens.clear();
+            }
+            spans.add(const TextSpan(text: '\n'));
+          } else {
+            currentLineTokens.add(token);
+          }
+        }
+        if (currentLineTokens.isNotEmpty) {
+          spans.add(buildTransitionSpan(currentLineTokens, t));
+        }
+        newIdx += length;
+      } else if (diff.operation == DIFF_DELETE) {
+        final length = diff.text.length;
+        final chunk = _oldTokens.sublist(oldIdx, oldIdx + length);
+
+        final currentLineTokens = <_Token>[];
+        for (final token in chunk) {
+          if (token.char == '\n') {
+            if (currentLineTokens.isNotEmpty) {
+              spans.add(buildTransitionSpan(currentLineTokens, 1.0 - t));
+              currentLineTokens.clear();
+            }
+            spans.add(const TextSpan(text: '\n'));
+          } else {
+            currentLineTokens.add(token);
+          }
+        }
+        if (currentLineTokens.isNotEmpty) {
+          spans.add(buildTransitionSpan(currentLineTokens, 1.0 - t));
+        }
+        oldIdx += length;
+      }
+    }
+    return spans;
+  }
+
+  List<InlineSpan> _buildStaticSpans(List<_Token> tokens, TextStyle defaultTextStyle) {
+    if (tokens.isEmpty) return [];
+    final spans = <InlineSpan>[];
+    var currentStyle = tokens.first.style;
+    var currentBuffer = StringBuffer()..write(tokens.first.char);
+
+    for (var i = 1; i < tokens.length; i++) {
+      if (tokens[i].style == currentStyle) {
+        currentBuffer.write(tokens[i].char);
+      } else {
+        spans.add(TextSpan(text: currentBuffer.toString(), style: currentStyle ?? defaultTextStyle));
+        currentStyle = tokens[i].style;
+        currentBuffer = StringBuffer()..write(tokens[i].char);
+      }
+    }
+    spans.add(TextSpan(text: currentBuffer.toString(), style: currentStyle ?? defaultTextStyle));
+    return spans;
+  }
+
+  int _countLinesInSpans(List<InlineSpan> spans) {
+    var count = 1;
+    for (final span in spans) {
+      if (span is TextSpan && span.text != null) {
+        count += '\n'.allMatches(span.text!).length;
+      }
+    }
+    return count;
   }
 
   @override
@@ -155,21 +329,19 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
     // Default text style for measuring layout and line heights
     final defaultTextStyle = textStyle ?? FlutterDeckTheme.of(context).textTheme.bodyMedium;
 
-    final animatedCode = widget.code;
-
     Widget content;
     if (_highlighter == null) {
       // Still loading the highlighter/theme
-      content = Text(animatedCode, style: defaultTextStyle);
+      content = Text(widget.code, style: defaultTextStyle);
     } else {
-      final highlightedText = _highlighter!.highlight(animatedCode);
-      final coloredCode = Text.rich(highlightedText, style: defaultTextStyle);
+      final animatedSpans = _buildAnimatedSpans(defaultTextStyle);
+      final coloredCode = Text.rich(TextSpan(children: animatedSpans), style: defaultTextStyle);
 
       if (widget.highlightedLines.isEmpty) {
         content = coloredCode;
       } else {
-        final numLines = animatedCode.split('\n').length;
-        final fadedColoredCode = Text.rich(highlightedText, style: defaultTextStyle);
+        final numLines = _countLinesInSpans(animatedSpans);
+        final fadedColoredCode = Text.rich(TextSpan(children: animatedSpans), style: defaultTextStyle);
 
         content = Stack(
           children: [

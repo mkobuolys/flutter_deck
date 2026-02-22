@@ -21,6 +21,7 @@ environment:
 
 dependencies:
   auto_size_text: ^3.0.0
+  diff_match_patch: ^0.4.1
   flutter:
     sdk: flutter
   flutter_deck_client: ^0.3.0

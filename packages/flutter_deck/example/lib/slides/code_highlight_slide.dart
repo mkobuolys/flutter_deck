@@ -14,7 +14,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
           route: '/code-highlight',
           speakerNotes: _speakerNotes,
           header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
-          steps: 4,
+          steps: 3,
         ),
       );
 
@@ -64,30 +64,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
     );
   }
 }''';
-            } else if (stepNumber == 3) {
-              codeCode = '''
-import 'package:flutter/material.dart';
-import 'package:flutter_deck/flutter_deck.dart';
-
-class CodeHighlightSlide extends FlutterDeckSlideWidget {
-  const CodeHighlightSlide()
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/code-highlight',
-            header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
-          ),
-        );
-
-  @override
-  Widget build(BuildContext context) {
-    return FlutterDeckSlide.blank(
-      builder: (context) => const Center(
-        child: Text('Use FlutterDeckCodeHighlight widget to highlight code!'),
-      ),
-    );
-  }
-}''';
-              highlightedLines = [13, 14, 15, 16, 17, 18, 19, 20];
+              highlightedLines = [12, 13, 14, 15, 16, 17, 18, 19, 20];
             } else {
               codeCode = '''
 import 'package:flutter/material.dart';
