@@ -45,6 +45,8 @@ class FlutterDeckBulletListDemoSlide extends FlutterDeckSlideWidget {
 
 Provides a widget that gives you customizable syntax highlighting for many languages.
 
+This widget supports line highlighting and animated code transitions natively. You can pass a list of 0-based indices to `highlightedLines` to emphasize specific lines while dimming the rest. It uses `syntax_highlight` to parse TextMate grammars and `diff_match_patch` to perfectly cross-fade only the changed code segments dynamically whenever the `code` string updates.
+
 ```dart
 class CodeHighlightSlide extends FlutterDeckSlideWidget {
   const CodeHighlightSlide()
