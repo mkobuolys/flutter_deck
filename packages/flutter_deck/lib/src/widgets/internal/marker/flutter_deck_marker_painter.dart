@@ -7,11 +7,7 @@ class FlutterDeckMarkerPainter extends CustomPainter {
   /// Creates a [FlutterDeckMarkerPainter].
   ///
   /// The [configuration] and [paths] arguments must not be null.
-  const FlutterDeckMarkerPainter({
-    required this.configuration,
-    required this.paths,
-    this.version = 0,
-  });
+  const FlutterDeckMarkerPainter({required this.configuration, required this.paths, this.version = 0});
 
   /// The configuration of the marker.
   final FlutterDeckMarkerConfiguration configuration;

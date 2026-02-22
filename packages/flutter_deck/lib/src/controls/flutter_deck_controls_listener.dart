@@ -15,6 +15,8 @@ import 'package:flutter_deck/src/widgets/internal/internal.dart';
 /// * `toggleMarker` - Toggle the slide deck's marker.
 /// * `toggleNavigationDrawer` - Toggle the navigation drawer.
 ///
+/// Also, custom shortcuts and actions can be defined by the user.
+///
 /// Cursor visibility is also handled by this widget. The cursor will be hidden
 /// after 3 seconds of inactivity.
 ///
@@ -100,6 +102,24 @@ class FlutterDeckControlsListener extends StatelessWidget {
 
     final shortcuts = controls.shortcuts;
 
+    final allShortcuts = [
+      ...shortcuts.nextSlide,
+      ...shortcuts.previousSlide,
+      ...shortcuts.toggleMarker,
+      ...shortcuts.toggleNavigationDrawer,
+      for (final shortcut in shortcuts.customShortcuts) ...shortcut.activators,
+    ];
+
+    final seen = <ShortcutActivator>{};
+
+    for (final shortcut in allShortcuts) {
+      assert(
+        seen.add(shortcut),
+        'Shortcuts must not clash with each other. '
+        'Multiple actions are mapped to the "$shortcut" shortcut.',
+      );
+    }
+
     if (controls.presenterToolbarVisible || shortcuts.enabled) {
       widget = Actions(
         actions: <Type, Action<Intent>>{
@@ -107,6 +127,7 @@ class FlutterDeckControlsListener extends StatelessWidget {
           GoPreviousIntent: GoPreviousAction(controlsNotifier),
           ToggleDrawerIntent: ToggleDrawerAction(controlsNotifier),
           ToggleMarkerIntent: ToggleMarkerAction(controlsNotifier),
+          for (final shortcut in shortcuts.customShortcuts) shortcut.intentType: shortcut.action,
         },
         child: widget,
       );
@@ -118,6 +139,8 @@ class FlutterDeckControlsListener extends StatelessWidget {
             for (final activator in shortcuts.previousSlide) activator: const GoPreviousIntent(),
             for (final activator in shortcuts.toggleMarker) activator: const ToggleMarkerIntent(),
             for (final activator in shortcuts.toggleNavigationDrawer) activator: const ToggleDrawerIntent(),
+            for (final shortcut in shortcuts.customShortcuts)
+              for (final activator in shortcut.activators) activator: shortcut.intent,
           },
           child: widget,
         );

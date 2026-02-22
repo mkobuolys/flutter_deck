@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_deck/src/controls/flutter_deck_shortcut.dart';
 
 /// The configuration for the slide deck controls.
 class FlutterDeckControlsConfiguration {
@@ -18,6 +19,8 @@ class FlutterDeckControlsConfiguration {
   /// - [SingleActivator] for more information on how to define a key
   /// combination.
   /// - [LogicalKeyboardKey] for a list of all available keys.
+  /// - [FlutterDeckShortcut] for more information on how to define a
+  /// custom shortcut.
   const FlutterDeckControlsConfiguration({
     this.presenterToolbarVisible = true,
     this.gestures = const FlutterDeckGesturesConfiguration.mobileOnly(),
@@ -82,12 +85,15 @@ class FlutterDeckShortcutsConfiguration {
   /// - [SingleActivator] for more information on how to define a key
   /// combination.
   /// - [LogicalKeyboardKey] for a list of all available keys.
+  /// - [FlutterDeckShortcut] for more information on how to define a
+  /// custom shortcut.
   const FlutterDeckShortcutsConfiguration({
     this.enabled = true,
     this.nextSlide = const {SingleActivator(LogicalKeyboardKey.arrowRight)},
     this.previousSlide = const {SingleActivator(LogicalKeyboardKey.arrowLeft)},
     this.toggleMarker = const {SingleActivator(LogicalKeyboardKey.keyM)},
     this.toggleNavigationDrawer = const {SingleActivator(LogicalKeyboardKey.period)},
+    this.customShortcuts = const [],
   });
 
   /// Creates a configuration for the slide deck keyboard shortcuts where they
@@ -108,4 +114,10 @@ class FlutterDeckShortcutsConfiguration {
 
   /// The key combinations to use for toggling the navigation drawer.
   final Set<ShortcutActivator> toggleNavigationDrawer;
+
+  /// Custom shortcuts for the slide deck.
+  ///
+  /// This can be used to add custom shortcuts and their corresponding actions
+  /// to the slide deck.
+  final List<FlutterDeckShortcut> customShortcuts;
 }

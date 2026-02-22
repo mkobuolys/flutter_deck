@@ -1,5 +1,6 @@
 # NEXT
 
+- feat: add `FlutterDeckShortcut` to define custom shortcuts and actions
 - feat: allow defining multiple key combinations for a single shortcut
   - **BREAKING**: `nextSlide`, `previousSlide`, `toggleMarker` and `toggleNavigationDrawer` properties in the `FlutterDeckShortcutsConfiguration` class now accept a `Set<ShortcutActivator>` instead of a `SingleActivator`
     - **Migration**: instead of:

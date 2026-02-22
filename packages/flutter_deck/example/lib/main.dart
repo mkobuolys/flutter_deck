@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck_example/l10n/l10n.dart';
+import 'package:flutter_deck_example/shortcuts/shortcuts.dart';
 import 'package:flutter_deck_example/slides/slides.dart';
 import 'package:flutter_deck_example/templates/templates.dart';
 import 'package:flutter_deck_pdf_export/flutter_deck_pdf_export.dart';
@@ -36,6 +37,10 @@ class FlutterDeckExample extends StatelessWidget {
               colors: [Color(0xFF16222A), Color(0xFF3A6073)],
             ),
           ),
+        ),
+        // Update controls and add custom shortcuts.
+        controls: const FlutterDeckControlsConfiguration(
+          shortcuts: FlutterDeckShortcutsConfiguration(customShortcuts: [SkipSlideShortcut()]),
         ),
         // Set defaults for the footer.
         footer: const FlutterDeckFooterConfiguration(showSlideNumbers: true, showSocialHandle: true),

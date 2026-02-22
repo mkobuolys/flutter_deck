@@ -1,6 +1,6 @@
 ---
 title: Presenter view
-navOrder: 6
+navOrder: 5
 ---
 
 The presenter view allows you to control your presentation from a separate screen or (even) device. It displays the current slide, speaker notes, and a timer.
