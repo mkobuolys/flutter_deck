@@ -14,6 +14,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
           route: '/code-highlight',
           speakerNotes: _speakerNotes,
           header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
+          steps: 4,
         ),
       );
 
@@ -21,12 +22,27 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
   Widget build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => Center(
-        child: FlutterDeckCodeHighlightTheme(
-          data: FlutterDeckCodeHighlightTheme.of(
-            context,
-          ).copyWith(textStyle: FlutterDeckTheme.of(context).textTheme.bodySmall),
-          child: const FlutterDeckCodeHighlight(
-            code: '''
+        child: FlutterDeckSlideStepsBuilder(
+          builder: (context, stepNumber) {
+            String codeCode;
+            var highlightedLines = <int>[];
+
+            if (stepNumber == 1) {
+              codeCode = '''
+import 'package:flutter/material.dart';
+import 'package:flutter_deck/flutter_deck.dart';
+
+class CodeHighlightSlide extends FlutterDeckSlideWidget {
+  const CodeHighlightSlide()
+      : super(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/code-highlight',
+            header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
+          ),
+        );
+}''';
+            } else if (stepNumber == 2) {
+              codeCode = '''
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
@@ -47,10 +63,69 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
       ),
     );
   }
-}''',
-            fileName: 'code_highlight_slide.dart',
-            language: 'dart',
+}''';
+            } else if (stepNumber == 3) {
+              codeCode = '''
+import 'package:flutter/material.dart';
+import 'package:flutter_deck/flutter_deck.dart';
+
+class CodeHighlightSlide extends FlutterDeckSlideWidget {
+  const CodeHighlightSlide()
+      : super(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/code-highlight',
+            header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
           ),
+        );
+
+  @override
+  Widget build(BuildContext context) {
+    return FlutterDeckSlide.blank(
+      builder: (context) => const Center(
+        child: Text('Use FlutterDeckCodeHighlight widget to highlight code!'),
+      ),
+    );
+  }
+}''';
+              highlightedLines = [13, 14, 15, 16, 17, 18, 19, 20];
+            } else {
+              codeCode = '''
+import 'package:flutter/material.dart';
+import 'package:flutter_deck/flutter_deck.dart';
+
+class CodeHighlightSlide extends FlutterDeckSlideWidget {
+  const CodeHighlightSlide()
+      : super(
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/code-highlight',
+            header: FlutterDeckHeaderConfiguration(title: 'Code Highlighting'),
+          ),
+        );
+
+  @override
+  Widget build(BuildContext context) {
+    return FlutterDeckSlide.blank(
+      builder: (context) => const Center(
+        child: Text('Enjoy code animations!'),
+      ),
+    );
+  }
+}''';
+              highlightedLines = [16];
+            }
+
+            return FlutterDeckCodeHighlightTheme(
+              data: FlutterDeckCodeHighlightTheme.of(
+                context,
+              ).copyWith(textStyle: FlutterDeckTheme.of(context).textTheme.bodySmall),
+              child: FlutterDeckCodeHighlight(
+                code: codeCode,
+                fileName: 'code_highlight_slide.dart',
+                language: 'dart',
+                highlightedLines: highlightedLines,
+              ),
+            );
+          },
         ),
       ),
     );
