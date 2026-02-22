@@ -10,7 +10,6 @@ class _Token {
 }
 
 const _dimmedCodeOpacity = 0.3;
-const _dimCodeDuration = Duration(milliseconds: 500);
 
 /// This widget provides syntax highlighting for many languages and line
 /// highlighting transitions.
@@ -44,13 +43,21 @@ class FlutterDeckCodeHighlight extends StatefulWidget {
   ///
   /// Provide [highlightedLines] via 0-indexed line numbers to emphasize certain
   /// lines while dimming the rest.
+  ///
+  /// The [codeTransitionDuration] controls the duration of the animation when
+  /// the code changes.
+  ///
+  /// The [highlightDuration] controls the duration of the animation when the
+  /// highlighted lines change.
   const FlutterDeckCodeHighlight({
     required this.code,
     this.language = 'dart',
     this.fileName,
     this.textStyle,
+    this.codeTransitionDuration = const Duration(milliseconds: 300),
     this.highlightedLines = const [],
     this.animateHighlightedLines = true,
+    this.highlightDuration = const Duration(milliseconds: 500),
     super.key,
   });
 
@@ -73,6 +80,12 @@ class FlutterDeckCodeHighlight extends StatefulWidget {
   /// Whether to animate the dimming of non-highlighted lines. Defaults to true.
   final bool animateHighlightedLines;
 
+  /// The duration of the code transition animation. Defaults to 300ms.
+  final Duration codeTransitionDuration;
+
+  /// The duration of the highlight animation. Defaults to 500ms.
+  final Duration highlightDuration;
+
   @override
   State<FlutterDeckCodeHighlight> createState() => _FlutterDeckCodeHighlightState();
 }
@@ -92,7 +105,7 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
     super.initState();
     _initHighlighter();
 
-    _transitionController = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
+    _transitionController = AnimationController(vsync: this, duration: widget.codeTransitionDuration);
     _highlightController = AnimationController(vsync: this, value: 1);
 
     _transitionController.addListener(() {
@@ -106,7 +119,7 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
     if (widget.highlightedLines.isNotEmpty) {
       if (widget.animateHighlightedLines) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          _highlightController.animateTo(_dimmedCodeOpacity, duration: _dimCodeDuration);
+          _highlightController.animateTo(_dimmedCodeOpacity, duration: widget.highlightDuration);
         });
       } else {
         _highlightController.value = _dimmedCodeOpacity;
@@ -135,7 +148,7 @@ class _FlutterDeckCodeHighlightState extends State<FlutterDeckCodeHighlight> wit
       _highlightController.value = 1.0;
       if (widget.highlightedLines.isNotEmpty) {
         if (widget.animateHighlightedLines) {
-          _highlightController.animateTo(_dimmedCodeOpacity, duration: _dimCodeDuration);
+          _highlightController.animateTo(_dimmedCodeOpacity, duration: widget.highlightDuration);
         } else {
           _highlightController.value = _dimmedCodeOpacity;
         }
