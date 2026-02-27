@@ -68,7 +68,7 @@ jobs:
         run: dart run bin/main.dart
 
       - name: Download flutter_deck demo presentation
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: demo-presentation
           path: ./doc/website/build/demo
