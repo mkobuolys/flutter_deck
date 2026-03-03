@@ -14,9 +14,18 @@ void main() {
   group('FlutterDeckSlideSteps', () {
     testWidgets('builder and listener build properly', (tester) async {
       final mockRouter = MockFlutterDeckRouter();
-      when(mockRouter.currentStep).thenReturn(1);
       final flutterDeck = MockFlutterDeck();
+
+      when(mockRouter.currentStep).thenReturn(1);
+      when(mockRouter.currentSlideIndex).thenReturn(0);
       when(flutterDeck.router).thenReturn(mockRouter);
+      when(flutterDeck.stepNumber).thenAnswer((_) => mockRouter.currentStep);
+      when(flutterDeck.slideNumber).thenAnswer((_) => mockRouter.currentSlideIndex + 1);
+
+      final routerListeners = <VoidCallback>[];
+      when(mockRouter.addListener(any)).thenAnswer((invocation) {
+        routerListeners.add(invocation.positionalArguments[0]);
+      });
 
       var listenerCalled = false;
 
@@ -29,16 +38,20 @@ void main() {
                 listener: (context, step) {
                   listenerCalled = true;
                 },
-                child: FlutterDeckSlideStepsBuilder(builder: (context, step) => const Text(r'Step $step')),
+                child: FlutterDeckSlideStepsBuilder(builder: (context, step) => Text('Step $step')),
               ),
             ),
           ),
         ),
       );
 
-      expect(find.text('Step 1'), findsNothing);
+      expect(find.text('Step 1'), findsOneWidget);
+      expect(listenerCalled, isFalse);
 
       when(mockRouter.currentStep).thenReturn(2);
+      for (final listener in routerListeners) {
+        listener();
+      }
 
       await tester.pumpAndSettle();
 
