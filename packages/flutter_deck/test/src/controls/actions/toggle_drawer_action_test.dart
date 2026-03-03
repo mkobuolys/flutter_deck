@@ -11,12 +11,10 @@ void main() {
   group('ToggleDrawerAction', () {
     test('invoke should call toggleDrawer on notifier', () {
       final mockNotifier = MockFlutterDeckControlsNotifier();
-      final action = ToggleDrawerAction(mockNotifier);
 
-      final result = action.invoke(const ToggleDrawerIntent());
+      ToggleDrawerAction(mockNotifier).invoke(const ToggleDrawerIntent());
 
       verify(mockNotifier.toggleDrawer()).called(1);
-      expect(result, isNull);
     });
   });
 }

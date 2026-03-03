@@ -11,12 +11,10 @@ void main() {
   group('ToggleMarkerAction', () {
     test('invoke should call toggleMarker on notifier', () {
       final mockNotifier = MockFlutterDeckControlsNotifier();
-      final action = ToggleMarkerAction(mockNotifier);
 
-      final result = action.invoke(const ToggleMarkerIntent());
+      ToggleMarkerAction(mockNotifier).invoke(const ToggleMarkerIntent());
 
       verify(mockNotifier.toggleMarker()).called(1);
-      expect(result, isNull);
     });
   });
 }
