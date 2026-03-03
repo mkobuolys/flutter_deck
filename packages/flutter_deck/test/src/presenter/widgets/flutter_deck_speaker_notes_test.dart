@@ -12,21 +12,28 @@ import 'flutter_deck_speaker_notes_test.mocks.dart';
 @GenerateNiceMocks([MockSpec<FlutterDeck>(), MockSpec<FlutterDeckRouter>()])
 void main() {
   group('FlutterDeckSpeakerNotes', () {
-    testWidgets('builds notes', (tester) async {
-      final mockRouter = MockFlutterDeckRouter();
+    late MockFlutterDeck mockDeck;
+    late MockFlutterDeckRouter mockRouter;
+
+    setUp(() {
+      mockDeck = MockFlutterDeck();
+      mockRouter = MockFlutterDeckRouter();
+
       when(
         mockRouter.currentSlideConfiguration,
       ).thenReturn(const FlutterDeckSlideConfiguration(route: '/1', speakerNotes: 'test note'));
-      final flutterDeck = MockFlutterDeck();
-      when(flutterDeck.router).thenReturn(mockRouter);
+      when(mockDeck.router).thenReturn(mockRouter);
+    });
 
+    testWidgets('builds notes', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: FlutterDeckProvider(flutterDeck: flutterDeck, child: const FlutterDeckSpeakerNotes()),
+            body: FlutterDeckProvider(flutterDeck: mockDeck, child: const FlutterDeckSpeakerNotes()),
           ),
         ),
       );
+
       expect(find.byType(FlutterDeckSpeakerNotes), findsOneWidget);
       expect(find.text('test note'), findsOneWidget);
     });

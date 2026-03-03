@@ -11,7 +11,9 @@ void main() {
 
       expect(newState, equals(state));
       expect(newState.hashCode, equals(state.hashCode));
+
       final newState2 = state.copyWith(slideIndex: 10, slideStep: 5);
+
       expect(newState2.slideIndex, equals(10));
       expect(newState2.slideStep, equals(5));
     });

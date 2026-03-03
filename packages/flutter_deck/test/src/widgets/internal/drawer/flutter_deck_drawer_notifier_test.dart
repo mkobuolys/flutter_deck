@@ -5,6 +5,7 @@ void main() {
   group('FlutterDeckDrawerNotifier', () {
     test('toggle should notify listeners', () {
       final notifier = FlutterDeckDrawerNotifier();
+
       var listenerCalled = false;
 
       notifier

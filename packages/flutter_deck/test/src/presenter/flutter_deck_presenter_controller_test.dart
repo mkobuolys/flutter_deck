@@ -75,6 +75,7 @@ void main() {
       )..init();
 
       expect(controller.available, isTrue);
+
       verify(mockClient.init(any)).called(1);
       verify(mockLocalizationNotifier.addListener(any)).called(1);
       verify(mockMarkerNotifier.addListener(any)).called(1);
@@ -144,27 +145,35 @@ void main() {
 
       // Simulate route change
       when(mockRouter.currentSlideIndex).thenReturn(1);
+
       final onRouteChanged = verify(mockRouter.addListener(captureAny)).captured.first as VoidCallback;
       onRouteChanged();
+
       verify(mockClient.updateState(any)).called(1);
 
       // Simulate localization change
       when(mockLocalizationNotifier.value).thenReturn(const Locale('es'));
+
       final onLocalizationChanged =
           verify(mockLocalizationNotifier.addListener(captureAny)).captured.first as VoidCallback;
       onLocalizationChanged();
+
       verify(mockClient.updateState(any)).called(1);
 
       // Simulate marker change
       when(mockMarkerNotifier.enabled).thenReturn(true);
+
       final onMarkerStateChanged = verify(mockMarkerNotifier.addListener(captureAny)).captured.first as VoidCallback;
       onMarkerStateChanged();
+
       verify(mockClient.updateState(any)).called(1);
 
       // Simulate theme change
       when(mockThemeNotifier.value).thenReturn(ThemeMode.light);
+
       final onThemeChanged = verify(mockThemeNotifier.addListener(captureAny)).captured.first as VoidCallback;
       onThemeChanged();
+
       verify(mockClient.updateState(any)).called(1);
     });
 

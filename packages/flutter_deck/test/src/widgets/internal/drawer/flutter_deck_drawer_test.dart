@@ -11,12 +11,18 @@ import 'flutter_deck_drawer_test.mocks.dart';
 @GenerateNiceMocks([MockSpec<FlutterDeck>(), MockSpec<FlutterDeckRouter>()])
 void main() {
   group('FlutterDeckDrawer', () {
-    testWidgets('builds the drawer correctly', (tester) async {
-      final mockRouter = MockFlutterDeckRouter();
-      when(mockRouter.slides).thenReturn([]);
-      final mockDeck = MockFlutterDeck();
-      when(mockDeck.router).thenReturn(mockRouter);
+    late MockFlutterDeck mockDeck;
+    late MockFlutterDeckRouter mockRouter;
 
+    setUp(() {
+      mockDeck = MockFlutterDeck();
+      mockRouter = MockFlutterDeckRouter();
+
+      when(mockDeck.router).thenReturn(mockRouter);
+      when(mockRouter.slides).thenReturn([]);
+    });
+
+    testWidgets('builds the drawer correctly', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

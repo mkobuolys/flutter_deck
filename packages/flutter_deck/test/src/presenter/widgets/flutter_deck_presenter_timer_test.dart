@@ -6,6 +6,7 @@ void main() {
   group('FlutterDeckPresenterTimer', () {
     testWidgets('builds timer', (tester) async {
       await tester.pumpWidget(const MaterialApp(home: Scaffold(body: FlutterDeckPresenterTimer())));
+
       expect(find.byType(FlutterDeckPresenterTimer), findsOneWidget);
     });
   });
