@@ -7,11 +7,15 @@ void main() {
   group('LocalizedShortcutLabeler', () {
     testWidgets('getShortcutLabel uses default labeler logic', (tester) async {
       await tester.pumpWidget(const MaterialApp(home: Scaffold(body: Text('A'))));
+
       final context = tester.element(find.byType(Scaffold));
       final localizations = MaterialLocalizations.of(context);
 
       final labeler = LocalizedShortcutLabeler.instance;
-      final label = labeler.getShortcutLabel(const SingleActivator(LogicalKeyboardKey.keyA, control: true), localizations);
+      final label = labeler.getShortcutLabel(
+        const SingleActivator(LogicalKeyboardKey.keyA, control: true),
+        localizations,
+      );
 
       expect(label, isNotEmpty);
     });

@@ -4,30 +4,20 @@ import 'package:test/test.dart';
 void main() {
   group('FlutterDeckState', () {
     test('fromJson and toJson', () {
-      const state = FlutterDeckState(
-        locale: 'en',
-        themeMode: 'dark',
-        markerEnabled: true,
-        slideIndex: 2,
-        slideStep: 3,
-      );
+      const state = FlutterDeckState(locale: 'en', themeMode: 'dark', markerEnabled: true, slideIndex: 2, slideStep: 3);
 
       final json = state.toJson();
       final newState = FlutterDeckState.fromJson(json);
 
       expect(newState, equals(state));
       expect(newState.hashCode, equals(state.hashCode));
-          final newState2 = state.copyWith(slideIndex: 10, slideStep: 5);
+      final newState2 = state.copyWith(slideIndex: 10, slideStep: 5);
       expect(newState2.slideIndex, equals(10));
       expect(newState2.slideStep, equals(5));
     });
 
-
     test('copyWith', () {
-      const state = FlutterDeckState(
-        locale: 'en',
-        themeMode: 'dark',
-      );
+      const state = FlutterDeckState(locale: 'en', themeMode: 'dark');
 
       final newState = state.copyWith(locale: 'es', markerEnabled: true);
 

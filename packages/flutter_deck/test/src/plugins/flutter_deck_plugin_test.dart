@@ -15,12 +15,15 @@ void main() {
 
       plugin.dispose(); // Should not throw
 
-      final controls = plugin.buildControls(
-        mockContext,
-        (context, {required String label, required VoidCallback? onPressed, Widget? icon, bool? closeOnActivate}) {
-          return const SizedBox();
-        },
-      );
+      final controls = plugin.buildControls(mockContext, (
+        context, {
+        required String label,
+        required VoidCallback? onPressed,
+        Widget? icon,
+        bool? closeOnActivate,
+      }) {
+        return const SizedBox();
+      });
       expect(controls, isEmpty);
 
       final wrappedChild = plugin.wrap(mockContext, const Text('Child'));

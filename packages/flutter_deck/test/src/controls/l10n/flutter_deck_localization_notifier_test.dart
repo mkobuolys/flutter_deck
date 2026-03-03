@@ -5,17 +5,17 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('FlutterDeckLocalizationNotifier', () {
     test('update should change value', () {
-      final notifier = FlutterDeckLocalizationNotifier(
-        locale: const Locale('en'),
-        supportedLocales: const [Locale('en'), Locale('es')],
-      );
+      const localeEn = Locale('en');
+      const localeEs = Locale('es');
 
-      expect(notifier.value, const Locale('en'));
+      final notifier = FlutterDeckLocalizationNotifier(locale: localeEn, supportedLocales: const [localeEn, localeEs]);
+
+      expect(notifier.value, localeEn);
       expect(notifier.supportedLocales.length, 2);
 
-      notifier.update(const Locale('es'));
+      notifier.update(localeEs);
 
-      expect(notifier.value, const Locale('es'));
+      expect(notifier.value, localeEs);
     });
   });
 }

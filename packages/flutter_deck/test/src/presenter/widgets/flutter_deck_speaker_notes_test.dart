@@ -14,17 +14,16 @@ void main() {
   group('FlutterDeckSpeakerNotes', () {
     testWidgets('builds notes', (tester) async {
       final mockRouter = MockFlutterDeckRouter();
-      when(mockRouter.currentSlideConfiguration).thenReturn(const FlutterDeckSlideConfiguration(route: '/1', speakerNotes: 'test note'));
+      when(
+        mockRouter.currentSlideConfiguration,
+      ).thenReturn(const FlutterDeckSlideConfiguration(route: '/1', speakerNotes: 'test note'));
       final flutterDeck = MockFlutterDeck();
       when(flutterDeck.router).thenReturn(mockRouter);
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: FlutterDeckProvider(
-              flutterDeck: flutterDeck,
-              child: const FlutterDeckSpeakerNotes(),
-            ),
+            body: FlutterDeckProvider(flutterDeck: flutterDeck, child: const FlutterDeckSpeakerNotes()),
           ),
         ),
       );
