@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('FlutterDeckTransition', () {
     testWidgets('custom constructor should use custom transition builder', (tester) async {
-      const transition = FlutterDeckTransition.custom(transitionBuilder: _CustomTransitionBuilder());
+      final transition = FlutterDeckTransition.custom(transitionBuilder: const _CustomTransitionBuilder());
 
       await tester.pumpWidget(
         Directionality(
@@ -27,7 +27,7 @@ void main() {
     });
 
     testWidgets('fade constructor should use fade transition builder', (tester) async {
-      const transition = FlutterDeckTransition.fade();
+      final transition = FlutterDeckTransition.fade();
 
       await tester.pumpWidget(
         Directionality(
@@ -50,7 +50,7 @@ void main() {
     });
 
     testWidgets('scale constructor should use scale transition builder', (tester) async {
-      const transition = FlutterDeckTransition.scale();
+      final transition = FlutterDeckTransition.scale();
 
       await tester.pumpWidget(
         Directionality(
@@ -73,7 +73,7 @@ void main() {
     });
 
     testWidgets('slide constructor should use slide transition builder', (tester) async {
-      const transition = FlutterDeckTransition.slide();
+      final transition = FlutterDeckTransition.slide();
 
       await tester.pumpWidget(
         Directionality(
@@ -95,7 +95,7 @@ void main() {
     });
 
     testWidgets('rotation constructor should use rotation transition builder', (tester) async {
-      const transition = FlutterDeckTransition.rotation();
+      final transition = FlutterDeckTransition.rotation();
 
       await tester.pumpWidget(
         Directionality(
@@ -118,7 +118,7 @@ void main() {
     });
 
     testWidgets('none constructor should use no transition builder', (tester) async {
-      const transition = FlutterDeckTransition.none();
+      final transition = FlutterDeckTransition.none();
 
       await tester.pumpWidget(
         Directionality(
