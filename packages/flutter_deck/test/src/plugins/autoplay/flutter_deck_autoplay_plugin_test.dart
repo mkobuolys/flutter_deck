@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deck/src/controls/flutter_deck_controls_notifier.dart';
+import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
-import 'package:flutter_deck/src/plugins/autoplay/flutter_deck_autoplay_plugin.dart';
-import 'package:flutter_deck/src/plugins/autoplay/flutter_deck_autoplay_provider.dart';
+import 'package:flutter_deck/src/plugins/autoplay/autoplay.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'flutter_deck_autoplay_plugin_test.mocks.dart';
+
+class MockBuildContext extends Mock implements BuildContext {}
 
 @GenerateNiceMocks([MockSpec<FlutterDeck>(), MockSpec<FlutterDeckRouter>(), MockSpec<FlutterDeckControlsNotifier>()])
 void main() {
@@ -61,5 +62,3 @@ void main() {
     });
   });
 }
-
-class MockBuildContext extends Mock implements BuildContext {}

@@ -6,6 +6,11 @@ class _TestPlugin extends FlutterDeckPlugin {
   const _TestPlugin();
 }
 
+class _MockBuildContext extends BuildContext {
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
 void main() {
   group('FlutterDeckPlugin', () {
     test('default methods do nothing or return default values', () {
@@ -30,9 +35,4 @@ void main() {
       expect(wrappedChild, isA<Text>());
     });
   });
-}
-
-class _MockBuildContext extends BuildContext {
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }

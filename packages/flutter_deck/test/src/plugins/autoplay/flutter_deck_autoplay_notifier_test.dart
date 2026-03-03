@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
-import 'package:flutter_deck/src/plugins/autoplay/flutter_deck_autoplay_notifier.dart';
+import 'package:flutter_deck/src/plugins/autoplay/autoplay.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -15,6 +15,7 @@ void main() {
 
     setUp(() {
       mockRouter = MockFlutterDeckRouter();
+
       when(mockRouter.currentSlideIndex).thenReturn(0);
       when(mockRouter.currentStep).thenReturn(1);
       when(mockRouter.slides).thenReturn([
@@ -29,6 +30,7 @@ void main() {
 
     test('initial state is correct', () {
       final notifier = FlutterDeckAutoplayNotifier(router: mockRouter);
+
       expect(notifier.isPlaying, isFalse);
       expect(notifier.isLooping, isFalse);
       expect(notifier.autoplayDuration, const Duration(seconds: 5));

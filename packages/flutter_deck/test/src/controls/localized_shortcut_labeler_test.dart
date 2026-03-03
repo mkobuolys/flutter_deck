@@ -6,9 +6,9 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('LocalizedShortcutLabeler', () {
     testWidgets('getShortcutLabel uses default labeler logic', (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: Scaffold(body: Text('A'))));
+      await tester.pumpWidget(const MaterialApp(home: SizedBox.shrink()));
 
-      final context = tester.element(find.byType(Scaffold));
+      final context = tester.element(find.byType(SizedBox));
       final localizations = MaterialLocalizations.of(context);
 
       final labeler = LocalizedShortcutLabeler.instance;
@@ -17,7 +17,7 @@ void main() {
         localizations,
       );
 
-      expect(label, isNotEmpty);
+      expect(label, 'Ctrl+A');
     });
   });
 }
