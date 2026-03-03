@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 void main() {
   group('FlutterDeckState', () {
     test('fromJson and toJson', () {
-      final state = const FlutterDeckState(
+      const state = FlutterDeckState(
         locale: 'en',
         themeMode: 'dark',
         markerEnabled: true,
@@ -24,7 +24,7 @@ void main() {
 
 
     test('copyWith', () {
-      final state = const FlutterDeckState(
+      const state = FlutterDeckState(
         locale: 'en',
         themeMode: 'dark',
       );

@@ -6,11 +6,10 @@ void main() {
     test('toggle should notify listeners', () {
       final notifier = FlutterDeckDrawerNotifier();
       var listenerCalled = false;
-      notifier.addListener(() {
-        listenerCalled = true;
-      });
 
-      notifier.toggle();
+      notifier
+        ..addListener(() => listenerCalled = true)
+        ..toggle();
 
       expect(listenerCalled, isTrue);
     });

@@ -20,16 +20,13 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            drawer: FlutterDeckProvider(
-              flutterDeck: mockDeck,
-              child: const FlutterDeckDrawer(),
-            ),
+            drawer: FlutterDeckProvider(flutterDeck: mockDeck, child: const FlutterDeckDrawer()),
           ),
         ),
       );
 
-      final scaffoldState = tester.state<ScaffoldState>(find.byType(Scaffold));
-      scaffoldState.openDrawer();
+      tester.state<ScaffoldState>(find.byType(Scaffold)).openDrawer();
+
       await tester.pumpAndSettle();
 
       expect(find.byType(FlutterDeckDrawer), findsOneWidget);

@@ -1,7 +1,7 @@
-import 'package:flutter_deck/src/flutter_deck_router.dart';
-import 'package:flutter_deck/src/configuration/configuration.dart';
-import 'package:flutter_deck/src/plugins/autoplay/flutter_deck_autoplay_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_deck/src/configuration/configuration.dart';
+import 'package:flutter_deck/src/flutter_deck_router.dart';
+import 'package:flutter_deck/src/plugins/autoplay/flutter_deck_autoplay_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -17,8 +17,14 @@ void main() {
       mockRouter = MockFlutterDeckRouter();
       when(mockRouter.currentSlideIndex).thenReturn(0);
       when(mockRouter.currentStep).thenReturn(1);
-      when(mockRouter.slides).thenReturn([FlutterDeckRouterSlide(route: '/1', widget: const SizedBox(), configuration: const FlutterDeckSlideConfiguration(route: '/1'))]);
-      when(mockRouter.currentSlideConfiguration).thenReturn(const FlutterDeckSlideConfiguration(route: '/1', steps: 1));
+      when(mockRouter.slides).thenReturn([
+        const FlutterDeckRouterSlide(
+          route: '/1',
+          widget: SizedBox(),
+          configuration: FlutterDeckSlideConfiguration(route: '/1'),
+        ),
+      ]);
+      when(mockRouter.currentSlideConfiguration).thenReturn(const FlutterDeckSlideConfiguration(route: '/1'));
     });
 
     test('initial state is correct', () {
@@ -30,10 +36,12 @@ void main() {
 
     test('play changes isPlaying to true', () {
       final notifier = FlutterDeckAutoplayNotifier(router: mockRouter);
-      var listenerCalled = false;
-      notifier.addListener(() => listenerCalled = true);
 
-      notifier.play();
+      var listenerCalled = false;
+
+      notifier
+        ..addListener(() => listenerCalled = true)
+        ..play();
 
       expect(notifier.isPlaying, isTrue);
       expect(listenerCalled, isTrue);
@@ -42,12 +50,13 @@ void main() {
     });
 
     test('pause changes isPlaying to false', () {
-      final notifier = FlutterDeckAutoplayNotifier(router: mockRouter);
-      notifier.play();
-      var listenerCalled = false;
-      notifier.addListener(() => listenerCalled = true);
+      final notifier = FlutterDeckAutoplayNotifier(router: mockRouter)..play();
 
-      notifier.pause();
+      var listenerCalled = false;
+
+      notifier
+        ..addListener(() => listenerCalled = true)
+        ..pause();
 
       expect(notifier.isPlaying, isFalse);
       expect(listenerCalled, isTrue);
@@ -55,10 +64,12 @@ void main() {
 
     test('toggleLooping toggles isLooping', () {
       final notifier = FlutterDeckAutoplayNotifier(router: mockRouter);
-      var listenerCalled = false;
-      notifier.addListener(() => listenerCalled = true);
 
-      notifier.toggleLooping();
+      var listenerCalled = false;
+
+      notifier
+        ..addListener(() => listenerCalled = true)
+        ..toggleLooping();
 
       expect(notifier.isLooping, isTrue);
       expect(listenerCalled, isTrue);
@@ -69,13 +80,13 @@ void main() {
     });
 
     test('updateAutoplayDuration updates duration and restarts if playing', () {
-      final notifier = FlutterDeckAutoplayNotifier(router: mockRouter);
-      notifier.play();
+      final notifier = FlutterDeckAutoplayNotifier(router: mockRouter)..play();
 
       var listenerCalled = false;
-      notifier.addListener(() => listenerCalled = true);
 
-      notifier.updateAutoplayDuration(const Duration(seconds: 10));
+      notifier
+        ..addListener(() => listenerCalled = true)
+        ..updateAutoplayDuration(const Duration(seconds: 10));
 
       expect(notifier.autoplayDuration, const Duration(seconds: 10));
       expect(listenerCalled, isTrue);

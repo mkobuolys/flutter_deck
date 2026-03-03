@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
@@ -58,9 +59,7 @@ void main() {
         markerNotifier: mockMarkerNotifier,
         themeNotifier: mockThemeNotifier,
         router: mockRouter,
-      );
-
-      controller.init();
+      )..init();
 
       expect(controller.available, isFalse);
     });
@@ -73,9 +72,7 @@ void main() {
         themeNotifier: mockThemeNotifier,
         router: mockRouter,
         client: mockClient,
-      );
-
-      controller.init();
+      )..init();
 
       expect(controller.available, isTrue);
       verify(mockClient.init(any)).called(1);
@@ -93,9 +90,7 @@ void main() {
         themeNotifier: mockThemeNotifier,
         router: mockRouter,
         client: mockClient,
-      );
-
-      controller.init();
+      )..init();
       verify(mockClient.init(any)).called(1);
 
       controller.init();
@@ -103,17 +98,16 @@ void main() {
     });
 
     test('dispose should cancel subscription and remove listeners', () {
-      final controller = FlutterDeckPresenterController(
-        controlsNotifier: mockControlsNotifier,
-        localizationNotifier: mockLocalizationNotifier,
-        markerNotifier: mockMarkerNotifier,
-        themeNotifier: mockThemeNotifier,
-        router: mockRouter,
-        client: mockClient,
-      );
-
-      controller.init();
-      controller.dispose();
+      FlutterDeckPresenterController(
+          controlsNotifier: mockControlsNotifier,
+          localizationNotifier: mockLocalizationNotifier,
+          markerNotifier: mockMarkerNotifier,
+          themeNotifier: mockThemeNotifier,
+          router: mockRouter,
+          client: mockClient,
+        )
+        ..init()
+        ..dispose();
 
       verify(mockClient.dispose()).called(1);
       verify(mockLocalizationNotifier.removeListener(any)).called(1);
@@ -123,31 +117,27 @@ void main() {
     });
 
     test('open should open presenter view', () {
-      final controller = FlutterDeckPresenterController(
+      FlutterDeckPresenterController(
         controlsNotifier: mockControlsNotifier,
         localizationNotifier: mockLocalizationNotifier,
         markerNotifier: mockMarkerNotifier,
         themeNotifier: mockThemeNotifier,
         router: mockRouter,
         client: mockClient,
-      );
-
-      controller.open();
+      ).open();
 
       verify(mockClient.openPresenterView()).called(1);
     });
 
     test('listeners should notify client with updated state', () {
-      final controller = FlutterDeckPresenterController(
+      FlutterDeckPresenterController(
         controlsNotifier: mockControlsNotifier,
         localizationNotifier: mockLocalizationNotifier,
         markerNotifier: mockMarkerNotifier,
         themeNotifier: mockThemeNotifier,
         router: mockRouter,
         client: mockClient,
-      );
-
-      controller.init();
+      ).init();
 
       // Clear the initial client.init call if we want to just check updateState
       clearInteractions(mockClient);
@@ -160,7 +150,8 @@ void main() {
 
       // Simulate localization change
       when(mockLocalizationNotifier.value).thenReturn(const Locale('es'));
-      final onLocalizationChanged = verify(mockLocalizationNotifier.addListener(captureAny)).captured.first as VoidCallback;
+      final onLocalizationChanged =
+          verify(mockLocalizationNotifier.addListener(captureAny)).captured.first as VoidCallback;
       onLocalizationChanged();
       verify(mockClient.updateState(any)).called(1);
 
@@ -178,18 +169,16 @@ void main() {
     });
 
     test('_onStateChanged updates local notifiers', () async {
-      final controller = FlutterDeckPresenterController(
+      FlutterDeckPresenterController(
         controlsNotifier: mockControlsNotifier,
         localizationNotifier: mockLocalizationNotifier,
         markerNotifier: mockMarkerNotifier,
         themeNotifier: mockThemeNotifier,
         router: mockRouter,
         client: mockClient,
-      );
+      ).init();
 
-      controller.init();
-
-      final newState = const FlutterDeckState(
+      const newState = FlutterDeckState(
         slideIndex: 2,
         slideStep: 3,
         locale: 'es',

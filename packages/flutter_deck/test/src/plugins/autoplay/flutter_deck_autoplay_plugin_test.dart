@@ -10,11 +10,7 @@ import 'package:mockito/mockito.dart';
 
 import 'flutter_deck_autoplay_plugin_test.mocks.dart';
 
-@GenerateNiceMocks([
-  MockSpec<FlutterDeck>(),
-  MockSpec<FlutterDeckRouter>(),
-  MockSpec<FlutterDeckControlsNotifier>(),
-])
+@GenerateNiceMocks([MockSpec<FlutterDeck>(), MockSpec<FlutterDeckRouter>(), MockSpec<FlutterDeckControlsNotifier>()])
 void main() {
   group('FlutterDeckAutoplayPlugin', () {
     late MockFlutterDeck mockFlutterDeck;
@@ -32,9 +28,7 @@ void main() {
     });
 
     test('init and dispose manage listeners', () {
-      final plugin = FlutterDeckAutoplayPlugin();
-
-      plugin.init(mockFlutterDeck);
+      final plugin = FlutterDeckAutoplayPlugin()..init(mockFlutterDeck);
       verify(mockControlsNotifier.addListener(any)).called(1);
 
       plugin.dispose();
@@ -42,30 +36,26 @@ void main() {
     });
 
     testWidgets('wrap provides AutoplayProvider', (tester) async {
-      final plugin = FlutterDeckAutoplayPlugin();
-      plugin.init(mockFlutterDeck);
+      final plugin = FlutterDeckAutoplayPlugin()..init(mockFlutterDeck);
 
-      await tester.pumpWidget(MaterialApp(
-        home: plugin.wrap(
-          MockBuildContext(),
-          const Text('ChildWidget'),
-        ),
-      ));
+      await tester.pumpWidget(MaterialApp(home: plugin.wrap(MockBuildContext(), const Text('ChildWidget'))));
 
       expect(find.byType(FlutterDeckAutoplayProvider), findsOneWidget);
       expect(find.text('ChildWidget'), findsOneWidget);
     });
 
     test('buildControls returns menu items', () {
-      final plugin = FlutterDeckAutoplayPlugin();
-      plugin.init(mockFlutterDeck);
+      final plugin = FlutterDeckAutoplayPlugin()..init(mockFlutterDeck);
 
-      final controls = plugin.buildControls(
-        MockBuildContext(),
-        (context, {Widget? icon, required String label, required VoidCallback? onPressed, bool? closeOnActivate}) {
-          return const SizedBox();
-        },
-      );
+      final controls = plugin.buildControls(MockBuildContext(), (
+        context, {
+        required String label,
+        required VoidCallback? onPressed,
+        Widget? icon,
+        bool? closeOnActivate,
+      }) {
+        return const SizedBox();
+      });
 
       expect(controls.length, 1);
     });

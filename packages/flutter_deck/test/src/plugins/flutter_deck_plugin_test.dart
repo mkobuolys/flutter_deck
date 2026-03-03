@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/plugins/flutter_deck_plugin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -18,7 +17,7 @@ void main() {
 
       final controls = plugin.buildControls(
         mockContext,
-        (context, {Widget? icon, required String label, required VoidCallback? onPressed, bool? closeOnActivate}) {
+        (context, {required String label, required VoidCallback? onPressed, Widget? icon, bool? closeOnActivate}) {
           return const SizedBox();
         },
       );

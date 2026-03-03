@@ -2,6 +2,7 @@ analyzer:
   exclude:
     - bricks/**
     - build/**
+    - "**/*.mocks.dart"
 
 formatter:
   page_width: 120

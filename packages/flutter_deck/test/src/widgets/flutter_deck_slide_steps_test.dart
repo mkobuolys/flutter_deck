@@ -29,9 +29,7 @@ void main() {
                 listener: (context, step) {
                   listenerCalled = true;
                 },
-                child: FlutterDeckSlideStepsBuilder(
-                  builder: (context, step) => Text('Step \$step'),
-                ),
+                child: FlutterDeckSlideStepsBuilder(builder: (context, step) => const Text(r'Step $step')),
               ),
             ),
           ),
@@ -39,7 +37,13 @@ void main() {
       );
 
       expect(find.text('Step 1'), findsNothing);
-      // It won't call listener until it changes, let's force a change by changing mock and rebuilding or notying
+
+      when(mockRouter.currentStep).thenReturn(2);
+
+      await tester.pumpAndSettle();
+
+      expect(find.text('Step 2'), findsOneWidget);
+      expect(listenerCalled, isTrue);
     });
   });
 }
