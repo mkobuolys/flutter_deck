@@ -1,6 +1,6 @@
 ---
 title: Widgets
-navOrder: 3
+navOrder: 5
 ---
 
 This package comes with a few predefined widgets that could be used in your slide deck.

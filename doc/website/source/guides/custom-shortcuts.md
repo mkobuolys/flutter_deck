@@ -1,6 +1,6 @@
 ---
 title: Custom shortcuts
-navOrder: 10
+navOrder: 12
 ---
 
 # Custom shortcuts

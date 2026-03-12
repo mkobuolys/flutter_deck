@@ -1,6 +1,6 @@
 ---
 title: Initial slide
-navOrder: 6
+navOrder: 8
 ---
 
 By default, the first slide in the `slides` list is the initial slide. However, you can specify a different slide as the initial one by setting the `initial` property to `true` in the `FlutterDeckSlideConfiguration`. This keeps the slide order intact while allowing you to define a different starting point.

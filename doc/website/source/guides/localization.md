@@ -1,6 +1,6 @@
 ---
 title: Localization
-navOrder: 7
+navOrder: 9
 ---
 
 This package comes with a built-in localization support. You can change the locale of the slide deck at runtime (see [controls](/playback/controls/)). The updated locale will be applied to the whole slide deck.
