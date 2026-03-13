@@ -1,6 +1,6 @@
 ---
 title: Template overrides
-navOrder: 9
+navOrder: 11
 ---
 
 The `flutter_deck` package comes with a set of predefined slide templates. However, sometimes you might want to customize the look and feel of these templates to match your brand or design. For instance, you might want to change the layout of the title slide or update the layout of the split slide.

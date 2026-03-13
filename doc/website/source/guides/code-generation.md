@@ -1,6 +1,6 @@
 ---
 title: Code generation
-navOrder: 12
+navOrder: 14
 ---
 
 This package comes with a [mason](https://pub.dev/packages/mason) template that can be used to generate a new slide for the slide deck.
