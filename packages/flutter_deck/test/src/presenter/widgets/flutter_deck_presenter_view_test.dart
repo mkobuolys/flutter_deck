@@ -41,7 +41,7 @@ void main() {
       when(mockRouter.currentStep).thenReturn(1);
       when(
         mockRouter.currentSlideConfiguration,
-      ).thenReturn(const FlutterDeckSlideConfiguration(route: '/1', steps: 1, speakerNotes: 'Some notes'));
+      ).thenReturn(const FlutterDeckSlideConfiguration(route: '/1', speakerNotes: 'Some notes'));
       when(mockRouter.slides).thenReturn([
         const FlutterDeckRouterSlide(
           route: '/1',
