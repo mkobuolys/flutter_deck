@@ -7,7 +7,7 @@ navOrder: 2
 
 The global configuration for the slide deck allows you to define the default settings for all slides in your presentation. You can configure the background, controls, footer, header, progress indicator, and more.
 
-Some of these configurations can be overridden on a per-slide basis. For more information, see the [Slide configuration](slide-configuration.md) guide.
+Some of these configurations can be overridden on a per-slide basis. For more information, see the [Slide configuration](/guides/slide-configuration/) guide.
 
 ## Defining the global configuration
 
@@ -71,7 +71,7 @@ _Note: This configuration cannot be overridden by the slide configuration, but r
 
 ### Controls
 
-The `controls` property configures the controls for the slide deck using `FlutterDeckControlsConfiguration`. By default, the presenter toolbar is visible, the default keyboard controls are enabled, and gestures are enabled on mobile platforms only.
+The `controls` property configures the controls for the slide deck using `FlutterDeckControlsConfiguration`. By default, the presenter toolbar is visible, the default keyboard controls are enabled, and gestures are enabled on mobile platforms only. For more information, see the [Controls](/playback/controls/) guide.
 
 ```dart
 const FlutterDeckConfiguration(
@@ -168,7 +168,7 @@ _Note: This configuration cannot be overridden by the slide configuration._
 
 The `templateOverrides` property allows you to override default slide template configurations using `FlutterDeckTemplateOverrideConfiguration`.
 
-_Note: This configuration cannot be overridden by the slide configuration._
+For more information, see the [Template overrides](/guides/template-overrides/) guide.
 
 ### Transition
 
@@ -179,3 +179,5 @@ const FlutterDeckConfiguration(
   transition: FlutterDeckTransition.fade(),
 )
 ```
+
+For more information, see the [Transitions](/guides/transitions/) guide.

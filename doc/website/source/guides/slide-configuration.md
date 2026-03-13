@@ -84,19 +84,25 @@ The `title` property sets the title of the slide. If set, it will be used in the
 
 ### Speaker Notes
 
-The `speakerNotes` property sets the speaker notes for the slide. These notes are visible in the presenter view and are not shown to the audience. The default is an empty string.
+The `speakerNotes` property sets the speaker notes for the slide. These notes are visible in the [presenter view](/playback/presenter-view/) and are not shown to the audience. The default is an empty string.
 
 ### Hidden
 
 The `hidden` property determines whether the slide should be hidden from the presentation. Hidden slides cannot be navigated to using standard controls and do not appear in the slide deck overview. The default is `false`.
 
+For more information, see the [Hiding slides](/guides/hiding-slides/) guide.
+
 ### Initial
 
 The `initial` property sets the slide as the initial slide of the presentation. On Web, this is only used if the URL path is not set; otherwise, the URL path determines the initial slide. The default is `false`.
 
+For more information, see the [Initial slide](/guides/initial-slide/) guide.
+
 ### Steps
 
 The `steps` property defines the number of internal steps the slide has. It is useful for building animations or revealing content sequentially on a single slide. The default is `1`.
+
+For more information, see the [Slide steps](/guides/slide-steps/) guide.
 
 ### Preload Images
 
@@ -116,11 +122,11 @@ const FlutterDeckSlideConfiguration(
 
 A slide configuration can override several global configuration properties on a per-slide basis:
 
-*   **`footer`**: Overrides the `FlutterDeckFooterConfiguration`.
-*   **`header`**: Overrides the `FlutterDeckHeaderConfiguration`.
-*   **`progressIndicator`**: Overrides the `FlutterDeckProgressIndicator`.
-*   **`showProgress`**: Overrides whether to show the progress indicator on this slide.
-*   **`transition`**: Overrides the transition effect when navigating to this slide (`FlutterDeckTransition`).
+- **`footer`**: Overrides the `FlutterDeckFooterConfiguration`.
+- **`header`**: Overrides the `FlutterDeckHeaderConfiguration`.
+- **`progressIndicator`**: Overrides the `FlutterDeckProgressIndicator`.
+- **`showProgress`**: Overrides whether to show the progress indicator on this slide.
+- **`transition`**: Overrides the transition effect when navigating to this slide (`FlutterDeckTransition`).
 
 ```dart
 const FlutterDeckSlideConfiguration(
