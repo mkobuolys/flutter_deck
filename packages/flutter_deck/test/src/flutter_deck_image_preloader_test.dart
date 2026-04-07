@@ -40,6 +40,7 @@ void main() {
       // We don't actually need a valid context for this test, just for the preloader to not crash if accessed
 
       preloader.init();
+      await tester.pump();
 
       verify(mockRouter.addListener(any)).called(1);
     });
@@ -98,6 +99,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(navigatorKey: key, home: Container()));
 
       preloader.init();
+      await tester.pump();
 
       expect(precachedImages, containsAll(['assets/image1.png', 'https://element.com/image2.png']));
       expect(precachedImages, isNot(contains('assets/image3.png')));
@@ -130,6 +132,7 @@ void main() {
       when(mockRouter.currentSlideIndex).thenReturn(0);
 
       preloader.init();
+      await tester.pump();
 
       expect(precachedImages.where((i) => i == 'assets/image1.png').length, 1);
     });
@@ -156,6 +159,7 @@ void main() {
       when(mockRouter.currentSlideIndex).thenReturn(0);
 
       preloader.init();
+      await tester.pump();
 
       expect(precachedImages, isEmpty);
     });
@@ -182,6 +186,7 @@ void main() {
       when(mockRouter.currentSlideIndex).thenReturn(1); // Last slide
 
       preloader.init();
+      await tester.pump();
 
       expect(precachedImages, isEmpty); // Should not crash and preload nothing
     });
