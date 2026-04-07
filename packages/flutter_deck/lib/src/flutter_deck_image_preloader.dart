@@ -23,10 +23,13 @@ class FlutterDeckImagePreloader {
   /// Initializes the preloader.
   void init() {
     _router.addListener(_onRouterChanged);
-    _onRouterChanged();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _onRouterChanged());
   }
 
   void _onRouterChanged() {
+    final context = _router.navigatorKey.currentContext;
+    if (context == null) return;
+
     final slides = _router.slides;
     final currentIndex = _router.currentSlideIndex;
 
@@ -44,17 +47,17 @@ class FlutterDeckImagePreloader {
       for (final image in preloadImages) {
         if (_cachedImages.contains(image)) continue;
 
-        _precacheImage(image);
+        _precacheImage(image, context);
         _cachedImages.add(image);
       }
     }
   }
 
-  void _precacheImage(String image) {
+  void _precacheImage(String image, BuildContext context) {
     if (image.startsWith('http') || image.startsWith('https')) {
-      _imagePrecacher(NetworkImage(image), _router.navigatorKey.currentContext!);
+      _imagePrecacher(NetworkImage(image), context);
     } else {
-      _imagePrecacher(AssetImage(image), _router.navigatorKey.currentContext!);
+      _imagePrecacher(AssetImage(image), context);
     }
   }
 }

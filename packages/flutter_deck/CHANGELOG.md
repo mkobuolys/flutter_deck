@@ -1,3 +1,7 @@
+# 0.28.1
+
+- fix: add null check for image preloader context
+
 # 0.28.0
 
 - feat: rework `FlutterDeckCodeHighlight` widget
