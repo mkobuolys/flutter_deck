@@ -167,6 +167,51 @@ FlutterDeckApp(
 );
 ```
 
+## 🤖 Agent Skills
+
+This repository ships [Agent Skills](https://agentskills.io) so AI coding agents (Claude Code, Cursor, Codex, OpenCode, Windsurf, and many [other compatible agents](https://agentskills.io/clients)) can help you build flutter_deck presentations accurately. Each skill captures the framework's conventions for a specific area:
+
+| Skill                             | Description                                                                                                |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `flutter-deck-presentation-setup` | Scaffold a new presentation from an empty Flutter project — `FlutterDeckApp`, themes, slides, plugins.     |
+| `flutter-deck-configuration`      | Configure a deck globally and per-slide — slide size, transitions, backgrounds, headers, footers.          |
+| `flutter-deck-slides`             | Create slides using the eight built-in factories and three idiomatic patterns.                             |
+| `flutter-deck-theming`            | Style with `FlutterDeckThemeData`, light/dark modes, per-slide overrides, and component themes.            |
+| `flutter-deck-plugins`            | Build, register, and use `FlutterDeckPlugin`s — autoplay, exporters, presenter view, custom controls.      |
+
+Skills are managed via the [`skills`](https://www.npmjs.com/package/skills) CLI.
+
+### Install all skills
+
+```sh
+npx skills add mkobuolys/flutter_deck --all
+```
+
+### Install a specific skill
+
+```sh
+npx skills add mkobuolys/flutter_deck --skill flutter-deck-slides
+```
+
+To target a specific agent or install globally:
+
+```sh
+npx skills add mkobuolys/flutter_deck --skill flutter-deck-slides -a claude-code -g -y
+```
+
+### List available skills without installing
+
+```sh
+npx skills add mkobuolys/flutter_deck --list
+```
+
+### Other commands
+
+```sh
+npx skills list                           # List installed skills
+npx skills remove flutter-deck-slides     # Remove an installed skill
+```
+
 ## 🧑‍💻 Maintainers
 
 - [Mangirdas Kazlauskas](https://github.com/mkobuolys)
