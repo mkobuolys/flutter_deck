@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_deck: ^0.28.0
-  open_xml: ^0.2.0
+  open_xml: ^0.3.0
 
 dev_dependencies:
   flutter_test:
