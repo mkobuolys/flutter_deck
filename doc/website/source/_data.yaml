@@ -54,3 +54,7 @@ navigation:
     - title: Plugins
       tag: plugins
       sortBy: navOrder
+
+    - title: AI
+      tag: ai
+      sortBy: navOrder
