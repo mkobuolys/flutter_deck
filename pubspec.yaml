@@ -15,7 +15,7 @@ workspace:
   - packages/flutter_deck_ws_client
 
 dev_dependencies:
-  melos: ^7.4.0
+  melos: ^8.0.0
 
 melos:
   scripts:
