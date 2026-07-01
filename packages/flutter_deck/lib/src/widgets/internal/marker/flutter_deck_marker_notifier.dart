@@ -22,16 +22,24 @@ class FlutterDeckMarkerNotifier with ChangeNotifier {
   /// The paths drawn on the slide with the given [route].
   List<List<Offset>> pathsForSlide(String route) => _pathsBySlide[route] ?? const [];
 
-  /// Add a new [offset] to the path at [index] for the slide with the given
+  /// Start a new path on the slide with the given [route] at [offset].
+  void startPath(String route, Offset offset) {
+    _pathsBySlide.putIfAbsent(route, () => []).add([offset]);
+    _version++;
+
+    notifyListeners();
+  }
+
+  /// Add [offset] to the current (last) path on the slide with the given
   /// [route].
   ///
-  /// If [index] is equal to the length of the paths, a new path is created.
-  void update(String route, int index, Offset offset) {
-    final paths = _pathsBySlide.putIfAbsent(route, () => []);
+  /// Does nothing if no path has been started for the slide.
+  void addPoint(String route, Offset offset) {
+    final paths = _pathsBySlide[route];
 
-    if (index == paths.length) paths.add([]);
+    if (paths == null || paths.isEmpty) return;
 
-    paths[index].add(offset);
+    paths.last.add(offset);
     _version++;
 
     notifyListeners();

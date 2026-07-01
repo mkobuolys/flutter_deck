@@ -15,10 +15,10 @@ void main() {
       expect(notifier.pathsForSlide(routeA), isEmpty);
     });
 
-    test('update() stores paths per slide route', () {
+    test('startPath() and addPoint() build a path per slide route', () {
       notifier
-        ..update(routeA, 0, const Offset(1, 1))
-        ..update(routeA, 0, const Offset(2, 2));
+        ..startPath(routeA, const Offset(1, 1))
+        ..addPoint(routeA, const Offset(2, 2));
 
       expect(notifier.pathsForSlide(routeA), [
         [const Offset(1, 1), const Offset(2, 2)],
@@ -26,17 +26,27 @@ void main() {
       expect(notifier.pathsForSlide(routeB), isEmpty);
     });
 
-    test('update() creates a new path when index equals the path count', () {
+    test('startPath() creates a new path each time', () {
       notifier
-        ..update(routeA, 0, const Offset(1, 1))
-        ..update(routeA, 1, const Offset(2, 2));
+        ..startPath(routeA, const Offset(1, 1))
+        ..startPath(routeA, const Offset(2, 2));
 
       expect(notifier.pathsForSlide(routeA), hasLength(2));
     });
 
+    test('addPoint() does nothing when no path has been started', () {
+      var notifications = 0;
+      notifier
+        ..addListener(() => notifications++)
+        ..addPoint(routeA, const Offset(1, 1));
+
+      expect(notifier.pathsForSlide(routeA), isEmpty);
+      expect(notifications, 0);
+    });
+
     test('toggle() flips enabled without erasing paths', () {
       notifier
-        ..update(routeA, 0, const Offset(1, 1))
+        ..startPath(routeA, const Offset(1, 1))
         ..toggle();
 
       expect(notifier.enabled, isTrue);
@@ -50,8 +60,8 @@ void main() {
 
     test('clear() only removes paths for the given route', () {
       notifier
-        ..update(routeA, 0, const Offset(1, 1))
-        ..update(routeB, 0, const Offset(2, 2))
+        ..startPath(routeA, const Offset(1, 1))
+        ..startPath(routeB, const Offset(2, 2))
         ..clear(routeA);
 
       expect(notifier.pathsForSlide(routeA), isEmpty);
@@ -60,8 +70,8 @@ void main() {
 
     test('clearAll() removes paths for every route', () {
       notifier
-        ..update(routeA, 0, const Offset(1, 1))
-        ..update(routeB, 0, const Offset(2, 2))
+        ..startPath(routeA, const Offset(1, 1))
+        ..startPath(routeB, const Offset(2, 2))
         ..clearAll();
 
       expect(notifier.pathsForSlide(routeA), isEmpty);
@@ -77,13 +87,13 @@ void main() {
       expect(notifications, 0);
     });
 
-    test('version increments and listeners are notified on update and clear', () {
+    test('version increments and listeners are notified on draw and clear', () {
       var notifications = 0;
       notifier.addListener(() => notifications++);
 
       final initialVersion = notifier.version;
 
-      notifier.update(routeA, 0, const Offset(1, 1));
+      notifier.startPath(routeA, const Offset(1, 1));
       expect(notifier.version, greaterThan(initialVersion));
 
       notifier.clear(routeA);

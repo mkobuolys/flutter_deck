@@ -19,11 +19,13 @@ class FlutterDeckMarker extends StatelessWidget {
   /// The widget below this widget in the tree.
   final Widget child;
 
-  void _updatePath(BuildContext context, String route, Offset globalPosition, int index) {
+  void _updatePath(BuildContext context, String route, Offset globalPosition, {bool startPath = false}) {
     final box = context.findRenderObject() as RenderBox?;
     final offset = box?.globalToLocal(globalPosition);
 
-    if (offset != null) notifier.update(route, index, offset);
+    if (offset == null) return;
+
+    startPath ? notifier.startPath(route, offset) : notifier.addPoint(route, offset);
   }
 
   @override
@@ -46,8 +48,8 @@ class FlutterDeckMarker extends StatelessWidget {
             if (notifier.enabled || paths.isNotEmpty)
               _MarkerOverlay(
                 enabled: notifier.enabled,
-                onPanStart: (details) => _updatePath(context, route, details.globalPosition, paths.length),
-                onPanUpdate: (details) => _updatePath(context, route, details.globalPosition, paths.length - 1),
+                onPanStart: (details) => _updatePath(context, route, details.globalPosition, startPath: true),
+                onPanUpdate: (details) => _updatePath(context, route, details.globalPosition),
                 child: RepaintBoundary(
                   child: ConstrainedBox(
                     constraints: const BoxConstraints.expand(),

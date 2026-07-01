@@ -91,7 +91,7 @@ void main() {
 
       testWidgets('keeps drawings on slide change when enabled', (tester) async {
         final flutterDeck = await pumpDeck(tester, persist: true);
-        flutterDeck.markerNotifier.update('/slide-1', 0, const Offset(1, 1));
+        flutterDeck.markerNotifier.startPath('/slide-1', const Offset(1, 1));
 
         await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
         await tester.pumpAndSettle();
@@ -101,7 +101,7 @@ void main() {
 
       testWidgets('clears drawings on slide change when disabled', (tester) async {
         final flutterDeck = await pumpDeck(tester, persist: false);
-        flutterDeck.markerNotifier.update('/slide-1', 0, const Offset(1, 1));
+        flutterDeck.markerNotifier.startPath('/slide-1', const Offset(1, 1));
 
         await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
         await tester.pumpAndSettle();

@@ -30,7 +30,7 @@ void main() {
       final router = buildRouter();
       FlutterDeckMarkerController(router: router, markerNotifier: markerNotifier, persist: false).init();
 
-      markerNotifier.update('/slide-1', 0, const Offset(1, 1));
+      markerNotifier.startPath('/slide-1', const Offset(1, 1));
       router.next();
 
       expect(markerNotifier.pathsForSlide('/slide-1'), isEmpty);
@@ -40,7 +40,7 @@ void main() {
       final router = buildRouter(steps: 2);
       FlutterDeckMarkerController(router: router, markerNotifier: markerNotifier, persist: false).init();
 
-      markerNotifier.update('/slide-1', 0, const Offset(1, 1));
+      markerNotifier.startPath('/slide-1', const Offset(1, 1));
       router.next(); // advances the step, not the slide
 
       expect(markerNotifier.pathsForSlide('/slide-1'), isNotEmpty);
@@ -50,7 +50,7 @@ void main() {
       final router = buildRouter();
       FlutterDeckMarkerController(router: router, markerNotifier: markerNotifier, persist: true).init();
 
-      markerNotifier.update('/slide-1', 0, const Offset(1, 1));
+      markerNotifier.startPath('/slide-1', const Offset(1, 1));
       router.next();
 
       expect(markerNotifier.pathsForSlide('/slide-1'), isNotEmpty);
@@ -62,7 +62,7 @@ void main() {
         ..init()
         ..dispose();
 
-      markerNotifier.update('/slide-1', 0, const Offset(1, 1));
+      markerNotifier.startPath('/slide-1', const Offset(1, 1));
       router.next();
 
       expect(markerNotifier.pathsForSlide('/slide-1'), isNotEmpty);

@@ -69,8 +69,8 @@ void main() {
     testWidgets('keeps drawn paths visible when disabled', (tester) async {
       // Draw a path for the slide, then leave the marker disabled.
       final notifier = FlutterDeckMarkerNotifier()
-        ..update(route, 0, const Offset(10, 10))
-        ..update(route, 0, const Offset(20, 20));
+        ..startPath(route, const Offset(10, 10))
+        ..addPoint(route, const Offset(20, 20));
 
       await tester.pumpWidget(
         MaterialApp(
