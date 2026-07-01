@@ -4,7 +4,7 @@ import 'package:flutter_deck/flutter_deck.dart';
 const _speakerNotes = '''
 - If you want to highlight something, you can use the marker tool.
 - The tool is available in the options menu in the deck controls.
-- Each slide keeps its own drawings: they persist when you toggle the marker off or navigate away, and are restored when you return. Use "Erase all" to clear the current slide.
+- Each slide keeps its own drawings: they persist when you toggle the marker off or navigate away, and are restored when you return. Use "Clear marker" to clear the drawings for the current slide.
 - You can also update the marker color and stroke width in the global configuration.
 ''';
 

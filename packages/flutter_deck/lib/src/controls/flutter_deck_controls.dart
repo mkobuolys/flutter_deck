@@ -216,7 +216,7 @@ class _MarkerControls extends StatelessWidget {
                 ),
                 IconButton(
                   icon: const Icon(Icons.delete_forever_rounded),
-                  tooltip: 'Erase all',
+                  tooltip: 'Clear marker',
                   onPressed: markerNotifier.pathsForSlide(route).isNotEmpty ? () => markerNotifier.clear(route) : null,
                 ),
               ],
