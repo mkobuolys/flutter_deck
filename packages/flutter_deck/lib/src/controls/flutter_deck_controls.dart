@@ -198,6 +198,7 @@ class _MarkerControls extends StatelessWidget {
     final flutterDeck = context.flutterDeck;
     final controlsNotifier = flutterDeck.controlsNotifier;
     final markerNotifier = flutterDeck.markerNotifier;
+    final route = flutterDeck.configuration.route;
     final shortcuts = flutterDeck.globalConfiguration.controls.shortcuts;
     final shortcut = shortcuts.toggleMarker.toShortcutString(context);
 
@@ -216,7 +217,7 @@ class _MarkerControls extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.delete_forever_rounded),
                   tooltip: 'Erase all',
-                  onPressed: markerNotifier.paths.isNotEmpty ? markerNotifier.clear : null,
+                  onPressed: markerNotifier.pathsForSlide(route).isNotEmpty ? () => markerNotifier.clear(route) : null,
                 ),
               ],
             )

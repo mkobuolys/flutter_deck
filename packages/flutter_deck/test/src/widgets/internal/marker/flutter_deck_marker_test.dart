@@ -15,12 +15,15 @@ void main() {
     late MockFlutterDeck mockDeck;
     late MockFlutterDeckConfiguration mockConfig;
 
+    const route = '/test';
+
     setUp(() {
       mockDeck = MockFlutterDeck();
       mockConfig = MockFlutterDeckConfiguration();
 
       when(mockConfig.marker).thenReturn(const FlutterDeckMarkerConfiguration());
       when(mockDeck.globalConfiguration).thenReturn(mockConfig);
+      when(mockDeck.configuration).thenReturn(const FlutterDeckSlideConfiguration(route: route));
     });
 
     testWidgets('builds when enabled and draws on canvas', (tester) async {
@@ -60,6 +63,28 @@ void main() {
         ),
       );
 
+      expect(find.byType(GestureDetector), findsNothing);
+    });
+
+    testWidgets('keeps drawn paths visible when disabled', (tester) async {
+      // Draw a path for the slide, then leave the marker disabled.
+      final notifier = FlutterDeckMarkerNotifier()
+        ..update(route, 0, const Offset(10, 10))
+        ..update(route, 0, const Offset(20, 20));
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: FlutterDeckProvider(
+              flutterDeck: mockDeck,
+              child: FlutterDeckMarker(notifier: notifier, child: const SizedBox(width: 100, height: 100)),
+            ),
+          ),
+        ),
+      );
+
+      // The drawing is still painted, but no gesture detector captures input.
+      expect(find.byType(CustomPaint), findsWidgets);
       expect(find.byType(GestureDetector), findsNothing);
     });
   });
