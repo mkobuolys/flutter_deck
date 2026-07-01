@@ -1,3 +1,8 @@
+# NEXT
+
+- feat: persist marker drawings per slide
+- feat: added `persist` flag to `FlutterDeckMarkerConfiguration`
+
 # 0.28.1
 
 - fix: add null check for image preloader context

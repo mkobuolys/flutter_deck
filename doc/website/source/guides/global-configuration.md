@@ -112,16 +112,19 @@ const FlutterDeckConfiguration(
 
 ### Marker
 
-The `marker` property configures the drawing marker tool using `FlutterDeckMarkerConfiguration`. By default, the marker is red with a stroke width of 5px.
+The `marker` property configures the drawing marker tool using `FlutterDeckMarkerConfiguration`. By default, the marker is red with a stroke width of 5px and drawings persist for each slide.
 
 ```dart
 const FlutterDeckConfiguration(
   marker: FlutterDeckMarkerConfiguration(
     color: Colors.red,
     strokeWidth: 5.0,
+    persist: true,
   ),
 )
 ```
+
+The `persist` flag controls whether marker drawings are kept per slide. When `true` (the default), each slide keeps its own drawings and they are restored when you navigate back to a slide. Set it to `false` to clear the marker drawings whenever the slide changes.
 
 _Note: This configuration cannot be overridden by the slide configuration._
 

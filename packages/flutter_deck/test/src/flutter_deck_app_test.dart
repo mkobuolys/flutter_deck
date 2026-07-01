@@ -63,6 +63,53 @@ void main() {
       });
     });
 
+    group('marker persistence', () {
+      Future<FlutterDeck> pumpDeck(WidgetTester tester, {required bool persist}) async {
+        late FlutterDeck flutterDeck;
+
+        await tester.pumpWidget(
+          FlutterDeckApp(
+            configuration: FlutterDeckConfiguration(marker: FlutterDeckMarkerConfiguration(persist: persist)),
+            slides: [
+              FlutterDeckSlide.blank(
+                configuration: const FlutterDeckSlideConfiguration(route: '/slide-1'),
+                builder: (context) {
+                  flutterDeck = context.flutterDeck;
+                  return const SizedBox();
+                },
+              ),
+              FlutterDeckSlide.blank(
+                configuration: const FlutterDeckSlideConfiguration(route: '/slide-2'),
+                builder: (context) => const SizedBox(),
+              ),
+            ],
+          ),
+        );
+
+        return flutterDeck;
+      }
+
+      testWidgets('keeps drawings on slide change when enabled', (tester) async {
+        final flutterDeck = await pumpDeck(tester, persist: true);
+        flutterDeck.markerNotifier.startPath('/slide-1', const Offset(1, 1));
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+        await tester.pumpAndSettle();
+
+        expect(flutterDeck.markerNotifier.pathsForSlide('/slide-1'), isNotEmpty);
+      });
+
+      testWidgets('clears drawings on slide change when disabled', (tester) async {
+        final flutterDeck = await pumpDeck(tester, persist: false);
+        flutterDeck.markerNotifier.startPath('/slide-1', const Offset(1, 1));
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+        await tester.pumpAndSettle();
+
+        expect(flutterDeck.markerNotifier.pathsForSlide('/slide-1'), isEmpty);
+      });
+    });
+
     group('theme', () {
       testWidgets('renders with default theme mode', (tester) async {
         await tester.pumpWidget(

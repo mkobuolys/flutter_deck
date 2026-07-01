@@ -339,12 +339,25 @@ class FlutterDeckHeaderConfiguration {
 /// The configuration for the slide deck marker.
 class FlutterDeckMarkerConfiguration {
   /// Creates a configuration for the slide deck marker. By default, the marker
-  /// is red with a stroke width of 5px.
-  const FlutterDeckMarkerConfiguration({this.color = const Color(0xFFFF5252), this.strokeWidth = 5.0});
+  /// is red with a stroke width of 5px and drawings persist for each slide.
+  const FlutterDeckMarkerConfiguration({
+    this.color = const Color(0xFFFF5252),
+    this.strokeWidth = 5.0,
+    this.persist = true,
+  });
 
   /// The color of the marker.
   final Color color;
 
   /// The stroke width of the marker.
   final double strokeWidth;
+
+  /// Whether marker drawings are persisted for each slide.
+  ///
+  /// When `true` (the default), each slide keeps its own drawings: they are
+  /// preserved when toggling the marker off or navigating between slides, and
+  /// restored when returning to a slide.
+  ///
+  /// When `false`, changing the slide clears the marker drawings.
+  final bool persist;
 }

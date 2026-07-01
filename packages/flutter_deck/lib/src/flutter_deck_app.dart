@@ -178,6 +178,8 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
 
   late FlutterDeck _flutterDeck;
 
+  late FlutterDeckMarkerController _markerController;
+
   @override
   void initState() {
     super.initState();
@@ -187,6 +189,11 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
     _drawerNotifier = FlutterDeckDrawerNotifier();
     _imagePreloader = FlutterDeckImagePreloader(router: _flutterDeckRouter)..init();
     _markerNotifier = FlutterDeckMarkerNotifier();
+    _markerController = FlutterDeckMarkerController(
+      router: _flutterDeckRouter,
+      markerNotifier: _markerNotifier,
+      persist: widget.configuration.marker.persist,
+    )..init();
     _controlsNotifier = FlutterDeckControlsNotifier(
       drawerNotifier: _drawerNotifier,
       markerNotifier: _markerNotifier,
@@ -254,6 +261,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
 
     _presenterController.dispose();
     _imagePreloader.dispose();
+    _markerController.dispose();
 
     super.dispose();
   }

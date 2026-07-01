@@ -19,29 +19,34 @@ class FlutterDeckMarker extends StatelessWidget {
   /// The widget below this widget in the tree.
   final Widget child;
 
-  void _updatePath(BuildContext context, Offset globalPosition, int index) {
+  void _updatePath(BuildContext context, String route, Offset globalPosition, {bool startPath = false}) {
     final box = context.findRenderObject() as RenderBox?;
     final offset = box?.globalToLocal(globalPosition);
 
-    if (offset != null) notifier.update(index, offset);
+    if (offset == null) return;
+
+    startPath ? notifier.startPath(route, offset) : notifier.addPoint(route, offset);
   }
 
   @override
   Widget build(BuildContext context) {
-    final configuration = context.flutterDeck.globalConfiguration.marker;
+    final flutterDeck = context.flutterDeck;
+    final configuration = flutterDeck.globalConfiguration.marker;
+    final route = flutterDeck.configuration.route;
 
     return ListenableBuilder(
       listenable: notifier,
       builder: (context, child) {
-        final paths = notifier.paths;
+        final paths = notifier.pathsForSlide(route);
 
         return Stack(
           children: [
             child!,
-            if (notifier.enabled)
-              GestureDetector(
-                onPanStart: (details) => _updatePath(context, details.globalPosition, paths.length),
-                onPanUpdate: (details) => _updatePath(context, details.globalPosition, paths.length - 1),
+            if (notifier.enabled || paths.isNotEmpty)
+              _MarkerOverlay(
+                enabled: notifier.enabled,
+                onPanStart: (details) => _updatePath(context, route, details.globalPosition, startPath: true),
+                onPanUpdate: (details) => _updatePath(context, route, details.globalPosition),
                 child: RepaintBoundary(
                   child: ConstrainedBox(
                     constraints: const BoxConstraints.expand(),
@@ -60,5 +65,26 @@ class FlutterDeckMarker extends StatelessWidget {
       },
       child: child,
     );
+  }
+}
+
+class _MarkerOverlay extends StatelessWidget {
+  const _MarkerOverlay({
+    required this.enabled,
+    required this.onPanStart,
+    required this.onPanUpdate,
+    required this.child,
+  });
+
+  final bool enabled;
+  final GestureDragStartCallback onPanStart;
+  final GestureDragUpdateCallback onPanUpdate;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    if (!enabled) return child;
+
+    return GestureDetector(onPanStart: onPanStart, onPanUpdate: onPanUpdate, child: child);
   }
 }
