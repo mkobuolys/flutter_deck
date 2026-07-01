@@ -42,9 +42,6 @@ class FlutterDeckMarker extends StatelessWidget {
         return Stack(
           children: [
             child!,
-            // Paint the stored paths even when the marker is disabled so that
-            // drawn annotations stay visible. The painter does not hit-test, so
-            // the slide below remains interactive while the marker is off.
             if (notifier.enabled || paths.isNotEmpty)
               _MarkerOverlay(
                 enabled: notifier.enabled,
@@ -71,8 +68,6 @@ class FlutterDeckMarker extends StatelessWidget {
   }
 }
 
-/// The overlay that renders the marker paths and, when [enabled], captures the
-/// drawing gestures.
 class _MarkerOverlay extends StatelessWidget {
   const _MarkerOverlay({
     required this.enabled,
