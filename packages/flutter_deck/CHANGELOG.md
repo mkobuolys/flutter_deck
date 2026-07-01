@@ -1,7 +1,8 @@
-# NEXT
+# 0.29.0
 
 - feat: persist marker drawings per slide
 - feat: added `persist` flag to `FlutterDeckMarkerConfiguration`
+- fix: error when starting the marker path
 
 # 0.28.1
 

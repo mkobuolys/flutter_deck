@@ -1,3 +1,7 @@
+# 0.2.1
+
+- chore: update the dependency on `flutter_deck` to `^0.29.0`
+
 # 0.2.0
 
 - chore: update the dependency on `flutter_deck` to `^0.28.0`
