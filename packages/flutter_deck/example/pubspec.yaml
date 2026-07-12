@@ -11,7 +11,7 @@ environment:
 dependencies:
   cupertino_icons: ^1.0.2
   file: ^7.0.1
-  file_saver: ^0.3.1
+  file_saver: ^0.4.0
   flutter:
     sdk: flutter
   flutter_deck: ^0.29.0
