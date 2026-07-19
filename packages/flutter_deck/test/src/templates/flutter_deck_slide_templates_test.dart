@@ -4,7 +4,6 @@ import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/presenter/presenter.dart';
-import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 import 'package:flutter_test/flutter_test.dart';

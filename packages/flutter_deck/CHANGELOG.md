@@ -4,6 +4,9 @@
   - Defaults to `BoxFit.scaleDown` and `Alignment.center`, preserving the previous behavior.
   - **BREAKING**: `FlutterDeckImageSlideBuilder` (used for `imageSlideBuilder` template overrides) now receives `BoxFit fit` and `AlignmentGeometry alignment` arguments after `label`.
     - **Migration**: update the builder signature to `(context, imageBuilder, label, fit, alignment, backgroundBuilder, footerBuilder, headerBuilder)`.
+- feat: export the building blocks needed to create custom slides
+  - `FlutterDeckLayout`, the built-in template widgets (e.g. `FlutterDeckBigFactSlide`, `FlutterDeckImageSlide`) and `AutoSizeText` are now exported from `package:flutter_deck/flutter_deck.dart`.
+- docs: elaborate on creating custom slides
 
 # 0.29.0
 
