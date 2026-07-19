@@ -31,6 +31,8 @@ class FlutterDeckImageSlide extends StatelessWidget {
   const FlutterDeckImageSlide({
     required this.imageBuilder,
     this.label,
+    this.fit = BoxFit.scaleDown,
+    this.alignment = Alignment.center,
     this.backgroundBuilder,
     this.footerBuilder,
     this.headerBuilder,
@@ -44,6 +46,21 @@ class FlutterDeckImageSlide extends StatelessWidget {
   ///
   /// If this is null, no label will be displayed.
   final String? label;
+
+  /// How the image should be inscribed into the space allocated for it.
+  ///
+  /// Defaults to [BoxFit.scaleDown], which scales the image down to fit the
+  /// available space without ever upscaling it. Use [BoxFit.cover] to fill the
+  /// whole slide (cropping the image if needed), [BoxFit.contain] to scale the
+  /// image up or down to fit, etc.
+  final BoxFit fit;
+
+  /// How to align the image within the space allocated for it.
+  ///
+  /// This is relevant when the image does not fill the whole area, e.g. when
+  /// [fit] is [BoxFit.contain] or [BoxFit.scaleDown], or when the image is
+  /// cropped by [BoxFit.cover]. Defaults to [Alignment.center].
+  final AlignmentGeometry alignment;
 
   /// A builder for the background of the slide.
   final WidgetBuilder? backgroundBuilder;
@@ -74,7 +91,16 @@ class FlutterDeckImageSlide extends StatelessWidget {
         padding: FlutterDeckLayout.slidePadding,
         child: Column(
           children: [
-            Expanded(child: Center(child: imageBuilder(context))),
+            Expanded(
+              child: SizedBox.expand(
+                child: FittedBox(
+                  fit: fit,
+                  alignment: alignment,
+                  clipBehavior: Clip.hardEdge,
+                  child: imageBuilder(context),
+                ),
+              ),
+            ),
             if (label != null) ...[const SizedBox(height: 4), Text(label!, style: theme.labelTextStyle)],
           ],
         ),

@@ -29,6 +29,8 @@ typedef FlutterDeckImageSlideBuilder =
       BuildContext context,
       Image Function(BuildContext context) imageBuilder,
       String? label,
+      BoxFit fit,
+      AlignmentGeometry alignment,
       WidgetBuilder? backgroundBuilder,
       WidgetBuilder? footerBuilder,
       WidgetBuilder? headerBuilder,

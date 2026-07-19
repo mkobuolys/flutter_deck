@@ -1,3 +1,10 @@
+## NEXT
+
+- feat: support configurable `fit` and `alignment` on `FlutterDeckSlide.image` and `FlutterDeckImageSlide`
+  - Defaults to `BoxFit.scaleDown` and `Alignment.center`, preserving the previous behavior.
+  - **BREAKING**: `FlutterDeckImageSlideBuilder` (used for `imageSlideBuilder` template overrides) now receives `BoxFit fit` and `AlignmentGeometry alignment` arguments after `label`.
+    - **Migration**: update the builder signature to `(context, imageBuilder, label, fit, alignment, backgroundBuilder, footerBuilder, headerBuilder)`.
+
 # 0.29.0
 
 - feat: persist marker drawings per slide

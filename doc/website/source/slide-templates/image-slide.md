@@ -28,3 +28,17 @@ class ImageSlide extends FlutterDeckSlideWidget {
 ```
 
 ![Image slide example](https://github.com/mkobuolys/flutter_deck/blob/main/images/templates/image.png?raw=true)
+
+## Controlling how the image is displayed
+
+By default, the image is scaled down to fit the available space (without ever being upscaled) and centered. You can change this with the `fit` and `alignment` arguments. For example, to make the image fill the whole slide (cropping it if needed) and align it to the top:
+
+```dart
+FlutterDeckSlide.image(
+  imageBuilder: (context) => Image.asset('assets/image.png'),
+  fit: BoxFit.cover,
+  alignment: Alignment.topCenter,
+);
+```
+
+`fit` accepts any `BoxFit` value (defaults to `BoxFit.scaleDown`) and `alignment` accepts any `AlignmentGeometry` value (defaults to `Alignment.center`).
