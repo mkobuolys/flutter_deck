@@ -215,11 +215,17 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   /// [backgroundBuilder], [footerBuilder], and [headerBuilder] arguments are
   /// optional.
   ///
+  /// [fit] controls how the image is inscribed into the available space and
+  /// defaults to [BoxFit.scaleDown]. [alignment] controls how the image is
+  /// aligned within that space and defaults to [Alignment.center].
+  ///
   /// The passed [theme] will be merged with global [FlutterDeckTheme] data.
   FlutterDeckSlide.image({
     required ImageBuilder imageBuilder,
     FlutterDeckSlideConfiguration? configuration,
     String? label,
+    BoxFit fit = BoxFit.scaleDown,
+    AlignmentGeometry alignment = Alignment.center,
     WidgetBuilder? backgroundBuilder,
     WidgetBuilder? footerBuilder,
     WidgetBuilder? headerBuilder,
@@ -232,12 +238,23 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
            final imageSlideBuilder = configuration.templateOverrides.imageSlideBuilder;
 
            if (imageSlideBuilder != null) {
-             return imageSlideBuilder(context, imageBuilder, label, backgroundBuilder, footerBuilder, headerBuilder);
+             return imageSlideBuilder(
+               context,
+               imageBuilder,
+               label,
+               fit,
+               alignment,
+               backgroundBuilder,
+               footerBuilder,
+               headerBuilder,
+             );
            }
 
            return FlutterDeckImageSlide(
              imageBuilder: imageBuilder,
              label: label,
+             fit: fit,
+             alignment: alignment,
              backgroundBuilder: backgroundBuilder,
              footerBuilder: footerBuilder,
              headerBuilder: headerBuilder,

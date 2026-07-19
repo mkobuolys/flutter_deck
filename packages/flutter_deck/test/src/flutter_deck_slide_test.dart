@@ -225,7 +225,7 @@ void main() {
         final overrideConfiguration = FlutterDeckTemplateOverrideConfiguration(
           bigFactSlideBuilder: (_, _, _, _, _, _, _) => const Text('Overridden Big Fact'),
           blankSlideBuilder: (_, _, _, _, _) => const Text('Overridden Blank'),
-          imageSlideBuilder: (_, _, _, _, _, _) => const Text('Overridden Image'),
+          imageSlideBuilder: (_, _, _, _, _, _, _, _) => const Text('Overridden Image'),
           quoteSlideBuilder: (_, _, _, _, _, _, _) => const Text('Overridden Quote'),
           splitSlideBuilder: (_, _, _, _, _, _, _) => const Text('Overridden Split'),
           templateSlideBuilder: (_, _, _, _, _) => const Text('Overridden Template'),

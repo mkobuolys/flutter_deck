@@ -105,6 +105,50 @@ void main() {
       expect(find.byType(Image), findsOneWidget);
       expect(find.text('Label'), findsOneWidget);
     });
+
+    testWidgets('applies default fit and alignment to the image', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: FlutterDeckProvider(
+            flutterDeck: flutterDeck,
+            child: FlutterDeckTheme(
+              data: FlutterDeckThemeData.light(),
+              child: FlutterDeckImageSlide(imageBuilder: (context) => Image.memory(kTransparentImage)),
+            ),
+          ),
+        ),
+      );
+
+      final fittedBox = tester.widget<FittedBox>(
+        find.ancestor(of: find.byType(Image), matching: find.byType(FittedBox)),
+      );
+      expect(fittedBox.fit, BoxFit.scaleDown);
+      expect(fittedBox.alignment, Alignment.center);
+    });
+
+    testWidgets('forwards custom fit and alignment to the image', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: FlutterDeckProvider(
+            flutterDeck: flutterDeck,
+            child: FlutterDeckTheme(
+              data: FlutterDeckThemeData.light(),
+              child: FlutterDeckImageSlide(
+                imageBuilder: (context) => Image.memory(kTransparentImage),
+                fit: BoxFit.cover,
+                alignment: Alignment.topLeft,
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final fittedBox = tester.widget<FittedBox>(
+        find.ancestor(of: find.byType(Image), matching: find.byType(FittedBox)),
+      );
+      expect(fittedBox.fit, BoxFit.cover);
+      expect(fittedBox.alignment, Alignment.topLeft);
+    });
   });
 
   group('FlutterDeckQuoteSlide', () {
