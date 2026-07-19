@@ -1,3 +1,8 @@
+## NEXT
+
+- feat: export the building blocks needed to create custom slides
+  - `FlutterDeckLayout`, the built-in template widgets (e.g. `FlutterDeckBigFactSlide`, `FlutterDeckImageSlide`) and `AutoSizeText` are now exported from `package:flutter_deck/flutter_deck.dart`.
+
 # 0.29.0
 
 - feat: persist marker drawings per slide
