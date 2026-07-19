@@ -1,3 +1,7 @@
+## NEXT
+
+- docs: elaborate on creating custom slides
+
 # 0.29.0
 
 - feat: persist marker drawings per slide
