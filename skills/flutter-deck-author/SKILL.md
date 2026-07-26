@@ -82,6 +82,11 @@ Pick the factory from the **shape** of the segment's content:
 | Empty / unrecognized                            | `FlutterDeckSlide.blank`                                          |
 
 Notes:
+- **Precedence:** evaluate the rows top-to-bottom and use the first that
+  matches; the bottom two rows are fallbacks. A `<!-- slide: -->` directive
+  always overrides the heuristic. If a segment genuinely matches two specific
+  rows (e.g. text with both an image and a fenced code block), prefer `split`
+  or add an explicit `<!-- slide: -->`.
 - A bulleted content slide sets `header: FlutterDeckHeaderConfiguration(title:
   <heading>)` so the section title shows above the bullets.
 - Code slides: language comes from the fence info string (```` ```dart ````);
@@ -111,6 +116,9 @@ document. Place a directive inside the slide's segment.
   (`Slide100`). Empty → `Slide<index>`.
 - **File name:** snake_case of the class name (`WhySlidesAsCodeSlide` →
   `why_slides_as_code_slide.dart`; `Slide100` → `slide100.dart`).
+- **Barrel order:** order the `export` statements alphabetically (Dart's
+  `directives_ordering` lint expects this); the `FlutterDeckApp.slides` list,
+  by contrast, follows outline order.
 
 ## Worked Example
 
