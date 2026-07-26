@@ -97,16 +97,17 @@ In your AI coding agent (Claude Code, Cursor, Codex, and other
 ## 4. What you get
 
 The agent creates one file per slide under `lib/slides/`, picking a template for each segment and
-deriving a route and class name from each heading:
+deriving a route and class name from each heading. For the outline above, that's six slides:
 
-| Outline segment           | Slide template                           | Route                    | Class                      |
-| ------------------------- | ---------------------------------------- | ------------------------ | -------------------------- |
-| `# Building Better Decks` | title                                    | `/building-better-decks` | `BuildingBetterDecksSlide` |
-| `## Why slides as code?`  | content (bullets, revealed step by step) | `/why-slides-as-code`    | `WhySlidesAsCodeSlide`     |
-| `## 100%`                 | big fact                                 | `/100`                   | `Slide100`                 |
-| `## In their words`       | quote                                    | `/in-their-words`        | `InTheirWordsSlide`        |
-| `## Show me the code`     | code                                     | `/show-me-the-code`      | `ShowMeTheCodeSlide`       |
-| `## Thanks!`              | title (forced)                           | `/thanks`                | `ThanksSlide`              |
+- **`# Building Better Decks`** → **title** slide — route `/building-better-decks`, class
+  `BuildingBetterDecksSlide`
+- **`## Why slides as code?`** → **content** slide with bullets revealed step by step — route
+  `/why-slides-as-code`, class `WhySlidesAsCodeSlide`
+- **`## 100%`** → **big fact** slide — route `/100`, class `Slide100`
+- **`## In their words`** → **quote** slide — route `/in-their-words`, class `InTheirWordsSlide`
+- **`## Show me the code`** → **code** slide — route `/show-me-the-code`, class `ShowMeTheCodeSlide`
+- **`## Thanks!`** → **title** slide, forced with `` `<!-- slide: title -->` `` — route `/thanks`,
+  class `ThanksSlide`
 
 For example, the `## Why slides as code?` segment — with its `<!-- steps: reveal -->` directive —
 becomes a slide whose bullet points appear one at a time:
