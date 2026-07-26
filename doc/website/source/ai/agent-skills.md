@@ -22,7 +22,7 @@ Six skills cover the surface area of `flutter_deck`. Each is scoped to a single 
 - **`flutter-deck-slides`** - Adding a new slide using one of the eight built-in factories (title, image, split, quote, bigFact, blank, template, custom).
 - **`flutter-deck-theming`** - Configuring `FlutterDeckThemeData`, light/dark modes, per-slide overrides, typography, or component-level themes.
 - **`flutter-deck-plugins`** - Building or wiring up `FlutterDeckPlugin`s - autoplay, PDF/PPTX export, the web client for the presenter view, custom controls.
-- **`flutter-deck-author`** - Generating a whole deck from a Markdown outline: segmenting into slides, mapping each block to the right factory, and wiring the `lib/slides/` barrel.
+- **`flutter-deck-author`** - Generating a whole deck from a Markdown outline: segmenting into slides, mapping each block to the right factory, and wiring the `lib/slides/` barrel. See [Authoring from Markdown](/ai/authoring-from-markdown/) for a full walkthrough.
 
 Each skill is a folder with a `SKILL.md` file living under [`skills/`](https://github.com/mkobuolys/flutter_deck/tree/main/skills) in the repository.
 
