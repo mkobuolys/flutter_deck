@@ -37,7 +37,8 @@ block and wiring the barrel. It is **content-only**:
 
 - The user provides a Markdown outline / notes and wants slides.
 - The user asks to "make a deck about X" or "draft a talk on Y" — draft an
-  `outline.md` first (see Step 1), get approval, then generate from it.
+  `outline.md` first (see the Pipeline Checklist below), get approval, then
+  generate from it.
 - The user wants to bulk-create many slides at once rather than one at a time.
 
 ## Pipeline Checklist
@@ -89,8 +90,12 @@ Notes:
   or add an explicit `<!-- slide: -->`.
 - A bulleted content slide sets `header: FlutterDeckHeaderConfiguration(title:
   <heading>)` so the section title shows above the bullets.
-- Code slides: language comes from the fence info string (```` ```dart ````);
-  `FlutterDeckCodeHighlight` defaults to `language: 'dart'`.
+- Code slides: wrap `FlutterDeckCodeHighlight` in a `Center`. Language comes
+  from the fence info string; `FlutterDeckCodeHighlight` defaults to
+  `language: 'dart'`, so omit `language:` when the fence is `dart`, otherwise
+  pass it explicitly.
+- Quote attribution: keep the source attribution text verbatim, including any
+  leading `—`.
 
 ## Override Directives
 
@@ -114,6 +119,10 @@ document. Place a directive inside the slide's segment.
   (`Why slides as code?` → `WhySlidesAsCodeSlide`). If that would start with a
   digit (a stat heading like `100%`), use `Slide` + the digits instead
   (`Slide100`). Empty → `Slide<index>`.
+- **Title:** always set `title:` in the slide configuration to the heading
+  text, so the navigation drawer shows a readable label instead of falling
+  back to the route. Slides without a heading (e.g. a lone stat) still set
+  it — `title: '100%'`.
 - **File name:** snake_case of the class name (`WhySlidesAsCodeSlide` →
   `why_slides_as_code_slide.dart`; `Slide100` → `slide100.dart`).
 - **Barrel order:** order the `export` statements alphabetically (Dart's
@@ -204,7 +213,10 @@ import 'package:flutter_deck/flutter_deck.dart';
 class Slide100 extends FlutterDeckSlideWidget {
   const Slide100()
     : super(
-        configuration: const FlutterDeckSlideConfiguration(route: '/100'),
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/100',
+          title: '100%',
+        ),
       );
 
   @override
