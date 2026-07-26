@@ -52,22 +52,28 @@ title: Building Better Decks
 ---
 
 # Building Better Decks
+
 Slides as code, with flutter_deck
 
 ## Why slides as code?
+
 <!-- steps: reveal -->
+
 - Version control your entire talk
 - Reuse widgets and live demos
 - One framework, every platform
 
 ## 100%
+
 Flutter, all the way down
 
 ## In their words
+
 > The best presentation tool is the one you never fight.
-— A tired conference speaker
+> — A tired conference speaker
 
 ## Show me the code
+
 ```dart
 FlutterDeckApp(
   slides: [const TitleSlide()],
@@ -75,7 +81,9 @@ FlutterDeckApp(
 ```
 
 ## Thanks!
+
 <!-- slide: title -->
+
 Questions?
 ````
 
@@ -91,14 +99,14 @@ In your AI coding agent (Claude Code, Cursor, Codex, and other
 The agent creates one file per slide under `lib/slides/`, picking a template for each segment and
 deriving a route and class name from each heading:
 
-| Outline segment            | Slide template | Route                    | Class                     |
-| -------------------------- | -------------- | ------------------------ | ------------------------- |
-| `# Building Better Decks`  | title          | `/building-better-decks` | `BuildingBetterDecksSlide` |
-| `## Why slides as code?`   | content (bullets, revealed step by step) | `/why-slides-as-code` | `WhySlidesAsCodeSlide` |
-| `## 100%`                  | big fact       | `/100`                   | `Slide100`                |
-| `## In their words`        | quote          | `/in-their-words`        | `InTheirWordsSlide`       |
-| `## Show me the code`      | code           | `/show-me-the-code`      | `ShowMeTheCodeSlide`      |
-| `## Thanks!`               | title (forced) | `/thanks`                | `ThanksSlide`             |
+| Outline segment           | Slide template                           | Route                    | Class                      |
+| ------------------------- | ---------------------------------------- | ------------------------ | -------------------------- |
+| `# Building Better Decks` | title                                    | `/building-better-decks` | `BuildingBetterDecksSlide` |
+| `## Why slides as code?`  | content (bullets, revealed step by step) | `/why-slides-as-code`    | `WhySlidesAsCodeSlide`     |
+| `## 100%`                 | big fact                                 | `/100`                   | `Slide100`                 |
+| `## In their words`       | quote                                    | `/in-their-words`        | `InTheirWordsSlide`        |
+| `## Show me the code`     | code                                     | `/show-me-the-code`      | `ShowMeTheCodeSlide`       |
+| `## Thanks!`              | title (forced)                           | `/thanks`                | `ThanksSlide`              |
 
 For example, the `## Why slides as code?` segment — with its `<!-- steps: reveal -->` directive —
 becomes a slide whose bullet points appear one at a time:

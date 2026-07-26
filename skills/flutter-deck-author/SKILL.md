@@ -71,25 +71,26 @@ block and wiring the barrel. It is **content-only**:
 
 Pick the factory from the **shape** of the segment's content:
 
-| Segment shape                                   | Factory                                                          |
-| ----------------------------------------------- | ---------------------------------------------------------------- |
-| First slide / a lone H1                         | `FlutterDeckSlide.title` (subtitle from the next line or an H2)  |
-| A dominant blockquote (`>`)                     | `FlutterDeckSlide.quote` (attribution from a `— name` line)      |
-| A short stat heading (e.g. `## 100%`)           | `FlutterDeckSlide.bigFact` (subtitle = the following line)       |
-| A dominant fenced code block                    | `FlutterDeckSlide.blank` + `FlutterDeckCodeHighlight`            |
-| A lone image `![alt](path)`                     | `FlutterDeckSlide.image` (label = alt); add path to `preloadImages` |
-| Text **and** an image/code block together       | `FlutterDeckSlide.split` (text left, media right)                |
-| Heading + bullet list (**default**)             | `FlutterDeckSlide.blank` + `FlutterDeckBulletList`               |
-| Empty / unrecognized                            | `FlutterDeckSlide.blank`                                          |
+| Segment shape                             | Factory                                                             |
+| ----------------------------------------- | ------------------------------------------------------------------- |
+| First slide / a lone H1                   | `FlutterDeckSlide.title` (subtitle from the next line or an H2)     |
+| A dominant blockquote (`>`)               | `FlutterDeckSlide.quote` (attribution from a `— name` line)         |
+| A short stat heading (e.g. `## 100%`)     | `FlutterDeckSlide.bigFact` (subtitle = the following line)          |
+| A dominant fenced code block              | `FlutterDeckSlide.blank` + `FlutterDeckCodeHighlight`               |
+| A lone image `![alt](path)`               | `FlutterDeckSlide.image` (label = alt); add path to `preloadImages` |
+| Text **and** an image/code block together | `FlutterDeckSlide.split` (text left, media right)                   |
+| Heading + bullet list (**default**)       | `FlutterDeckSlide.blank` + `FlutterDeckBulletList`                  |
+| Empty / unrecognized                      | `FlutterDeckSlide.blank`                                            |
 
 Notes:
+
 - **Precedence:** evaluate the rows top-to-bottom and use the first that
   matches; the bottom two rows are fallbacks. A `<!-- slide: -->` directive
   always overrides the heuristic. If a segment genuinely matches two specific
   rows (e.g. text with both an image and a fenced code block), prefer `split`
   or add an explicit `<!-- slide: -->`.
 - A bulleted content slide sets `header: FlutterDeckHeaderConfiguration(title:
-  <heading>)` so the section title shows above the bullets.
+<heading>)` so the section title shows above the bullets.
 - Code slides: wrap `FlutterDeckCodeHighlight` in a `Center`. Language comes
   from the fence info string; `FlutterDeckCodeHighlight` defaults to
   `language: 'dart'`, so omit `language:` when the fence is `dart`, otherwise
@@ -102,12 +103,12 @@ Notes:
 HTML comments are invisible in rendered Markdown, so the source stays a normal
 document. Place a directive inside the slide's segment.
 
-| Directive                     | Effect                                                                 |
-| ----------------------------- | ---------------------------------------------------------------------- |
-| `<!-- slide: <factory> -->`   | Force the factory (e.g. `split`, `bigFact`, `quote`, `title`).         |
-| `<!-- steps: reveal -->`      | Reveal bullets one-by-one: `FlutterDeckBulletList(useSteps: true)` and set `steps:` to the bullet count. |
-| `<!-- notes: … -->`           | Becomes the slide's `speakerNotes`.                                     |
-| `<!-- route: /custom -->`     | Override the derived route.                                             |
+| Directive                   | Effect                                                                                                   |
+| --------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `<!-- slide: <factory> -->` | Force the factory (e.g. `split`, `bigFact`, `quote`, `title`).                                           |
+| `<!-- steps: reveal -->`    | Reveal bullets one-by-one: `FlutterDeckBulletList(useSteps: true)` and set `steps:` to the bullet count. |
+| `<!-- notes: … -->`         | Becomes the slide's `speakerNotes`.                                                                      |
+| `<!-- route: /custom -->`   | Override the derived route.                                                                              |
 
 ## Deriving Routes and Class Names
 
@@ -139,22 +140,28 @@ title: Building Better Decks
 ---
 
 # Building Better Decks
+
 Slides as code, with flutter_deck
 
 ## Why slides as code?
+
 <!-- steps: reveal -->
+
 - Version control your entire talk
 - Reuse widgets and live demos
 - One framework, every platform
 
 ## 100%
+
 Flutter, all the way down
 
 ## In their words
+
 > The best presentation tool is the one you never fight.
-— A tired conference speaker
+> — A tired conference speaker
 
 ## Show me the code
+
 ```dart
 FlutterDeckApp(
   slides: [const TitleSlide()],
@@ -162,7 +169,9 @@ FlutterDeckApp(
 ```
 
 ## Thanks!
+
 <!-- slide: title -->
+
 Questions?
 ````
 
