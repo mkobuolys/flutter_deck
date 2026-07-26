@@ -53,3 +53,6 @@ mason-lock.json
 
 # Agent related
 .agent
+
+# Superpowers (design specs, plans)
+docs/superpowers/
