@@ -171,13 +171,14 @@ FlutterDeckApp(
 
 This repository ships [Agent Skills](https://agentskills.io) so AI coding agents (Claude Code, Cursor, Codex, OpenCode, Windsurf, and many [other compatible agents](https://agentskills.io/clients)) can help you build flutter_deck presentations accurately. Each skill captures the framework's conventions for a specific area:
 
-| Skill                             | Description                                                                                                |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `flutter-deck-presentation-setup` | Scaffold a new presentation from an empty Flutter project — `FlutterDeckApp`, themes, slides, plugins.     |
-| `flutter-deck-configuration`      | Configure a deck globally and per-slide — slide size, transitions, backgrounds, headers, footers.          |
-| `flutter-deck-slides`             | Create slides using the eight built-in factories and three idiomatic patterns.                             |
-| `flutter-deck-theming`            | Style with `FlutterDeckThemeData`, light/dark modes, per-slide overrides, and component themes.            |
-| `flutter-deck-plugins`            | Build, register, and use `FlutterDeckPlugin`s — autoplay, exporters, presenter view, custom controls.      |
+| Skill                             | Description                                                                                            |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `flutter-deck-presentation-setup` | Scaffold a new presentation from an empty Flutter project — `FlutterDeckApp`, themes, slides, plugins. |
+| `flutter-deck-configuration`      | Configure a deck globally and per-slide — slide size, transitions, backgrounds, headers, footers.      |
+| `flutter-deck-slides`             | Create slides using the eight built-in factories and three idiomatic patterns.                         |
+| `flutter-deck-theming`            | Style with `FlutterDeckThemeData`, light/dark modes, per-slide overrides, and component themes.        |
+| `flutter-deck-plugins`            | Build, register, and use `FlutterDeckPlugin`s — autoplay, exporters, presenter view, custom controls.  |
+| `flutter-deck-author`             | Generate a full deck from a Markdown outline — segment, map to factories, wire the barrel.             |
 
 Skills are managed via the [`skills`](https://www.npmjs.com/package/skills) CLI.
 
