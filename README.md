@@ -178,6 +178,7 @@ This repository ships [Agent Skills](https://agentskills.io) so AI coding agents
 | `flutter-deck-slides`             | Create slides using the eight built-in factories and three idiomatic patterns.                             |
 | `flutter-deck-theming`            | Style with `FlutterDeckThemeData`, light/dark modes, per-slide overrides, and component themes.            |
 | `flutter-deck-plugins`            | Build, register, and use `FlutterDeckPlugin`s — autoplay, exporters, presenter view, custom controls.      |
+| `flutter-deck-author`             | Generate a full deck from a Markdown outline — segment, map to factories, wire the barrel. |
 
 Skills are managed via the [`skills`](https://www.npmjs.com/package/skills) CLI.
 

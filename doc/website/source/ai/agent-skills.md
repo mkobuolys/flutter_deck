@@ -15,13 +15,14 @@ Agent Skills are an open, vendor-neutral format. The skills shipped with `flutte
 
 ## Available skills
 
-Five skills cover the surface area of `flutter_deck`. Each is scoped to a single area so the agent loads only what's relevant to the task at hand.
+Six skills cover the surface area of `flutter_deck`. Each is scoped to a single area so the agent loads only what's relevant to the task at hand.
 
 - **`flutter-deck-presentation-setup`** - Scaffolding a new presentation, converting an empty Flutter project into a deck, or restructuring existing code.
 - **`flutter-deck-configuration`** - Defining `FlutterDeckConfiguration` or `FlutterDeckSlideConfiguration`, choosing transitions, slide size, controls, marker, etc.
 - **`flutter-deck-slides`** - Adding a new slide using one of the eight built-in factories (title, image, split, quote, bigFact, blank, template, custom).
 - **`flutter-deck-theming`** - Configuring `FlutterDeckThemeData`, light/dark modes, per-slide overrides, typography, or component-level themes.
 - **`flutter-deck-plugins`** - Building or wiring up `FlutterDeckPlugin`s - autoplay, PDF/PPTX export, the web client for the presenter view, custom controls.
+- **`flutter-deck-author`** - Generating a whole deck from a Markdown outline: segmenting into slides, mapping each block to the right factory, and wiring the `lib/slides/` barrel.
 
 Each skill is a folder with a `SKILL.md` file living under [`skills/`](https://github.com/mkobuolys/flutter_deck/tree/main/skills) in the repository.
 
@@ -39,7 +40,7 @@ This means you don't pay any context cost for skills you aren't using, and a sin
 
 Skills are managed via the [`skills`](https://www.npmjs.com/package/skills) CLI. Run the commands below from inside your `flutter_deck` project (or anywhere - they accept a project flag).
 
-### Install all five skills
+### Install all six skills
 
 ```sh
 npx skills add mkobuolys/flutter_deck --all
