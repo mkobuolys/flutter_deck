@@ -1,24 +1,16 @@
 ---
 name: flutter-deck-author
-description: >
-  Generate a flutter_deck presentation from a Markdown outline — turn talk
-  notes, an outline, or a topic into idiomatic slide files. Segments Markdown
-  into slides, maps each block to the right built-in factory (title, quote,
-  bigFact, image, split, code, bulleted content) by content shape, honors
-  per-slide override directives (`<!-- slide: -->`, `<!-- steps: reveal -->`,
-  `<!-- notes: -->`, `<!-- route: -->`), derives routes and class names, and
-  wires the `lib/slides/` barrel. Use when authoring or drafting a deck from
-  Markdown, bulk-creating slides from an outline, or converting notes into a
-  flutter_deck presentation — even when the user only says "make a deck about
-  X" or "turn this outline into slides". Composes with
-  flutter-deck-presentation-setup (app wiring) and flutter-deck-slides /
-  flutter-deck-theming (factory and styling details).
+description: Use when authoring or drafting a deck from Markdown, bulk-creating slides from an outline, or converting notes into a flutter_deck presentation.
 compatibility: >
   Requires a Flutter project with the flutter_deck package added as a
   dependency.
 ---
 
 # Authoring a Flutter Deck from Markdown
+
+## Generator Principles (Context & Quality)
+- **Check Intent:** Do not automatically invoke this generator for ambiguous metaphorical prompts (e.g., "Do good, be ugly"). Only generate a deck if the user explicitly requests a presentation or slide deck in the current context.
+- **Write DRY Code:** When generating multiple slides with similar structures or widgets, use data structures or builder patterns to iterate over data instead of copy-pasting repetitive UI code. Maintain high code quality (no "ugly" duplication) from the first draft.
 
 ## Overview
 
