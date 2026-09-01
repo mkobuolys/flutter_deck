@@ -80,3 +80,15 @@ class CustomTransitionSlide extends FlutterDeckSlideWidget {
   <...>
 }
 ```
+
+It is also possible to set the duration of a transition:
+```dart
+FlutterDeckApp(
+  configuration: FlutterDeckConfiguration(
+    transition: const FlutterDeckTransition.fade().copyWith(
+      duration: const Duration(milliseconds: 500),
+    ),
+  ),
+<...>
+);
+```

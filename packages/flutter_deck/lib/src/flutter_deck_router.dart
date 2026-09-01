@@ -89,6 +89,7 @@ class FlutterDeckRouter extends ChangeNotifier {
                     key: state.pageKey,
                     restorationId: state.pageKey.value,
                     transitionsBuilder: slide.configuration.transition.build,
+                    transitionDuration: slide.configuration.transition.duration,
                     child: slide.widget,
                   ),
                 ),
