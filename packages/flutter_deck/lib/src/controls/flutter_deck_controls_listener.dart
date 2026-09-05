@@ -75,8 +75,12 @@ class FlutterDeckControlsListener extends StatelessWidget {
   Widget build(BuildContext context) {
     final controls = context.flutterDeck.globalConfiguration.controls;
 
+    // The node is focused to receive key events, not to be a tab stop. Keeping
+    // it out of traversal also keeps it out of the traversal sort that the web
+    // runs on view focus, which happens before the first layout.
     Widget widget = Focus(
       autofocus: true,
+      skipTraversal: true,
       child: ListenableBuilder(
         listenable: controlsNotifier,
         builder: (context, child) => MouseRegion(

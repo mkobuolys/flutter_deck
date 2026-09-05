@@ -135,6 +135,23 @@ void main() {
       verify(mockControlsNotifier.showControls()).called(1);
     });
 
+    testWidgets('should focus the deck without joining focus traversal', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: FlutterDeckProvider(
+            flutterDeck: flutterDeck,
+            child: FlutterDeckControlsListener(
+              controlsNotifier: mockControlsNotifier,
+              markerNotifier: mockMarkerNotifier,
+              child: const SizedBox(),
+            ),
+          ),
+        ),
+      );
+
+      expect(FocusManager.instance.primaryFocus?.skipTraversal, isTrue);
+    });
+
     testWidgets('should trigger next action on key press', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
