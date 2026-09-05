@@ -7,6 +7,8 @@
 - feat: export the building blocks needed to create custom slides
   - `FlutterDeckLayout`, the built-in template widgets (e.g. `FlutterDeckBigFactSlide`, `FlutterDeckImageSlide`) and `AutoSizeText` are now exported from `package:flutter_deck/flutter_deck.dart`.
 - docs: elaborate on creating custom slides
+- fix: `RenderBox was not laid out` exception on startup on the web
+  - The deck's focus node is now skipped in focus traversal, so it is no longer sorted before the first layout.
 
 # 0.29.0
 
