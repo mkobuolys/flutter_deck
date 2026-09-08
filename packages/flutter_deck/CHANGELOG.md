@@ -6,6 +6,7 @@
     - **Migration**: update the builder signature to `(context, imageBuilder, label, fit, alignment, backgroundBuilder, footerBuilder, headerBuilder)`.
 - feat: export the building blocks needed to create custom slides
   - `FlutterDeckLayout`, the built-in template widgets (e.g. `FlutterDeckBigFactSlide`, `FlutterDeckImageSlide`) and `AutoSizeText` are now exported from `package:flutter_deck/flutter_deck.dart`.
+- feat: allow customizing the duration of slide transitions
 - docs: elaborate on creating custom slides
 
 # 0.29.0
