@@ -9,7 +9,7 @@ environment:
   flutter: ">=3.32.0"
 
 dependencies:
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^2.0.0
   file: ^7.0.1
   file_saver: ^0.4.0
   flutter:
