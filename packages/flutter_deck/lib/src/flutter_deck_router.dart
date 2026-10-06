@@ -158,7 +158,7 @@ class FlutterDeckRouter extends ChangeNotifier {
     if (_currentSlideIndex - 1 < 0) return;
 
     _currentSlideIndex--;
-    _currentSlideStep = 1;
+    _currentSlideStep = currentSlideConfiguration.steps;
 
     _updateRoute();
   }

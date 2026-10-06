@@ -10,6 +10,7 @@
 - docs: elaborate on creating custom slides
 - fix: `RenderBox was not laid out` exception on startup on the web
   - The deck's focus node is now skipped in focus traversal, so it is no longer sorted before the first layout.
+- fix: when navigating back to the previous slide, if that slide has multiple steps, the last step will be displayed, not the first one
 
 # 0.29.0
 

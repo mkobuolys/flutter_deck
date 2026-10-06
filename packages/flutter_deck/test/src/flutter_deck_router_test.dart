@@ -73,7 +73,7 @@ void main() {
         ..next() // Slide 2
         ..previous();
       expect(router.currentSlideIndex, 0);
-      expect(router.currentStep, 1);
+      expect(router.currentStep, 2);
     });
 
     test('previous() should do nothing if at start of deck', () {
