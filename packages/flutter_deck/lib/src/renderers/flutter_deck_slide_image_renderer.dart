@@ -142,6 +142,13 @@ class FlutterDeckSlideImageRenderer {
         container: renderRepaintBoundary,
         debugShortDescription: '[root]',
       ).attachToRenderTree(buildOwner, element);
+      // Attaching an empty root only schedules the slide's removal: build it
+      // to deactivate the slide's elements, then finalize the tree to unmount
+      // them, so their states are disposed (and, for example, their animation
+      // controllers stop ticking).
+      buildOwner
+        ..buildScope(element)
+        ..finalizeTree();
     }
   }
 }

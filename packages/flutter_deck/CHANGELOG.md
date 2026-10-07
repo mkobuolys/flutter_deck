@@ -10,6 +10,8 @@
 - docs: elaborate on creating custom slides
 - fix: `RenderBox was not laid out` exception on startup on the web
   - The deck's focus node is now skipped in focus traversal, so it is no longer sorted before the first layout.
+- fix: slides rendered for the presenter view previews are never disposed
+  - Their states stayed mounted, so animation controllers kept ticking and every preview stayed in memory.
 
 # 0.29.0
 
