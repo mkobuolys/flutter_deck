@@ -63,7 +63,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
       builder: (context) => const Center(
         child: FlutterDeckCodeHighlight(
           code: '''
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 class CodeHighlightSlide extends FlutterDeckSlideWidget {

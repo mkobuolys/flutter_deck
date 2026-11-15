@@ -71,7 +71,7 @@ class MyDeck extends StatelessWidget {
 To create a plugin, extend the `FlutterDeckPlugin` class. This class has four methods: `init`, `dispose`, `buildControls`, and `wrap`.
 
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 class MyPlugin extends FlutterDeckPlugin {

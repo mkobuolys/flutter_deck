@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_deck/src/theme/templates/flutter_deck_split_slide_theme.
 import 'package:flutter_deck/src/theme/widgets/flutter_deck_footer_theme.dart';
 import 'package:flutter_deck/src/theme/widgets/flutter_deck_header_theme.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A split ratio for a [FlutterDeckSplitSlide].
 ///
@@ -84,9 +84,8 @@ class FlutterDeckSplitSlide extends StatelessWidget {
 
     return footerBuilder?.call(context) ??
         FlutterDeckFooterTheme(
-          data: FlutterDeckFooterTheme.of(
-            context,
-          ).copyWith(slideNumberColor: theme.rightColor, socialHandleColor: theme.leftColor),
+          data: FlutterDeckFooterTheme.of(context)
+              .copyWith(slideNumberColor: theme.rightColor, socialHandleColor: theme.leftColor),
           child: FlutterDeckFooter.fromConfiguration(configuration: context.flutterDeck.configuration.footer),
         );
   }

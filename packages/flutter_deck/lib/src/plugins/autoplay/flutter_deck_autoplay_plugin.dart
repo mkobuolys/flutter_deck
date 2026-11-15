@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/plugins/autoplay/flutter_deck_autoplay_notifier.dart';
 import 'package:flutter_deck/src/plugins/autoplay/flutter_deck_autoplay_provider.dart';
 import 'package:flutter_deck/src/plugins/flutter_deck_plugin.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A plugin that adds autoplay functionality to the slide deck.
 class FlutterDeckAutoplayPlugin extends FlutterDeckPlugin {

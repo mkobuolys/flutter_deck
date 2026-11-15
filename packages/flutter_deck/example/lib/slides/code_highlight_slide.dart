@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_ui/material_ui.dart';
 
 const _speakerNotes = '''
 - Use FlutterDeckCodeHighlight widget to highlight code.
@@ -30,7 +30,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
 
             if (stepNumber == 1) {
               codeCode = '''
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 class CodeHighlightSlide extends FlutterDeckSlideWidget {
@@ -44,7 +44,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
 }''';
             } else if (stepNumber == 2) {
               codeCode = '''
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 class CodeHighlightSlide extends FlutterDeckSlideWidget {
@@ -68,7 +68,7 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
               highlightedLines = [12, 13, 14, 15, 16, 17, 18, 19, 20];
             } else {
               codeCode = '''
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 class CodeHighlightSlide extends FlutterDeckSlideWidget {
@@ -93,9 +93,8 @@ class CodeHighlightSlide extends FlutterDeckSlideWidget {
             }
 
             return FlutterDeckCodeHighlightTheme(
-              data: FlutterDeckCodeHighlightTheme.of(
-                context,
-              ).copyWith(textStyle: GoogleFonts.googleSansCode(fontSize: 26)),
+              data: FlutterDeckCodeHighlightTheme.of(context)
+                  .copyWith(textStyle: GoogleFonts.googleSansCode(fontSize: 26)),
               child: FlutterDeckCodeHighlight(
                 code: codeCode,
                 fileName: 'code_highlight_slide.dart',

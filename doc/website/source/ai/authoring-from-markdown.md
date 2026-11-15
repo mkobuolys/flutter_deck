@@ -113,7 +113,7 @@ For example, the `## Why slides as code?` segment — with its `<!-- steps: reve
 becomes a slide whose bullet points appear one at a time:
 
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 class WhySlidesAsCodeSlide extends FlutterDeckSlideWidget {

@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_deck/flutter_deck.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A renderer that captures [FlutterDeckSlide]s as images.
 class FlutterDeckSlideImageRenderer {

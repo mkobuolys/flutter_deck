@@ -1,5 +1,7 @@
 ## NEXT
 
+- **BREAKING**: migrate from `package:flutter/material.dart` to the standalone [`material_ui`](https://pub.dev/packages/material_ui) package
+  - The minimum supported versions are now Flutter 3.47.0 and Dart 3.13.0.
 - feat: support configurable `fit` and `alignment` on `FlutterDeckSlide.image` and `FlutterDeckImageSlide`
   - Defaults to `BoxFit.scaleDown` and `Alignment.center`, preserving the previous behavior.
   - **BREAKING**: `FlutterDeckImageSlideBuilder` (used for `imageSlideBuilder` template overrides) now receives `BoxFit fit` and `AlignmentGeometry alignment` arguments after `label`.

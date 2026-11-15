@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/plugins/flutter_deck_plugin.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 class _TestPlugin extends FlutterDeckPlugin {
   const _TestPlugin();

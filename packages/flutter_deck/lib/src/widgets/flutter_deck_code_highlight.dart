@@ -1,6 +1,6 @@
 import 'package:diff_match_patch/diff_match_patch.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:syntax_highlight/syntax_highlight.dart';
 
 class _Token {

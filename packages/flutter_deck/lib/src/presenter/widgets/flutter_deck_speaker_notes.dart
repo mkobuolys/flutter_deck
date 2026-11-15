@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Renders the speaker notes for the current slide.
 ///

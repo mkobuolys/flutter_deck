@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 import 'package:flutter_deck_client/flutter_deck_client.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A controller that manages the presenter view of the Flutter Deck.
 ///

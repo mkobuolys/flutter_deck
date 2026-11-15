@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/controls/actions/actions.dart';
 import 'package:flutter_deck/src/controls/localized_shortcut_labeler.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A widget that allows the user to control the slide deck.
 ///

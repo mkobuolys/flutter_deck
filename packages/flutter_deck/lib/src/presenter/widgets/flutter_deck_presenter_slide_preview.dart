@@ -1,11 +1,11 @@
 import 'dart:typed_data';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
 import 'package:flutter_deck/src/renderers/renderers.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Renders the preview of the current and next slide.
 ///

@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/widgets/internal/marker/flutter_deck_marker.dart';
 import 'package:flutter_deck/src/widgets/internal/marker/flutter_deck_marker_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

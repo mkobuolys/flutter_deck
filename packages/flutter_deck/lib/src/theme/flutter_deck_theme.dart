@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_text_theme.dart';
 import 'package:flutter_deck/src/theme/templates/templates.dart';
 import 'package:flutter_deck/src/theme/widgets/widgets.dart';
+import 'package:material_ui/material_ui.dart';
 
 const _flutterBlue = Color(0xff0553B1);
 

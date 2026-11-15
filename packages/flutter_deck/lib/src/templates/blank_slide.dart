@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/templates/slide_base.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A slide widget that represents a blank slide.
 ///
