@@ -12,6 +12,7 @@
   - `FlutterDeckLayout`, the built-in template widgets (e.g. `FlutterDeckBigFactSlide`, `FlutterDeckImageSlide`) and `AutoSizeText` are now exported from `package:flutter_deck/flutter_deck.dart`.
 - feat: allow customizing the duration of slide transitions
 - docs: elaborate on creating custom slides
+- chore: upgrade `window_manager` to 0.6.0 and newer (0.7.x on Flutter 3.50+)
 - fix: `RenderBox was not laid out` exception on startup on the web
   - The deck's focus node is now skipped in focus traversal, so it is no longer sorted before the first layout.
 - fix: slides rendered for the presenter view previews are never disposed
