@@ -8,7 +8,7 @@ import 'package:material_ui/material_ui.dart';
 /// A renderer that captures [FlutterDeckSlide]s as images.
 class FlutterDeckSlideImageRenderer {
   /// Creates a [FlutterDeckSlideImageRenderer].
-  const FlutterDeckSlideImageRenderer({required FlutterDeck flutterDeck}) : _flutterDeck = flutterDeck;
+  const FlutterDeckSlideImageRenderer({required this._flutterDeck});
 
   final FlutterDeck _flutterDeck;
 

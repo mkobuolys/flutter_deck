@@ -26,10 +26,7 @@ class FlutterDeckTransition {
 
   /// This constructor is private because it should not be used directly.
   /// Instead, use one of the public constructors.
-  const FlutterDeckTransition._({
-    required FlutterDeckTransitionBuilder transitionBuilder,
-    this.duration = const Duration(milliseconds: 300),
-  }) : _transitionBuilder = transitionBuilder;
+  const FlutterDeckTransition._({required this._transitionBuilder, this.duration = const Duration(milliseconds: 300)});
 
   /// The builder used to build the transition.
   final FlutterDeckTransitionBuilder _transitionBuilder;

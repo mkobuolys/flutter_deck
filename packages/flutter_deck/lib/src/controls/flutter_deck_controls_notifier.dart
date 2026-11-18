@@ -14,14 +14,11 @@ const _defaultControlsVisibleDuration = Duration(seconds: 3);
 class FlutterDeckControlsNotifier with ChangeNotifier implements FlutterDeckFullscreenManager {
   /// Creates a [FlutterDeckControlsNotifier].
   FlutterDeckControlsNotifier({
-    required FlutterDeckDrawerNotifier drawerNotifier,
-    required FlutterDeckMarkerNotifier markerNotifier,
-    required FlutterDeckFullscreenManager fullscreenManager,
-    required FlutterDeckRouter router,
-  }) : _drawerNotifier = drawerNotifier,
-       _markerNotifier = markerNotifier,
-       _fullscreenManager = fullscreenManager,
-       _router = router;
+    required this._drawerNotifier,
+    required this._markerNotifier,
+    required this._fullscreenManager,
+    required this._router,
+  });
 
   final FlutterDeckDrawerNotifier _drawerNotifier;
   final FlutterDeckMarkerNotifier _markerNotifier;

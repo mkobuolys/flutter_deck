@@ -7,9 +7,8 @@ typedef ImagePrecacher = Future<void> Function(ImageProvider provider, BuildCont
 /// A class that handles pre-caching of images for the slide deck.
 class FlutterDeckImagePreloader {
   /// Creates a [FlutterDeckImagePreloader].
-  FlutterDeckImagePreloader({required FlutterDeckRouter router, ImagePrecacher? imagePrecacher})
-    : _router = router,
-      _imagePrecacher = imagePrecacher ?? precacheImage;
+  FlutterDeckImagePreloader({required this._router, ImagePrecacher? imagePrecacher})
+    : _imagePrecacher = imagePrecacher ?? precacheImage;
 
   final FlutterDeckRouter _router;
   final ImagePrecacher _imagePrecacher;

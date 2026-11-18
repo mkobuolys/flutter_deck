@@ -10,13 +10,7 @@ import 'package:flutter_deck/src/widgets/internal/marker/flutter_deck_marker_not
 /// changes. Step changes within the same slide do not clear the drawings.
 class FlutterDeckMarkerController {
   /// Creates a [FlutterDeckMarkerController].
-  FlutterDeckMarkerController({
-    required FlutterDeckRouter router,
-    required FlutterDeckMarkerNotifier markerNotifier,
-    required bool persist,
-  }) : _router = router,
-       _markerNotifier = markerNotifier,
-       _persist = persist;
+  FlutterDeckMarkerController({required this._router, required this._markerNotifier, required this._persist});
 
   final FlutterDeckRouter _router;
   final FlutterDeckMarkerNotifier _markerNotifier;

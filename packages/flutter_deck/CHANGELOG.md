@@ -12,6 +12,9 @@
   - `FlutterDeckLayout`, the built-in template widgets (e.g. `FlutterDeckBigFactSlide`, `FlutterDeckImageSlide`) and `AutoSizeText` are now exported from `package:flutter_deck/flutter_deck.dart`.
 - feat: allow customizing the duration of slide transitions
 - docs: elaborate on creating custom slides
+- **BREAKING**: upgrade `window_manager` to 0.6.0 and newer (0.7.x on Flutter 3.50+)
+  - `window_manager` is now built on `nativeapi`, which compiles native code during the build. On Linux, this also applies to `flutter test`, which now needs the GTK 3, X11 and Xi development packages even when your tests never touch fullscreen.
+  - **Migration**: on Linux machines and CI runners, install the development packages (e.g. `sudo apt-get install -y pkg-config libgtk-3-dev libx11-dev libxi-dev` on Ubuntu).
 - fix: `RenderBox was not laid out` exception on startup on the web
   - The deck's focus node is now skipped in focus traversal, so it is no longer sorted before the first layout.
 - fix: slides rendered for the presenter view previews are never disposed
