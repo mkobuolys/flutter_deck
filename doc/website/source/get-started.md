@@ -6,11 +6,31 @@ title: Get Started
 
 First, create a new Flutter project for your slideshow.
 
-Next, add `flutter_deck` as a dependency in your `pubspec.yaml` file:
+`flutter_deck` requires Flutter 3.47.0 (Dart 3.13.0) or newer.
+
+Next, add `flutter_deck` and [`material_ui`](https://pub.dev/packages/material_ui) as dependencies in your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
   flutter_deck:
+  material_ui:
+```
+
+`flutter_deck` is built on the standalone `material_ui` package, so import it instead of `package:flutter/material.dart` in your presentation code:
+
+```dart
+import 'package:flutter_deck/flutter_deck.dart';
+import 'package:material_ui/material_ui.dart';
+```
+
+If you are upgrading from an older version that used `package:flutter/material.dart`, run `dart fix --apply --code=migrate_design_widgets` to migrate your imports.
+
+### Linux
+
+`flutter_deck` uses [`window_manager`](https://pub.dev/packages/window_manager), which compiles native code during the build, including `flutter test`. On Linux machines and CI runners, install the GTK 3, X11 and Xi development packages:
+
+```sh
+sudo apt-get install -y pkg-config libgtk-3-dev libx11-dev libxi-dev
 ```
 
 You're now ready to leverage the power of `flutter_deck` to quickly assemble a great

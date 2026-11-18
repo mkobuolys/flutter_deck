@@ -37,19 +37,33 @@ The official documentation is available at https://flutterdeck.dev.
 
 ## 💻 Installation
 
-**❗ In order to start using flutter_deck you must have the [Flutter SDK](https://docs.flutter.dev/get-started/install) installed on your machine.**
+**❗ In order to start using flutter_deck you must have the [Flutter SDK](https://docs.flutter.dev/get-started/install) 3.47.0 or newer installed on your machine.**
 
-Add `flutter_deck` to your `pubspec.yaml`:
+Add `flutter_deck` and [`material_ui`](https://pub.dev/packages/material_ui) to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
   flutter_deck:
+  material_ui:
 ```
 
 Install it:
 
 ```sh
 flutter packages get
+```
+
+flutter_deck is built on the standalone `material_ui` package, so import it instead of `package:flutter/material.dart` in your presentation code:
+
+```dart
+import 'package:flutter_deck/flutter_deck.dart';
+import 'package:material_ui/material_ui.dart';
+```
+
+**🐧 Linux:** flutter_deck uses [`window_manager`](https://pub.dev/packages/window_manager), which compiles native code during the build, including `flutter test`. Install the GTK 3, X11 and Xi development packages on Linux machines and CI runners:
+
+```sh
+sudo apt-get install -y pkg-config libgtk-3-dev libx11-dev libxi-dev
 ```
 
 ## 👋 Hello flutter_deck!

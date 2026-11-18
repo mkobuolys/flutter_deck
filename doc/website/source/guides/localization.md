@@ -17,3 +17,5 @@ FlutterDeckApp(
   supportedLocales: AppLocalizations.supportedLocales,
 );
 ```
+
+`FlutterDeckApp` always provides the `material_ui` localizations, so you don't need to add them to `localizationsDelegates` yourself.
