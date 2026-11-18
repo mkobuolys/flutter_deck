@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/theme/widgets/flutter_deck_header_theme.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A widget that renders a header for a slide. The header can contain the slide
 /// title. The title is rendered as an [AutoSizeText] widget and is

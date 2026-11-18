@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/presenter/widgets/flutter_deck_presenter_timer.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('FlutterDeckPresenterTimer', () {

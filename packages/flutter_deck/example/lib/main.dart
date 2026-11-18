@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck_example/l10n/l10n.dart';
 import 'package:flutter_deck_example/shortcuts/shortcuts.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_deck_pdf_export/flutter_deck_pdf_export.dart';
 import 'package:flutter_deck_pptx_export/flutter_deck_pptx_export.dart';
 import 'package:flutter_deck_web_client/flutter_deck_web_client.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   runApp(const FlutterDeckExample());

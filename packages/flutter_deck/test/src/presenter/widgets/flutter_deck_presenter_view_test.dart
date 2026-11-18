@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_deck/src/presenter/widgets/flutter_deck_speaker_notes.da
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -39,9 +39,8 @@ void main() {
 
       when(mockRouter.currentSlideIndex).thenReturn(0);
       when(mockRouter.currentStep).thenReturn(1);
-      when(
-        mockRouter.currentSlideConfiguration,
-      ).thenReturn(const FlutterDeckSlideConfiguration(route: '/1', speakerNotes: 'Some notes'));
+      when(mockRouter.currentSlideConfiguration)
+          .thenReturn(const FlutterDeckSlideConfiguration(route: '/1', speakerNotes: 'Some notes'));
       when(mockRouter.slides).thenReturn([
         const FlutterDeckRouterSlide(
           route: '/1',

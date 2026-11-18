@@ -131,7 +131,7 @@ Inside the `lib/slides/` directory, create your slides. Each slide should be its
 `lib/slides/title_slide.dart`:
 
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 class TitleSlide extends FlutterDeckSlideWidget {
@@ -184,7 +184,7 @@ export 'intro/intro.dart';
 Configure `FlutterDeckApp` and pass the grouped arrays from `slides.dart` using the spread operator. `FlutterDeckApp.slides` is typed `List<Widget>` — you can mix `FlutterDeckSlideWidget` subclasses, `FlutterDeckSlide.<factory>(configuration: ...)` constructors used inline, and any widget tagged with `Widget.withSlideConfiguration(...)` in the same list.
 
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 import 'slides/slides.dart';

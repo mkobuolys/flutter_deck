@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_layout.dart';
 import 'package:flutter_deck/src/templates/slide_base.dart';
 import 'package:flutter_deck/src/theme/templates/flutter_deck_image_slide_theme.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A signature for a function that builds an image for a slide.
 typedef ImageBuilder = Image Function(BuildContext context);

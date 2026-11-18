@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/controls/fullscreen/window_proxy/window_proxy.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
 import 'package:flutter_deck_client/flutter_deck_client.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 const _defaultLocale = Locale('en', 'US');
 
@@ -180,6 +180,11 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
 
   late FlutterDeckMarkerController _markerController;
 
+  Iterable<LocalizationsDelegate<dynamic>> get _localizationsDelegates => [
+    ...?widget.localizationsDelegates,
+    ...GlobalMaterialLocalizations.delegates,
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -228,7 +233,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
       markerNotifier: _markerNotifier,
       presenterController: _presenterController,
       themeNotifier: _themeNotifier,
-      localizationsDelegates: widget.localizationsDelegates,
+      localizationsDelegates: _localizationsDelegates,
       supportedLocales: widget.supportedLocales,
       plugins: widget.plugins,
     );
@@ -326,7 +331,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
             },
             debugShowCheckedModeBanner: false,
             locale: locale,
-            localizationsDelegates: widget.localizationsDelegates,
+            localizationsDelegates: _localizationsDelegates,
             supportedLocales: widget.supportedLocales,
           );
         },

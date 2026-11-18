@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/presenter/flutter_deck_presenter_controller.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_deck/src/presenter/widgets/flutter_deck_presenter_slide_
 import 'package:flutter_deck/src/presenter/widgets/flutter_deck_presenter_timer.dart';
 import 'package:flutter_deck/src/presenter/widgets/flutter_deck_speaker_notes.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// The presenter view page.
 class PresenterView extends StatefulWidget {

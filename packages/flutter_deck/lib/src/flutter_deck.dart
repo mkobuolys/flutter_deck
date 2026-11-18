@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck_app.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_deck/src/plugins/plugins.dart';
 import 'package:flutter_deck/src/presenter/presenter.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme_notifier.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// The main class used to interact with the slide deck.
 ///

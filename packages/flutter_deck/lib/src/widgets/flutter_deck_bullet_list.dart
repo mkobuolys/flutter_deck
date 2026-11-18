@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/theme/widgets/flutter_deck_bullet_list_theme.dart';
 import 'package:flutter_deck/src/widgets/widgets.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A widget that renders a list of bullet points.
 ///
@@ -17,7 +17,7 @@ import 'package:flutter_deck/src/widgets/widgets.dart';
 /// Example:
 ///
 /// ```dart
-/// import 'package:flutter/material.dart';
+/// import 'package:material_ui/material_ui.dart';
 /// import 'package:flutter_deck/flutter_deck.dart';
 ///
 /// class BulletListSlide extends FlutterDeckSlideWidget {

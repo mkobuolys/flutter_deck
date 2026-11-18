@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
-
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A widget that listens to the [FlutterDeckDrawerNotifier] and calls the
 /// [onDrawerToggle] callback.

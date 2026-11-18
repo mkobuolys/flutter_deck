@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A [CustomPainter] that draws all the paths of the marker.
 class FlutterDeckMarkerPainter extends CustomPainter {

@@ -1,8 +1,8 @@
 import 'package:file/memory.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:open_xml/open_xml.dart' as open_xml;
 
 /// A [FlutterDeckPlugin] that exports the presentation as a PPTX file.

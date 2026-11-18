@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/configuration/configuration.dart';
 import 'package:flutter_deck/src/controls/controls.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_deck/src/flutter_deck_speaker_info.dart';
 import 'package:flutter_deck/src/templates/templates.dart';
 import 'package:flutter_deck/src/theme/flutter_deck_theme.dart';
 import 'package:flutter_deck/src/widgets/internal/internal.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// An abstract class that represents a slide in a slide deck.
 ///

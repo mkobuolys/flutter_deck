@@ -4,8 +4,8 @@
 // The original file is located at lib/src/material/menu_anchor.dart
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A helper class used to generate shortcut labels for a
 /// [MenuSerializableShortcut] (a subset of the subclasses of

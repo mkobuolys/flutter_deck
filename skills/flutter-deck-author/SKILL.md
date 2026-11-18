@@ -182,7 +182,7 @@ Two representative outputs:
 `lib/slides/why_slides_as_code_slide.dart` (heading + bullets + `steps: reveal`):
 
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 class WhySlidesAsCodeSlide extends FlutterDeckSlideWidget {
@@ -216,7 +216,7 @@ class WhySlidesAsCodeSlide extends FlutterDeckSlideWidget {
 `Slide` prefix):
 
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 
 class Slide100 extends FlutterDeckSlideWidget {

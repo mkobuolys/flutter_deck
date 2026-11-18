@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A linear progress indicator that shows the current progress of the
 /// presentation.

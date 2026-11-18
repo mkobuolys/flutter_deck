@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../test_utils.dart';
 
@@ -66,9 +66,8 @@ class BlankSlide extends FlutterDeckSlideWidget {
   Widget build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => const Text('Test Content'),
-      theme: FlutterDeckTheme.of(
-        context,
-      ).copyWith(slideTheme: const FlutterDeckSlideThemeData(backgroundColor: Colors.orange)),
+      theme: FlutterDeckTheme.of(context)
+          .copyWith(slideTheme: const FlutterDeckSlideThemeData(backgroundColor: Colors.orange)),
       key: const Key('blankslide'),
     );
   }

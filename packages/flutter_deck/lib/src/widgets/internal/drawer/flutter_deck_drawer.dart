@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 const _navigationDrawerWidth = 400.0;
 const _navigationItemHeight = 48.0;

@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart' show GlobalCupertinoLocalizations;
 import 'package:flutter/services.dart';
 import 'package:flutter_deck/flutter_deck.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart' show GlobalWidgetsLocalizations;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('FlutterDeckApp', () {
@@ -168,6 +169,31 @@ void main() {
 
         final materialApp = tester.widget<MaterialApp>(find.byType(MaterialApp));
         expect(materialApp.locale, locale);
+      });
+
+      testWidgets('provides material localizations for non-English locales', (tester) async {
+        const locale = Locale('lt');
+        late MaterialLocalizations? materialLocalizations;
+
+        await tester.pumpWidget(
+          FlutterDeckApp(
+            locale: locale,
+            supportedLocales: const [Locale('en'), locale],
+            localizationsDelegates: const [GlobalWidgetsLocalizations.delegate],
+            slides: [
+              FlutterDeckSlide.blank(
+                configuration: const FlutterDeckSlideConfiguration(route: '/slide-1'),
+                builder: (context) {
+                  materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
+                  return const SizedBox();
+                },
+              ),
+            ],
+          ),
+        );
+
+        expect(tester.takeException(), isNull);
+        expect(materialLocalizations?.okButtonLabel, 'GERAI');
       });
     });
   });

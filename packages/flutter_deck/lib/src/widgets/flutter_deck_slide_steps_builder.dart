@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A signature for a function that builds a widget for a slide step. The
 /// function is passed the [BuildContext] and the [stepNumber] of the slide.

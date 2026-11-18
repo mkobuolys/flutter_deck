@@ -48,11 +48,10 @@ abstract class FlutterDeckPlugin {
 ///
 /// See also:
 /// * [FlutterDeckPlugin.buildControls], which uses this builder to add custom menu items to the controls.
-typedef FlutterDeckPluginMenuItemBuilder =
-    Widget Function(
-      BuildContext context, {
-      required String label,
-      required VoidCallback? onPressed,
-      Widget? icon,
-      bool? closeOnActivate,
-    });
+typedef FlutterDeckPluginMenuItemBuilder = Widget Function(
+  BuildContext context, {
+  required String label,
+  required VoidCallback? onPressed,
+  Widget? icon,
+  bool? closeOnActivate,
+});

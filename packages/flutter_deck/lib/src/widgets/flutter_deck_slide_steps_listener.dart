@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_deck/src/flutter_deck.dart';
 import 'package:flutter_deck/src/flutter_deck_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A signature for a function that is called when the slide step changes. The
 /// function is passed the [BuildContext] and the [stepNumber] of the slide.
