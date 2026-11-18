@@ -24,26 +24,21 @@ class FlutterDeckPresenterController {
   /// Creates a new [FlutterDeckPresenterController] with the given
   /// dependencies.
   ///
-  /// The [controlsNotifier], [localizationNotifier], [markerNotifier],
-  /// [themeNotifier], and [router] are required dependencies that are used to
+  /// The `controlsNotifier`, `localizationNotifier`, `markerNotifier`,
+  /// `themeNotifier`, and `router` are required dependencies that are used to
   /// manage the state of the presentation.
   ///
-  /// The [client] is an optional dependency that can be used to provide a
+  /// The `client` is an optional dependency that can be used to provide a
   /// custom implementation of the [FlutterDeckClient]. If not provided, this controller
   /// will not be able to communicate with a remote presenter view.
   FlutterDeckPresenterController({
-    required FlutterDeckControlsNotifier controlsNotifier,
-    required FlutterDeckLocalizationNotifier localizationNotifier,
-    required FlutterDeckMarkerNotifier markerNotifier,
-    required FlutterDeckThemeNotifier themeNotifier,
-    required FlutterDeckRouter router,
-    FlutterDeckClient? client,
-  }) : _controlsNotifier = controlsNotifier,
-       _localizationNotifier = localizationNotifier,
-       _markerNotifier = markerNotifier,
-       _themeNotifier = themeNotifier,
-       _router = router,
-       _client = client;
+    required this._controlsNotifier,
+    required this._localizationNotifier,
+    required this._markerNotifier,
+    required this._themeNotifier,
+    required this._router,
+    this._client,
+  });
 
   final FlutterDeckControlsNotifier _controlsNotifier;
   final FlutterDeckLocalizationNotifier _localizationNotifier;

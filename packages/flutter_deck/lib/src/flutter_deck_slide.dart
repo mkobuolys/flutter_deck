@@ -77,13 +77,7 @@ class FlutterDeckSlide extends FlutterDeckSlideWidget {
   ///
   /// This constructor is private and should not be used directly. Instead, use
   /// one of the named constructors to create a new slide.
-  const FlutterDeckSlide._({
-    required WidgetBuilder builder,
-    required FlutterDeckThemeData? theme,
-    super.configuration,
-    super.key,
-  }) : _builder = builder,
-       _theme = theme;
+  const FlutterDeckSlide._({required this._builder, required this._theme, super.configuration, super.key});
 
   /// Creates a new big fact slide.
   ///

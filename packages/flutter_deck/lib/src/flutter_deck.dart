@@ -41,60 +41,48 @@ import 'package:material_ui/material_ui.dart';
 class FlutterDeck {
   /// Default constructor for [FlutterDeck].
   ///
-  /// The [configuration] is required and is used to configure the slide deck.
+  /// The `configuration` is required and is used to configure the slide deck.
   ///
-  /// The [router] is required and is used to navigate between slides.
+  /// The `router` is required and is used to navigate between slides.
   ///
-  /// The [speakerInfo] is optional and is used to access the speaker info.
+  /// The `speakerInfo` is optional and is used to access the speaker info.
   ///
-  /// The [controlsNotifier] is required and is used to control the slide deck.
+  /// The `controlsNotifier` is required and is used to control the slide deck.
   ///
-  /// The [drawerNotifier] is required and is used to control the slide deck's
+  /// The `drawerNotifier` is required and is used to control the slide deck's
   /// drawer.
   ///
-  /// The [localizationNotifier] is required and is used to control the slide
+  /// The `localizationNotifier` is required and is used to control the slide
   /// deck's localization.
   ///
-  /// The [markerNotifier] is required and is used to control the slide deck's
+  /// The `markerNotifier` is required and is used to control the slide deck's
   /// marker.
   ///
-  /// The [themeNotifier] is required and is used to control the slide deck's
+  /// The `themeNotifier` is required and is used to control the slide deck's
   /// theme.
   ///
-  /// The [localizationsDelegates] is optional and is used to provide
+  /// The `localizationsDelegates` is optional and is used to provide
   /// [LocalizationsDelegate]s for the slide deck.
   ///
-  /// The [supportedLocales] is used to provide the locales that the slide
+  /// The `supportedLocales` is used to provide the locales that the slide
   /// deck supports.
   ///
-  /// The [plugins] is required and is used to add plugins to the slide deck.
+  /// The `plugins` is required and is used to add plugins to the slide deck.
   const FlutterDeck({
-    required FlutterDeckConfiguration configuration,
-    required FlutterDeckRouter router,
-    required FlutterDeckSpeakerInfo? speakerInfo,
-    required FlutterDeckControlsNotifier controlsNotifier,
-    required FlutterDeckDrawerNotifier drawerNotifier,
-    required FlutterDeckLocalizationNotifier localizationNotifier,
-    required FlutterDeckMarkerNotifier markerNotifier,
-    required FlutterDeckPresenterController presenterController,
-    required FlutterDeckThemeNotifier themeNotifier,
-    required Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates,
-    required Iterable<Locale> supportedLocales,
-    required List<FlutterDeckPlugin> plugins,
-    int? stepNumber,
-  }) : _configuration = configuration,
-       _router = router,
-       _speakerInfo = speakerInfo,
-       _controlsNotifier = controlsNotifier,
-       _drawerNotifier = drawerNotifier,
-       _localizationNotifier = localizationNotifier,
-       _markerNotifier = markerNotifier,
-       _presenterController = presenterController,
-       _themeNotifier = themeNotifier,
-       _localizationsDelegates = localizationsDelegates,
-       _supportedLocales = supportedLocales,
-       _plugins = plugins,
-       _stepNumber = stepNumber;
+    required this._configuration,
+    required this._router,
+    required this._speakerInfo,
+    required this._controlsNotifier,
+    required this._drawerNotifier,
+    required this._localizationNotifier,
+    required this._markerNotifier,
+    required this._presenterController,
+    required this._themeNotifier,
+    required this._localizationsDelegates,
+    required this._supportedLocales,
+    required this._plugins,
+    this._stepNumber,
+  });
 
   final FlutterDeckConfiguration _configuration;
   final FlutterDeckRouter _router;
