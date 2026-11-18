@@ -180,6 +180,11 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
 
   late FlutterDeckMarkerController _markerController;
 
+  Iterable<LocalizationsDelegate<dynamic>> get _localizationsDelegates => [
+    ...?widget.localizationsDelegates,
+    ...GlobalMaterialLocalizations.delegates,
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -228,7 +233,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
       markerNotifier: _markerNotifier,
       presenterController: _presenterController,
       themeNotifier: _themeNotifier,
-      localizationsDelegates: widget.localizationsDelegates,
+      localizationsDelegates: _localizationsDelegates,
       supportedLocales: widget.supportedLocales,
       plugins: widget.plugins,
     );
@@ -326,7 +331,7 @@ class _FlutterDeckAppState extends State<FlutterDeckApp> {
             },
             debugShowCheckedModeBanner: false,
             locale: locale,
-            localizationsDelegates: widget.localizationsDelegates,
+            localizationsDelegates: _localizationsDelegates,
             supportedLocales: widget.supportedLocales,
           );
         },
