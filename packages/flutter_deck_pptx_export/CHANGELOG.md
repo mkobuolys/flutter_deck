@@ -1,7 +1,10 @@
-## NEXT
+# 0.5.0
 
 - **BREAKING**: migrate from `package:flutter/material.dart` to the standalone [`material_ui`](https://pub.dev/packages/material_ui) package
   - The minimum supported versions are now Flutter 3.47.0 and Dart 3.13.0.
+- chore: update the dependency on `flutter_deck` to `^0.30.0`
+- chore: update `file_saver` to `^0.7.0` and `open_xml` to `^0.3.1`
+- chore: remove the `archive` dependency override
 
 # 0.4.1
 

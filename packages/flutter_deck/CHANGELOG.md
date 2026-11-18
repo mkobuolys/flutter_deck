@@ -1,4 +1,4 @@
-## NEXT
+# 0.30.0
 
 - **BREAKING**: migrate from `package:flutter/material.dart` to the standalone [`material_ui`](https://pub.dev/packages/material_ui) package
   - The minimum supported versions are now Flutter 3.47.0 and Dart 3.13.0.
@@ -15,6 +15,8 @@
 - **BREAKING**: upgrade `window_manager` to 0.6.0 and newer (0.7.x on Flutter 3.50+)
   - `window_manager` is now built on `nativeapi`, which compiles native code during the build. On Linux, this also applies to `flutter test`, which now needs the GTK 3, X11 and Xi development packages even when your tests never touch fullscreen.
   - **Migration**: on Linux machines and CI runners, install the development packages (e.g. `sudo apt-get install -y pkg-config libgtk-3-dev libx11-dev libxi-dev` on Ubuntu).
+- chore: upgrade `go_router` to `^18.1.1`
+  - Apps that depend on `go_router` directly need a version compatible with `^18.1.1`.
 - fix: `RenderBox was not laid out` exception on startup on the web
   - The deck's focus node is now skipped in focus traversal, so it is no longer sorted before the first layout.
 - fix: slides rendered for the presenter view previews are never disposed

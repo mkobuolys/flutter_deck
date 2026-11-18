@@ -1,3 +1,7 @@
+# 0.3.1
+
+- chore: update `web_socket_client` to `^0.2.1`
+
 # 0.3.0
 
 - chore: bump `flutter_deck_client` to v0.3.0
