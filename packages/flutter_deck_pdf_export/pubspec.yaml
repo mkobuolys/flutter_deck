@@ -23,7 +23,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_deck: ^0.30.0
-  image: ">=4.1.0 <4.11.0"
+  image: ^4.11.0
   material_ui: ^1.11.0
   pdf: ^3.10.0
 
